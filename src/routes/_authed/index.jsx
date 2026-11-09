@@ -25,7 +25,7 @@ function Home() {
   const next = nextMeeting(relevantMeetings(data.meetings, user));
 
   return (
-    <div className="animate-in fade-in duration-300">
+    <div className="">
       {!user?.access ? <AccessSetup user={user} sites={data.sites} /> : null}
 
       <GoalHero goal={goal} />

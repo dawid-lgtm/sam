@@ -16,7 +16,7 @@ function StrategyLayout() {
   const path = useRouterState({ select: (s) => s.location.pathname });
 
   return (
-    <div className="animate-in fade-in duration-300">
+    <div className="">
       <PageHeader eyebrow="Tool 2" title="The strategy" intro="One goal, at most five objectives, and the strategies that carry them." />
       <div className="-mx-4 mb-5 overflow-x-auto px-4">
         <div className="flex w-max gap-2">

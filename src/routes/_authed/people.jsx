@@ -25,7 +25,7 @@ function People() {
   }
 
   return (
-    <div className="animate-in fade-in duration-300">
+    <div className="">
       <PageHeader eyebrow="Access" title="People" intro="Everyone signed in sees the strategy. Access decides who can change what." />
       <Section title="App users" subtitle="Site roles can only change their own site's tactics, plans, actions and tracker.">
         {isLoading ? (

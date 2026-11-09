@@ -103,7 +103,7 @@ function Assess() {
   };
 
   return (
-    <div className="animate-in fade-in duration-300">
+    <div className="">
       <PageHeader
         eyebrow="Tool 1"
         title="Where we are now"

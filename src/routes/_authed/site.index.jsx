@@ -14,7 +14,7 @@ function SiteList() {
   if (isLoading || !data) return <div className="h-56 animate-pulse rounded-2xl bg-white" />;
 
   return (
-    <div className="animate-in fade-in duration-300">
+    <div className="">
       <PageHeader eyebrow="Tool 3" title="Sites" intro="Pick a site to see what the strategy asks of it, and the work that follows." />
       <div className="space-y-3">
         {data.sites.map((site) => {

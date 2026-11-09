@@ -32,7 +32,7 @@ function SiteDetail() {
   const canEdit = canEditSite(user, site.id);
 
   return (
-    <div className="animate-in fade-in duration-300">
+    <div className="">
       <Link to="/site" className="mb-3 inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground">
         <ArrowLeft className="h-4 w-4" /> All sites
       </Link>

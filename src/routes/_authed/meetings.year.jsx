@@ -22,7 +22,7 @@ function YearView() {
   if (isLoading || !data) return <div className="h-56 animate-pulse rounded-2xl bg-white" />;
 
   return (
-    <div className="animate-in fade-in duration-300">
+    <div className="">
       <PageHeader eyebrow="Tool 4" title="The year" intro="Same rhythm every month. Months 3, 6, 9 and 12 are value-check months." />
 
       <div className="mb-4 flex gap-2">

@@ -24,7 +24,7 @@ function MeetingsHome() {
   const shift = (n) => setCursor((c) => c.clone().add(n, "month"));
 
   return (
-    <div className="animate-in fade-in duration-300">
+    <div className="">
       <PageHeader eyebrow="Tool 4" title="Meetings" intro="The rhythm that keeps the strategy visible: IN runs the work, ON improves it." />
 
       <div className="mb-4 flex gap-2">
