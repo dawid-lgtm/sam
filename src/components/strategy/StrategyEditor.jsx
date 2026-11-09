@@ -78,7 +78,7 @@ export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, 
           <TextField label="90-day review" type="date" value={form.review_date} onChange={(e) => set({ review_date: e.target.value })} />
         </div>
         <div>
-          <p className="text-[13px] font-semibold text-navy">Sites</p>
+          <p className="text-[15px] font-semibold text-foreground">Sites</p>
           <div className="mt-1.5 flex flex-wrap gap-2">
             {sites.map((s) => {
               const on = (form.sites || []).includes(s.id);
@@ -87,8 +87,8 @@ export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, 
                   key={s.id}
                   type="button"
                   onClick={() => toggleSite(s.id)}
-                  className={`min-h-[44px] rounded-xl px-3.5 text-sm font-medium transition ${
-                    on ? "bg-navy text-white" : "bg-secondary text-muted-foreground"
+                  className={`min-h-[48px] rounded-xl px-3.5 text-[15px] font-medium transition ${
+                    on ? "bg-gold text-gold-foreground" : "bg-background/40 text-foreground"
                   }`}
                 >
                   {s.name}

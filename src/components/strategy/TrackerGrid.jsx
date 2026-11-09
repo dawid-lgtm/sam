@@ -1,14 +1,15 @@
 import { base44 } from "@/api/base44Client";
 import { useRefreshSam } from "@/lib/useSamData";
+import { withWords } from "@/lib/labels";
 
 const MONTHS = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "m9", "m10", "m11", "m12"];
 const QUARTERS = ["q1", "q2", "q3", "q4"];
 
-const tone = {
-  Y: "bg-emerald-500 text-white",
-  N: "bg-amber-400 text-navy",
-  "": "bg-secondary text-muted-foreground/70",
-};
+function cellClass(state) {
+  if (state === "Y") return "bg-gold text-gold-foreground";
+  if (state === "N") return "border-2 border-foreground text-foreground";
+  return "bg-background/50 text-muted-foreground";
+}
 
 export function TrackerGrid({ site, strategies, trackers, canEdit }) {
   const refresh = useRefreshSam();
@@ -42,35 +43,36 @@ export function TrackerGrid({ site, strategies, trackers, canEdit }) {
       {strategies.map((s) => {
         const row = rowFor(s.code) || {};
         return (
-          <div key={s.code} className="rounded-2xl border border-border bg-white p-3.5">
+          <div key={s.code} className="rounded-xl bg-background/40 p-3.5">
             <div className="flex items-start gap-2.5">
-              <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-navy text-[12px] font-bold text-white">
+              <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gold text-[15px] font-semibold text-gold-foreground">
                 {s.code}
               </span>
-              <p className="text-[14px] font-semibold leading-snug text-navy">{s.statement}</p>
+              <p className="text-[15px] font-medium leading-snug text-foreground">{withWords(s.code, s.statement, 9)}</p>
             </div>
 
-            <div className="mt-3 flex flex-wrap gap-1">
-              {MONTHS.map((key, i) => (
-                <button
-                  key={key}
-                  type="button"
-                  disabled={!canEdit}
-                  onClick={() => cycle(s.code, key)}
-                  aria-label={`Month ${i + 1}: ${row[key] || "blank"}`}
-                  className={`h-8 w-8 rounded-md text-[11px] font-bold transition ${tone[row[key] || ""]}`}
-                >
-                  {row[key] === "Y" ? "Y" : row[key] === "N" ? "N" : i + 1}
-                </button>
-              ))}
+            <div className="mt-3 grid grid-cols-4 gap-1.5 sm:grid-cols-6 lg:grid-cols-12">
+              {MONTHS.map((key, i) => {
+                const state = row[key] || "";
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    disabled={!canEdit}
+                    onClick={() => cycle(s.code, key)}
+                    aria-label={`Month ${i + 1}: ${state === "Y" ? "yes" : state === "N" ? "no" : "empty"}`}
+                    className={`min-h-[48px] rounded-lg text-[15px] font-semibold transition ${cellClass(state)}`}
+                  >
+                    {state === "Y" ? "Yes" : state === "N" ? "No" : i + 1}
+                  </button>
+                );
+              })}
             </div>
 
             <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
               {QUARTERS.map((q, i) => (
-                <div key={q} className="rounded-xl bg-secondary/60 p-2">
-                  <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                    Q{i + 1}
-                  </p>
+                <div key={q} className="rounded-lg bg-background/60 p-2">
+                  <p className="text-[15px] font-semibold text-foreground">Q{i + 1}</p>
                   <div className="mt-1 space-y-1">
                     <input
                       type="number"
@@ -78,15 +80,15 @@ export function TrackerGrid({ site, strategies, trackers, canEdit }) {
                       disabled={!canEdit}
                       onBlur={(e) => canEdit && save(s.code, { [`${q}_volume`]: Number(e.target.value) || 0 })}
                       placeholder="Volume"
-                      className="w-full rounded-md border border-input bg-white px-2 py-1.5 text-[12px] text-navy focus:border-navy focus:outline-none"
+                      className="w-full rounded-md bg-background px-2 py-2 text-[15px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold/50"
                     />
                     <input
                       type="number"
                       defaultValue={row[`${q}_value`] ?? ""}
                       disabled={!canEdit}
                       onBlur={(e) => canEdit && save(s.code, { [`${q}_value`]: Number(e.target.value) || 0 })}
-                      placeholder="$"
-                      className="w-full rounded-md border border-input bg-white px-2 py-1.5 text-[12px] text-navy focus:border-navy focus:outline-none"
+                      placeholder="Dollars"
+                      className="w-full rounded-md bg-background px-2 py-2 text-[15px] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-gold/50"
                     />
                   </div>
                 </div>

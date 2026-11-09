@@ -43,9 +43,12 @@ export function GoalEditor({ company, canEdit }) {
   };
 
   return (
-    <section className="rounded-3xl bg-navy p-5 text-white">
-      <div className="mb-3 flex items-center justify-between">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-gold">The goal</p>
+    <section className="rounded-2xl bg-card p-5">
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <span className="flex items-center gap-2 text-[15px] font-medium text-foreground">
+          <span className="h-4 w-1.5 rounded-full bg-gold" />
+          The goal
+        </span>
         {canEdit ? (
           <button
             onClick={() => {
@@ -53,51 +56,52 @@ export function GoalEditor({ company, canEdit }) {
               setRepeatable(!!company?.goal_repeatable);
               setOpen(true);
             }}
-            className="inline-flex min-h-[40px] items-center gap-1.5 rounded-xl bg-white/10 px-3 text-[13px] font-medium"
+            className="inline-flex min-h-[44px] items-center gap-1.5 rounded-xl bg-secondary px-3 text-[15px] font-medium text-foreground"
           >
-            <Pencil className="h-4 w-4" /> Edit
+            <Pencil className="h-5 w-5" /> Edit
           </button>
         ) : null}
       </div>
 
-      <p className="text-[24px] font-semibold leading-[1.25] sm:text-[30px]">{company?.goal_sentence || "No goal set yet"}</p>
+      <p className="font-heading text-[24px] font-semibold leading-[1.25] text-foreground sm:text-[30px]">
+        {company?.goal_sentence || "No goal set yet"}
+      </p>
 
-      <div className="mt-4 flex items-start gap-2 text-[13px] text-white/80">
+      <div className="mt-4 flex items-start gap-2 text-[15px] text-muted-foreground">
         <span
-          className={`mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-md ${
-            company?.goal_repeatable ? "bg-gold text-navy" : "border border-white/30"
+          className={`mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md ${
+            company?.goal_repeatable ? "bg-gold text-gold-foreground" : "border-2 border-muted-foreground"
           }`}
         >
-          {company?.goal_repeatable ? <Check className="h-3.5 w-3.5" /> : null}
+          {company?.goal_repeatable ? <Check className="h-4 w-4" /> : null}
         </span>
         Could a Superintendent repeat it?
       </div>
 
       <Modal open={open} onClose={() => setOpen(false)} title="The goal">
         <div className="space-y-4">
-          <TextAreaField
-            label="One sentence"
-            rows={3}
-            value={sentence}
-            onChange={(e) => setSentence(e.target.value)}
-          />
+          <TextAreaField label="One sentence" rows={3} value={sentence} onChange={(e) => setSentence(e.target.value)} />
           <button
             type="button"
             onClick={() => setRepeatable((v) => !v)}
-            className="flex w-full items-start gap-3 rounded-xl border border-border p-3 text-left"
+            className="flex w-full items-start gap-3 rounded-xl bg-background/40 p-3 text-left"
           >
             <span
-              className={`mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md border ${
-                repeatable ? "border-navy bg-navy text-white" : "border-input"
+              className={`mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md ${
+                repeatable ? "bg-gold text-gold-foreground" : "border-2 border-muted-foreground"
               }`}
             >
               {repeatable ? <Check className="h-4 w-4" /> : null}
             </span>
-            <span className="text-sm text-navy">Could a Superintendent repeat it word for word?</span>
+            <span className="text-[15px] text-foreground">Could a Superintendent repeat it word for word?</span>
           </button>
           <div className="flex gap-2">
-            <GhostButton className="flex-1" onClick={() => setOpen(false)}>Cancel</GhostButton>
-            <PrimaryButton className="flex-1" onClick={save} disabled={saving}>Save goal</PrimaryButton>
+            <GhostButton className="flex-1" onClick={() => setOpen(false)}>
+              Cancel
+            </GhostButton>
+            <PrimaryButton className="flex-1" onClick={save} disabled={saving}>
+              Save goal
+            </PrimaryButton>
           </div>
         </div>
       </Modal>

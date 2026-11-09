@@ -105,7 +105,6 @@ function Assess() {
   return (
     <div className="">
       <PageHeader
-        eyebrow="Tool 1"
         title="Where we are now"
         intro="Work down the three parts. Save it and it is kept with today's date for you."
       />
@@ -161,8 +160,10 @@ function Assess() {
               <button
                 key={a.id}
                 onClick={() => open(a)}
-                className={`min-h-[44px] rounded-xl border px-3 text-sm font-medium transition ${
-                  a.id === assessmentId ? "border-navy bg-navy text-white" : "border-border text-navy hover:bg-secondary"
+                className={`min-h-[48px] rounded-xl px-3.5 text-[15px] font-medium transition ${
+                  a.id === assessmentId
+                    ? "bg-gold text-gold-foreground"
+                    : "bg-background/40 text-foreground hover:bg-background/60"
                 }`}
               >
                 {moment.utc(a.assessment_date).format("D MMM YYYY")}

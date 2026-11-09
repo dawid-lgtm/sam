@@ -11,10 +11,25 @@ export const Route = createFileRoute("/_authed/strategy/tracker")({
 
 function Legend() {
   return (
-    <div className="mb-3 flex flex-wrap items-center gap-3 text-[12px] text-muted-foreground">
-      <span className="flex items-center gap-1.5"><span className="h-4 w-4 rounded bg-emerald-500" /> Y — done that month</span>
-      <span className="flex items-center gap-1.5"><span className="h-4 w-4 rounded bg-secondary" /> blank — not started</span>
-      <span className="flex items-center gap-1.5"><span className="h-4 w-4 rounded bg-amber-400" /> N — did not happen</span>
+    <div className="mb-3 flex flex-wrap items-center gap-4 text-[15px] text-muted-foreground">
+      <span className="flex items-center gap-2">
+        <span className="grid h-7 w-11 place-items-center rounded-md bg-gold text-[15px] font-semibold text-gold-foreground">
+          Yes
+        </span>
+        done that month
+      </span>
+      <span className="flex items-center gap-2">
+        <span className="grid h-7 w-11 place-items-center rounded-md border-2 border-foreground text-[15px] font-semibold text-foreground">
+          No
+        </span>
+        did not happen
+      </span>
+      <span className="flex items-center gap-2">
+        <span className="grid h-7 w-11 place-items-center rounded-md bg-background/50 text-[15px] text-muted-foreground">
+          4
+        </span>
+        empty
+      </span>
     </div>
   );
 }
@@ -24,7 +39,7 @@ function Tracker() {
   const { data, isLoading } = useSamData();
   const [siteId, setSiteId] = useState(user?.site_id || "");
 
-  if (isLoading || !data) return <div className="h-56 animate-pulse rounded-2xl bg-white" />;
+  if (isLoading || !data) return <div className="h-56 animate-pulse rounded-2xl bg-card" />;
 
   const site = data.sites.find((s) => s.id === siteId) || data.sites[0];
   if (!site) return <EmptyLine>No sites yet.</EmptyLine>;
@@ -39,8 +54,8 @@ function Tracker() {
           <button
             key={s.id}
             onClick={() => setSiteId(s.id)}
-            className={`min-h-[44px] rounded-full px-4 text-sm font-semibold transition ${
-              s.id === site.id ? "bg-navy text-white" : "bg-white text-muted-foreground hover:text-navy"
+            className={`min-h-[48px] rounded-xl px-4 text-[15px] font-semibold transition ${
+              s.id === site.id ? "bg-gold text-gold-foreground" : "bg-card text-muted-foreground hover:text-foreground"
             }`}
           >
             {s.name}
@@ -49,12 +64,12 @@ function Tracker() {
       </div>
 
       <Section
-        title={`Tracker — ${site.name}`}
-        subtitle="Tap a month to cycle Y → N → blank. Quarterly value is volume and dollars."
+        title={`Tracker for ${site.name}`}
+        subtitle="Tap a month: Yes, then No, then empty again."
       >
         <Legend />
         {!canEdit ? (
-          <p className="mb-3 rounded-xl bg-secondary/60 px-3 py-2 text-[13px] text-muted-foreground">
+          <p className="mb-3 rounded-xl bg-background/50 px-3 py-2 text-[15px] text-muted-foreground">
             View only. Site teams keep this tracker.
           </p>
         ) : null}

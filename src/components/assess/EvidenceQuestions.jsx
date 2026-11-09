@@ -6,19 +6,19 @@ export function EvidenceQuestions({ answers, onChange }) {
   return (
     <div className="space-y-3">
       {answers.map((item, i) => (
-        <div key={i} className="rounded-2xl border border-border p-3">
-          <p className="text-[14px] font-medium leading-snug text-navy">{item.question}</p>
+        <div key={i} className="rounded-xl bg-background/40 p-3.5">
+          <p className="text-[16px] font-medium leading-snug text-foreground">{item.question}</p>
           <div className="mt-2 flex gap-1.5">
-            {["Y", "N"].map((v) => (
+            {[{ v: "Y", label: "Yes" }, { v: "N", label: "No" }].map(({ v, label }) => (
               <button
                 key={v}
                 type="button"
                 onClick={() => set(i, { answer: v })}
-                className={`min-h-[44px] min-w-[56px] rounded-lg text-[14px] font-semibold transition ${
-                  item.answer === v ? "bg-navy text-white" : "bg-secondary text-muted-foreground"
+                className={`min-h-[44px] min-w-[72px] rounded-xl text-[15px] font-semibold transition ${
+                  item.answer === v ? "bg-gold text-gold-foreground" : "bg-card text-foreground"
                 }`}
               >
-                {v}
+                {label}
               </button>
             ))}
           </div>

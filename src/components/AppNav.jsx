@@ -15,25 +15,28 @@ export function AppNav({ variant = "bottom" }) {
 
   if (variant === "top") {
     return (
-      <nav className="flex gap-1 pb-2">
-        {items.map(({ to, label, icon: Icon }) => (
-          <Link
-            key={to}
-            to={to}
-            className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
-              isActive(to) ? "bg-navy text-white" : "text-muted-foreground hover:bg-secondary"
-            }`}
-          >
-            <Icon className="h-4 w-4" />
-            {label}
-          </Link>
-        ))}
+      <nav className="flex flex-wrap gap-2 pb-3">
+        {items.map(({ to, label, icon: Icon }) => {
+          const active = isActive(to);
+          return (
+            <Link
+              key={to}
+              to={to}
+              className={`flex min-h-[48px] items-center gap-2 rounded-xl px-4 text-[15px] font-medium transition ${
+                active ? "bg-card text-foreground" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+              }`}
+            >
+              <Icon className={`h-5 w-5 ${active ? "text-gold" : ""}`} />
+              {label}
+            </Link>
+          );
+        })}
       </nav>
     );
   }
 
   return (
-    <nav className="safe-bottom border-t border-border bg-white/95 backdrop-blur">
+    <nav className="safe-bottom bg-background">
       <div className="mx-auto flex max-w-3xl items-stretch">
         {items.map(({ to, label, icon: Icon }) => {
           const active = isActive(to);
@@ -41,14 +44,16 @@ export function AppNav({ variant = "bottom" }) {
             <Link
               key={to}
               to={to}
-              className={`flex flex-1 flex-col items-center gap-1 pb-2 pt-3 transition ${
-                active ? "text-navy" : "text-muted-foreground"
-              }`}
+              className="flex min-h-[56px] flex-1 flex-col items-center justify-center gap-1 py-2"
             >
-              <span className={`grid h-9 w-14 place-items-center rounded-full transition ${active ? "bg-accent" : ""}`}>
-                <Icon className="h-[21px] w-[21px]" strokeWidth={2} />
+              <Icon className={`h-6 w-6 ${active ? "text-gold" : "text-muted-foreground"}`} strokeWidth={2} />
+              <span
+                className={`text-[15px] leading-tight ${
+                  active ? "font-semibold text-foreground" : "text-muted-foreground"
+                }`}
+              >
+                {label}
               </span>
-              <span className="text-[11px] font-medium">{label}</span>
             </Link>
           );
         })}

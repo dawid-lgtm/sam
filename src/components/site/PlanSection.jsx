@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useRefreshSam } from "@/lib/useSamData";
+import { withWords } from "@/lib/labels";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
 import { Modal } from "@/components/ui-kit/Modal";
 import { TextField, TextAreaField, SelectField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
@@ -52,38 +53,52 @@ export function PlanSection({ site, plans, tactics, canEdit }) {
           <button
             onClick={() => !atLimit && setEditor({ ...blank })}
             disabled={atLimit}
-            className="inline-flex min-h-[40px] items-center gap-1 rounded-xl border border-border px-3 text-[13px] font-semibold text-navy disabled:opacity-40"
+            className="inline-flex min-h-[48px] items-center gap-1.5 rounded-xl bg-secondary px-3.5 text-[15px] font-semibold text-foreground disabled:opacity-40"
           >
-            <Plus className="h-4 w-4" /> Add
+            <Plus className="h-5 w-5" /> Add
           </button>
         ) : null
       }
     >
       <div className="space-y-2.5">
         {plans.length ? (
-          plans.map((p) => (
-            <div key={p.id} className="rounded-xl border border-border p-3.5">
-              <div className="flex items-start justify-between gap-2">
-                <p className="text-[14px] font-medium leading-snug text-navy">
-                  <span className="mr-1.5 rounded bg-secondary px-1.5 py-0.5 text-[11px] font-bold">{p.code}</span>
-                  {p.what}
+          plans.map((p) => {
+            const tactic = tactics.find((t) => t.code === p.delivers_tactic);
+            return (
+              <div key={p.id} className="rounded-xl bg-background/40 p-3.5">
+                <div className="flex items-start justify-between gap-2">
+                  <p className="text-[15px] font-medium leading-snug text-foreground">
+                    <span className="mr-1.5 inline-flex rounded bg-gold px-1.5 py-0.5 text-[15px] font-semibold text-gold-foreground">
+                      {p.code}
+                    </span>
+                    {p.what}
+                  </p>
+                  {canEdit ? (
+                    <div className="flex shrink-0">
+                      <button
+                        onClick={() => setEditor(p)}
+                        aria-label="Edit"
+                        className="grid h-11 w-11 place-items-center rounded-xl text-muted-foreground hover:bg-card hover:text-foreground"
+                      >
+                        <Pencil className="h-5 w-5" />
+                      </button>
+                      <button
+                        onClick={() => remove(p.id)}
+                        aria-label="Delete"
+                        className="grid h-11 w-11 place-items-center rounded-xl text-muted-foreground hover:bg-card hover:text-foreground"
+                      >
+                        <Trash2 className="h-5 w-5" />
+                      </button>
+                    </div>
+                  ) : null}
+                </div>
+                <p className="mt-1.5 text-[15px] leading-snug text-muted-foreground">
+                  Delivers {withWords(p.delivers_tactic, tactic?.approach, 5)} · {p.who || "no owner"} ·{" "}
+                  {p.where || "no place"} · {p.when || "no date"}
                 </p>
-                {canEdit ? (
-                  <div className="flex shrink-0">
-                    <button onClick={() => setEditor(p)} aria-label="Edit" className="grid h-9 w-9 place-items-center rounded-lg text-muted-foreground hover:bg-secondary">
-                      <Pencil className="h-4 w-4" />
-                    </button>
-                    <button onClick={() => remove(p.id)} aria-label="Delete" className="grid h-9 w-9 place-items-center rounded-lg text-muted-foreground hover:bg-secondary">
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                  </div>
-                ) : null}
               </div>
-              <p className="mt-1.5 text-[12px] text-muted-foreground">
-                Delivers {p.delivers_tactic || "—"} · {p.who || "no owner"} · {p.where || "no place"} · {p.when || "no date"}
-              </p>
-            </div>
-          ))
+            );
+          })
         ) : (
           <EmptyLine>No plans yet.</EmptyLine>
         )}
@@ -98,7 +113,7 @@ export function PlanSection({ site, plans, tactics, canEdit }) {
               placeholder="Choose"
               value={editor.delivers_tactic || ""}
               onChange={(e) => setEditor({ ...editor, delivers_tactic: e.target.value })}
-              options={tactics.map((t) => ({ value: t.code, label: `${t.code} — ${t.approach}` }))}
+              options={tactics.map((t) => ({ value: t.code, label: `${t.code} · ${t.approach}` }))}
             />
             <div className="grid gap-3 sm:grid-cols-3">
               <TextField label="Who" value={editor.who || ""} onChange={(e) => setEditor({ ...editor, who: e.target.value })} />
@@ -106,8 +121,12 @@ export function PlanSection({ site, plans, tactics, canEdit }) {
               <TextField label="When" value={editor.when || ""} onChange={(e) => setEditor({ ...editor, when: e.target.value })} />
             </div>
             <div className="flex gap-2">
-              <GhostButton className="flex-1" onClick={() => setEditor(null)}>Cancel</GhostButton>
-              <PrimaryButton className="flex-1" onClick={save}>Save plan</PrimaryButton>
+              <GhostButton className="flex-1" onClick={() => setEditor(null)}>
+                Cancel
+              </GhostButton>
+              <PrimaryButton className="flex-1" onClick={save}>
+                Save plan
+              </PrimaryButton>
             </div>
           </div>
         ) : null}

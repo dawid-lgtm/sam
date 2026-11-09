@@ -1,41 +1,39 @@
-import { DAY_LABELS, cellDate, meetingsInCell } from "@/lib/meetings";
-
-const short = (m) => (m.title || "").replace("Head office", "Office").replace("Kestrel Underground", "Kestrel");
+import { DAY_LABELS, monthWeekStarts, meetingsInCell, meetingChip } from "@/lib/meetings";
 
 export function MonthGrid({ meetings, cursor }) {
   const year = cursor.year();
   const month = cursor.month();
+  const starts = monthWeekStarts(year, month);
 
   return (
-    <div className="overflow-hidden rounded-xl border border-border">
-      <div className="grid grid-cols-5 bg-secondary/60">
+    <div className="overflow-hidden rounded-xl p-1">
+      <div className="grid grid-cols-5 gap-1">
         {DAY_LABELS.map((d) => (
-          <div key={d} className="py-2 text-center text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+          <div key={d} className="py-2 text-center text-[15px] font-medium text-foreground">
             {d}
           </div>
         ))}
       </div>
-      {[1, 2, 3, 4].map((week) => (
-        <div key={week}>
-          <p className="border-t border-border bg-white px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
-            Week {week}
-          </p>
-          <div className="grid grid-cols-5">
+      {starts.map((start, weekIndex) => (
+        <div key={weekIndex} className="mt-1">
+          <p className="px-1 text-[15px] font-medium text-muted-foreground">Week {weekIndex + 1}</p>
+          <div className="mt-1 grid grid-cols-5 gap-1">
             {[1, 2, 3, 4, 5].map((day) => {
-              const cell = meetingsInCell(meetings, week, day);
-              const date = cellDate(year, month, week, day);
+              const date = start.clone().add(day - 1, "days");
+              const inMonth = date.month() === month;
+              const cell = inMonth ? meetingsInCell(meetings, weekIndex + 1, day) : [];
               return (
-                <div key={day} className="min-h-[62px] border-r border-t border-border/60 p-1 last:border-r-0">
-                  <p className="text-[10px] font-medium text-muted-foreground/80">{date.format("D")}</p>
+                <div key={day} className="min-h-[76px] rounded-lg bg-background/50 p-1">
+                  {inMonth ? <p className="text-[15px] leading-tight text-muted-foreground">{date.date()}</p> : null}
                   {cell.map((m) => (
                     <div
                       key={m.id}
                       title={`${m.title} — ${m.start_time}, ${m.duration_min} min`}
-                      className={`mt-0.5 truncate rounded px-1 py-0.5 text-[9.5px] font-semibold leading-tight ${
-                        m.cadence === "ON" ? "bg-gold/30 text-[#6b540f]" : "bg-navy/10 text-navy"
+                      className={`mt-1 break-words rounded px-1 py-1 text-[15px] leading-[1.15] font-medium ${
+                        m.cadence === "ON" ? "bg-gold text-gold-foreground" : "bg-background text-foreground"
                       }`}
                     >
-                      {short(m)}
+                      {meetingChip(m)}
                     </div>
                   ))}
                 </div>

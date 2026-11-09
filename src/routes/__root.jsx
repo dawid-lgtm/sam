@@ -13,16 +13,12 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { title: "Sam — Managing Strategy" },
       { name: "description", content: "Sam keeps one goal, five objectives and every site's work in a single line of sight." },
-      { name: "theme-color", content: "#0B1F3A" },
+      { name: "theme-color", content: "#2c4775" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap",
-      },
     ],
   }),
   errorComponent: DefaultCatchBoundary,

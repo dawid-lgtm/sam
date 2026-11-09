@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
-import { Plus } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Plus, ChevronRight, Lock } from "lucide-react";
 import { useSamData } from "@/lib/useSamData";
 import { canEditStrategy } from "@/lib/access";
 import { GoalEditor } from "@/components/strategy/GoalEditor";
@@ -18,7 +18,7 @@ function GoalAndObjectives() {
   const [editor, setEditor] = useState({ open: false, objective: null });
   const canEdit = canEditStrategy(user);
 
-  if (isLoading || !data) return <div className="h-56 animate-pulse rounded-2xl bg-white" />;
+  if (isLoading || !data) return <div className="h-56 animate-pulse rounded-2xl bg-card" />;
 
   const atLimit = data.objectives.length >= 5;
   const nextCode = `O${data.objectives.length + 1}`;
@@ -26,6 +26,16 @@ function GoalAndObjectives() {
   return (
     <div className="space-y-4">
       <GoalEditor company={data.company} canEdit={canEdit} />
+
+      <Link
+        to="/strategy/changelog"
+        className="flex min-h-[48px] items-center justify-between gap-3 rounded-2xl bg-card px-4 py-3"
+      >
+        <span className="flex items-center gap-2 text-[16px] font-semibold text-foreground">
+          <Lock className="h-5 w-5 text-gold" /> The change log
+        </span>
+        <ChevronRight className="h-5 w-5 text-muted-foreground" />
+      </Link>
 
       <Section
         title="Objectives"
@@ -35,15 +45,15 @@ function GoalAndObjectives() {
             <button
               onClick={() => !atLimit && setEditor({ open: true, objective: null })}
               disabled={atLimit}
-              className="inline-flex min-h-[40px] items-center gap-1 rounded-xl border border-border px-3 text-[13px] font-semibold text-navy transition hover:bg-secondary disabled:opacity-40"
+              className="inline-flex min-h-[48px] items-center gap-1.5 rounded-xl bg-secondary px-3.5 text-[15px] font-semibold text-foreground transition disabled:opacity-40"
             >
-              <Plus className="h-4 w-4" /> Add
+              <Plus className="h-5 w-5" /> Add
             </button>
           ) : null
         }
       >
         {atLimit && canEdit ? (
-          <p className="mb-3 rounded-xl bg-accent px-3 py-2 text-[13px] text-[#7a6114]">
+          <p className="mb-3 rounded-xl bg-background/50 px-3 py-2 text-[15px] text-foreground">
             Five objectives already. Retire or merge one before adding a sixth.
           </p>
         ) : null}

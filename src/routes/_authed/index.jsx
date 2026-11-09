@@ -17,7 +17,7 @@ function Home() {
   const { data, isLoading } = useSamData();
 
   if (isLoading || !data) {
-    return <div className="h-56 animate-pulse rounded-3xl bg-white" />;
+    return <div className="h-56 animate-pulse rounded-3xl bg-card" />;
   }
 
   const goal = data.company?.goal_sentence || "No goal set yet";
@@ -30,9 +30,9 @@ function Home() {
 
       <GoalHero goal={goal} />
 
-      <div className="mt-3 flex items-center justify-between rounded-2xl border border-border bg-white px-4 py-3">
-        <p className="text-sm text-muted-foreground">You are signed in as</p>
-        <p className="text-sm font-semibold text-navy">{accessLabel(user)}</p>
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 rounded-2xl bg-card px-4 py-3">
+        <p className="text-[15px] text-muted-foreground">You are signed in as</p>
+        <p className="text-[15px] font-semibold text-foreground">{accessLabel(user)}</p>
       </div>
 
       <ObjectiveList objectives={objectives} />

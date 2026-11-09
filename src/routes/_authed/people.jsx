@@ -25,11 +25,14 @@ function People() {
   }
 
   return (
-    <div className="">
-      <PageHeader eyebrow="Access" title="People" intro="Everyone signed in sees the strategy. Access decides who can change what." />
+    <div>
+      <PageHeader
+        title="People"
+        intro="Everyone signed in sees the strategy. Access decides who can change what."
+      />
       <Section title="App users" subtitle="Site roles can only change their own site's tactics, plans, actions and tracker.">
         {isLoading ? (
-          <div className="h-32 animate-pulse rounded-xl bg-secondary" />
+          <div className="h-32 animate-pulse rounded-xl bg-background/40" />
         ) : users?.length ? (
           <div className="space-y-2.5">
             {users.map((person) => (

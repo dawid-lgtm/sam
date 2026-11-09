@@ -19,51 +19,64 @@ function YearView() {
   const { data, isLoading } = useSamData();
   const [year, setYear] = useState(() => moment.utc().year());
 
-  if (isLoading || !data) return <div className="h-56 animate-pulse rounded-2xl bg-white" />;
+  if (isLoading || !data) return <div className="h-56 animate-pulse rounded-2xl bg-card" />;
 
   return (
-    <div className="">
-      <PageHeader eyebrow="Tool 4" title="The year" intro="Same rhythm every month. Months 3, 6, 9 and 12 are value-check months." />
+    <div>
+      <PageHeader
+        title="The year"
+        intro="Same rhythm every month. Months 3, 6, 9 and 12 are value-check months."
+      />
 
-      <div className="mb-4 flex gap-2">
-        <Link to="/meetings" className="flex min-h-[40px] items-center rounded-full bg-white px-4 text-sm font-medium text-muted-foreground">
+      <div className="mb-4 grid grid-cols-2 gap-2">
+        <Link
+          to="/meetings"
+          className="flex min-h-[48px] items-center justify-center rounded-xl bg-card text-[15px] font-semibold text-muted-foreground"
+        >
           Calendar
         </Link>
-        <span className="flex min-h-[40px] items-center rounded-full bg-navy px-4 text-sm font-medium text-white">Year view</span>
+        <span className="flex min-h-[48px] items-center justify-center rounded-xl bg-gold text-[15px] font-semibold text-gold-foreground">
+          Year view
+        </span>
       </div>
 
-      <div className="mb-4 flex items-center justify-between rounded-2xl border border-border bg-white px-3 py-2">
-        <button onClick={() => setYear((y) => y - 1)} aria-label="Previous year" className="grid h-10 w-10 place-items-center rounded-xl text-navy">
-          <ChevronLeft className="h-4 w-4" />
+      <div className="mb-4 flex items-center justify-between rounded-2xl bg-card px-3 py-2">
+        <button
+          onClick={() => setYear((y) => y - 1)}
+          aria-label="Previous year"
+          className="grid h-12 w-12 place-items-center rounded-xl text-foreground"
+        >
+          <ChevronLeft className="h-6 w-6" />
         </button>
-        <p className="text-[15px] font-semibold text-navy">{year}</p>
-        <button onClick={() => setYear((y) => y + 1)} aria-label="Next year" className="grid h-10 w-10 place-items-center rounded-xl text-navy">
-          <ChevronRight className="h-4 w-4" />
+        <p className="font-heading text-[19px] font-semibold text-foreground">{year}</p>
+        <button
+          onClick={() => setYear((y) => y + 1)}
+          aria-label="Next year"
+          className="grid h-12 w-12 place-items-center rounded-xl text-foreground"
+        >
+          <ChevronRight className="h-6 w-6" />
         </button>
       </div>
 
-      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
         {MONTH_LABELS.map((label, i) => {
           const month = i + 1;
           const valueCheck = VALUE_CHECK_MONTHS.includes(month);
           return (
-            <div
-              key={label}
-              className={`rounded-2xl border p-3 ${valueCheck ? "border-gold bg-gold/10" : "border-border bg-white"}`}
-            >
-              <div className="flex items-center justify-between">
-                <p className="text-[14px] font-semibold text-navy">{label}</p>
+            <div key={label} className="rounded-2xl bg-card p-4">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <p className="font-heading text-[17px] font-semibold text-foreground">{label}</p>
                 {valueCheck ? (
-                  <span className="rounded-full bg-gold px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-navy">
+                  <span className="rounded-full bg-gold px-2.5 py-1 text-[15px] font-semibold text-gold-foreground">
                     Value check
                   </span>
                 ) : null}
               </div>
-              <ul className="mt-2 space-y-1 text-[11px] leading-snug text-muted-foreground">
-                <li>Wk 1 · Head office ON</li>
-                <li>Wk 1-3 · Site IN, weekly</li>
-                <li>Wk 4 · Site ON, per site</li>
-                <li>Every Friday · Head office IN</li>
+              <ul className="mt-2 space-y-1 text-[15px] leading-snug text-muted-foreground">
+                <li>Week 1: Head office ON</li>
+                <li>Weeks 1 to 3: site IN, weekly</li>
+                <li>Week 4: site ON, per site</li>
+                <li>Every Friday: Head office IN</li>
               </ul>
             </div>
           );

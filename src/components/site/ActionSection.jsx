@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { Plus, Pencil, Trash2, Check } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useRefreshSam } from "@/lib/useSamData";
+import { withWords } from "@/lib/labels";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
 import { Modal } from "@/components/ui-kit/Modal";
 import { TextField, SelectField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
@@ -57,49 +58,62 @@ export function ActionSection({ site, actions, plans, canEdit }) {
           <button
             onClick={() => !atLimit && setEditor({ ...blank })}
             disabled={atLimit}
-            className="inline-flex min-h-[40px] items-center gap-1 rounded-xl border border-border px-3 text-[13px] font-semibold text-navy disabled:opacity-40"
+            className="inline-flex min-h-[48px] items-center gap-1.5 rounded-xl bg-secondary px-3.5 text-[15px] font-semibold text-foreground disabled:opacity-40"
           >
-            <Plus className="h-4 w-4" /> Add
+            <Plus className="h-5 w-5" /> Add
           </button>
         ) : null
       }
     >
       <div className="space-y-2.5">
         {actions.length ? (
-          actions.map((a) => (
-            <div key={a.id} className="flex items-start gap-3 rounded-xl border border-border p-3.5">
-              <button
-                onClick={() => canEdit && tick(a)}
-                disabled={!canEdit}
-                aria-label={a.done ? "Mark not done" : "Mark done"}
-                className={`mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg border transition ${
-                  a.done ? "border-emerald-500 bg-emerald-500 text-white" : "border-input text-transparent"
-                }`}
-              >
-                <Check className="h-4 w-4" />
-              </button>
-              <div className="min-w-0 flex-1">
-                <p className={`text-[14px] leading-snug ${a.done ? "text-muted-foreground line-through" : "font-medium text-navy"}`}>
-                  <span className="mr-1.5 rounded bg-secondary px-1.5 py-0.5 text-[11px] font-bold no-underline">{a.code}</span>
-                  {a.action}
-                </p>
-                <p className="mt-1 text-[12px] text-muted-foreground">
-                  For {a.for_plan || "—"} · {a.owner || "no owner"}
-                  {a.due ? ` · due ${a.due}` : ""}
-                </p>
-              </div>
-              {canEdit ? (
-                <div className="flex shrink-0">
-                  <button onClick={() => setEditor(a)} aria-label="Edit" className="grid h-9 w-9 place-items-center rounded-lg text-muted-foreground hover:bg-secondary">
-                    <Pencil className="h-4 w-4" />
-                  </button>
-                  <button onClick={() => remove(a.id)} aria-label="Delete" className="grid h-9 w-9 place-items-center rounded-lg text-muted-foreground hover:bg-secondary">
-                    <Trash2 className="h-4 w-4" />
-                  </button>
+          actions.map((a) => {
+            const plan = plans.find((p) => p.code === a.for_plan);
+            return (
+              <div key={a.id} className="flex items-start gap-3 rounded-xl bg-background/40 p-3.5">
+                <button
+                  onClick={() => canEdit && tick(a)}
+                  disabled={!canEdit}
+                  aria-label={a.done ? "Mark not done" : "Mark done"}
+                  className={`mt-0.5 grid h-11 w-11 shrink-0 place-items-center rounded-xl transition ${
+                    a.done ? "bg-gold text-gold-foreground" : "border-2 border-muted-foreground text-transparent"
+                  }`}
+                >
+                  <Check className="h-5 w-5" />
+                </button>
+                <div className="min-w-0 flex-1">
+                  <p className={`text-[15px] leading-snug ${a.done ? "text-muted-foreground line-through" : "font-medium text-foreground"}`}>
+                    <span className="mr-1.5 inline-flex rounded bg-card px-1.5 py-0.5 text-[15px] font-semibold text-foreground no-underline">
+                      {a.code}
+                    </span>
+                    {a.action}
+                  </p>
+                  <p className="mt-1 text-[15px] leading-snug text-muted-foreground">
+                    For {withWords(a.for_plan, plan?.what, 5)} · {a.owner || "no owner"}
+                    {a.due ? ` · due ${a.due}` : ""}
+                  </p>
                 </div>
-              ) : null}
-            </div>
-          ))
+                {canEdit ? (
+                  <div className="flex shrink-0">
+                    <button
+                      onClick={() => setEditor(a)}
+                      aria-label="Edit"
+                      className="grid h-11 w-11 place-items-center rounded-xl text-muted-foreground hover:bg-card hover:text-foreground"
+                    >
+                      <Pencil className="h-5 w-5" />
+                    </button>
+                    <button
+                      onClick={() => remove(a.id)}
+                      aria-label="Delete"
+                      className="grid h-11 w-11 place-items-center rounded-xl text-muted-foreground hover:bg-card hover:text-foreground"
+                    >
+                      <Trash2 className="h-5 w-5" />
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })
         ) : (
           <EmptyLine>No actions yet.</EmptyLine>
         )}
@@ -114,15 +128,19 @@ export function ActionSection({ site, actions, plans, canEdit }) {
               placeholder="Choose"
               value={editor.for_plan || ""}
               onChange={(e) => setEditor({ ...editor, for_plan: e.target.value })}
-              options={plans.map((p) => ({ value: p.code, label: `${p.code} — ${p.what}` }))}
+              options={plans.map((p) => ({ value: p.code, label: `${p.code} · ${p.what}` }))}
             />
             <div className="grid gap-3 sm:grid-cols-2">
               <TextField label="Owner" value={editor.owner || ""} onChange={(e) => setEditor({ ...editor, owner: e.target.value })} />
               <TextField label="Due" type="date" value={editor.due || ""} onChange={(e) => setEditor({ ...editor, due: e.target.value })} />
             </div>
             <div className="flex gap-2">
-              <GhostButton className="flex-1" onClick={() => setEditor(null)}>Cancel</GhostButton>
-              <PrimaryButton className="flex-1" onClick={save}>Save action</PrimaryButton>
+              <GhostButton className="flex-1" onClick={() => setEditor(null)}>
+                Cancel
+              </GhostButton>
+              <PrimaryButton className="flex-1" onClick={save}>
+                Save action
+              </PrimaryButton>
             </div>
           </div>
         ) : null}

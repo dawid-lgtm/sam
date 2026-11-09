@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { Plus, Pencil } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useRefreshSam } from "@/lib/useSamData";
+import { shortWords } from "@/lib/labels";
 import { Section, EmptyLine, Pill } from "@/components/ui-kit/Section";
 import { Modal } from "@/components/ui-kit/Modal";
 import { TextAreaField, SelectField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
@@ -49,40 +50,56 @@ export function AskSection({ site, asks, strategies, canEdit }) {
         canEdit ? (
           <button
             onClick={() => setEditor({ ...blank })}
-            className="inline-flex min-h-[40px] items-center gap-1 rounded-xl border border-border px-3 text-[13px] font-semibold text-navy"
+            className="inline-flex min-h-[48px] items-center gap-1.5 rounded-xl bg-secondary px-3.5 text-[15px] font-semibold text-foreground"
           >
-            <Plus className="h-4 w-4" /> Add
+            <Plus className="h-5 w-5" /> Add
           </button>
         ) : null
       }
     >
       <div className="space-y-2.5">
         {asks.length ? (
-          asks.map((a) => (
-            <div key={a.id} className="rounded-xl border border-border p-3.5">
-              <div className="flex items-start justify-between gap-2">
-                <div className="min-w-0">
-                  <div className="mb-1.5 flex flex-wrap gap-1.5">
-                    <Pill tone="navy">{a.strategy_code || "—"}</Pill>
-                    <Pill tone="gold">{a.objective_code || "—"}</Pill>
-                    <Pill tone={a.can_deliver ? "green" : "amber"}>{a.can_deliver ? "We can deliver" : "We cannot"}</Pill>
+          asks.map((a) => {
+            const strategy = strategies.find((s) => s.code === a.strategy_code);
+            return (
+              <div key={a.id} className="rounded-xl bg-background/40 p-3.5">
+                <div className="flex items-start justify-between gap-2">
+                  <div className="min-w-0">
+                    <div className="mb-1.5 flex flex-wrap gap-1.5">
+                      <Pill tone="gold">
+                        {a.strategy_code ? `${a.strategy_code} · ${shortWords(strategy?.statement, 5)}` : "No strategy chosen"}
+                      </Pill>
+                      <Pill tone={a.can_deliver ? "neutral" : "outline"}>
+                        {a.can_deliver ? "We can deliver" : "We cannot"}
+                      </Pill>
+                    </div>
+                    <p className="text-[15px] leading-snug text-foreground">{a.ask}</p>
                   </div>
-                  <p className="text-[14px] leading-snug text-navy">{a.ask}</p>
+                  {canEdit ? (
+                    <button
+                      onClick={() => setEditor(a)}
+                      aria-label="Edit"
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-muted-foreground hover:bg-card hover:text-foreground"
+                    >
+                      <Pencil className="h-5 w-5" />
+                    </button>
+                  ) : null}
                 </div>
-                {canEdit ? (
-                  <button onClick={() => setEditor(a)} aria-label="Edit" className="grid h-9 w-9 shrink-0 place-items-center rounded-lg text-muted-foreground hover:bg-secondary">
-                    <Pencil className="h-4 w-4" />
-                  </button>
+                {!a.can_deliver ? (
+                  <div className="mt-2 space-y-1.5 rounded-lg bg-background/60 px-3 py-2 text-[15px] leading-snug text-foreground">
+                    <p>
+                      <span className="font-semibold">Why not: </span>
+                      {a.reason || "not given"}
+                    </p>
+                    <p>
+                      <span className="font-semibold">What it would take: </span>
+                      {a.what_it_would_take || "not given"}
+                    </p>
+                  </div>
                 ) : null}
               </div>
-              {!a.can_deliver ? (
-                <div className="mt-2 space-y-1.5 rounded-lg bg-amber-50 px-2.5 py-2 text-[12px] text-amber-900">
-                  <p><span className="font-semibold">Why not: </span>{a.reason || "not given"}</p>
-                  <p><span className="font-semibold">What it would take: </span>{a.what_it_would_take || "not given"}</p>
-                </div>
-              ) : null}
-            </div>
-          ))
+            );
+          })
         ) : (
           <EmptyLine>No asks recorded for this site yet.</EmptyLine>
         )}
@@ -96,7 +113,7 @@ export function AskSection({ site, asks, strategies, canEdit }) {
               placeholder="Choose"
               value={editor.strategy_code || ""}
               onChange={(e) => setStrategy(e.target.value)}
-              options={strategies.map((s) => ({ value: s.code, label: `${s.code} — ${s.statement}` }))}
+              options={strategies.map((s) => ({ value: s.code, label: `${s.code} · ${s.statement}` }))}
             />
             <TextAreaField label="The ask" rows={2} value={editor.ask || ""} onChange={(e) => setEditor({ ...editor, ask: e.target.value })} />
             <div className="flex gap-2">
@@ -105,8 +122,8 @@ export function AskSection({ site, asks, strategies, canEdit }) {
                   key={String(v)}
                   type="button"
                   onClick={() => setEditor({ ...editor, can_deliver: v })}
-                  className={`min-h-[48px] flex-1 rounded-xl text-sm font-semibold transition ${
-                    editor.can_deliver === v ? "bg-navy text-white" : "bg-secondary text-muted-foreground"
+                  className={`min-h-[48px] flex-1 rounded-xl text-[15px] font-semibold transition ${
+                    editor.can_deliver === v ? "bg-gold text-gold-foreground" : "bg-background/40 text-foreground"
                   }`}
                 >
                   {v ? "We can deliver" : "We cannot"}
@@ -125,8 +142,12 @@ export function AskSection({ site, asks, strategies, canEdit }) {
               </>
             ) : null}
             <div className="flex gap-2">
-              <GhostButton className="flex-1" onClick={() => setEditor(null)}>Cancel</GhostButton>
-              <PrimaryButton className="flex-1" onClick={save}>Save</PrimaryButton>
+              <GhostButton className="flex-1" onClick={() => setEditor(null)}>
+                Cancel
+              </GhostButton>
+              <PrimaryButton className="flex-1" onClick={save}>
+                Save
+              </PrimaryButton>
             </div>
           </div>
         ) : null}

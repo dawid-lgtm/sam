@@ -23,9 +23,9 @@ export function PersonRow({ person, sites, onSaved }) {
   };
 
   return (
-    <div className="rounded-xl border border-border p-3.5">
-      <p className="text-[15px] font-semibold text-navy">{person.full_name || person.email}</p>
-      <p className="text-[12px] text-muted-foreground">
+    <div className="rounded-xl bg-background/40 p-3.5">
+      <p className="text-[16px] font-medium text-foreground">{person.full_name || person.email}</p>
+      <p className="text-[15px] leading-snug text-muted-foreground">
         {person.email} · {person.role === "admin" ? "app administrator" : "app user"}
       </p>
       <div className="mt-2 grid gap-2 sm:grid-cols-2">

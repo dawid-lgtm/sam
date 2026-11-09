@@ -17,7 +17,7 @@ function Strategies() {
   const [editor, setEditor] = useState({ open: false, strategy: null });
   const canEdit = canEditStrategy(user);
 
-  if (isLoading || !data) return <div className="h-56 animate-pulse rounded-2xl bg-white" />;
+  if (isLoading || !data) return <div className="h-56 animate-pulse rounded-2xl bg-card" />;
 
   const atLimit = data.strategies.length >= 8;
   const nextCode = `S${data.strategies.length + 1}`;
@@ -33,15 +33,15 @@ function Strategies() {
             <button
               onClick={() => !atLimit && setEditor({ open: true, strategy: null })}
               disabled={atLimit}
-              className="inline-flex min-h-[40px] items-center gap-1 rounded-xl border border-border px-3 text-[13px] font-semibold text-navy transition hover:bg-secondary disabled:opacity-40"
+              className="inline-flex min-h-[48px] items-center gap-1.5 rounded-xl bg-secondary px-3.5 text-[15px] font-semibold text-foreground transition disabled:opacity-40"
             >
-              <Plus className="h-4 w-4" /> Add
+              <Plus className="h-5 w-5" /> Add
             </button>
           ) : null
         }
       >
         {atLimit && canEdit ? (
-          <p className="mb-3 rounded-xl bg-accent px-3 py-2 text-[13px] text-[#7a6114]">
+          <p className="mb-3 rounded-xl bg-background/50 px-3 py-2 text-[15px] text-foreground">
             Eight strategies already. Retire one before adding another.
           </p>
         ) : null}
@@ -49,21 +49,21 @@ function Strategies() {
         <div className="space-y-3">
           {data.strategies.length ? (
             data.strategies.map((s) => (
-              <div key={s.id} className="rounded-2xl border border-border p-4">
+              <div key={s.id} className="rounded-xl bg-background/40 p-4">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex min-w-0 gap-3">
-                    <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-navy text-[13px] font-bold text-white">
+                    <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gold text-[15px] font-semibold text-gold-foreground">
                       {s.code}
                     </span>
-                    <p className="text-[15px] font-semibold leading-snug text-navy">{s.statement}</p>
+                    <p className="text-[16px] font-medium leading-snug text-foreground">{s.statement}</p>
                   </div>
                   {canEdit ? (
                     <button
                       onClick={() => setEditor({ open: true, strategy: s })}
                       aria-label="Edit strategy"
-                      className="grid h-10 w-10 shrink-0 place-items-center rounded-xl text-muted-foreground transition hover:bg-secondary"
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-muted-foreground transition hover:bg-card hover:text-foreground"
                     >
-                      <Pencil className="h-4 w-4" />
+                      <Pencil className="h-5 w-5" />
                     </button>
                   ) : null}
                 </div>
@@ -72,21 +72,23 @@ function Strategies() {
                   <Pill tone="gold">Serves {s.objective_code || "—"}</Pill>
                   <Pill tone="neutral">Owner {s.owner || "unset"}</Pill>
                   {(s.sites || []).map((id) => (
-                    <Pill key={id} tone="neutral">{siteName(id)}</Pill>
+                    <Pill key={id} tone="neutral">
+                      {siteName(id)}
+                    </Pill>
                   ))}
                 </div>
 
-                <dl className="mt-3 grid grid-cols-2 gap-2 text-[13px]">
-                  <div className="rounded-xl bg-secondary/60 px-3 py-2">
-                    <dt className="text-[11px] uppercase tracking-wide text-muted-foreground">Value volume</dt>
-                    <dd className="mt-0.5 font-medium text-navy">{s.value_volume || "—"}</dd>
+                <dl className="mt-3 grid grid-cols-2 gap-2 text-[15px]">
+                  <div className="rounded-lg bg-background/60 px-3 py-2">
+                    <dt className="text-muted-foreground">Value volume</dt>
+                    <dd className="mt-0.5 font-medium text-foreground">{s.value_volume || "—"}</dd>
                   </div>
-                  <div className="rounded-xl bg-secondary/60 px-3 py-2">
-                    <dt className="text-[11px] uppercase tracking-wide text-muted-foreground">Value $</dt>
-                    <dd className="mt-0.5 font-medium text-navy">{s.value_dollars || "—"}</dd>
+                  <div className="rounded-lg bg-background/60 px-3 py-2">
+                    <dt className="text-muted-foreground">Value in dollars</dt>
+                    <dd className="mt-0.5 font-medium text-foreground">{s.value_dollars || "—"}</dd>
                   </div>
                 </dl>
-                <p className="mt-2 text-xs text-muted-foreground">
+                <p className="mt-2 text-[15px] text-muted-foreground">
                   90-day review: {s.review_date ? moment.utc(s.review_date).format("D MMM YYYY") : "not set"}
                 </p>
               </div>

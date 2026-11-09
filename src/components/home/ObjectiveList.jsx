@@ -4,36 +4,34 @@ import { ChevronRight } from "lucide-react";
 export function ObjectiveList({ objectives }) {
   return (
     <section className="mt-6">
-      <div className="mb-3 flex items-end justify-between">
-        <h2 className="text-lg font-semibold text-navy">The objectives</h2>
-        <Link to="/strategy" className="text-sm font-medium text-muted-foreground underline-offset-4 hover:underline">
+      <div className="mb-3 flex items-end justify-between gap-3">
+        <h2 className="font-heading text-[21px] font-semibold text-foreground">The objectives</h2>
+        <Link to="/strategy" className="text-[15px] font-medium text-foreground underline-offset-4 hover:underline">
           See strategy
         </Link>
       </div>
       <div className="space-y-3">
         {objectives.map((o) => (
-          <Link
-            key={o.code}
-            to="/strategy"
-            className="block rounded-2xl border border-border bg-white p-4 transition hover:border-navy/20 hover:shadow-sm"
-          >
+          <Link key={o.code} to="/strategy" className="block rounded-2xl bg-card p-4">
             <div className="flex items-start gap-3">
-              <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-accent text-[13px] font-bold text-[#7a6114]">
+              <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gold text-[15px] font-semibold text-gold-foreground">
                 {o.code}
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-[15px] font-medium leading-snug text-navy">{o.statement}</p>
+                <p className="text-[16px] font-medium leading-snug text-foreground">{o.statement}</p>
                 <div className="mt-3 flex items-center gap-3">
-                  <div className="h-2 flex-1 overflow-hidden rounded-full bg-secondary">
+                  <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-background/60">
                     <div className="h-full rounded-full bg-gold" style={{ width: `${o.progress}%` }} />
                   </div>
-                  <span className="w-10 text-right text-sm font-semibold tabular-nums text-navy">{o.progress}%</span>
+                  <span className="w-12 text-right text-[15px] font-semibold tabular-nums text-foreground">
+                    {o.progress}%
+                  </span>
                 </div>
-                <p className="mt-2 text-xs text-muted-foreground">
-                  {o.metric} · {o.exec_owner}
+                <p className="mt-2 text-[15px] leading-snug text-muted-foreground">
+                  {o.metric || "No measure yet"} · {o.exec_owner || "no owner"}
                 </p>
               </div>
-              <ChevronRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground/60" />
+              <ChevronRight className="mt-1 h-5 w-5 shrink-0 text-muted-foreground" />
             </div>
           </Link>
         ))}

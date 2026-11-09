@@ -109,7 +109,7 @@ export function ObjectiveEditor({ open, onClose, objective, nextCode, onSaved })
         </div>
       ) : (
         <div className="space-y-3">
-          <p className="rounded-xl bg-accent px-3 py-2.5 text-[13px] leading-snug text-[#7a6114]">
+          <p className="rounded-xl bg-background/50 px-3 py-2.5 text-[15px] leading-snug text-foreground">
             Changing an objective always leaves a change-log entry. It cannot be edited or deleted afterwards.
           </p>
           <TextAreaField label="The change" rows={2} value={log.change} onChange={(e) => setLogField({ change: e.target.value })} />

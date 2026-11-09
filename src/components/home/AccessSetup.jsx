@@ -12,9 +12,11 @@ export function AccessSetup({ user, sites }) {
 
   if (user?.role !== "admin") {
     return (
-      <div className="mb-5 rounded-2xl border border-gold/40 bg-gold/10 p-4">
-        <p className="text-sm font-semibold text-[#7a6114]">Your access has not been set yet</p>
-        <p className="mt-1 text-sm text-[#7a6114]/90">Ask an administrator to set your role in Sam.</p>
+      <div className="mb-5 rounded-2xl bg-card p-4">
+        <p className="text-[16px] font-semibold text-foreground">Your access has not been set yet</p>
+        <p className="mt-1 text-[15px] leading-snug text-muted-foreground">
+          Ask an administrator to set your role in Sam.
+        </p>
       </div>
     );
   }
@@ -30,13 +32,14 @@ export function AccessSetup({ user, sites }) {
   };
 
   return (
-    <div className="mb-5 rounded-2xl border border-gold/40 bg-gold/10 p-4">
-      <p className="text-sm font-semibold text-[#7a6114]">Set your access</p>
-      <p className="mt-1 text-sm text-[#7a6114]/90">
+    <div className="mb-5 rounded-2xl bg-card p-4">
+      <p className="text-[16px] font-semibold text-foreground">Set your access</p>
+      <p className="mt-1 text-[15px] leading-snug text-muted-foreground">
         Sam shows the strategy to everyone. Your role decides what you can change.
       </p>
-      <p className="mt-1 text-[13px] leading-snug text-[#7a6114]/90">
-        Administrators and executives also need app-admin rights on their account before they can save strategy changes.
+      <p className="mt-1 text-[15px] leading-snug text-muted-foreground">
+        Administrators and executives also need app-admin rights on their account before they can save strategy
+        changes.
       </p>
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         <SelectField
