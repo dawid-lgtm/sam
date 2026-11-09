@@ -1,6 +1,6 @@
 import { DAY_LABELS, cellDate, meetingsInCell } from "@/lib/meetings";
 
-const short = (m) => (m.title || "").replace("Head office", "HO").replace("Kestrel Underground", "Kestrel");
+const short = (m) => (m.title || "").replace("Head office", "Head off.").replace("Kestrel Underground", "Kestrel");
 
 export function MonthGrid({ meetings, cursor }) {
   const year = cursor.year();
