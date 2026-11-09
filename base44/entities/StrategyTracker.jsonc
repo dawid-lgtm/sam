@@ -12,52 +12,52 @@
       "type": "string"
     },
     "m1": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": ""
     },
     "m2": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": ""
     },
     "m3": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": ""
     },
     "m4": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": ""
     },
     "m5": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": ""
     },
     "m6": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": ""
     },
     "m7": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": ""
     },
     "m8": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": ""
     },
     "m9": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": ""
     },
     "m10": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": ""
     },
     "m11": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": ""
     },
     "m12": {
-      "type": "boolean",
-      "default": false
+      "type": "string",
+      "default": ""
     },
     "q1_volume": {
       "type": "number",
