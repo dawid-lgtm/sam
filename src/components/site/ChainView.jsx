@@ -39,7 +39,7 @@ export function ChainView({ goal, siteId, objectives, strategies, tactics, plans
                           return (
                             <div key={t.id}>
                               <p className="text-[15px] leading-snug text-muted-foreground">
-                                {withWords(t.code, t.approach, 7)}
+                                {withWords(t.code, t.approach, 999)}
                               </p>
                               <div className="mt-1 flex flex-wrap gap-1.5">
                                 {ps.map((p) => (
@@ -47,7 +47,7 @@ export function ChainView({ goal, siteId, objectives, strategies, tactics, plans
                                     key={p.id}
                                     className="rounded-md bg-background/60 px-2 py-1 text-[15px] leading-snug text-foreground"
                                   >
-                                    {withWords(p.code, p.what, 4)}
+                                    {withWords(p.code, p.what, 999)}
                                   </span>
                                 ))}
                                 {actions
@@ -61,7 +61,7 @@ export function ChainView({ goal, siteId, objectives, strategies, tactics, plans
                                           : "bg-background text-muted-foreground"
                                       }`}
                                     >
-                                      {withWords(a.code, a.action, 4)}
+                                      {withWords(a.code, a.action, 999)}
                                     </span>
                                   ))}
                               </div>
