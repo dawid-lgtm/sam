@@ -25,9 +25,7 @@ function Legend() {
         did not happen
       </span>
       <span className="flex items-center gap-2">
-        <span className="grid h-7 w-11 place-items-center rounded-md bg-background/50 text-[15px] text-muted-foreground">
-          4
-        </span>
+        <span className="grid h-7 w-11 place-items-center rounded-md border-2 border-dashed border-muted-foreground/60" aria-hidden="true" />
         empty
       </span>
     </div>
