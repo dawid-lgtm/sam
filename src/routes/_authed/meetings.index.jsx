@@ -25,7 +25,7 @@ function MeetingsHome() {
 
   return (
     <div>
-      <PageHeader title="Meetings" intro="The rhythm that keeps the strategy visible: IN runs the work, ON improves it." />
+      <PageHeader title="Meetings" intro="Weekly meetings run the work. Monthly meetings improve it." />
 
       <div className="mb-4 grid grid-cols-2 gap-2">
         <span className="flex min-h-[48px] items-center justify-center rounded-xl bg-gold text-[15px] font-semibold text-gold-foreground">
