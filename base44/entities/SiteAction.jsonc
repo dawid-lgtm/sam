@@ -1,0 +1,95 @@
+{
+  "name": "SiteAction",
+  "type": "object",
+  "properties": {
+    "site_id": {
+      "type": "string"
+    },
+    "site_name": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string"
+    },
+    "for_plan": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "due": {
+      "type": "string"
+    },
+    "done": {
+      "type": "boolean",
+      "default": false
+    },
+    "sort": {
+      "type": "number",
+      "default": 0
+    },
+    "is_test": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "site_id",
+    "action"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    }
+  }
+}

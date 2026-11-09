@@ -1,0 +1,107 @@
+{
+  "name": "Meeting",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "Head office",
+        "Site"
+      ],
+      "enumColors": [
+        "blue",
+        "purple"
+      ]
+    },
+    "site_id": {
+      "type": "string"
+    },
+    "site_name": {
+      "type": "string"
+    },
+    "cadence": {
+      "type": "string",
+      "enum": [
+        "IN",
+        "ON"
+      ],
+      "enumColors": [
+        "green",
+        "yellow"
+      ]
+    },
+    "weeks": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "day_of_week": {
+      "type": "number",
+      "default": 1
+    },
+    "start_time": {
+      "type": "string",
+      "default": "09:00"
+    },
+    "duration_min": {
+      "type": "number",
+      "default": 60
+    },
+    "owner": {
+      "type": "string"
+    },
+    "decides": {
+      "type": "string"
+    },
+    "rules": {
+      "type": "string"
+    },
+    "sort": {
+      "type": "number",
+      "default": 0
+    },
+    "is_test": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "title",
+    "cadence"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

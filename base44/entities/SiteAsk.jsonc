@@ -1,0 +1,91 @@
+{
+  "name": "SiteAsk",
+  "type": "object",
+  "properties": {
+    "site_id": {
+      "type": "string"
+    },
+    "site_name": {
+      "type": "string"
+    },
+    "strategy_code": {
+      "type": "string"
+    },
+    "objective_code": {
+      "type": "string"
+    },
+    "ask": {
+      "type": "string"
+    },
+    "can_deliver": {
+      "type": "boolean",
+      "default": true
+    },
+    "reason": {
+      "type": "string"
+    },
+    "what_it_would_take": {
+      "type": "string"
+    },
+    "is_test": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "site_id",
+    "ask"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    }
+  }
+}

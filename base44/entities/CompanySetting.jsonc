@@ -1,0 +1,61 @@
+{
+  "name": "CompanySetting",
+  "type": "object",
+  "properties": {
+    "company_name": {
+      "type": "string"
+    },
+    "goal_sentence": {
+      "type": "string"
+    },
+    "goal_repeatable": {
+      "type": "boolean",
+      "default": false
+    },
+    "goal_changed_by": {
+      "type": "string"
+    },
+    "goal_changed_date": {
+      "type": "string"
+    },
+    "is_test": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "company_name",
+    "goal_sentence"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

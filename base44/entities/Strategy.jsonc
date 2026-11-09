@@ -1,0 +1,76 @@
+{
+  "name": "Strategy",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string"
+    },
+    "statement": {
+      "type": "string"
+    },
+    "objective_code": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "value_volume": {
+      "type": "string"
+    },
+    "value_dollars": {
+      "type": "string"
+    },
+    "sites": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "review_date": {
+      "type": "string"
+    },
+    "sort": {
+      "type": "number",
+      "default": 0
+    },
+    "is_test": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "code",
+    "statement"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "name": "Plan",
+  "type": "object",
+  "properties": {
+    "site_id": {
+      "type": "string"
+    },
+    "site_name": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "what": {
+      "type": "string"
+    },
+    "delivers_tactic": {
+      "type": "string"
+    },
+    "who": {
+      "type": "string"
+    },
+    "where": {
+      "type": "string"
+    },
+    "when": {
+      "type": "string"
+    },
+    "sort": {
+      "type": "number",
+      "default": 0
+    },
+    "is_test": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "site_id",
+    "what"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    }
+  }
+}

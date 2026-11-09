@@ -1,0 +1,59 @@
+{
+  "name": "ObjectiveChangeLog",
+  "type": "object",
+  "properties": {
+    "log_date": {
+      "type": "string"
+    },
+    "objective_code": {
+      "type": "string"
+    },
+    "change": {
+      "type": "string"
+    },
+    "cause": {
+      "type": "string"
+    },
+    "board_approval_date": {
+      "type": "string"
+    },
+    "logged_by": {
+      "type": "string"
+    },
+    "is_test": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "log_date",
+    "objective_code",
+    "change",
+    "cause"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "created_by_id": "00000000-0000-0000-0000-000000000000"
+    },
+    "delete": false
+  }
+}

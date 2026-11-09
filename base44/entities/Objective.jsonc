@@ -1,0 +1,71 @@
+{
+  "name": "Objective",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string"
+    },
+    "statement": {
+      "type": "string"
+    },
+    "metric": {
+      "type": "string"
+    },
+    "target_date": {
+      "type": "string"
+    },
+    "exec_owner": {
+      "type": "string"
+    },
+    "load_bearing_note": {
+      "type": "string"
+    },
+    "progress": {
+      "type": "number",
+      "default": 0
+    },
+    "sort": {
+      "type": "number",
+      "default": 0
+    },
+    "is_test": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "code",
+    "statement"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

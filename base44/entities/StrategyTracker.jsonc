@@ -1,0 +1,155 @@
+{
+  "name": "StrategyTracker",
+  "type": "object",
+  "properties": {
+    "strategy_code": {
+      "type": "string"
+    },
+    "site_id": {
+      "type": "string"
+    },
+    "site_name": {
+      "type": "string"
+    },
+    "m1": {
+      "type": "boolean",
+      "default": false
+    },
+    "m2": {
+      "type": "boolean",
+      "default": false
+    },
+    "m3": {
+      "type": "boolean",
+      "default": false
+    },
+    "m4": {
+      "type": "boolean",
+      "default": false
+    },
+    "m5": {
+      "type": "boolean",
+      "default": false
+    },
+    "m6": {
+      "type": "boolean",
+      "default": false
+    },
+    "m7": {
+      "type": "boolean",
+      "default": false
+    },
+    "m8": {
+      "type": "boolean",
+      "default": false
+    },
+    "m9": {
+      "type": "boolean",
+      "default": false
+    },
+    "m10": {
+      "type": "boolean",
+      "default": false
+    },
+    "m11": {
+      "type": "boolean",
+      "default": false
+    },
+    "m12": {
+      "type": "boolean",
+      "default": false
+    },
+    "q1_volume": {
+      "type": "number",
+      "default": 0
+    },
+    "q1_value": {
+      "type": "number",
+      "default": 0
+    },
+    "q2_volume": {
+      "type": "number",
+      "default": 0
+    },
+    "q2_value": {
+      "type": "number",
+      "default": 0
+    },
+    "q3_volume": {
+      "type": "number",
+      "default": 0
+    },
+    "q3_value": {
+      "type": "number",
+      "default": 0
+    },
+    "q4_volume": {
+      "type": "number",
+      "default": 0
+    },
+    "q4_value": {
+      "type": "number",
+      "default": 0
+    },
+    "is_test": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "strategy_code",
+    "site_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "name": "Tactic",
+  "type": "object",
+  "properties": {
+    "site_id": {
+      "type": "string"
+    },
+    "site_name": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "approach": {
+      "type": "string"
+    },
+    "delivers_strategy": {
+      "type": "string"
+    },
+    "owner": {
+      "type": "string"
+    },
+    "not_working_trigger": {
+      "type": "string"
+    },
+    "review_date": {
+      "type": "string"
+    },
+    "sort": {
+      "type": "number",
+      "default": 0
+    },
+    "is_test": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "site_id",
+    "approach"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.site_id": "{{user.data.site_id}}"
+        }
+      ]
+    }
+  }
+}

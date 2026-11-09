@@ -1,0 +1,140 @@
+{
+  "name": "Assessment",
+  "type": "object",
+  "properties": {
+    "assessee": {
+      "type": "string"
+    },
+    "assessment_date": {
+      "type": "string"
+    },
+    "staircase_step": {
+      "type": "string",
+      "enum": [
+        "Creativity",
+        "Direction",
+        "Delegation",
+        "Coordination",
+        "Collaboration"
+      ],
+      "enumColors": [
+        "gray",
+        "blue",
+        "purple",
+        "yellow",
+        "green"
+      ]
+    },
+    "turning_point": {
+      "type": "string"
+    },
+    "maturity_goal": {
+      "type": "string",
+      "enum": [
+        "Reactive",
+        "Structured",
+        "Measured",
+        "Self-improving"
+      ]
+    },
+    "maturity_strategies": {
+      "type": "string",
+      "enum": [
+        "Reactive",
+        "Structured",
+        "Measured",
+        "Self-improving"
+      ]
+    },
+    "maturity_meetings": {
+      "type": "string",
+      "enum": [
+        "Reactive",
+        "Structured",
+        "Measured",
+        "Self-improving"
+      ]
+    },
+    "maturity_site_head_office": {
+      "type": "string",
+      "enum": [
+        "Reactive",
+        "Structured",
+        "Measured",
+        "Self-improving"
+      ]
+    },
+    "maturity_behaviours": {
+      "type": "string",
+      "enum": [
+        "Reactive",
+        "Structured",
+        "Measured",
+        "Self-improving"
+      ]
+    },
+    "gaps": {
+      "type": "string"
+    },
+    "meetings_review": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "is_test": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "assessment_date"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
