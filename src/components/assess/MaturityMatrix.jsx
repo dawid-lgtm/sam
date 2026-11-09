@@ -5,9 +5,9 @@ export function MaturityMatrix({ value, onChange, disabled }) {
     <div className="space-y-3">
       {MATURITY_AREAS.map((area) => (
         <div key={area.key} className="rounded-2xl border border-border p-3">
-          <p className="mb-2 text-[14px] font-semibold text-navy">{area.label}</p>
-          <div className="grid grid-cols-4 gap-1.5">
-            {MATURITY_LEVELS.map((level) => {
+          <p className="mb-2 text-[15px] font-semibold text-navy">{area.label}</p>
+          <div className="space-y-1.5">
+            {MATURITY_LEVELS.map((level, i) => {
               const selected = value[area.key] === level;
               return (
                 <button
@@ -15,13 +15,14 @@ export function MaturityMatrix({ value, onChange, disabled }) {
                   type="button"
                   disabled={disabled}
                   onClick={() => onChange(area.key, level)}
-                  className={`min-h-[52px] rounded-xl px-1.5 py-2 text-[11px] font-semibold leading-tight transition ${
-                    selected
-                      ? "bg-gold text-navy shadow-sm"
-                      : "bg-secondary/70 text-muted-foreground hover:bg-secondary"
+                  className={`w-full min-h-[52px] rounded-xl px-3 py-2 text-left transition ${
+                    selected ? "bg-gold text-navy shadow-sm" : "bg-secondary/70 text-navy hover:bg-secondary"
                   }`}
                 >
-                  {level}
+                  <span className="block text-[11px] font-bold uppercase tracking-wide">
+                    Level {i + 1} · {level}
+                  </span>
+                  <span className="block text-[13px] leading-snug">{area.cells[i]}</span>
                 </button>
               );
             })}
