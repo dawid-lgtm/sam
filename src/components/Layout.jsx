@@ -6,22 +6,10 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function AppShell({ children }) {
   const { user, logout } = useAuth();
-  const company = "Ridgeback (test)";
 
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-30 bg-background">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 overflow-hidden dark:block"
-          style={{
-            backgroundImage:
-              "linear-gradient(90deg, hsl(var(--background)) 35%, hsl(var(--background) / 0.82)), url('https://media.base44.com/images/public/6af15b436d05108c2128035d/0dc42b8b1_sam-hero.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "right center",
-            opacity: 0.9,
-          }}
-        />
         <div className="relative mx-auto flex max-w-3xl items-center justify-between gap-2 px-4 py-2.5">
           <div className="flex min-w-0 items-center gap-3">
             <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gold font-heading text-[18px] font-semibold text-gold-foreground">
@@ -29,7 +17,7 @@ export function AppShell({ children }) {
             </span>
             <div className="min-w-0 leading-tight">
               <p className="font-heading text-[19px] font-semibold text-foreground">Sam</p>
-              <p className="whitespace-nowrap text-[15px] text-muted-foreground">{company} · Mine in a box™</p>
+              <p className="whitespace-nowrap text-[15px] text-muted-foreground">Mine in a box™</p>
             </div>
           </div>
           <div className="flex shrink-0 items-center">
@@ -63,7 +51,19 @@ export function AppShell({ children }) {
         </p>
       </div>
 
-      <main className="mx-auto w-full max-w-3xl px-4 pb-28 pt-5 md:pb-12">{children}</main>
+      <div className="relative">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 h-80"
+          style={{
+            backgroundImage:
+              "linear-gradient(180deg, hsl(var(--background) / 0.78) 0%, hsl(var(--background) / 0.86) 55%, hsl(var(--background)) 100%), url('https://media.base44.com/images/public/6af15b436d05108c2128035d/0dc42b8b1_sam-hero.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center top",
+          }}
+        />
+        <main className="relative mx-auto w-full max-w-3xl px-4 pb-28 pt-5 md:pb-12">{children}</main>
+      </div>
 
       <div className="fixed inset-x-0 bottom-0 z-30 md:hidden">
         <AppNav variant="bottom" />
