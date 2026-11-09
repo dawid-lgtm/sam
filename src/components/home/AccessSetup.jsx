@@ -35,6 +35,9 @@ export function AccessSetup({ user, sites }) {
       <p className="mt-1 text-sm text-[#7a6114]/90">
         Sam shows the strategy to everyone. Your role decides what you can change.
       </p>
+      <p className="mt-1 text-[13px] leading-snug text-[#7a6114]/90">
+        Administrators and executives also need app-admin rights on their account before they can save strategy changes.
+      </p>
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         <SelectField
           label="Role"

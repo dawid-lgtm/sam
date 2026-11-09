@@ -2,6 +2,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { base44 } from "@/api/base44Client";
 import { useRefreshSam } from "@/lib/useSamData";
+import { notifySaveError } from "@/lib/access";
 import { Modal } from "@/components/ui-kit/Modal";
 import { TextField, TextAreaField, SelectField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
 
@@ -46,6 +47,8 @@ export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, 
       refresh();
       onClose();
       toast.success(editing ? "Strategy saved" : "Strategy added");
+    } catch (err) {
+      toast.error(notifySaveError(err));
     } finally {
       setSaving(false);
     }

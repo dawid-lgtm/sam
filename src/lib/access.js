@@ -27,3 +27,12 @@ export function canEditSite(user, siteId) {
 export function isAdministrator(user) {
   return user?.access === "administrator";
 }
+
+/** Shared message when a save is refused because the account is not an app administrator. */
+export function notifySaveError(err) {
+  const message = String(err?.message || "").toLowerCase();
+  if (message.includes("permission") || message.includes("403")) {
+    return "Only app administrators can change this. Ask an administrator to give your account app-admin rights.";
+  }
+  return "Could not save. Please try again.";
+}

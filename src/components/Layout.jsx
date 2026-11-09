@@ -1,5 +1,6 @@
+import { Link } from "@tanstack/react-router";
 import { useAuth } from "@/lib/AuthContext";
-import { LogOut } from "lucide-react";
+import { LogOut, Users } from "lucide-react";
 import { AppNav } from "@/components/AppNav";
 
 export function AppShell({ children }) {
@@ -19,13 +20,24 @@ export function AppShell({ children }) {
               <p className="text-xs text-muted-foreground">{company}</p>
             </div>
           </div>
-          <button
-            onClick={() => logout()}
-            aria-label="Sign out"
-            className="grid h-11 w-11 place-items-center rounded-xl text-muted-foreground transition hover:bg-secondary hover:text-navy"
-          >
-            <LogOut className="h-5 w-5" />
-          </button>
+          <div className="flex items-center">
+            {user?.role === "admin" ? (
+              <Link
+                to="/people"
+                aria-label="People and access"
+                className="grid h-11 w-11 place-items-center rounded-xl text-muted-foreground transition hover:bg-secondary hover:text-navy"
+              >
+                <Users className="h-5 w-5" />
+              </Link>
+            ) : null}
+            <button
+              onClick={() => logout()}
+              aria-label="Sign out"
+              className="grid h-11 w-11 place-items-center rounded-xl text-muted-foreground transition hover:bg-secondary hover:text-navy"
+            >
+              <LogOut className="h-5 w-5" />
+            </button>
+          </div>
         </div>
         <div className="mx-auto hidden max-w-3xl px-4 md:block">
           <AppNav variant="top" />

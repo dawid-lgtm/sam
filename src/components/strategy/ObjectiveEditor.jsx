@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { base44 } from "@/api/base44Client";
 import { useAuth } from "@/lib/AuthContext";
 import { useRefreshSam } from "@/lib/useSamData";
+import { notifySaveError } from "@/lib/access";
 import { Modal } from "@/components/ui-kit/Modal";
 import { TextField, TextAreaField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
 
@@ -69,6 +70,8 @@ export function ObjectiveEditor({ open, onClose, objective, nextCode, onSaved })
       onSaved?.();
       close();
       toast.success(editing ? "Objective changed and logged" : "Objective added");
+    } catch (err) {
+      toast.error(notifySaveError(err));
     } finally {
       setSaving(false);
     }

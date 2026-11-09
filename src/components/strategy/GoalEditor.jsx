@@ -5,6 +5,7 @@ import { Pencil, Check } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useAuth } from "@/lib/AuthContext";
 import { useRefreshSam } from "@/lib/useSamData";
+import { notifySaveError } from "@/lib/access";
 import { Modal } from "@/components/ui-kit/Modal";
 import { TextAreaField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
 
@@ -20,15 +21,22 @@ export function GoalEditor({ company, canEdit }) {
     if (!sentence.trim()) return;
     setSaving(true);
     try {
-      await base44.entities.CompanySetting.update(company.id, {
+      const payload = {
         goal_sentence: sentence.trim(),
         goal_repeatable: repeatable,
         goal_changed_by: user?.full_name || user?.email || "",
         goal_changed_date: moment.utc().format("YYYY-MM-DD"),
-      });
+      };
+      if (company?.id) {
+        await base44.entities.CompanySetting.update(company.id, payload);
+      } else {
+        await base44.entities.CompanySetting.create({ company_name: "Your company", is_test: true, ...payload });
+      }
       refresh();
       setOpen(false);
       toast.success("Goal saved");
+    } catch (err) {
+      toast.error(notifySaveError(err));
     } finally {
       setSaving(false);
     }

@@ -48,9 +48,11 @@ function Assess() {
     },
   });
 
+  const myAssessments = (mine || []).filter((a) => a.created_by_id === user?.id);
+
   useEffect(() => {
     if (prefilled.current || !data || !mine) return;
-    const latest = mine.find((a) => a.created_by_id === user?.id) || mine[0] || null;
+    const latest = myAssessments[0] || null;
     setForm({
       ...emptyForm(),
       ...(latest || {}),
@@ -82,9 +84,9 @@ function Assess() {
         evidence: form.evidence,
         is_test: true,
       };
-      const todays = mine?.find((a) => a.assessment_date === today && a.created_by_id === user?.id);
-      const record = todays || assessmentId
-        ? await base44.entities.Assessment.update((todays || { id: assessmentId }).id, payload)
+      const todays = myAssessments.find((a) => a.assessment_date === today);
+      const record = todays
+        ? await base44.entities.Assessment.update(todays.id, payload)
         : await base44.entities.Assessment.create(payload);
       setAssessmentId(record.id);
       await refetch();
@@ -152,10 +154,10 @@ function Assess() {
         {saving ? "Saving…" : "Save my assessment"}
       </PrimaryButton>
 
-      {mine?.length ? (
+      {myAssessments.length ? (
         <Section className="mt-6" title="Assessments you have saved">
           <div className="flex flex-wrap gap-2">
-            {mine.map((a) => (
+            {myAssessments.map((a) => (
               <button
                 key={a.id}
                 onClick={() => open(a)}
