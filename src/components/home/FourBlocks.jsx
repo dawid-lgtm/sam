@@ -22,8 +22,8 @@ export function FourBlocks({ role, now }) {
   const cur = currentBlock(now);
   const [open, setOpen] = useState(cur || 1);
   return (
-    <section className="mt-3 rounded-2xl bg-card p-4 sm:p-5">
-      <h2 className="font-heading text-[20px] font-semibold">Your day in four blocks</h2>
+    <section className="rounded-2xl bg-card p-3 sm:p-4">
+      <h2 className="font-heading text-[18px] font-semibold">Your day in four blocks</h2>
       <p className="mt-1 text-[15px] text-muted-foreground">{role} · day shift · {cur ? `now in Block ${cur}` : "off shift"}</p>
 
       {/* Phone: one row per block, tap to open */}

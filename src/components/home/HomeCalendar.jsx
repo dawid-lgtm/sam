@@ -43,9 +43,9 @@ export function HomeCalendar() {
   const bookedLab = labSessions.find((l) => l.id === booked);
 
   return (
-    <section className="mt-3 rounded-2xl bg-card p-4 sm:p-5">
+    <section className="rounded-2xl bg-card p-3 sm:p-4">
       <div className="mb-3 flex items-center justify-between">
-        <h2 className="font-heading text-[20px] font-semibold text-foreground">Key dates</h2>
+        <h2 className="font-heading text-[18px] font-semibold text-foreground">Key dates</h2>
         <div className="flex items-center gap-1">
           <button aria-label="Previous month" onClick={() => move(-1)} className="grid h-11 w-11 place-items-center rounded-xl hover:bg-background/40"><ChevronLeft className="h-5 w-5" /></button>
           <span className="min-w-[110px] text-center text-[15px] font-semibold">
