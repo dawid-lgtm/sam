@@ -9,7 +9,7 @@ export const companies = [
 export const masterPrograms = [
   { id: "ops", name: "Managing Operations", short: "Ops", steps: ["Workbook (Learn)", "Lab", "Apply", "Validation Lab", "Verify: observed shift"] },
   { id: "maint", name: "Managing Maintenance", short: "Maint", steps: ["Workbook (Learn)", "Lab", "Apply", "Validation Lab", "Verify"] },
-  { id: "strategy", name: "Managing Strategy", short: "Strategy", steps: ["Self-assessment", "Goal, objectives, strategies", "Site tactics, plans, actions", "Monthly strategy review", "Verify"] },
+  { id: "strategy", name: "Managing Strategy", short: "Strategy", steps: ["Goals and Objectives", "Briefing Workshop", "Regional Strategies and Tactics", "Site Tactics, Plans, Actions", "Monthly On the Business"] },
   { id: "safety", name: "Managing Safety", short: "Safety", steps: ["Workbook (Learn)", "Lab", "Apply", "Validation Lab", "Verify"] },
 ];
 
