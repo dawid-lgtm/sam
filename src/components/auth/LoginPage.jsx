@@ -41,7 +41,7 @@ export function LoginPage() {
   if (mfaChallenge) return <MfaScreen><MfaFlow challenge={mfaChallenge} returnTo={returnTo} /></MfaScreen>;
 
   return (
-    <AuthLayout icon={LogIn} title="Welcome back" subtitle="Log in to your account">
+    <AuthLayout icon={LogIn} title="Sign in" subtitle="Leadership programs for mine sites">
       <AuthError>{error}</AuthError>
       <form onSubmit={submit} className="space-y-4">
         <div className="space-y-2">

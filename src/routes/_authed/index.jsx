@@ -6,6 +6,7 @@ import { AccessSetup } from "@/components/home/AccessSetup";
 import { HomeCalendar } from "@/components/home/HomeCalendar";
 import { FourBlocks } from "@/components/home/FourBlocks";
 import { TestDataBadge } from "@/components/TestDataBadge";
+import { SuperAdmin } from "@/components/super/SuperAdmin";
 import { person, programs, sitePerformance, safetyFocus, keyDates } from "@/lib/homeTestData";
 
 const HERO = "https://media.base44.com/images/public/6af15b436d05108c2128035d/0dc42b8b1_sam-hero.jpg";
@@ -65,6 +66,21 @@ function Home() {
   const tactics = data?.tactics || [];
   const todayIso = now.toISOString().slice(0, 10);
   const upcoming = keyDates.filter((k) => k.date >= todayIso).slice(0, 3);
+  const myName = user?.full_name?.split(" ")[0] || user?.email?.split("@")[0] || "";
+
+  // The super admin lands on the master admin page: every customer and every program.
+  if (user?.role === "admin") {
+    return (
+      <div className="space-y-3">
+        <section className="rounded-2xl bg-gold p-3">
+          <p className="text-[15px] font-medium text-gold-foreground">
+            Signed in as {user.full_name || user.email} · super admin
+          </p>
+        </section>
+        <SuperAdmin />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-3">
@@ -78,7 +94,7 @@ function Home() {
         <div className="flex items-start justify-between gap-2">
           <div>
             <p className="text-[14px] text-gold">{hello}</p>
-            <h1 className="font-heading text-[26px] font-semibold leading-tight">Welcome, {person.first_name}</h1>
+            <h1 className="font-heading text-[26px] font-semibold leading-tight">Welcome{myName ? `, ${myName}` : ""}</h1>
             <p className="text-[14px]">
               {now.toLocaleDateString("en-AU", { weekday: "long", day: "numeric", month: "long" })} ·{" "}
               {now.toLocaleTimeString("en-AU", { hour: "2-digit", minute: "2-digit" })}
