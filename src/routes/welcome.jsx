@@ -17,7 +17,7 @@ function Welcome() {
       <div className="mx-auto mt-6 w-full max-w-[900px] flex-1 flex items-center">
         <div
           className="relative w-full"
-          style={{ aspectRatio: "1.7", backgroundImage: `url('${HERO}')`, backgroundSize: "165% auto", backgroundPosition: "62% 8%", backgroundRepeat: "no-repeat" }}
+          style={{ aspectRatio: "1.45", backgroundImage: `url('${HERO}')`, backgroundSize: "150% auto", backgroundPosition: "80% 18%", backgroundRepeat: "no-repeat" }}
         >
           <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(44,71,117,0.9) 0%, rgba(44,71,117,0) 18%, rgba(44,71,117,0) 80%, rgba(44,71,117,1) 100%), linear-gradient(90deg, rgba(44,71,117,1) 0%, rgba(44,71,117,0) 14%, rgba(44,71,117,0) 86%, rgba(44,71,117,1) 100%)" }} />
         </div>
