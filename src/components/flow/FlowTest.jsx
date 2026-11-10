@@ -178,15 +178,26 @@ function Ops({ s, save, role, actAs, setActAs }) {
   return null;
 }
 
-function SuperView({ s, save }) {
+function SuperView({ s, save, prog }) {
   const o = s.op, t = s.st;
   const stage = (p) => o.attended[p.name] ? "Apply" : o.wb[p.name]?.ok ? "Lab next" : o.wb[p.name]?.sub ? "Waiting sign-off" : "Prime workbook";
   const answers = o.people.filter((p) => o.wb[p.name]?.sub);
+  if (prog === "strategy") return (
+    <div className="grid gap-3 md:grid-cols-2">
+      <Card title="MMS (test) · Managing Strategy">
+        <p className="text-[14px]">{t.goals.length} goals · {t.strategies.length} strategies · {t.actions.length} actions · briefing {t.briefing ? "done ✓" : "not yet"}</p>
+        <p className="mt-1 text-[14px]">Regional GMs: {t.regionals.length} · site leaders: {t.leaders.length} · regional workshop {t.regWorkshop ? "done ✓" : "not yet"}</p>
+      </Card>
+      <Card title="Monthly On the Business">
+        <List items={t.monthly} render={(m) => <>{m.date} · {m.done ? "held ✓" : "not held"} · {m.reg ? "register ✓" : "register not updated"}</>} />
+      </Card>
+      <div className="md:col-span-2"><Master t={t} /></div>
+    </div>
+  );
   return (
     <div className="grid gap-3 md:grid-cols-2">
-      <Card title="MMS (test) · programs">
+      <Card title="MMS (test) · Ops and Maintenance Phase 1">
         <label className="flex items-center gap-2 text-[15px]"><input type="checkbox" checked={o.on} onChange={(e) => save((n) => { n.op.on = e.target.checked; return n; })} /> Ops / Maintenance Phase 1 on</label>
-        <p className="mt-2 text-[14px]">Strategy: {t.goals.length} goals · {t.strategies.length} strategies · {t.actions.length} actions · briefing {t.briefing ? "done ✓" : "not yet"}</p>
       </Card>
       <Card title="Where everyone is (CML)">
         <List items={o.people} render={(p) => <>{p.name} · {p.level} · {p.stream} · <b className="text-gold">{stage(p)}</b></>} />
@@ -197,7 +208,6 @@ function SuperView({ s, save }) {
       <Card title="AI summary" tag="Coming">
         <p className="text-[14px]">Sam will read all the answers and give you the themes, gaps and who needs help. Needs your OK for the AI spend before it is switched on.</p>
       </Card>
-      <div className="md:col-span-2"><Master t={t} /></div>
     </div>
   );
 }
@@ -224,7 +234,7 @@ export function FlowTest() {
           {ROLES[prog].map(([k, l]) => <button key={k} onClick={() => setRole(k)} className={`rounded-lg px-3 py-1 text-[13px] ${role === k ? "bg-gold text-background font-bold" : "bg-background"}`}>{l}</button>)}
         </div>
       </div>
-      {role === "super" ? <SuperView s={s} save={save} /> : prog === "strategy" ? <Strategy s={s} save={save} role={role} /> : <Ops s={s} save={save} role={role} actAs={actAs} setActAs={setActAs} />}
+      {role === "super" ? <SuperView s={s} save={save} prog={prog} /> : prog === "strategy" ? <Strategy s={s} save={save} role={role} /> : <Ops s={s} save={save} role={role} actAs={actAs} setActAs={setActAs} />}
       <Card title="Test outbox (not sent)">
         <List items={s.outbox.slice(0, 8)} render={(m) => <>{m.at} · to {m.to}: {m.what}</>} />
         <Btn onClick={() => { if (confirm("Clear all test data?")) save(() => structuredClone(blank)); }}>Reset test</Btn>
