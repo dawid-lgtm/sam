@@ -9,7 +9,7 @@ function Welcome() {
   const returnTo = typeof search?.returnTo === "string" ? search.returnTo : undefined;
   return (
     <div
-      className="relative flex min-h-screen flex-col justify-between bg-cover bg-[position:72%_center] text-white"
+      className="relative flex min-h-screen flex-col justify-between bg-cover bg-[position:62%_center] text-white"
       style={{ backgroundImage: `linear-gradient(180deg, rgba(44,71,117,0.55) 0%, rgba(44,71,117,0.25) 40%, rgba(20,32,56,0.9) 100%), url('${HERO}')` }}
     >
       <header className="px-6 pt-10">
