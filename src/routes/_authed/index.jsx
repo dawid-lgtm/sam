@@ -56,7 +56,7 @@ function Home() {
       ) : null}
 
       {/* Welcome and details */}
-      <section className="rounded-2xl bg-card p-4 md:col-span-2">
+      <section className="rounded-2xl bg-card bg-cover bg-center p-4 md:col-span-2" style={{ backgroundImage: "linear-gradient(90deg, hsl(var(--card)) 0%, hsl(var(--card) / 0.9) 50%, hsl(var(--card) / 0.45) 100%), url('https://media.base44.com/images/public/6af15b436d05108c2128035d/0dc42b8b1_sam-hero.jpg')" }}>
         <div className="flex items-start justify-between gap-2">
           <p className="text-[15px] text-gold">{hello}</p>
           <TestDataBadge />
@@ -85,7 +85,6 @@ function Home() {
         </dl>
       </section>
 
-      <div className="grid items-start gap-x-3 md:grid-cols-2">
       {/* Programs */}
       <Tile title="My programs">
         <ul className="space-y-2">
@@ -150,7 +149,6 @@ function Home() {
         </ul>
       </Tile>
 
-      </div>
       {/* Strategy this quarter */}
       <Tile
         title="Our focus this quarter"
