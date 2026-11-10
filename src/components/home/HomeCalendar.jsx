@@ -77,7 +77,7 @@ export function HomeCalendar() {
               key={d}
               onClick={() => ev.length && setOpen(d)}
               disabled={!ev.length}
-              className={`relative grid h-11 place-items-center rounded-lg text-[15px] ${cls} ${d === todayIso ? "ring-2 ring-white" : ""}`}
+              className={`relative grid h-9 place-items-center rounded-md text-[14px] ${cls} ${d === todayIso ? "ring-2 ring-white" : ""}`}
             >
               {i + 1}
             </button>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 
 // Superintendent's day, from the Mine in a box knowledge base (superintendents-day.md). Day shift times.
 const blocks = [
@@ -18,53 +17,33 @@ function currentBlock(now) {
   return [...blocks].reverse().find((b) => h >= b.from).n;
 }
 
-export function FourBlocks({ role, now }) {
+export function FourBlocks({ role, now, compact = false }) {
   const cur = currentBlock(now);
-  const [open, setOpen] = useState(cur || 1);
+  if (compact) {
+    return (
+      <span className="grid grid-cols-4 gap-2">
+        {blocks.map((b) => (
+          <span key={b.n} className={`block rounded-lg px-2 py-1.5 ${cur === b.n ? "bg-gold text-gold-foreground" : "bg-background/40"}`}>
+            <span className="block text-[12px]">{b.n} · {cur === b.n ? "Now" : b.label}</span>
+            <span className="block truncate text-[14px] font-semibold">{b.title}</span>
+          </span>
+        ))}
+      </span>
+    );
+  }
   return (
-    <section className="rounded-2xl bg-card p-3 sm:p-4">
-      <h2 className="font-heading text-[18px] font-semibold">Your day in four blocks</h2>
-      <p className="mt-1 text-[15px] text-muted-foreground">{role} · day shift · {cur ? `now in Block ${cur}` : "off shift"}</p>
-
-      {/* Phone: one row per block, tap to open */}
-      <ul className="mt-3 space-y-2 md:hidden">
-        {blocks.map((b) => {
-          const isOpen = open === b.n;
-          const isNow = cur === b.n;
-          return (
-            <li key={b.n}>
-              <button
-                onClick={() => setOpen(isOpen ? 0 : b.n)}
-                className={`flex min-h-[52px] w-full items-center gap-3 rounded-xl px-3 text-left ${isNow ? "bg-gold text-gold-foreground" : "bg-background/40"}`}
-              >
-                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border-2 border-current text-[15px] font-bold">{b.n}</span>
-                <span className="text-[15px] font-semibold">{b.title}</span>
-                <span className="ml-auto text-[13px]">{isNow ? "Now" : b.label}</span>
-              </button>
-              {isOpen ? (
-                <div className="px-3 pb-1 pt-2">
-                  <p className="text-[15px] italic">{b.aim}</p>
-                  <ul className="mt-1 list-disc pl-5 text-[15px]">{b.items.map((i) => <li key={i}>{i}</li>)}</ul>
-                </div>
-              ) : null}
-            </li>
-          );
-        })}
-      </ul>
-
-      {/* Tablet and up: four small cards side by side */}
-      <div className="mt-3 hidden grid-cols-4 gap-2 md:grid">
-        {blocks.map((b) => {
-          const isNow = cur === b.n;
-          return (
-            <div key={b.n} className={`rounded-xl px-3 py-2 ${isNow ? "bg-gold text-gold-foreground" : "bg-background/40"}`}>
-              <p className="text-[13px]">Block {b.n} · {isNow ? "Now" : b.label}</p>
-              <p className="text-[15px] font-semibold leading-tight">{b.title}</p>
-              <p className="mt-0.5 text-[13px] leading-snug opacity-90">{b.aim}</p>
-            </div>
-          );
-        })}
+    <div>
+      <p className="text-[15px] text-muted-foreground">{role} · day shift · {cur ? `now in Block ${cur}` : "off shift"}</p>
+      <div className="mt-3 grid gap-2 sm:grid-cols-2">
+        {blocks.map((b) => (
+          <div key={b.n} className={`rounded-xl p-3 ${cur === b.n ? "bg-gold text-gold-foreground" : "bg-card"}`}>
+            <p className="text-[13px]">Block {b.n} · {cur === b.n ? "Now" : b.label}</p>
+            <p className="text-[16px] font-semibold">{b.title}</p>
+            <p className="text-[14px] italic">{b.aim}</p>
+            <ul className="mt-1 list-disc pl-5 text-[14px]">{b.items.map((i) => <li key={i}>{i}</li>)}</ul>
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }
