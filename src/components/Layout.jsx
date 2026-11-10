@@ -45,12 +45,6 @@ export function AppShell({ children }) {
         </div>
       </header>
 
-      <div className="bg-gold">
-        <p className="mx-auto max-w-3xl px-4 py-2 text-center text-[15px] font-medium text-gold-foreground">
-          Test data: sample sites, people and numbers
-        </p>
-      </div>
-
       <div className="relative">
         <div
           aria-hidden="true"
