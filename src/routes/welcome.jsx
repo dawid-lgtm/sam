@@ -10,7 +10,7 @@ function Welcome() {
   return (
     <div
       className="relative flex min-h-screen flex-col justify-between bg-[#2c4775] bg-no-repeat text-white"
-      style={{ backgroundImage: `linear-gradient(180deg, rgba(44,71,117,0) 55%, rgba(20,32,56,0.95) 85%), url('${HERO}')`, backgroundSize: "100% 100%, min(100%, 900px) auto", backgroundPosition: "center, center 35%", backgroundRepeat: "no-repeat" }}
+      style={{ backgroundImage: `linear-gradient(180deg, rgba(44,71,117,1) 21%, rgba(44,71,117,0) 33%, rgba(44,71,117,0) 50%, rgba(44,71,117,1) 61%, rgba(20,32,56,1) 100%), linear-gradient(90deg, rgba(44,71,117,0.9) 0%, rgba(44,71,117,0) 12%, rgba(44,71,117,0) 88%, rgba(44,71,117,0.9) 100%), url('${HERO}')`, backgroundSize: "100% 100%, 100% 100%, min(100%, 900px) auto", backgroundPosition: "center, center, center 35%", backgroundRepeat: "no-repeat" }}
     >
       <header className="px-6 pt-10">
         <p className="font-serif text-5xl font-semibold tracking-tight" style={{ fontFamily: "Fraunces, serif" }}>Sam</p>
