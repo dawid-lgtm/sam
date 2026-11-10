@@ -57,10 +57,14 @@ function Sheet({ title, onClose, children }) {
 
 function Admin() {
   const { user } = Route.useRouteContext();
-  const [open, setOpen] = useState(null);
   if (user?.role !== "admin") {
     return <p className="rounded-2xl bg-card p-4 text-[15px]">This page is for administrators. <Link to="/" className="text-gold underline">Back home</Link></p>;
   }
+  return <AdminDashboard />;
+}
+
+export function AdminDashboard() {
+  const [open, setOpen] = useState(null);
   const invited = people.filter((p) => p.invite !== "Active").length;
   return (
     <div className="space-y-3">
