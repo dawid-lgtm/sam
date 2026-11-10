@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Building2, CalendarDays, ChevronRight, GraduationCap, ShieldCheck, Users, X } from "lucide-react";
+import { Building2, CalendarDays, ChevronRight, FileBarChart, GraduationCap, ShieldCheck, UserPlus, Users, X } from "lucide-react";
 import { TestDataBadge } from "@/components/TestDataBadge";
 import { labSessions } from "@/lib/homeTestData";
 
@@ -65,7 +65,8 @@ function Admin() {
 
 export function AdminDashboard() {
   const [open, setOpen] = useState(null);
-  const invited = people.filter((p) => p.invite !== "Active").length;
+  const [staff, setStaff] = useState(people);
+  const invited = staff.filter((p) => p.invite !== "Active").length;
   return (
     <div className="space-y-3">
       <section className="rounded-2xl bg-card p-4">
@@ -78,7 +79,7 @@ export function AdminDashboard() {
           <TestDataBadge />
         </div>
         <div className="mt-3 grid grid-cols-4 gap-2 text-center">
-          {[[customers.length, "Customers"], [customers.reduce((n, c) => n + c.sites.length, 0), "Sites"], [people.length, "People"], [labSessions.length, "Lab dates"]].map(([n, l]) => (
+          {[[customers.length, "Customers"], [customers.reduce((n, c) => n + c.sites.length, 0), "Sites"], [staff.length, "People"], [labSessions.length, "Lab dates"]].map(([n, l]) => (
             <div key={l} className="rounded-xl bg-background/40 p-2"><p className="text-[22px] font-semibold">{n}</p><p className="text-[13px] text-muted-foreground">{l}</p></div>
           ))}
         </div>
@@ -89,7 +90,7 @@ export function AdminDashboard() {
           {customers.map((c) => <span key={c.name} className="mb-1 block truncate"><b>{c.name}</b> · {c.sites.length} sites</span>)}
         </Tile>
         <Tile title="People and invites" icon={Users} onOpen={() => setOpen("people")}>
-          <span className="block">{people.length} people</span>
+          <span className="block">{staff.length} people</span>
           <span className="block text-gold">{invited} still to accept or invite</span>
         </Tile>
         <Tile title="Validation Labs" icon={CalendarDays} onOpen={() => setOpen("labs")}>
@@ -107,6 +108,12 @@ export function AdminDashboard() {
           <span className="block">Two-step sign-in: on for all</span>
           <span className="block">Data: test only</span>
         </Tile>
+        <Tile title="Add a person" icon={UserPlus} onOpen={() => setOpen("add")}>
+          <span className="block">Name, job, site, program. Then invite.</span>
+        </Tile>
+        <Tile title="Completion reports" icon={FileBarChart} onOpen={() => setOpen("report")} className="md:col-span-2">
+          <span className="block">Who has finished each step, by program and site.</span>
+        </Tile>
       </div>
 
       {open === "customers" && (
@@ -119,13 +126,13 @@ export function AdminDashboard() {
       )}
       {open === "people" && (
         <Sheet title="People and invites" onClose={() => setOpen(null)}>
-          <ul className="space-y-2">{people.map((p) => (
+          <ul className="space-y-2">{staff.map((p) => (
             <li key={p.name} className="flex items-center justify-between gap-2 rounded-xl bg-card p-3 text-[15px]">
               <span><b>{p.name}</b><br />{p.job} · {p.site}</span>
               <span className={p.invite === "Active" ? "" : "text-gold"}>{p.invite}</span>
             </li>
           ))}</ul>
-          <button className="mt-3 min-h-[48px] w-full rounded-xl bg-gold font-semibold text-gold-foreground" disabled>Invite a person (coming next)</button>
+          <button onClick={() => setOpen("add")} className="mt-3 min-h-[48px] w-full rounded-xl bg-gold font-semibold text-gold-foreground">Add a person</button>
         </Sheet>
       )}
       {open === "labs" && (
@@ -152,6 +159,72 @@ export function AdminDashboard() {
           </ul>
         </Sheet>
       )}
+      {open === "add" && (
+        <Sheet title="Add a person" onClose={() => setOpen(null)}>
+          <AddPersonForm onAdd={(p) => { setStaff((x) => [...x, p]); setOpen("people"); }} />
+        </Sheet>
+      )}
+      {open === "report" && (
+        <Sheet title="Completion report" onClose={() => setOpen(null)}>
+          <CompletionReport />
+        </Sheet>
+      )}
     </div>
+  );
+}
+
+
+const STEPS = ["Workbook", "Lab", "Apply", "Validation Lab", "Verify"];
+const report = [
+  { person: "John Carter (test)", site: "North Pit (test)", done: 2 },
+  { person: "Mia Ross (test)", site: "North Pit (test)", done: 1 },
+  { person: "Liam Hart (test)", site: "South Pit (test)", done: 0 },
+  { person: "Ava Chen (test)", site: "South Pit (test)", done: 3 },
+];
+
+function CompletionReport() {
+  const csv = () => {
+    const rows = [["Person", "Site", ...STEPS], ...report.map((r) => [r.person, r.site, ...STEPS.map((_, i) => (i < r.done ? "Done" : ""))])];
+    const blob = new Blob([rows.map((r) => r.join(",")).join("\n")], { type: "text/csv" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "completion-report-test.csv";
+    a.click();
+  };
+  return (
+    <div>
+      <p className="mb-2 text-[15px]">Superintendent program · Test Mining Co</p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-left text-[14px]">
+          <thead><tr><th className="p-2">Person</th><th className="p-2">Site</th>{STEPS.map((s) => <th key={s} className="p-2 text-center">{s}</th>)}</tr></thead>
+          <tbody>{report.map((r) => (
+            <tr key={r.person} className="border-t border-border">
+              <td className="p-2 font-medium">{r.person}</td><td className="p-2">{r.site}</td>
+              {STEPS.map((s, i) => <td key={s} className="p-2 text-center">{i < r.done ? <span className="text-gold">✔</span> : "·"}</td>)}
+            </tr>
+          ))}</tbody>
+        </table>
+      </div>
+      <p className="mt-2 text-[13px] text-muted-foreground">For the program admin only. Never shown on a group screen.</p>
+      <button onClick={csv} className="mt-3 min-h-[48px] w-full rounded-xl bg-gold font-semibold text-gold-foreground">Download report (CSV)</button>
+    </div>
+  );
+}
+
+function AddPersonForm({ onAdd }) {
+  const f = "mt-1 h-12 w-full rounded-xl border border-border bg-card px-3 text-[15px] text-foreground";
+  const [name, setName] = useState("");
+  const [job, setJob] = useState("Supervisor");
+  const [site, setSite] = useState("North Pit (test)");
+  const [program, setProgram] = useState("Superintendent program");
+  return (
+    <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); if (!name) return; onAdd({ name, job, site, program, invite: "Invite ready" }); }}>
+      <label className="block text-[15px]">Name<input className={f} value={name} onChange={(e) => setName(e.target.value)} required /></label>
+      <label className="block text-[15px]">Job<select className={f} value={job} onChange={(e) => setJob(e.target.value)}>{["Supervisor", "Superintendent", "Operations Manager", "Site Project Manager"].map((j) => <option key={j}>{j}</option>)}</select></label>
+      <label className="block text-[15px]">Site<select className={f} value={site} onChange={(e) => setSite(e.target.value)}>{["North Pit (test)", "South Pit (test)"].map((j) => <option key={j}>{j}</option>)}</select></label>
+      <label className="block text-[15px]">Program<select className={f} value={program} onChange={(e) => setProgram(e.target.value)}>{["Superintendent program", "Supervisor program", "Managing Strategy"].map((j) => <option key={j}>{j}</option>)}</select></label>
+      <button className="min-h-[48px] w-full rounded-xl bg-gold font-semibold text-gold-foreground">Add and enrol</button>
+      <p className="text-[13px] text-muted-foreground">Test version: no invite is sent and nothing is saved yet.</p>
+    </form>
   );
 }
