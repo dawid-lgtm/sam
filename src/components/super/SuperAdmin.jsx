@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowLeft, BookOpen, Building2, ChevronRight, ClipboardCheck, GraduationCap, Send, UserPlus, X } from "lucide-react";
 import { TestDataBadge } from "@/components/TestDataBadge";
 import { companies as seedCompanies, masterPrograms, materials, enrolments } from "@/lib/superTestData";
+import { Sandbox } from "@/components/super/Sandbox";
 
 const btn = "min-h-[48px] w-full rounded-xl bg-gold px-4 font-semibold text-gold-foreground";
 const field = "mt-1 h-12 w-full rounded-xl border border-border bg-card px-3 text-[15px] text-foreground";
@@ -61,6 +62,8 @@ export function SuperAdmin() {
           ))}
         </div>
       </section>
+
+      <Sandbox />
 
       <h2 className="px-1 font-heading text-[18px] font-semibold">Master programs</h2>
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
