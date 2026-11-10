@@ -42,8 +42,6 @@ export function LoginPage() {
 
   return (
     <AuthLayout icon={LogIn} title="Welcome back" subtitle="Log in to your account">
-      <GoogleButton returnTo={returnTo} onError={setError} />
-      <OrDivider />
       <AuthError>{error}</AuthError>
       <form onSubmit={submit} className="space-y-4">
         <div className="space-y-2">
@@ -69,12 +67,7 @@ export function LoginPage() {
           Log in
         </SubmitButton>
       </form>
-      <p className="mt-6 text-center text-sm text-muted-foreground">
-        Don't have an account?{" "}
-        <AuthLink to="/register" returnTo={returnTo}>
-          Create one
-        </AuthLink>
-      </p>
+      <p className="mt-6 text-center text-sm text-muted-foreground">Invite only. Ask your site Project Manager for access.</p>
     </AuthLayout>
   );
 }
