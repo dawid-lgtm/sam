@@ -35,7 +35,7 @@ function Welcome() {
         >
           Log in
         </Link>
-        <p className="mt-6 text-center text-sm text-white/80">Invite only · Test data · Mine in a box™</p>
+        <p className="mt-6 text-center text-sm text-white/80">Invite only · Mine in a box™</p>
         <p className="mt-2 text-center text-[15px] text-white/70">Powered by Raptortech</p>
       </main>
     </div>

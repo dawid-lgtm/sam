@@ -2,8 +2,8 @@
 // until each step list is confirmed against the Mine in a box knowledge base.
 
 export const companies = [
-  { id: "c1", name: "Test Mining Co", sites: ["North Pit (test)", "South Pit (test)"], admin: "Ava Chen (test)", programs: ["ops", "strategy"] },
-  { id: "c2", name: "Sample Resources (test)", sites: ["East Mine (test)"], admin: "Sam Lee (test)", programs: ["strategy", "safety"] },
+  { id: "c1", name: "Pilbara Mining Co", sites: ["North Pit", "South Pit"], admin: "Ava Chen", programs: ["ops", "strategy"] },
+  { id: "c2", name: "Sample Resources", sites: ["East Mine"], admin: "Sam Lee", programs: ["strategy", "safety"] },
 ];
 
 export const masterPrograms = [
@@ -25,11 +25,11 @@ export const materials = [
 ];
 
 export const enrolments = [
-  { person: "John Carter (test)", job: "Superintendent", company: "Test Mining Co", site: "North Pit (test)", program: "ops", step: 2 },
-  { person: "Mia Ross (test)", job: "Supervisor", company: "Test Mining Co", site: "North Pit (test)", program: "ops", step: 1 },
-  { person: "Liam Hart (test)", job: "Supervisor", company: "Test Mining Co", site: "South Pit (test)", program: "ops", step: 0 },
-  { person: "John Carter (test)", job: "Superintendent", company: "Test Mining Co", site: "North Pit (test)", program: "strategy", step: 1 },
-  { person: "Ava Chen (test)", job: "Site Project Manager", company: "Test Mining Co", site: "South Pit (test)", program: "strategy", step: 2 },
-  { person: "Noah Reid (test)", job: "Superintendent", company: "Sample Resources (test)", site: "East Mine (test)", program: "strategy", step: 0 },
-  { person: "Sam Lee (test)", job: "Operations Manager", company: "Sample Resources (test)", site: "East Mine (test)", program: "safety", step: 1 },
+  { person: "John Carter", job: "Superintendent", company: "Pilbara Mining Co", site: "North Pit", program: "ops", step: 2 },
+  { person: "Mia Ross", job: "Supervisor", company: "Pilbara Mining Co", site: "North Pit", program: "ops", step: 1 },
+  { person: "Liam Hart", job: "Supervisor", company: "Pilbara Mining Co", site: "South Pit", program: "ops", step: 0 },
+  { person: "John Carter", job: "Superintendent", company: "Pilbara Mining Co", site: "North Pit", program: "strategy", step: 1 },
+  { person: "Ava Chen", job: "Site Project Manager", company: "Pilbara Mining Co", site: "South Pit", program: "strategy", step: 2 },
+  { person: "Noah Reid", job: "Superintendent", company: "Sample Resources", site: "East Mine", program: "strategy", step: 0 },
+  { person: "Sam Lee", job: "Operations Manager", company: "Sample Resources", site: "East Mine", program: "safety", step: 1 },
 ];

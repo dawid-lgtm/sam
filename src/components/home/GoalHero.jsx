@@ -1,5 +1,3 @@
-import { TestDataBadge } from "@/components/TestDataBadge";
-
 export function GoalHero({ goal }) {
   return (
     <section className="rounded-2xl bg-card p-5 sm:p-6">
@@ -8,7 +6,6 @@ export function GoalHero({ goal }) {
           <span className="h-4 w-1.5 rounded-full bg-gold" />
           The goal
         </span>
-        <TestDataBadge />
       </div>
       <h1 className="font-heading text-[26px] font-semibold leading-[1.25] text-foreground sm:text-[32px]">{goal}</h1>
       <p className="mt-4 text-[15px] leading-snug text-muted-foreground">

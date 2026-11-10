@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ArrowLeft, BookOpen, Building2, ChevronRight, ClipboardCheck, GraduationCap, Send, UserPlus, X } from "lucide-react";
-import { TestDataBadge } from "@/components/TestDataBadge";
 import { companies as seedCompanies, masterPrograms, materials, enrolments } from "@/lib/superTestData";
 import { Sandbox } from "@/components/super/Sandbox";
 
@@ -54,7 +53,6 @@ export function SuperAdmin() {
             <h1 className="font-heading text-[26px] font-semibold leading-tight">All customers and programs</h1>
             <p className="text-[14px]">Add companies and people. Open a program to see who is in it and push out material.</p>
           </div>
-          <TestDataBadge />
         </div>
         <div className="mt-3 grid grid-cols-4 gap-2 text-center">
           {[[companies.length, "Companies"], [companies.reduce((n, c) => n + c.sites.length, 0), "Sites"], [new Set(people.map((p) => p.person)).size, "People"], [masterPrograms.length, "Programs"]].map(([n, l]) => (
@@ -133,7 +131,7 @@ function AddCompany({ onAdd }) {
         <button type="button" key={p.id} onClick={() => toggle(p.id)} className={`min-h-[48px] rounded-xl px-3 text-[15px] ${progs.includes(p.id) ? "bg-gold text-gold-foreground" : "bg-card"}`}>{p.name}</button>
       ))}</div>
       <button className={btn}>Add company</button>
-      <p className="text-[13px] text-muted-foreground">Test version: kept on this screen only, not saved yet.</p>
+      <p className="text-[13px] text-muted-foreground">Kept on this screen only, not saved yet.</p>
     </form>
   );
 }
@@ -157,7 +155,7 @@ function AddPerson({ companies, onAdd }) {
       <label className="block text-[15px]">Program<select className={field} value={program} onChange={(e) => setProgram(e.target.value)}>
         {masterPrograms.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}</select></label>
       <button className={btn}>Add and enrol</button>
-      <p className="text-[13px] text-muted-foreground">Test version: no invite is sent and nothing is saved yet.</p>
+      <p className="text-[13px] text-muted-foreground">Nothing is sent and nothing is saved yet.</p>
     </form>
   );
 }
@@ -175,7 +173,6 @@ function ProgramDetail({ p, people, pushed, onBack, onPush, companies }) {
       <section className="rounded-2xl bg-card p-4">
         <div className="flex items-start justify-between gap-2">
           <div><p className="text-[14px] text-gold">Master program</p><h1 className="font-heading text-[26px] font-semibold">{p.name}</h1></div>
-          <TestDataBadge />
         </div>
         <p className="mt-2 text-[13px] text-muted-foreground">Program sequence</p>
         <ol className="mt-1 flex flex-wrap gap-2">
@@ -216,7 +213,7 @@ function ProgramDetail({ p, people, pushed, onBack, onPush, companies }) {
         <Sheet title={`Push out: ${pushing.title}`} onClose={() => setPushing(null)}>
           <label className="block text-[15px]">Send to<select className={field} value={to} onChange={(e) => setTo(e.target.value)}>{targets.map((t) => <option key={t}>{t}</option>)}</select></label>
           <button className={`${btn} mt-3`} onClick={() => { onPush(pushing, to); setPushing(null); }}>Push out now</button>
-          <p className="mt-2 text-[13px] text-muted-foreground">Test version: shows here only. Nothing is sent to anyone.</p>
+          <p className="mt-2 text-[13px] text-muted-foreground">Shows here only. Nothing is sent to anyone.</p>
         </Sheet>
       )}
     </div>

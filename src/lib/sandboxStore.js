@@ -9,8 +9,8 @@ export const SANDBOX_PROGRAMS = [
 ];
 
 export const blankAdmins = {
-  strategy: { person: "Tess Morgan (test)", email: "strategy.admin@test.sam" },
-  ops: { person: "Rhys Nolan (test)", email: "ops.admin@test.sam" },
+  strategy: { person: "Tess Morgan", email: "strategy.admin@test.sam" },
+  ops: { person: "Rhys Nolan", email: "ops.admin@test.sam" },
 };
 
 export function useSandbox() {

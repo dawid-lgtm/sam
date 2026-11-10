@@ -5,7 +5,6 @@ import { useSamData } from "@/lib/useSamData";
 import { AccessSetup } from "@/components/home/AccessSetup";
 import { HomeCalendar } from "@/components/home/HomeCalendar";
 import { FourBlocks } from "@/components/home/FourBlocks";
-import { TestDataBadge } from "@/components/TestDataBadge";
 import { SuperAdmin } from "@/components/super/SuperAdmin";
 import { person, programs, sitePerformance, safetyFocus, keyDates } from "@/lib/homeTestData";
 
@@ -100,7 +99,6 @@ function Home() {
               {now.toLocaleTimeString("en-AU", { hour: "2-digit", minute: "2-digit" })}
             </p>
           </div>
-          <TestDataBadge />
         </div>
         <p className="mt-2 text-[14px]">
           <b>{person.role}</b> · {person.site} · {person.crew} · {person.shift} · {person.roster} · Reports to {person.reports_to}
@@ -198,7 +196,7 @@ function Home() {
               </li>
             ))}
           </ul>
-          <p className="mt-2 text-[13px] text-muted-foreground">From the site's data reporting systems (test numbers).</p>
+          <p className="mt-2 text-[13px] text-muted-foreground">From the site's data reporting systems.</p>
         </Sheet>
       )}
       {open === "safety" && (

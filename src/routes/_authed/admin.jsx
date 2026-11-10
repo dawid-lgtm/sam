@@ -1,25 +1,23 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Building2, CalendarDays, ChevronRight, FileBarChart, GraduationCap, ShieldCheck, UserPlus, Users, X } from "lucide-react";
-import { TestDataBadge } from "@/components/TestDataBadge";
 import { labSessions } from "@/lib/homeTestData";
 
-// TEST DATA ONLY.
 const customers = [
-  { name: "Test Mining Co", sites: ["North Pit (test)", "South Pit (test)"], status: "Deploying" },
-  { name: "Sample Resources (test)", sites: ["East Mine (test)"], status: "Setting up" },
+  { name: "Pilbara Mining Co", sites: ["North Pit", "South Pit"], status: "Deploying" },
+  { name: "Sample Resources", sites: ["East Mine"], status: "Setting up" },
 ];
 const people = [
-  { name: "John Carter (test)", job: "Superintendent", site: "North Pit (test)", invite: "Active" },
-  { name: "Mia Ross (test)", job: "Supervisor", site: "North Pit (test)", invite: "Active" },
-  { name: "Liam Hart (test)", job: "Supervisor", site: "South Pit (test)", invite: "Invite sent" },
-  { name: "Ava Chen (test)", job: "Site Project Manager", site: "South Pit (test)", invite: "Active" },
-  { name: "Noah Reid (test)", job: "Superintendent", site: "East Mine (test)", invite: "Not invited" },
+  { name: "John Carter", job: "Superintendent", site: "North Pit", invite: "Active" },
+  { name: "Mia Ross", job: "Supervisor", site: "North Pit", invite: "Active" },
+  { name: "Liam Hart", job: "Supervisor", site: "South Pit", invite: "Invite sent" },
+  { name: "Ava Chen", job: "Site Project Manager", site: "South Pit", invite: "Active" },
+  { name: "Noah Reid", job: "Superintendent", site: "East Mine", invite: "Not invited" },
 ];
 const progress = [
-  { site: "North Pit (test)", program: "Superintendent program", week: 6, weeks: 13, pct: 46 },
-  { site: "South Pit (test)", program: "Superintendent program", week: 3, weeks: 13, pct: 21 },
-  { site: "East Mine (test)", program: "Managing Strategy", week: 1, weeks: 8, pct: 5 },
+  { site: "North Pit", program: "Superintendent program", week: 6, weeks: 13, pct: 46 },
+  { site: "South Pit", program: "Superintendent program", week: 3, weeks: 13, pct: 21 },
+  { site: "East Mine", program: "Managing Strategy", week: 1, weeks: 8, pct: 5 },
 ];
 const nice = (s) => new Date(`${s}T00:00:00`).toLocaleDateString("en-AU", { weekday: "short", day: "numeric", month: "short" });
 
@@ -76,7 +74,6 @@ export function AdminDashboard() {
             <h1 className="font-heading text-[26px] font-semibold leading-tight">Admin dashboard</h1>
             <p className="text-[14px]">Customers, sites, people, Labs and program progress.</p>
           </div>
-          <TestDataBadge />
         </div>
         <div className="mt-3 grid grid-cols-4 gap-2 text-center">
           {[[customers.length, "Customers"], [customers.reduce((n, c) => n + c.sites.length, 0), "Sites"], [staff.length, "People"], [labSessions.length, "Lab dates"]].map(([n, l]) => (
@@ -106,7 +103,6 @@ export function AdminDashboard() {
         </Tile>
         <Tile title="Security" icon={ShieldCheck} onOpen={() => setOpen("security")}>
           <span className="block">Two-step sign-in: on for all</span>
-          <span className="block">Data: test only</span>
         </Tile>
         <Tile title="Add a person" icon={UserPlus} onOpen={() => setOpen("add")}>
           <span className="block">Name, job, site, program. Then invite.</span>
@@ -155,7 +151,6 @@ export function AdminDashboard() {
           <ul className="list-disc space-y-1 pl-5 text-[15px]">
             <li>Two-step sign-in (MFA) required for everyone.</li>
             <li>Sign-up is hidden; access is by invite.</li>
-            <li>Test data only. No real people or mine data.</li>
           </ul>
         </Sheet>
       )}
@@ -176,10 +171,10 @@ export function AdminDashboard() {
 
 const STEPS = ["Workbook", "Lab", "Apply", "Validation Lab", "Verify"];
 const report = [
-  { person: "John Carter (test)", site: "North Pit (test)", done: 2 },
-  { person: "Mia Ross (test)", site: "North Pit (test)", done: 1 },
-  { person: "Liam Hart (test)", site: "South Pit (test)", done: 0 },
-  { person: "Ava Chen (test)", site: "South Pit (test)", done: 3 },
+  { person: "John Carter", site: "North Pit", done: 2 },
+  { person: "Mia Ross", site: "North Pit", done: 1 },
+  { person: "Liam Hart", site: "South Pit", done: 0 },
+  { person: "Ava Chen", site: "South Pit", done: 3 },
 ];
 
 function CompletionReport() {
@@ -188,12 +183,12 @@ function CompletionReport() {
     const blob = new Blob([rows.map((r) => r.join(",")).join("\n")], { type: "text/csv" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "completion-report-test.csv";
+    a.download = "completion-report.csv";
     a.click();
   };
   return (
     <div>
-      <p className="mb-2 text-[15px]">Superintendent program · Test Mining Co</p>
+      <p className="mb-2 text-[15px]">Superintendent program · Pilbara Mining Co</p>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-[14px]">
           <thead><tr><th className="p-2">Person</th><th className="p-2">Site</th>{STEPS.map((s) => <th key={s} className="p-2 text-center">{s}</th>)}</tr></thead>
@@ -215,16 +210,16 @@ function AddPersonForm({ onAdd }) {
   const f = "mt-1 h-12 w-full rounded-xl border border-border bg-card px-3 text-[15px] text-foreground";
   const [name, setName] = useState("");
   const [job, setJob] = useState("Supervisor");
-  const [site, setSite] = useState("North Pit (test)");
+  const [site, setSite] = useState("North Pit");
   const [program, setProgram] = useState("Superintendent program");
   return (
     <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); if (!name) return; onAdd({ name, job, site, program, invite: "Invite ready" }); }}>
       <label className="block text-[15px]">Name<input className={f} value={name} onChange={(e) => setName(e.target.value)} required /></label>
       <label className="block text-[15px]">Job<select className={f} value={job} onChange={(e) => setJob(e.target.value)}>{["Supervisor", "Superintendent", "Operations Manager", "Site Project Manager"].map((j) => <option key={j}>{j}</option>)}</select></label>
-      <label className="block text-[15px]">Site<select className={f} value={site} onChange={(e) => setSite(e.target.value)}>{["North Pit (test)", "South Pit (test)"].map((j) => <option key={j}>{j}</option>)}</select></label>
+      <label className="block text-[15px]">Site<select className={f} value={site} onChange={(e) => setSite(e.target.value)}>{["North Pit", "South Pit"].map((j) => <option key={j}>{j}</option>)}</select></label>
       <label className="block text-[15px]">Program<select className={f} value={program} onChange={(e) => setProgram(e.target.value)}>{["Superintendent program", "Supervisor program", "Managing Strategy"].map((j) => <option key={j}>{j}</option>)}</select></label>
       <button className="min-h-[48px] w-full rounded-xl bg-gold font-semibold text-gold-foreground">Add and enrol</button>
-      <p className="text-[13px] text-muted-foreground">Test version: no invite is sent and nothing is saved yet.</p>
+      <p className="text-[13px] text-muted-foreground">Nothing is sent and nothing is saved yet.</p>
     </form>
   );
 }

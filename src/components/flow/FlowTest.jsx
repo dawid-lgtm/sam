@@ -237,7 +237,7 @@ export function FlowTest() {
       {role === "super" ? <SuperView s={s} save={save} prog={prog} /> : prog === "strategy" ? <Strategy s={s} save={save} role={role} /> : <Ops s={s} save={save} role={role} actAs={actAs} setActAs={setActAs} />}
       <Card title="Test outbox (not sent)">
         <List items={s.outbox.slice(0, 8)} render={(m) => <>{m.at} · to {m.to}: {m.what}</>} />
-        <Btn onClick={() => { if (confirm("Clear all test data?")) save(() => structuredClone(blank)); }}>Reset test</Btn>
+        <Btn onClick={() => { if (confirm("Clear all saved answers?")) save(() => structuredClone(blank)); }}>Reset test</Btn>
       </Card>
     </div>
   );

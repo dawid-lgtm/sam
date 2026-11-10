@@ -2,14 +2,14 @@
 
 export const person = {
   first_name: "John",
-  full_name: "John Carter (test)",
+  full_name: "John Carter",
   role: "Production Superintendent",
-  site: "North Pit (test)",
-  company: "Test Mining Co",
+  site: "North Pit",
+  company: "Pilbara Mining Co",
   crew: "B Crew",
   roster: "7 on / 7 off, day shift",
   shift: "05:00 to 17:00",
-  reports_to: "Operations Manager (test)",
+  reports_to: "Operations Manager",
   team: "4 supervisors, 62 operators",
 };
 
@@ -60,9 +60,9 @@ export const keyDates = [
 ];
 
 export const labSessions = [
-  { id: "lab-a", date: "2026-11-19", place: "North Pit training room (test)", seats: 4 },
-  { id: "lab-b", date: "2026-11-26", place: "North Pit training room (test)", seats: 7 },
-  { id: "lab-c", date: "2026-12-08", place: "South Pit crib room (test)", seats: 10 },
+  { id: "lab-a", date: "2026-11-19", place: "North Pit training room", seats: 4 },
+  { id: "lab-b", date: "2026-11-26", place: "North Pit training room", seats: 7 },
+  { id: "lab-c", date: "2026-12-08", place: "South Pit crib room", seats: 10 },
 ];
 
 export const sitePerformance = [

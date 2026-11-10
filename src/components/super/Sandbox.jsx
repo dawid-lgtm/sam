@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Pencil, RotateCcw, ShieldCheck, X } from "lucide-react";
-import { TestDataBadge } from "@/components/TestDataBadge";
 import { SANDBOX_PROGRAMS, useSandbox } from "@/lib/sandboxStore";
 
 const field = "mt-1 h-12 w-full rounded-xl border border-border bg-card px-3 text-[15px] text-foreground";
@@ -19,7 +18,6 @@ export function Sandbox() {
             <h2 className="font-heading text-[22px] font-semibold leading-tight">Program admins</h2>
             <p className="text-[15px]">One admin per program to start. They are the first person in each program and add everyone below them.</p>
           </div>
-          <TestDataBadge />
         </div>
       </section>
 
@@ -41,7 +39,7 @@ export function Sandbox() {
                 <button onClick={() => setEditing(p)} className="inline-flex min-h-[48px] flex-1 items-center justify-center gap-2 rounded-xl bg-gold px-3 font-semibold text-gold-foreground">
                   <Pencil className="h-4 w-4" /> Change admin
                 </button>
-                <button onClick={() => resetAdmin(p.id)} aria-label="Reset to test name" className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-secondary text-foreground">
+                <button onClick={() => resetAdmin(p.id)} aria-label="Reset name" className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-secondary text-foreground">
                   <RotateCcw className="h-5 w-5" />
                 </button>
               </div>
@@ -51,7 +49,7 @@ export function Sandbox() {
       </div>
 
       <p className="px-1 text-[13px] text-muted-foreground">
-        Test names only. These are not real logins yet and nothing is emailed.
+        Names only. These are not real logins yet and nothing is emailed.
       </p>
 
       {editing && (

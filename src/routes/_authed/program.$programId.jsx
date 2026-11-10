@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, CheckCircle2, Circle, PlayCircle } from "lucide-react";
 import { programs } from "@/lib/homeTestData";
-import { TestDataBadge } from "@/components/TestDataBadge";
 
 export const Route = createFileRoute("/_authed/program/$programId")({
   component: Program,
@@ -19,7 +18,6 @@ function Program() {
       <section className="rounded-2xl bg-card p-5">
         <div className="flex items-center justify-between gap-2">
           <p className="text-[15px] text-gold">{p.level}</p>
-          <TestDataBadge />
         </div>
         <h1 className="mt-1 font-heading text-[26px] font-semibold">{p.name}</h1>
         <p className="mt-2 text-[15px]">Week {p.week} of {p.weeks} · {p.done} of {p.total} steps done</p>
