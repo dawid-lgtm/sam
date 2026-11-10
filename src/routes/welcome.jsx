@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-const HERO = "https://media.base44.com/images/public/6af15b436d05108c2128035d/0dc42b8b1_sam-hero.jpg";
+const HERO = "https://base44.app/api/apps/6af15b436d05108c2128035d/files/mp/public/6af15b436d05108c2128035d/7892daf24_sam-hero-aeroplane.jpg";
 
 export const Route = createFileRoute("/welcome")({ ssr: false, component: Welcome });
 

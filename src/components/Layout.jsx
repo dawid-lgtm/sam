@@ -57,7 +57,7 @@ export function AppShell({ children }) {
           className="pointer-events-none absolute inset-x-0 top-0 h-80"
           style={{
             backgroundImage:
-              "linear-gradient(180deg, hsl(var(--background) / 0.86) 0%, hsl(var(--background) / 0.93) 55%, hsl(var(--background)) 100%), url('https://media.base44.com/images/public/6af15b436d05108c2128035d/0dc42b8b1_sam-hero.jpg')",
+              "linear-gradient(180deg, hsl(var(--background) / 0.74) 0%, hsl(var(--background) / 0.9) 55%, hsl(var(--background)) 100%), url('https://base44.app/api/apps/6af15b436d05108c2128035d/files/mp/public/6af15b436d05108c2128035d/7892daf24_sam-hero-aeroplane.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center top",
           }}
