@@ -52,16 +52,15 @@ export function FourBlocks({ role, now }) {
         })}
       </ul>
 
-      {/* Tablet and up: four columns */}
-      <div className="mt-3 hidden grid-cols-4 gap-3 md:grid">
+      {/* Tablet and up: four small cards side by side */}
+      <div className="mt-3 hidden grid-cols-4 gap-2 md:grid">
         {blocks.map((b) => {
           const isNow = cur === b.n;
           return (
-            <div key={b.n} className={`rounded-xl p-3 ${isNow ? "bg-gold text-gold-foreground" : "bg-background/40"}`}>
-              <p className="text-[13px]">Block {b.n} · {b.label}{isNow ? " · Now" : ""}</p>
-              <p className="mt-1 text-[16px] font-semibold">{b.title}</p>
-              <p className="mt-1 text-[14px] italic">{b.aim}</p>
-              <ul className="mt-2 list-disc pl-4 text-[14px]">{b.items.map((i) => <li key={i}>{i}</li>)}</ul>
+            <div key={b.n} className={`rounded-xl px-3 py-2 ${isNow ? "bg-gold text-gold-foreground" : "bg-background/40"}`}>
+              <p className="text-[13px]">Block {b.n} · {isNow ? "Now" : b.label}</p>
+              <p className="text-[15px] font-semibold leading-tight">{b.title}</p>
+              <p className="mt-0.5 text-[13px] leading-snug opacity-90">{b.aim}</p>
             </div>
           );
         })}

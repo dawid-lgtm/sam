@@ -85,6 +85,7 @@ function Home() {
         </dl>
       </section>
 
+      <div className="grid items-start gap-x-3 md:grid-cols-2">
       {/* Programs */}
       <Tile title="My programs">
         <ul className="space-y-2">
@@ -149,6 +150,7 @@ function Home() {
         </ul>
       </Tile>
 
+      </div>
       {/* Strategy this quarter */}
       <Tile
         title="Our focus this quarter"
