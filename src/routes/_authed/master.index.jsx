@@ -13,16 +13,21 @@ export const Route = createFileRoute("/_authed/master/")({
 });
 
 function Overview() {
+  const { user } = Route.useRouteContext();
   const { data: customers = [], isLoading } = useQuery(customersQuery);
   const { data: users = [] } = useQuery(appUsersQuery);
   const { data: tools = [] } = useQuery(toolsQuery);
 
   const list = [...customers].sort(byName);
   const active = list.filter((c) => c.status === "Active");
+  const name = user?.full_name?.trim().split(" ")[0] || user?.email?.split("@")[0] || "";
 
   return (
     <div className="space-y-4">
-      <PageHeader title="Master admin" intro="Every customer, product, person and tool for the whole Sam system." />
+      <PageHeader
+        title={`Hello${name ? `, ${name}` : ""}`}
+        intro="Master admin · every customer, product, person and tool for the whole Sam system."
+      />
 
       <Section>
         <StatTiles
