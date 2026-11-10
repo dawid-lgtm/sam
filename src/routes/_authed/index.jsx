@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { CalendarDays, ChevronRight, GraduationCap, LayoutGrid, ShieldCheck, Target, TrendingUp, X } from "lucide-react";
 import { useSamData } from "@/lib/useSamData";
 import { AccessSetup } from "@/components/home/AccessSetup";
 import { HomeCalendar } from "@/components/home/HomeCalendar";
 import { FourBlocks } from "@/components/home/FourBlocks";
-import { SuperAdmin } from "@/components/super/SuperAdmin";
 import { person, programs, sitePerformance, safetyFocus, keyDates } from "@/lib/homeTestData";
 
 const HERO = "https://media.base44.com/images/public/6af15b436d05108c2128035d/0dc42b8b1_sam-hero.jpg";
@@ -54,6 +53,15 @@ function Sheet({ title, onClose, children }) {
   );
 }
 
+// A super admin belongs on the master admin dashboard, not the site home page.
+function GoToMaster() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate({ to: "/master", replace: true });
+  }, [navigate]);
+  return <div className="h-40 animate-pulse rounded-2xl bg-background/40" />;
+}
+
 function Home() {
   const { user } = Route.useRouteContext();
   const { data } = useSamData();
@@ -67,19 +75,8 @@ function Home() {
   const upcoming = keyDates.filter((k) => k.date >= todayIso).slice(0, 3);
   const myName = user?.full_name?.split(" ")[0] || user?.email?.split("@")[0] || "";
 
-  // The super admin lands on the master admin page: every customer and every program.
-  if (user?.role === "admin") {
-    return (
-      <div className="space-y-3">
-        <section className="rounded-2xl bg-gold p-3">
-          <p className="text-[15px] font-medium text-gold-foreground">
-            Signed in as {user.full_name || user.email} · super admin
-          </p>
-        </section>
-        <SuperAdmin />
-      </div>
-    );
-  }
+  // The super admin lands on the master admin page.
+  if (user?.role === "admin") return <GoToMaster />;
 
   return (
     <div className="space-y-3">

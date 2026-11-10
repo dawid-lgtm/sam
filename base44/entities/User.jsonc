@@ -2,37 +2,8 @@
   "name": "User",
   "type": "object",
   "properties": {
-    "access": {
-      "type": "string",
-      "enum": [
-        "administrator",
-        "executive",
-        "project_manager",
-        "site_lead"
-      ],
-      "enumColors": [
-        "purple",
-        "blue",
-        "yellow",
-        "green"
-      ],
-      "rls": {
-        "update": {
-          "user_condition": {
-            "role": "admin"
-          }
-        }
-      }
-    },
-    "site_id": {
-      "type": "string",
-      "rls": {
-        "update": {
-          "user_condition": {
-            "role": "admin"
-          }
-        }
-      }
+    "customer_id": {
+      "type": "string"
     }
   }
 }

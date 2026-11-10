@@ -13,7 +13,7 @@ const baseItems = [
 
 export function AppNav({ variant = "bottom" }) {
   const { data: auth } = useQuery(authQuery);
-  const items = auth?.user?.role === "admin" ? [...baseItems, { to: "/admin", label: "Admin", icon: Settings }, { to: "/super", label: "Super", icon: Crown }, { to: "/flow", label: "Test flow", icon: Workflow }] : baseItems;
+  const items = auth?.user?.role === "admin" ? [...baseItems, { to: "/master", label: "Master", icon: Crown }, { to: "/admin", label: "Admin", icon: Settings }, { to: "/flow", label: "Test flow", icon: Workflow }] : baseItems;
   const path = useRouterState({ select: (s) => s.location.pathname });
   const isActive = (to) => (to === "/" ? path === "/" : path === to || path.startsWith(`${to}/`));
 
