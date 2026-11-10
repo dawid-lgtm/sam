@@ -8,7 +8,7 @@ export const person = {
   company: "Test Mining Co",
   crew: "B Crew",
   roster: "7 on / 7 off, day shift",
-  shift: "06:00 to 18:00",
+  shift: "05:00 to 17:00",
   reports_to: "Operations Manager (test)",
   team: "4 supervisors, 62 operators",
 };

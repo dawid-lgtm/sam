@@ -4,6 +4,7 @@ import { ChevronRight, ShieldCheck, Target, TrendingUp } from "lucide-react";
 import { useSamData } from "@/lib/useSamData";
 import { AccessSetup } from "@/components/home/AccessSetup";
 import { HomeCalendar } from "@/components/home/HomeCalendar";
+import { FourBlocks } from "@/components/home/FourBlocks";
 import { TestDataBadge } from "@/components/TestDataBadge";
 import { person, programs, sitePerformance, safetyFocus } from "@/lib/homeTestData";
 
@@ -164,6 +165,8 @@ function Home() {
           ))}
         </ul>
       </Card>
+
+      <FourBlocks role={person.role} now={now} />
     </div>
   );
 }
