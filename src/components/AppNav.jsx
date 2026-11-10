@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { authQuery } from "@/lib/AuthContext";
-import { Home, ClipboardCheck, Target, Mountain, CalendarDays, Settings } from "lucide-react";
+import { Home, ClipboardCheck, Target, Mountain, CalendarDays, Settings, Crown } from "lucide-react";
 
 const baseItems = [
   { to: "/", label: "Home", icon: Home },
@@ -13,7 +13,7 @@ const baseItems = [
 
 export function AppNav({ variant = "bottom" }) {
   const { data: auth } = useQuery(authQuery);
-  const items = auth?.user?.role === "admin" ? [...baseItems, { to: "/admin", label: "Admin", icon: Settings }] : baseItems;
+  const items = auth?.user?.role === "admin" ? [...baseItems, { to: "/admin", label: "Admin", icon: Settings }, { to: "/super", label: "Super", icon: Crown }] : baseItems;
   const path = useRouterState({ select: (s) => s.location.pathname });
   const isActive = (to) => (to === "/" ? path === "/" : path === to || path.startsWith(`${to}/`));
 
