@@ -62,7 +62,10 @@ export function AppShell({ children }) {
             backgroundPosition: "center top",
           }}
         />
-        <main className="relative mx-auto w-full max-w-3xl px-4 pb-28 pt-5 md:pb-12">{children}</main>
+        <main className="relative mx-auto w-full max-w-3xl px-4 pb-6 pt-5">{children}</main>
+        <footer className="relative mx-auto w-full max-w-3xl px-4 pb-28 md:pb-10">
+          <p className="text-center text-[15px] text-muted-foreground">Powered by Raptortech</p>
+        </footer>
       </div>
 
       <div className="fixed inset-x-0 bottom-0 z-30 md:hidden">

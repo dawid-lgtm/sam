@@ -25,6 +25,7 @@ export function AuthLayout({ icon: Icon, title, subtitle, footer, children }) {
         </div>
         <div className="rounded-2xl bg-card p-6 text-card-foreground shadow-lg sm:p-8">{children}</div>
         {footer && <p className="mt-6 text-center text-[15px] text-muted-foreground">{footer}</p>}
+        <p className="mt-4 text-center text-[15px] text-muted-foreground">Powered by Raptortech</p>
       </div>
     </div>
   );
