@@ -78,7 +78,7 @@ export function AdminDashboard() {
           <TestDataBadge />
         </div>
         <div className="mt-3 grid grid-cols-4 gap-2 text-center">
-          {[[customers.length, "Customers"], [customers.reduce((n, c) => n + c.sites.length, 0), "Sites"], [people.length, "People"], [labSessions.length, "Labs booked in"]].map(([n, l]) => (
+          {[[customers.length, "Customers"], [customers.reduce((n, c) => n + c.sites.length, 0), "Sites"], [people.length, "People"], [labSessions.length, "Lab dates"]].map(([n, l]) => (
             <div key={l} className="rounded-xl bg-background/40 p-2"><p className="text-[22px] font-semibold">{n}</p><p className="text-[13px] text-muted-foreground">{l}</p></div>
           ))}
         </div>
