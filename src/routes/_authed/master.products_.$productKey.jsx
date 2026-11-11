@@ -106,7 +106,7 @@ function ProductChain() {
       </Link>
 
       <section className="rounded-2xl bg-card p-4">
-        <h1 className="font-heading text-[26px] font-semibold leading-tight">{product.name}</h1>
+        <h1 className="font-heading text-[26px] font-semibold leading-tight text-gold">{product.name}</h1>
         <div className="mt-3">
           <ProductCard product={product} />
         </div>

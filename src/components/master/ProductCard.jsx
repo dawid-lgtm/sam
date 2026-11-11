@@ -1,7 +1,7 @@
 export function ProductCard({ product }) {
   return (
     <div className="rounded-xl bg-background/40 p-3">
-      <p className="text-[15px] font-semibold leading-snug">{product.name}</p>
+      <p className="text-[15px] font-semibold leading-snug text-gold">{product.name}</p>
       <p className="mt-1 text-[14px] leading-snug text-muted-foreground">{product.description}</p>
       {product.for_whom ? (
         <p className="mt-2 text-[14px] leading-snug">

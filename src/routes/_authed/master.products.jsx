@@ -63,7 +63,7 @@ function ProductsPage() {
                 className="rounded-xl bg-background/40 p-3 transition hover:ring-2 hover:ring-gold"
               >
                 <div className="flex items-start justify-between gap-2">
-                  <p className="text-[15px] font-semibold leading-snug">{product.name}</p>
+                  <p className="text-[15px] font-semibold leading-snug text-gold">{product.name}</p>
                   <ChevronRight className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
                 </div>
                 {product.description ? (
