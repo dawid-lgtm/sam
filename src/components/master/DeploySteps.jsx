@@ -1,14 +1,43 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { Check, Wrench } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Check, FileText } from "lucide-react";
+import { base44 } from "@/api/base44Client";
+import { toolsQuery } from "@/lib/masterQueries";
 
-const toolsButtonClass =
-  "inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-4 text-[15px] font-semibold text-gold-foreground transition active:opacity-90";
+function ToolLink({ tool }) {
+  const [opening, setOpening] = useState(false);
+  const open = async () => {
+    setOpening(true);
+    try {
+      const { signed_url } = await base44.integrations.Core.CreateFileSignedUrl({ file_uri: tool.file_uri });
+      window.open(signed_url, "_blank", "noopener");
+    } finally {
+      setOpening(false);
+    }
+  };
+  return (
+    <button
+      type="button"
+      onClick={open}
+      disabled={opening}
+      title={`Open ${tool.title}`}
+      className="flex min-h-[44px] w-full items-center gap-2 rounded-xl bg-background/50 px-3 text-left text-[15px] font-semibold text-gold underline decoration-gold underline-offset-2 transition hover:bg-background/70 disabled:opacity-50"
+    >
+      <FileText className="h-4 w-4 shrink-0" />
+      {tool.title}
+    </button>
+  );
+}
 
 /** One card per deployment step, each with a description, its tools and one tick box. */
-export function DeploySteps({ plan, productKey = "strategy", onOpenTools }) {
+export function DeploySteps({ plan, productKey = "strategy" }) {
   const storageKey = `sam-deploy-steps:${productKey}`;
   const [done, setDone] = useState([]);
+  const { data: tools = [], isLoading } = useQuery(toolsQuery);
+
+  const stepTools = tools
+    .filter((t) => t.file_uri && (t.assigned_products || []).includes(productKey))
+    .sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
   useEffect(() => {
     const raw = localStorage.getItem(storageKey);
@@ -58,17 +87,18 @@ export function DeploySteps({ plan, productKey = "strategy", onOpenTools }) {
 
             <p className="mt-2 text-[15px] leading-snug text-foreground">{p.description}</p>
 
-            <div className="mt-3">
-              {onOpenTools ? (
-                <button type="button" onClick={onOpenTools} title="Open the tools for this step" className={toolsButtonClass}>
-                  <Wrench className="h-4 w-4" /> Tools needed
-                </button>
-              ) : (
-                <Link to="/strategy/start" title="Open the tools for this step" className={toolsButtonClass}>
-                  <Wrench className="h-4 w-4" /> Tools needed
-                </Link>
-              )}
-            </div>
+            <p className="mt-3 text-[14px] font-semibold uppercase tracking-wide text-muted-foreground">Tools needed</p>
+            {isLoading ? (
+              <div className="mt-1.5 h-11 animate-pulse rounded-xl bg-background/40" />
+            ) : stepTools.length ? (
+              <div className="mt-1.5 space-y-1.5">
+                {stepTools.map((t) => (
+                  <ToolLink key={t.id} tool={t} />
+                ))}
+              </div>
+            ) : (
+              <p className="mt-1 text-[15px] leading-snug text-muted-foreground">No tools have been added for this program yet.</p>
+            )}
           </div>
         );
       })}

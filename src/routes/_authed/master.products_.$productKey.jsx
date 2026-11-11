@@ -129,9 +129,7 @@ function ProductChain() {
         ))}
       </div>
 
-      {activeTab === "plan" ? (
-        <DeploymentPlan plan={plan} productKey={productKey} onOpenTools={() => setTab("downloads")} />
-      ) : null}
+      {activeTab === "plan" ? <DeploymentPlan plan={plan} productKey={productKey} /> : null}
       {activeTab === "rhythm" ? <RhythmExplained /> : null}
       {activeTab === "gospa" ? <GospaSheet /> : null}
       {activeTab === "downloads" ? <ProductDownloads productKey={productKey} /> : null}
