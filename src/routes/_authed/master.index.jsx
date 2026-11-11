@@ -5,6 +5,7 @@ import { appUsersQuery, customersQuery } from "@/lib/masterQueries";
 import { PageHeader } from "@/components/ui-kit/PageHeader";
 import { Section } from "@/components/ui-kit/Section";
 import { KeyDates } from "@/components/master/KeyDates";
+import { UpcomingEvents } from "@/components/master/UpcomingEvents";
 import { SafetyTasksCard } from "@/components/master/SafetyTasksCard";
 import { FourBlockCard } from "@/components/master/FourBlockCard";
 import { CustomerProgressCard } from "@/components/master/CustomerProgressCard";
@@ -56,7 +57,10 @@ function MasterHome() {
       <div className="grid gap-2.5 lg:grid-cols-3">
         <div className="lg:col-span-2">
           <Section title="Key dates" subtitle="Customer start dates, month by month.">
-            <KeyDates dates={keyDates} />
+            <div className="flex flex-wrap gap-3">
+              <KeyDates dates={keyDates} />
+              <UpcomingEvents dates={keyDates} />
+            </div>
           </Section>
         </div>
         <div className="space-y-2.5">
