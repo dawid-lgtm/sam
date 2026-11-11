@@ -14,6 +14,7 @@ export function CardEditor({ card, productKey, saving, onSave, onCancel }) {
   const meta = formatMeta(card.format);
   const { data: tools = [] } = useQuery(toolsQuery);
   const [toolId, setToolId] = useState(card.tool_id || "");
+  const [step, setStep] = useState(card.step || 1);
   const toolOptions = tools
     .filter((t) => t.file_uri && (t.assigned_products || []).includes(productKey))
     .map((t) => ({ value: t.id, label: t.title }));
@@ -36,6 +37,7 @@ export function CardEditor({ card, productKey, saving, onSave, onCancel }) {
       options: meta.needsOptions ? options : [],
       correct_option: meta.key === "quiz" && options.includes(correct) ? correct : "",
       tool_id: toolId,
+      step: Number(step),
     });
   };
 
@@ -93,6 +95,18 @@ export function CardEditor({ card, productKey, saving, onSave, onCancel }) {
           ]}
         />
       ) : null}
+
+      <SelectField
+        label="Step"
+        hint="Which of the three steps this activity sits in."
+        value={step}
+        onChange={(e) => setStep(e.target.value)}
+        options={[
+          { value: 1, label: "Step 1" },
+          { value: 2, label: "Step 2" },
+          { value: 3, label: "Step 3" },
+        ]}
+      />
 
       <SelectField
         label="Tool for this card"

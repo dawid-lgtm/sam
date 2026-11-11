@@ -63,6 +63,10 @@
     "tool_id": {
       "type": "string"
     },
+    "step": {
+      "type": "number",
+      "default": 1
+    },
     "is_welcome": {
       "type": "boolean",
       "default": false

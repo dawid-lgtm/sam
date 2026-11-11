@@ -8,7 +8,7 @@ import { BackLink } from "@/components/ui-kit/BackLink";
 import { Modal } from "@/components/ui-kit/Modal";
 import { GhostButton, PrimaryButton } from "@/components/ui-kit/controls";
 import { ProductCard } from "@/components/master/ProductCard";
-import { CardChain } from "@/components/master/CardChain";
+import { ProgramSteps } from "@/components/master/ProgramSteps";
 import { CardEditor } from "@/components/master/CardEditor";
 import { CardRunner } from "@/components/master/CardRunner";
 import { DEPLOYMENT_PLANS } from "@/lib/deploymentPlan";
@@ -44,6 +44,7 @@ function ProductChain() {
   const activeTab = tab || tabs[0].id;
 
   const product = products.find((p) => p.key === productKey);
+  const ordered = [...cards].sort((a, b) => (a.step || 1) - (b.step || 1) || (a.sort || 0) - (b.sort || 0));
   const refresh = async () => {
     if (product) await syncWelcomeCard(product);
     await queryClient.invalidateQueries({ queryKey: ["program-cards"] });
@@ -66,18 +67,19 @@ function ProductChain() {
       if (editing.id) {
         await base44.entities.ProgramCard.update(editing.id, payload);
       } else {
-        await base44.entities.ProgramCard.create({ ...payload, product_key: productKey, format: editing.format, sort: cards.length });
+        await base44.entities.ProgramCard.create({
+          ...payload,
+          product_key: productKey,
+          format: editing.format,
+          step: payload.step || 1,
+          sort: cards.length,
+        });
       }
       setEditing(null);
       await refresh();
     } finally {
       setSaving(false);
     }
-  };
-
-  const reorder = async (ids) => {
-    await base44.entities.ProgramCard.bulkUpdate(ids.map((id, index) => ({ id, sort: index })));
-    await refresh();
   };
 
   const remove = async () => {
@@ -129,34 +131,29 @@ function ProductChain() {
         ))}
       </div>
 
-      {activeTab === "plan" ? (
-        <DeploymentPlan plan={plan} productKey={productKey} onOpenTools={() => setTab("downloads")} />
-      ) : null}
+      {activeTab === "plan" ? <DeploymentPlan plan={plan} /> : null}
       {activeTab === "rhythm" ? <RhythmExplained /> : null}
       {activeTab === "gospa" ? <GospaSheet /> : null}
       {activeTab === "downloads" ? <ProductDownloads productKey={productKey} /> : null}
       {activeTab === "chain" ? (
         <Section
-          title="Card chain"
-          subtitle="Drag the cards into the order they run, day by day."
-          action={
-            cards.length ? (
-              <PrimaryButton onClick={() => setRunning(true)}>Run the chain</PrimaryButton>
-            ) : null
-          }
+          title="Launch the program"
+          subtitle="Three steps. Each has its own activities, and a step unlocks when the one before it is finished."
+          action={cards.length ? <PrimaryButton onClick={() => setRunning(true)}>Run the program</PrimaryButton> : null}
         >
-          <CardChain
-            cards={cards}
+          <ProgramSteps
+            cards={ordered}
+            steps={plan?.phases}
+            productKey={productKey}
             onAdd={(format) => setEditing({ format })}
             onEdit={(card) => setEditing({ ...card })}
             onDelete={setDeleting}
-            onReorder={reorder}
           />
         </Section>
       ) : null}
 
       <Modal open={running} onClose={() => setRunning(false)} title={product.name}>
-        {running ? <CardRunner cards={cards} productKey={productKey} /> : null}
+        {running ? <CardRunner cards={ordered} productKey={productKey} /> : null}
       </Modal>
 
       <Modal

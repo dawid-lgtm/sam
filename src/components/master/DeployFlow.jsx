@@ -1,61 +1,56 @@
-import { useState } from "react";
-import { ChevronRight, Flag } from "lucide-react";
+import { Flag } from "lucide-react";
 
-function PhaseDetail({ phase }) {
-  return (
-    <div className="mt-2 rounded-lg bg-background/40 p-2.5">
-      <div className="mt-1 grid gap-2 sm:grid-cols-3">
-        {phase.blocks.map((b) => (
-          <div key={b.h}>
-            <p className="text-[14px] font-semibold leading-snug text-gold">{b.h}</p>
-            <ul className="mt-0.5 list-disc space-y-0 pl-4 text-[14px] leading-snug">
-              {b.items.map((i) => (
-                <li key={i}>{i}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <div className="mt-2 rounded-md bg-card p-2">
-        <p className="flex items-center gap-1.5 text-[14px] font-semibold">
-          <Flag className="h-3.5 w-3.5 text-gold" /> Done when
-        </p>
-        <ul className="mt-0.5 list-disc space-y-0 pl-4 text-[14px] leading-snug">
-          {phase.gate.map((g) => (
-            <li key={g}>{g}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
+/** The three deployment steps as a connected flow, with what happens in each. */
 export function DeployFlow({ phases }) {
-  const [open, setOpen] = useState(phases[0]?.n ?? null);
-  const phase = phases.find((p) => p.n === open);
-
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-x-1 gap-y-1.5">
-        {phases.map((p, i) => (
-          <div key={p.n} className="flex items-center gap-1">
-            <button
-              onClick={() => setOpen(open === p.n ? null : p.n)}
-              title={`Show the detail for phase ${p.n}`}
-              className={`w-[140px] rounded-lg px-2 py-1.5 text-left transition ${
-                open === p.n ? "bg-gold text-gold-foreground" : "bg-background/40 hover:ring-2 hover:ring-gold"
-              }`}
-            >
-              <span className={`text-[12px] font-semibold ${open === p.n ? "opacity-80" : "text-muted-foreground"}`}>
-                Step {p.n} · {p.status}
+      {phases.map((p, i) => (
+        <div key={p.n}>
+          <div className="rounded-2xl bg-background/40 p-4">
+            <div className="flex items-start gap-3">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold font-heading text-[19px] font-semibold text-gold-foreground">
+                {p.n}
               </span>
-              <span className="mt-0.5 block text-[14px] font-semibold leading-tight">{p.name}</span>
-            </button>
-            {i < phases.length - 1 ? <ChevronRight className="h-4 w-4 shrink-0 text-gold" /> : null}
+              <div className="min-w-0">
+                <p className="font-heading text-[20px] font-semibold leading-snug text-foreground">{p.name}</p>
+                <p className="text-[15px] leading-snug text-muted-foreground">{p.status}</p>
+              </div>
+            </div>
+
+            <p className="mt-2 text-[15px] leading-snug text-foreground">{p.description}</p>
+
+            <div className="mt-3 grid gap-2 sm:grid-cols-3">
+              {p.blocks.map((b) => (
+                <div key={b.h} className="rounded-xl bg-card/70 p-3">
+                  <p className="text-[15px] font-semibold leading-snug text-gold">{b.h}</p>
+                  <ul className="mt-1 list-disc space-y-1 pl-4 text-[15px] leading-snug text-foreground">
+                    {b.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-2 rounded-xl bg-card p-3">
+              <p className="flex items-center gap-1.5 text-[15px] font-semibold text-foreground">
+                <Flag className="h-4 w-4 text-gold" /> Done when
+              </p>
+              <ul className="mt-1 list-disc space-y-1 pl-4 text-[15px] leading-snug text-foreground">
+                {p.gate.map((g) => (
+                  <li key={g}>{g}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-        ))}
-      </div>
-      {phase ? <PhaseDetail phase={phase} /> : null}
+
+          {i < phases.length - 1 ? (
+            <div className="flex justify-center py-1">
+              <span className="h-7 w-0.5 rounded-full bg-gold/60" aria-hidden="true" />
+            </div>
+          ) : null}
+        </div>
+      ))}
     </div>
   );
 }

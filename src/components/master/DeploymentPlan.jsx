@@ -1,10 +1,10 @@
 import { Section } from "@/components/ui-kit/Section";
-import { DeploySteps } from "@/components/master/DeploySteps";
+import { DeployFlow } from "@/components/master/DeployFlow";
 
-export function DeploymentPlan({ plan, productKey, onOpenTools }) {
+export function DeploymentPlan({ plan }) {
   return (
     <Section title="The deployment plan" subtitle={plan.intro}>
-      <DeploySteps plan={plan} productKey={productKey} onOpenTools={onOpenTools} />
+      <DeployFlow phases={plan.phases} />
     </Section>
   );
 }
