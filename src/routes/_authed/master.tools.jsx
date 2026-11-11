@@ -3,7 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Plus, RefreshCw } from "lucide-react";
 import { base44 } from "@/api/base44Client";
-import { ALL_PRODUCTS } from "@/lib/products";
+import { useProducts } from "@/lib/catalog";
 import { byName, toolsQuery } from "@/lib/masterQueries";
 import { PageHeader } from "@/components/ui-kit/PageHeader";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
@@ -23,6 +23,7 @@ const CATEGORIES = ["Handbook", "Agenda", "Coaching card", "Workbook", "Slide pa
 function ToolsPage() {
   const queryClient = useQueryClient();
   const { data: tools = [], isLoading } = useQuery(toolsQuery);
+  const products = useProducts();
   const [editing, setEditing] = useState(null);
   const [deleting, setDeleting] = useState(null);
   const [saving, setSaving] = useState(false);
@@ -74,7 +75,7 @@ function ToolsPage() {
           <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search tools" className={field} />
           <select value={productFilter} onChange={(e) => setProductFilter(e.target.value)} className={field}>
             <option value="">Every product</option>
-            {ALL_PRODUCTS.map((p) => (
+            {products.map((p) => (
               <option key={p.key} value={p.key}>
                 {p.name}
               </option>

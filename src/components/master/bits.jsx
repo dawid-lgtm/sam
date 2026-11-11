@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { productName } from "@/lib/products";
+import { useProducts } from "@/lib/catalog";
 
 const STATUS_STYLE = {
   Active: "bg-gold text-gold-foreground",
@@ -17,6 +17,7 @@ export function StatusChip({ status }) {
 }
 
 export function ProductChips({ keys = [], max = 4 }) {
+  const products = useProducts();
   const shown = keys.slice(0, max);
   const rest = keys.length - shown.length;
   if (!keys.length) return <span className="text-[14px] text-muted-foreground">No products yet</span>;
@@ -24,7 +25,7 @@ export function ProductChips({ keys = [], max = 4 }) {
     <span className="flex flex-wrap gap-1.5">
       {shown.map((key) => (
         <span key={key} className="inline-flex items-center rounded-full bg-background/50 px-2.5 py-1 text-[14px]">
-          {productName(key)}
+          {products.find((p) => p.key === key)?.name || key}
         </span>
       ))}
       {rest > 0 ? <span className="inline-flex items-center rounded-full bg-background/50 px-2.5 py-1 text-[14px]">+{rest}</span> : null}

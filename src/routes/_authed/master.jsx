@@ -7,7 +7,7 @@ export const Route = createFileRoute("/_authed/master")({
 const tabs = [
   { to: "/master", label: "Home" },
   { to: "/master/customers", label: "Customers" },
-  { to: "/master/programs", label: "Program design" },
+  { to: "/master/products", label: "Products" },
   { to: "/master/tools", label: "Core materials" },
 ];
 

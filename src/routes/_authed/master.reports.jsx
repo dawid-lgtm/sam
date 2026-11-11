@@ -5,7 +5,8 @@ import { useServerFn } from "@tanstack/react-start";
 import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Sparkles } from "lucide-react";
 import { getAdminSummary } from "@/lib/master-fns";
-import { ALL_PRODUCTS, CUSTOMER_STATUSES } from "@/lib/products";
+import { CUSTOMER_STATUSES } from "@/lib/products";
+import { useProducts } from "@/lib/catalog";
 import { appUsersQuery, averageProgress, byName, customersQuery, toolsQuery } from "@/lib/masterQueries";
 import { PageHeader } from "@/components/ui-kit/PageHeader";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
@@ -26,13 +27,14 @@ function ReportsPage() {
   const { data: customers = [] } = useQuery(customersQuery);
   const { data: users = [] } = useQuery(appUsersQuery);
   const { data: tools = [] } = useQuery(toolsQuery);
+  const catalog = useProducts();
   const runSummary = useServerFn(getAdminSummary);
   const [summary, setSummary] = useState("");
   const [busy, setBusy] = useState(false);
 
   const list = [...customers].sort(byName);
   const active = list.filter((c) => c.status === "Active");
-  const adoption = ALL_PRODUCTS.map((p) => ({
+  const adoption = catalog.map((p) => ({
     name: p.name,
     customers: list.filter((c) => (c.products || []).includes(p.key)).length,
   }));
@@ -47,10 +49,10 @@ function ReportsPage() {
           activeCustomers: active.length,
           users: users.length,
           tools: tools.length,
-          products: ALL_PRODUCTS.map((p) => {
+          products: catalog.map((p) => {
             const using = list.filter((c) => (c.products || []).includes(p.key));
             const avg = using.length
-              ? using.reduce((n, c) => n + (averageProgress(c, [p.key]) ?? 0), 0) / using.length
+              ? using.reduce((n, c) => n + (averageProgress(c, [p.key], catalog) ?? 0), 0) / using.length
               : 0;
             return { name: p.name, customers: using.length, progress: avg };
           }),
@@ -137,7 +139,7 @@ function ReportsPage() {
                   <span>
                     {tools.filter((t) => (t.assigned_products || []).some((k) => (c.products || []).includes(k))).length} tools available
                   </span>
-                  <span>average progress {averageProgress(c, c.products || []) ?? 0}%</span>
+                  <span>average progress {averageProgress(c, c.products || [], catalog) ?? 0}%</span>
                 </div>
               </div>
             ))}

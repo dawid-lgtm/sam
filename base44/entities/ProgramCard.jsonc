@@ -1,0 +1,103 @@
+{
+  "name": "ProgramCard",
+  "type": "object",
+  "properties": {
+    "product_key": {
+      "type": "string"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "text",
+        "video",
+        "question",
+        "multiple_choice",
+        "upload",
+        "quiz",
+        "poll"
+      ],
+      "enumColors": [
+        "blue",
+        "purple",
+        "yellow",
+        "green",
+        "pink",
+        "red",
+        "gray"
+      ],
+      "default": "text"
+    },
+    "title": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string"
+    },
+    "media_url": {
+      "type": "string"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "correct_option": {
+      "type": "string"
+    },
+    "upload_kind": {
+      "type": "string",
+      "enum": [
+        "image",
+        "document",
+        "both"
+      ],
+      "enumColors": [
+        "blue",
+        "purple",
+        "green"
+      ],
+      "default": "both"
+    },
+    "sort": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "product_key",
+    "format"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

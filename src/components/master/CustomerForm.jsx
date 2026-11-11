@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { CUSTOMER_STATUSES, ALL_PRODUCTS } from "@/lib/products";
+import { CUSTOMER_STATUSES } from "@/lib/products";
+import { useProducts } from "@/lib/catalog";
 import { TextField, TextAreaField, SelectField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
 import { ProductPicker } from "@/components/master/ProductPicker";
 
@@ -31,8 +32,9 @@ export function CustomerForm({ customer, saving, onSave, onCancel }) {
       : BLANK,
   );
 
+  const products = useProducts();
   const set = (key, value) => setForm((f) => ({ ...f, [key]: value }));
-  const progressProducts = ALL_PRODUCTS.filter((p) => p.progress_field && form.products.includes(p.key));
+  const progressProducts = products.filter((p) => p.progress_field && form.products.includes(p.key));
 
   const submit = (e) => {
     e.preventDefault();

@@ -3,7 +3,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
-import { ALL_PRODUCTS } from "@/lib/products";
+import { useProducts } from "@/lib/catalog";
 import { appUsersQuery, averageProgress, customersQuery, toolsQuery } from "@/lib/masterQueries";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
 import { Modal } from "@/components/ui-kit/Modal";
@@ -23,6 +23,7 @@ function CustomerDetail() {
   const { data: customers = [], isLoading } = useQuery(customersQuery);
   const { data: users = [] } = useQuery(appUsersQuery);
   const { data: tools = [] } = useQuery(toolsQuery);
+  const catalog = useProducts();
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -49,7 +50,7 @@ function CustomerDetail() {
   const products = customer.products || [];
   const people = users.filter((u) => u.customer_id === customer.id);
   const assignedTools = tools.filter((t) => (t.assigned_products || []).some((k) => products.includes(k)));
-  const avg = averageProgress(customer, products);
+  const avg = averageProgress(customer, products, catalog);
 
   const save = async (patch) => {
     setSaving(true);
@@ -109,7 +110,7 @@ function CustomerDetail() {
         {products.length ? (
           <div className="space-y-3">
             {products.map((key) => {
-              const product = ALL_PRODUCTS.find((p) => p.key === key);
+              const product = catalog.find((p) => p.key === key);
               if (!product?.progress_field) return null;
               return <ProgressBar key={key} value={customer[product.progress_field] || 0} label={product.name} />;
             })}

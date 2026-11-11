@@ -58,8 +58,8 @@ function MasterHome() {
           <Link to="/master/customers" className="rounded-xl bg-background/40 p-3 text-[15px] font-semibold transition hover:ring-2 hover:ring-gold">
             Customers
           </Link>
-          <Link to="/master/programs" className="rounded-xl bg-background/40 p-3 text-[15px] font-semibold transition hover:ring-2 hover:ring-gold">
-            Program design
+          <Link to="/master/products" className="rounded-xl bg-background/40 p-3 text-[15px] font-semibold transition hover:ring-2 hover:ring-gold">
+            Products
           </Link>
           <Link to="/master/tools" className="rounded-xl bg-background/40 p-3 text-[15px] font-semibold transition hover:ring-2 hover:ring-gold">
             Core materials

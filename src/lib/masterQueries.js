@@ -20,10 +20,10 @@ export function byName(a, b) {
   return String(a.name || a.title || "").localeCompare(String(b.name || b.title || ""));
 }
 
-export function averageProgress(customer, keys) {
+export function averageProgress(customer, keys, products = []) {
   const values = keys
     .map((key) => {
-      const field = progressField(key);
+      const field = products.find((p) => p.key === key)?.progress_field || progressField(key);
       return field ? Number(customer?.[field] || 0) : null;
     })
     .filter((v) => v !== null);

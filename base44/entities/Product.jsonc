@@ -1,0 +1,75 @@
+{
+  "name": "Product",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "for_whom": {
+      "type": "string"
+    },
+    "inside": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Available",
+        "Later"
+      ],
+      "enumColors": [
+        "green",
+        "gray"
+      ],
+      "default": "Available"
+    },
+    "progress_field": {
+      "type": "string"
+    },
+    "sort": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "key",
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "user"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
