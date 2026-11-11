@@ -12,6 +12,9 @@ import { CardChain } from "@/components/master/CardChain";
 import { CardEditor } from "@/components/master/CardEditor";
 import { CardRunner } from "@/components/master/CardRunner";
 import { useCardProgress } from "@/lib/cardProgress";
+import { DEPLOYMENT_PLANS } from "@/lib/deploymentPlan";
+import { DeploymentPlan } from "@/components/master/DeploymentPlan";
+import { ProductDownloads } from "@/components/master/ProductDownloads";
 import { syncWelcomeCard } from "@/lib/welcomeCard";
 
 export const Route = createFileRoute("/_authed/master/products_/$productKey")({
@@ -29,6 +32,14 @@ function ProductChain() {
   const [saving, setSaving] = useState(false);
 
   const { record } = useCardProgress(productKey);
+  const plan = DEPLOYMENT_PLANS[productKey];
+  const tabs = [
+    ...(plan ? [{ id: "plan", label: "Deployment plan" }] : []),
+    { id: "chain", label: "Program cards" },
+    { id: "downloads", label: "Downloads" },
+  ];
+  const [tab, setTab] = useState(null);
+  const activeTab = tab || tabs[0].id;
 
   const product = products.find((p) => p.key === productKey);
   const refresh = async () => {
@@ -124,15 +135,31 @@ function ProductChain() {
         ) : null}
       </section>
 
-      <Section title="Card chain" subtitle="Drag the cards into the order they run, day by day.">
-        <CardChain
-          cards={cards}
-          onAdd={(format) => setEditing({ format })}
-          onEdit={(card) => setEditing({ ...card })}
-          onDelete={setDeleting}
-          onReorder={reorder}
-        />
-      </Section>
+      <div className="flex gap-2 overflow-x-auto">
+        {tabs.map((t) => (
+          <button
+            key={t.id}
+            onClick={() => setTab(t.id)}
+            className={`min-h-[44px] shrink-0 rounded-xl px-4 text-[15px] font-semibold ${activeTab === t.id ? "bg-gold text-gold-foreground" : "bg-card"}`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {activeTab === "plan" ? <DeploymentPlan plan={plan} /> : null}
+      {activeTab === "downloads" ? <ProductDownloads productKey={productKey} /> : null}
+      {activeTab === "chain" ? (
+        <Section title="Card chain" subtitle="Drag the cards into the order they run, day by day.">
+          <CardChain
+            cards={cards}
+            onAdd={(format) => setEditing({ format })}
+            onEdit={(card) => setEditing({ ...card })}
+            onDelete={setDeleting}
+            onReorder={reorder}
+          />
+        </Section>
+      ) : null}
 
       <Modal open={running} onClose={() => setRunning(false)} title={product.name}>
         {running ? <CardRunner cards={cards} productKey={productKey} /> : null}
