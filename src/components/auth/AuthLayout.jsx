@@ -1,3 +1,5 @@
+import { AuthTagline } from "@/components/auth/AuthTagline";
+
 // Full-screen card shared by the auth pages. It sets its own color tokens so it stays readable under any theme.
 export function AuthLayout({ icon: Icon, title, subtitle, footer, children }) {
   return (
@@ -17,7 +19,8 @@ export function AuthLayout({ icon: Icon, title, subtitle, footer, children }) {
           </div>
           <p className="font-heading text-[38px] font-semibold leading-none">Sam</p>
           <p className="mt-1 text-[15px] font-semibold text-gold">Mine in a box™</p>
-          <h1 className="mt-7 flex items-center justify-center gap-2 font-heading text-[26px] font-semibold tracking-tight">
+          <AuthTagline />
+          <h1 className="mt-2 flex items-center justify-center gap-2 font-heading text-[26px] font-semibold tracking-tight">
             {Icon ? <Icon className="h-6 w-6 text-gold" aria-hidden="true" /> : null}
             {title}
           </h1>
