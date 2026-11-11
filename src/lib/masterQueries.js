@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { base44 } from "@/api/base44Client";
 import { progressField } from "@/lib/products";
 
@@ -14,6 +15,33 @@ export const toolsQuery = {
 export const appUsersQuery = {
   queryKey: ["app-users"],
   queryFn: () => base44.entities.User.list(),
+};
+
+export const safetyTasksQuery = {
+  queryKey: ["safety-tasks"],
+  queryFn: () => base44.entities.SafetyTask.list({ limit: 500 }),
+  select: (page) => page.items || [],
+};
+
+/** Open safety tasks across every customer site: total, due in the next 7 days, overdue. */
+export const safetyCountsQuery = {
+  queryKey: ["safety-counts"],
+  queryFn: async () => {
+    const start = new Date();
+    start.setHours(0, 0, 0, 0);
+    const weekEnd = new Date(start);
+    weekEnd.setDate(weekEnd.getDate() + 7);
+    const today = format(start, "yyyy-MM-dd");
+    const inAWeek = format(weekEnd, "yyyy-MM-dd");
+    const open = { status: { $ne: "Done" } };
+
+    const [active, dueThisWeek, overdue] = await Promise.all([
+      base44.entities.SafetyTask.count(open),
+      base44.entities.SafetyTask.count({ ...open, due_date: { $gte: today, $lte: inAWeek } }),
+      base44.entities.SafetyTask.count({ ...open, due_date: { $lt: today } }),
+    ]);
+    return { active, dueThisWeek, overdue };
+  },
 };
 
 export function byName(a, b) {
