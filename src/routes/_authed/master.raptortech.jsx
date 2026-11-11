@@ -1,10 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { Building2, Users } from "lucide-react";
+import { appUsersQuery, customersQuery } from "@/lib/masterQueries";
+import { isRaptortech } from "@/lib/teams";
 import { PageHeader } from "@/components/ui-kit/PageHeader";
 import { Section } from "@/components/ui-kit/Section";
-import { StatTiles } from "@/components/master/bits";
-import { RaptortechCustomerCard } from "@/components/master/RaptortechCustomerCard";
-import { RaptortechSessions } from "@/components/master/RaptortechSessions";
-import { RAPTORTECH_CUSTOMERS, RAPTORTECH_SESSIONS } from "@/lib/raptortechData";
+import { KeyDates } from "@/components/master/KeyDates";
+import { SafetyTasksCard } from "@/components/master/SafetyTasksCard";
+import { FourBlockCard } from "@/components/master/FourBlockCard";
+import { TeamProgressCard } from "@/components/master/TeamProgressCard";
 
 export const Route = createFileRoute("/_authed/master/raptortech")({
   component: RaptortechTeam,
@@ -12,46 +16,59 @@ export const Route = createFileRoute("/_authed/master/raptortech")({
 });
 
 function RaptortechTeam() {
-  const active = RAPTORTECH_CUSTOMERS.filter((c) => c.status === "Active");
-  const people = RAPTORTECH_CUSTOMERS.reduce((sum, c) => sum + c.people, 0);
-  const completion = Math.round(
-    RAPTORTECH_CUSTOMERS.reduce((sum, c) => sum + c.progress, 0) / RAPTORTECH_CUSTOMERS.length,
-  );
+  const { user } = Route.useRouteContext();
+  const { data: customers = [], isLoading } = useQuery(customersQuery);
+  const { data: users = [] } = useQuery(appUsersQuery);
 
-  const tiles = [
-    { value: RAPTORTECH_CUSTOMERS.length, label: "Raptortech customers", hint: `${active.length} active` },
-    { value: people, label: "People in training", hint: "Across every site" },
-    { value: `${completion}%`, label: "Average completion", hint: "Program progress" },
-    { value: RAPTORTECH_SESSIONS.length, label: "Sessions booked", hint: "Next four weeks" },
-  ];
+  const mine = customers.filter(isRaptortech);
+  const activeCustomers = mine.filter((c) => c.status === "Active");
+  const activeIds = new Set(activeCustomers.map((c) => c.id));
+  const participants = users.filter((u) => u.customer_id && activeIds.has(u.customer_id)).length;
+
+  const keyDates = mine
+    .filter((c) => c.start_date)
+    .map((c) => ({ id: c.id, date: c.start_date, label: `${c.name} starts` }));
+
+  const customerIds = mine.map((c) => c.id);
+  const name = user?.full_name?.trim().split(" ")[0] || user?.email?.split("@")[0] || "";
 
   return (
     <div className="space-y-2.5">
       <PageHeader
-        title="Hello, Jean"
-        intro="Raptortech team · the customers your team owns and where each one is up to."
+        title={`Hello${name ? `, ${name}` : ""}`}
+        intro="Raptortech team · the customers your team delivers and the dates that matter."
         brand
       />
 
-      <Section title="Portfolio" subtitle="Raptortech customers only.">
-        <StatTiles tiles={tiles} />
-      </Section>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <Link to="/master/customers" className="sam-glass p-3 transition hover:ring-2 hover:ring-gold">
+          <Building2 className="h-3.5 w-3.5 text-gold" />
+          <p className="mt-1 font-heading text-[18px] font-semibold leading-none">{isLoading ? "—" : activeCustomers.length}</p>
+          <p className="mt-1 text-[12px] font-semibold">Active customers</p>
+          <p className="text-[11px] text-muted-foreground">{mine.length} in total · your team's customers</p>
+        </Link>
+
+        <Link to="/master/customers" className="sam-glass p-3 transition hover:ring-2 hover:ring-gold">
+          <Users className="h-3.5 w-3.5 text-gold" />
+          <p className="mt-1 font-heading text-[18px] font-semibold leading-none">{participants}</p>
+          <p className="mt-1 text-[12px] font-semibold">Active participants</p>
+          <p className="text-[11px] text-muted-foreground">People with access to an active customer</p>
+        </Link>
+      </div>
 
       <div className="grid gap-2.5 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <Section title="Customers" subtitle="Program, people and the next session at each site.">
-            <div className="grid gap-2.5 sm:grid-cols-2">
-              {RAPTORTECH_CUSTOMERS.map((customer) => (
-                <RaptortechCustomerCard key={customer.id} customer={customer} />
-              ))}
-            </div>
+          <Section title="Key dates" subtitle="Customer start dates, month by month.">
+            <KeyDates dates={keyDates} />
           </Section>
         </div>
-
-        <Section title="Coming up" subtitle="Delivery booked for the weeks ahead.">
-          <RaptortechSessions sessions={RAPTORTECH_SESSIONS} />
-        </Section>
+        <div className="space-y-2.5">
+          <SafetyTasksCard customerIds={customerIds} />
+          <FourBlockCard customerIds={customerIds} />
+        </div>
       </div>
+
+      <TeamProgressCard customers={mine} />
     </div>
   );
 }

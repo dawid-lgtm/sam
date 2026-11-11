@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { ShieldCheck } from "lucide-react";
-import { safetyCountsQuery } from "@/lib/masterQueries";
+import { safetyCountsFor } from "@/lib/masterQueries";
 
-export function SafetyTasksCard() {
-  const { data } = useQuery(safetyCountsQuery);
+export function SafetyTasksCard({ customerIds }) {
+  const { data } = useQuery(safetyCountsFor(customerIds));
   const counts = data || { designed: 0, implemented: 0 };
 
   return (

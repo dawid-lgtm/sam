@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { base44 } from "@/api/base44Client";
 import { CUSTOMER_STATUSES } from "@/lib/products";
+import { TEAMS, RAPTORTECH_TEAM } from "@/lib/teams";
 import { useProducts } from "@/lib/catalog";
 import { Image } from "@/components/ui/image";
 import { TextField, TextAreaField, SelectField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
@@ -10,6 +11,7 @@ const BLANK = {
   name: "",
   code: "",
   status: "Prospect",
+  delivered_by: RAPTORTECH_TEAM,
   products: [],
   contact_name: "",
   contact_email: "",
@@ -82,6 +84,13 @@ export function CustomerForm({ customer, saving, onSave, onCancel }) {
           options={CUSTOMER_STATUSES.map((s) => ({ value: s, label: s }))}
         />
       </div>
+      <SelectField
+        label="Delivered by"
+        hint="The Raptortech team page only shows its own customers."
+        value={form.delivered_by || RAPTORTECH_TEAM}
+        onChange={(e) => set("delivered_by", e.target.value)}
+        options={TEAMS.map((t) => ({ value: t, label: t }))}
+      />
       <div className="grid grid-cols-2 gap-3">
         <TextField label="Main contact" value={form.contact_name} onChange={(e) => set("contact_name", e.target.value)} />
         <TextField label="Contact email" type="email" value={form.contact_email} onChange={(e) => set("contact_email", e.target.value)} />

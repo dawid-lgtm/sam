@@ -60,6 +60,18 @@
     "notes": {
       "type": "string"
     },
+    "delivered_by": {
+      "type": "string",
+      "enum": [
+        "Raptortech team",
+        "Another team"
+      ],
+      "enumColors": [
+        "green",
+        "gray"
+      ],
+      "default": "Raptortech team"
+    },
     "progress_sam": {
       "type": "number",
       "default": 0

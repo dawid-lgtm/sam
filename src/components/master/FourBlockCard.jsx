@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { LayoutGrid } from "lucide-react";
-import { fourBlockCountsQuery } from "@/lib/masterQueries";
+import { fourBlockCountsFor } from "@/lib/masterQueries";
 
-export function FourBlockCard() {
-  const { data } = useQuery(fourBlockCountsQuery);
+export function FourBlockCard({ customerIds }) {
+  const { data } = useQuery(fourBlockCountsFor(customerIds));
   const counts = data || { total: 0, supervisors: 0, superintendents: 0 };
 
   return (

@@ -22,17 +22,22 @@ export const safetyTasksQuery = {
   select: (page) => page.items || [],
 };
 
-/** Safety tasks across every customer site: designed (all) and implemented (done). */
-export const safetyCountsQuery = {
-  queryKey: ["safety-counts"],
-  queryFn: async () => {
-    const [designed, implemented] = await Promise.all([
-      base44.entities.SafetyTask.count({}),
-      base44.entities.SafetyTask.count({ status: "Done" }),
-    ]);
-    return { designed, implemented };
-  },
-};
+/** Safety task counts: designed (all) and implemented (done), optionally one team's customers. */
+export const safetyCountsQuery = safetyCountsFor();
+
+export function safetyCountsFor(customerIds) {
+  const scope = customerIds ? { customer_id: { $in: customerIds } } : {};
+  return {
+    queryKey: ["safety-counts", customerIds ? customerIds.join(",") : "all"],
+    queryFn: async () => {
+      const [designed, implemented] = await Promise.all([
+        base44.entities.SafetyTask.count(scope),
+        base44.entities.SafetyTask.count({ ...scope, status: "Done" }),
+      ]);
+      return { designed, implemented };
+    },
+  };
+}
 
 export const fourBlockDaysQuery = {
   queryKey: ["four-block-days"],
@@ -40,18 +45,23 @@ export const fourBlockDaysQuery = {
   select: (page) => page.items || [],
 };
 
-/** Full shifts completed in four blocks across every customer site, split by role. */
-export const fourBlockCountsQuery = {
-  queryKey: ["four-block-counts"],
-  queryFn: async () => {
-    const [total, supervisors, superintendents] = await Promise.all([
-      base44.entities.FourBlockDay.count({}),
-      base44.entities.FourBlockDay.count({ role: "Supervisor" }),
-      base44.entities.FourBlockDay.count({ role: "Superintendent" }),
-    ]);
-    return { total, supervisors, superintendents };
-  },
-};
+/** Four-block shift counts by role, optionally one team's customers. */
+export const fourBlockCountsQuery = fourBlockCountsFor();
+
+export function fourBlockCountsFor(customerIds) {
+  const scope = customerIds ? { customer_id: { $in: customerIds } } : {};
+  return {
+    queryKey: ["four-block-counts", customerIds ? customerIds.join(",") : "all"],
+    queryFn: async () => {
+      const [total, supervisors, superintendents] = await Promise.all([
+        base44.entities.FourBlockDay.count(scope),
+        base44.entities.FourBlockDay.count({ ...scope, role: "Supervisor" }),
+        base44.entities.FourBlockDay.count({ ...scope, role: "Superintendent" }),
+      ]);
+      return { total, supervisors, superintendents };
+    },
+  };
+}
 
 export function byName(a, b) {
   return String(a.name || a.title || "").localeCompare(String(b.name || b.title || ""));
