@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Building2, Users } from "lucide-react";
+import { Briefcase, Building2, Users } from "lucide-react";
 import { appUsersQuery, customersQuery } from "@/lib/masterQueries";
 import { PageHeader } from "@/components/ui-kit/PageHeader";
 import { Section } from "@/components/ui-kit/Section";
@@ -52,6 +52,15 @@ function MasterHome() {
           <p className="text-[11px] text-muted-foreground">People with access to an active customer</p>
         </Link>
       </div>
+
+      <Link
+        to="/master/raptortech"
+        title="See the Raptortech team's own dashboard"
+        className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-gold px-4 text-[15px] font-semibold text-gold-foreground transition active:opacity-90"
+      >
+        <Briefcase className="h-4 w-4" />
+        Raptortech master page
+      </Link>
 
       <div className="grid gap-2.5 lg:grid-cols-3">
         <div className="lg:col-span-2">
