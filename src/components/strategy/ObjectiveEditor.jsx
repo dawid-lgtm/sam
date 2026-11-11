@@ -10,7 +10,7 @@ import { TextField, TextAreaField, PrimaryButton, GhostButton } from "@/componen
 
 const blank = { statement: "", outcome: "", value_to_business: "", metric: "", target_date: "", exec_owner: "", load_bearing_note: "", progress: 0 };
 
-export function ObjectiveEditor({ open, onClose, objective, nextCode, onSaved }) {
+export function ObjectiveEditor({ open, onClose, objective, nextCode, onSaved, goalStatement }) {
   const { user } = useAuth();
   const refresh = useRefreshSam();
   const editing = !!objective;
@@ -83,6 +83,12 @@ export function ObjectiveEditor({ open, onClose, objective, nextCode, onSaved })
     <Modal open={open} onClose={close} title={editing ? `Edit ${form.code}` : `Add objective ${form.code}`}>
       {step === "edit" ? (
         <div className="space-y-3">
+          {goalStatement ? (
+            <p className="rounded-xl bg-gold/15 px-3 py-2.5 text-[15px] leading-snug text-foreground">
+              <span className="text-muted-foreground">Delivers the Goal: </span>
+              {goalStatement}
+            </p>
+          ) : null}
           <TextAreaField
             label="The objective"
             rows={3}

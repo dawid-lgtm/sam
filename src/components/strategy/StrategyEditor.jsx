@@ -18,10 +18,10 @@ const blank = {
   review_date: "",
 };
 
-export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, sites }) {
+export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, sites, presetObjective }) {
   const refresh = useRefreshSam();
   const editing = !!strategy;
-  const [form, setForm] = useState(strategy || { ...blank, code: nextCode });
+  const [form, setForm] = useState(strategy || { ...blank, code: nextCode, objective_code: presetObjective || "" });
   const [saving, setSaving] = useState(false);
   const set = (patch) => setForm((f) => ({ ...f, ...patch }));
 
@@ -61,6 +61,12 @@ export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, 
   return (
     <Modal open={open} onClose={onClose} title={editing ? `Edit ${form.code}` : `Add strategy ${form.code}`}>
       <div className="space-y-3">
+        {form.objective_code ? (
+          <p className="rounded-xl bg-gold/15 px-3 py-2.5 text-[15px] leading-snug text-foreground">
+            <span className="text-muted-foreground">Delivers the Objective: </span>
+            {objectives.find((o) => o.code === form.objective_code)?.statement || form.objective_code}
+          </p>
+        ) : null}
         <TextAreaField
           label="The strategy"
           rows={3}

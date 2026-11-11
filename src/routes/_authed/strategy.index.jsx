@@ -26,7 +26,13 @@ function GoalAndObjectives() {
 
   return (
     <div className="space-y-4">
-      <GospaExplainer />
+      <GospaExplainer
+        company={data.company}
+        objectives={data.objectives}
+        strategies={data.strategies}
+        sites={data.sites}
+        canEdit={canEdit}
+      />
 
       <GoalEditor company={data.company} canEdit={canEdit} />
 

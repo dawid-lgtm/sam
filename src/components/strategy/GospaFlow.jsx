@@ -50,7 +50,7 @@ function VideoSlot({ src }) {
   );
 }
 
-export function GospaDetail({ layer }) {
+export function GospaDetail({ layer, build }) {
   if (!layer) return null;
   return (
     <div className="mt-3 rounded-xl bg-background/40 p-3">
@@ -88,6 +88,8 @@ export function GospaDetail({ layer }) {
           </Link>
         ) : null}
       </div>
+
+      {build}
 
       {GOSPA_VIDEOS[layer.key] ? (
         <VideoSlot src={GOSPA_VIDEOS[layer.key]} />

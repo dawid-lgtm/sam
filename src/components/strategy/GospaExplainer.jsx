@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { GOSPA_LAYERS } from "@/lib/gospaContent";
 import { GospaFlow, GospaDetail } from "@/components/strategy/GospaFlow";
+import { BuildPanel } from "@/components/strategy/BuildPanel";
 
 const steps = [
   {
@@ -20,7 +21,7 @@ const steps = [
   },
 ];
 
-export function GospaExplainer() {
+export function GospaExplainer({ company, objectives, strategies, sites, canEdit }) {
   const [activeKey, setActiveKey] = useState("g");
   const active = GOSPA_LAYERS.find((l) => l.key === activeKey) || GOSPA_LAYERS[0];
 
@@ -37,7 +38,19 @@ export function GospaExplainer() {
 
       <div className="mt-3">
         <GospaFlow activeKey={activeKey} onSelect={setActiveKey} />
-        <GospaDetail layer={active} />
+        <GospaDetail
+          layer={active}
+          build={
+            <BuildPanel
+              layerKey={active.key}
+              company={company}
+              objectives={objectives}
+              strategies={strategies}
+              sites={sites}
+              canEdit={canEdit}
+            />
+          }
+        />
       </div>
 
       <h3 className="mt-4 font-heading text-[17px] font-semibold text-foreground">How it runs</h3>
