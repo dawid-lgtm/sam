@@ -1,5 +1,5 @@
 export function PageHeader({ title, intro, brand = false }) {
-  const tone = brand ? "text-brand" : "text-foreground";
+  const tone = brand ? "!text-blue-600" : "text-foreground";
   return (
     <div className="mb-5">
       <h1 className={`font-heading text-[27px] font-semibold leading-tight sm:text-[32px] ${tone}`}>{title}</h1>
