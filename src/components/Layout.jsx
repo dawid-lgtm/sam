@@ -3,12 +3,14 @@ import { useAuth } from "@/lib/AuthContext";
 import { LogOut, Users } from "lucide-react";
 import { AppNav } from "@/components/AppNav";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { ButtonHints } from "@/components/ButtonHints";
 
 export function AppShell({ children }) {
   const { user, logout } = useAuth();
 
   return (
     <div className="min-h-screen bg-background">
+      <ButtonHints />
       <header className="sticky top-0 z-30 bg-background">
         <div className="relative mx-auto flex max-w-3xl items-center justify-between gap-2 px-4 py-2.5">
           <div className="flex min-w-0 items-center gap-3">

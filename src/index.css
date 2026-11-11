@@ -29,7 +29,7 @@
     --gold: 42 76% 53%; /* #e2ad2f */
     --gold-foreground: 218 45% 22%;
     --navy: 218 45% 22%;
-    --brand: 218 45% 32%; /* the solid blue of the top bar */
+    --brand: 214 72% 56%; /* solid blue, readable over the hero photo */
     --radius: 1rem;
     --chart-1: 42 76% 53%;
     --chart-2: 42 76% 53%;
@@ -71,7 +71,7 @@
     --gold: 42 76% 53%;
     --gold-foreground: 220 49% 15%;
     --navy: 220 49% 15%;
-    --brand: 218 45% 32%;
+    --brand: 214 72% 52%;
   }
 }
 
