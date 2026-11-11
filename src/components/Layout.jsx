@@ -41,7 +41,7 @@ export function AppShell({ children }) {
             </button>
           </div>
         </div>
-        <div className="relative mx-auto hidden max-w-3xl px-4 md:block">
+        <div className="relative mx-auto hidden max-w-6xl px-4 md:block">
           <AppNav variant="top" />
         </div>
       </header>

@@ -49,7 +49,7 @@ export function AppNav({ variant = "bottom" }) {
 
   if (variant === "top") {
     return (
-      <nav className="flex flex-nowrap items-center gap-2 overflow-x-auto pb-3">
+      <nav className="flex flex-nowrap items-center gap-1 overflow-x-auto pb-2">
         {items.map(({ to, params, match, label, icon: Icon }) => {
           const active = isActive(match || to);
           return (
@@ -57,11 +57,11 @@ export function AppNav({ variant = "bottom" }) {
               key={label}
               to={to}
               params={params}
-              className={`flex min-h-[44px] shrink-0 items-center gap-2 whitespace-nowrap rounded-xl px-3.5 text-[15px] font-medium transition ${
+              className={`flex min-h-[36px] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg px-2 text-[13px] font-medium transition ${
                 active ? "bg-card text-foreground" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
               }`}
             >
-              <Icon className={`h-5 w-5 ${active ? "text-gold" : ""}`} />
+              <Icon className={`h-4 w-4 ${active ? "text-gold" : ""}`} />
               {label}
             </Link>
           );
