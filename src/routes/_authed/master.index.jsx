@@ -36,14 +36,14 @@ function MasterHome() {
       />
 
       <div className="grid gap-3 sm:grid-cols-2">
-        <Link to="/master/customers" className="rounded-2xl bg-card p-5 transition hover:ring-2 hover:ring-gold">
+        <Link to="/master/customers" className="sam-glass p-5 transition hover:ring-2 hover:ring-gold">
           <Building2 className="h-6 w-6 text-gold" />
           <p className="mt-3 font-heading text-[40px] font-semibold leading-none">{isLoading ? "—" : activeCustomers.length}</p>
           <p className="mt-2 text-[16px] font-semibold">Active customers</p>
           <p className="mt-1 text-[14px] text-muted-foreground">{customers.length} in total · open customers</p>
         </Link>
 
-        <Link to="/master/customers" className="rounded-2xl bg-card p-5 transition hover:ring-2 hover:ring-gold">
+        <Link to="/master/customers" className="sam-glass p-5 transition hover:ring-2 hover:ring-gold">
           <Users className="h-6 w-6 text-gold" />
           <p className="mt-3 font-heading text-[40px] font-semibold leading-none">{participants}</p>
           <p className="mt-2 text-[16px] font-semibold">Active participants</p>

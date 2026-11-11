@@ -4,7 +4,7 @@ const TASKS = { active: 7, dueThisWeek: 3, overdue: 1 };
 
 export function SafetyTasksCard() {
   return (
-    <section className="rounded-2xl bg-card p-4">
+    <section className="sam-glass p-4">
       <div className="flex items-center gap-2">
         <ShieldCheck className="h-5 w-5 text-gold" />
         <p className="text-[15px] font-semibold">Safety tasks</p>

@@ -1,6 +1,6 @@
 export function Section({ title, subtitle, action, children, className = "" }) {
   return (
-    <section className={`rounded-2xl bg-card p-4 sm:p-5 ${className}`}>
+    <section className={`sam-glass p-4 sm:p-5 ${className}`}>
       {(title || action) && (
         <div className="mb-3 flex items-start justify-between gap-3">
           <div className="min-w-0">
