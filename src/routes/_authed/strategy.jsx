@@ -9,6 +9,7 @@ const tabs = [
   { to: "/strategy", label: "Goal and objectives" },
   { to: "/strategy/strategies", label: "Strategies" },
   { to: "/strategy/tracker", label: "Tracker" },
+  { to: "/strategy/actions", label: "Action register" },
 ];
 
 function StrategyLayout() {
@@ -23,7 +24,7 @@ function StrategyLayout() {
         title="The strategy"
         intro="One goal, at most five objectives, and the strategies that carry them."
       />
-      <div className="mb-5 grid grid-cols-3 gap-2">
+      <div className="mb-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {tabs.map((t) => {
           const active = path === t.to;
           return (

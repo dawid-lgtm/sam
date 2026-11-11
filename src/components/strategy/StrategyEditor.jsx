@@ -10,8 +10,10 @@ const blank = {
   statement: "",
   objective_code: "",
   owner: "",
+  success_metric: "",
   value_volume: "",
   value_dollars: "",
+  deliver_date: "",
   sites: [],
   review_date: "",
 };
@@ -34,8 +36,10 @@ export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, 
         statement: form.statement.trim(),
         objective_code: form.objective_code || "",
         owner: form.owner || "",
+        success_metric: form.success_metric || "",
         value_volume: form.value_volume || "",
         value_dollars: form.value_dollars || "",
+        deliver_date: form.deliver_date || "",
         sites: form.sites || [],
         review_date: form.review_date || "",
       };
@@ -72,9 +76,11 @@ export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, 
             onChange={(e) => set({ objective_code: e.target.value })}
             options={objectives.map((o) => ({ value: o.code, label: `${o.code} — ${o.statement}` }))}
           />
-          <TextField label="Owner" value={form.owner} onChange={(e) => set({ owner: e.target.value })} />
-          <TextField label="Value volume" value={form.value_volume} onChange={(e) => set({ value_volume: e.target.value })} placeholder="e.g. 310 truck hours a quarter" />
+          <TextField label="Owner (wider leadership team)" value={form.owner} onChange={(e) => set({ owner: e.target.value })} />
+          <TextField label="Success metric" value={form.success_metric || ""} onChange={(e) => set({ success_metric: e.target.value })} placeholder="Agreed in Step 2" />
           <TextField label="Value $" value={form.value_dollars} onChange={(e) => set({ value_dollars: e.target.value })} placeholder="e.g. $1.2M a year" />
+          <TextField label="Deliver date" type="date" value={form.deliver_date || ""} onChange={(e) => set({ deliver_date: e.target.value })} />
+          <TextField label="Value volume" value={form.value_volume} onChange={(e) => set({ value_volume: e.target.value })} placeholder="e.g. 310 truck hours a quarter" />
           <TextField label="90-day review" type="date" value={form.review_date} onChange={(e) => set({ review_date: e.target.value })} />
         </div>
         <div>

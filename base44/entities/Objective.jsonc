@@ -8,6 +8,12 @@
     "statement": {
       "type": "string"
     },
+    "outcome": {
+      "type": "string"
+    },
+    "value_to_business": {
+      "type": "string"
+    },
     "metric": {
       "type": "string"
     },

@@ -13,9 +13,21 @@ export function ObjectiveCard({ objective, canEdit, onEdit }) {
           <div className="min-w-0">
             <p className="text-[16px] font-medium leading-snug text-foreground">{objective.statement}</p>
             <p className="mt-1 text-[15px] leading-snug text-muted-foreground">
-              {objective.metric || "No measure yet"}
+              {objective.metric || "No success metric yet"}
               {objective.target_date ? ` · by ${moment.utc(objective.target_date).format("D MMM YYYY")}` : ""}
             </p>
+            {objective.outcome ? (
+              <p className="mt-1 text-[15px] leading-snug text-foreground">
+                <span className="text-muted-foreground">Outcome: </span>
+                {objective.outcome}
+              </p>
+            ) : null}
+            {objective.value_to_business ? (
+              <p className="mt-1 text-[15px] leading-snug text-foreground">
+                <span className="text-muted-foreground">Value: </span>
+                {objective.value_to_business}
+              </p>
+            ) : null}
           </div>
         </div>
         {canEdit ? (

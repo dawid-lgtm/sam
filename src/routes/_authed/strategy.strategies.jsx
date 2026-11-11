@@ -87,6 +87,16 @@ function Strategies() {
                     <dt className="text-muted-foreground">Value in dollars</dt>
                     <dd className="mt-0.5 font-medium text-foreground">{s.value_dollars || "—"}</dd>
                   </div>
+                  <div className="rounded-lg bg-background/60 px-3 py-2">
+                    <dt className="text-muted-foreground">Success metric</dt>
+                    <dd className="mt-0.5 font-medium text-foreground">{s.success_metric || "—"}</dd>
+                  </div>
+                  <div className="rounded-lg bg-background/60 px-3 py-2">
+                    <dt className="text-muted-foreground">Deliver date</dt>
+                    <dd className="mt-0.5 font-medium text-foreground">
+                      {s.deliver_date ? moment.utc(s.deliver_date).format("D MMM YYYY") : "—"}
+                    </dd>
+                  </div>
                 </dl>
                 <p className="mt-2 text-[15px] text-muted-foreground">
                   90-day review: {s.review_date ? moment.utc(s.review_date).format("D MMM YYYY") : "not set"}

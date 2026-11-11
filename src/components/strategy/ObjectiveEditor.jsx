@@ -8,7 +8,7 @@ import { notifySaveError } from "@/lib/access";
 import { Modal } from "@/components/ui-kit/Modal";
 import { TextField, TextAreaField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
 
-const blank = { statement: "", metric: "", target_date: "", exec_owner: "", load_bearing_note: "", progress: 0 };
+const blank = { statement: "", outcome: "", value_to_business: "", metric: "", target_date: "", exec_owner: "", load_bearing_note: "", progress: 0 };
 
 export function ObjectiveEditor({ open, onClose, objective, nextCode, onSaved }) {
   const { user } = useAuth();
@@ -46,6 +46,8 @@ export function ObjectiveEditor({ open, onClose, objective, nextCode, onSaved })
     try {
       const payload = {
         statement: form.statement.trim(),
+        outcome: form.outcome || "",
+        value_to_business: form.value_to_business || "",
         metric: form.metric || "",
         target_date: form.target_date || "",
         exec_owner: form.exec_owner || "",
@@ -88,10 +90,26 @@ export function ObjectiveEditor({ open, onClose, objective, nextCode, onSaved })
             onChange={(e) => set({ statement: e.target.value })}
             placeholder="What has to be true"
           />
+          <TextAreaField
+            label="The outcome"
+            hint="What is different in the business when this objective is met."
+            rows={2}
+            value={form.outcome || ""}
+            onChange={(e) => set({ outcome: e.target.value })}
+            placeholder="e.g. every shift starts with a signed block plan"
+          />
+          <TextAreaField
+            label="Value to the business"
+            hint="In volume and in dollars, or both."
+            rows={2}
+            value={form.value_to_business || ""}
+            onChange={(e) => set({ value_to_business: e.target.value })}
+            placeholder="e.g. $2.4M a year in truck hours recovered"
+          />
           <div className="grid gap-3 sm:grid-cols-2">
-            <TextField label="The number" value={form.metric} onChange={(e) => set({ metric: e.target.value })} placeholder="e.g. 0 lost-time injuries" />
-            <TextField label="By when" type="date" value={form.target_date} onChange={(e) => set({ target_date: e.target.value })} />
-            <TextField label="Executive owner" value={form.exec_owner} onChange={(e) => set({ exec_owner: e.target.value })} />
+            <TextField label="Success metric" value={form.metric} onChange={(e) => set({ metric: e.target.value })} placeholder="e.g. 0 lost-time injuries" />
+            <TextField label="Deliver date" type="date" value={form.target_date} onChange={(e) => set({ target_date: e.target.value })} />
+            <TextField label="ELT owner" value={form.exec_owner} onChange={(e) => set({ exec_owner: e.target.value })} />
             <TextField label="Progress %" type="number" min="0" max="100" value={form.progress} onChange={(e) => set({ progress: e.target.value })} />
           </div>
           <TextAreaField

@@ -14,11 +14,18 @@
     "owner": {
       "type": "string"
     },
+    "success_metric": {
+      "type": "string"
+    },
     "value_volume": {
       "type": "string"
     },
     "value_dollars": {
       "type": "string"
+    },
+    "deliver_date": {
+      "type": "string",
+      "format": "date"
     },
     "sites": {
       "type": "array",
