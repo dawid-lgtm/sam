@@ -1,9 +1,10 @@
-// The products a customer can be given. Flip a status to "available" to turn it on
-// everywhere (pickers, program matrix, reports) without any other change.
+// Everything Sam sells sits under one heading: Products. Each one is the same Sam
+// system, just a different delivery pathway. Flip a status to "later" to hide it
+// from switching on anywhere (pickers, program matrix, reports).
 export const PRODUCT_GROUPS = [
   {
-    id: "mine-in-a-box",
-    name: "Mine in a Box",
+    id: "products",
+    name: "Products",
     items: [
       {
         key: "enterprise",
@@ -13,36 +14,42 @@ export const PRODUCT_GROUPS = [
         progress_field: "progress_ops",
       },
       {
-        key: "safety",
-        name: "Safety Sam",
-        description: "Safety leadership: the routine and the behaviours that keep people safe",
-        status: "available",
-      },
-      {
         key: "strategy",
-        name: "Strategy Sam",
+        name: "Managing Strategy",
         description: "Cascading GOSPA: goals, strategies and tactics, plans and actions",
         status: "available",
         progress_field: "progress_strategy",
-        kind: "strategy",
       },
-    ],
-  },
-  {
-    id: "platform",
-    name: "Platform",
-    items: [
       {
-        key: "sam",
-        name: "SAM App Platform",
-        description: "Online platform that guides users through the CML process",
+        key: "operations",
+        name: "Managing Operations",
+        description: "Running the month: the work, the numbers and the review that keeps them true",
         status: "available",
         progress_field: "progress_sam",
       },
       {
-        key: "lms",
-        name: "LMS (Raptor Tech)",
-        description: "Learning Management System",
+        key: "maintenance",
+        name: "Managing Maintenance",
+        description: "Keeping the plant and the equipment doing what the plan needs",
+        status: "available",
+        progress_field: "progress_maintenance",
+      },
+      {
+        key: "people_risk",
+        name: "Managing People and Risk",
+        description: "Safety, behaviours and the leadership that keeps people well",
+        status: "available",
+      },
+      {
+        key: "finance",
+        name: "Managing Finance: The Keys to the Vault",
+        description: "Reading the money and owning the decisions it drives",
+        status: "available",
+      },
+      {
+        key: "training",
+        name: "Managing Training",
+        description: "Building the crew's capability on purpose, not by accident",
         status: "available",
       },
     ],
@@ -50,7 +57,7 @@ export const PRODUCT_GROUPS = [
 ];
 
 export const ALL_PRODUCTS = PRODUCT_GROUPS.flatMap((group) =>
-  group.items.map((item) => ({ ...item, group: group.name, kind: item.kind || "program" })),
+  group.items.map((item) => ({ ...item, group: group.name })),
 );
 
 export function productByKey(key) {

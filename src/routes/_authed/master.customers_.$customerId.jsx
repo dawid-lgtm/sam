@@ -105,7 +105,7 @@ function CustomerDetail() {
         <p className="mt-2 text-[14px] text-muted-foreground">{saving ? "Saving…" : `Average progress ${avg ?? 0}%`}</p>
       </Section>
 
-      <Section title="Program progress" subtitle="Updated by the super admin from the programs they run.">
+      <Section title="Product progress" subtitle="Updated by the super admin from the products they run.">
         {products.length ? (
           <div className="space-y-3">
             {products.map((key) => {

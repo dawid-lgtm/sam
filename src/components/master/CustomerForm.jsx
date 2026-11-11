@@ -80,7 +80,7 @@ export function CustomerForm({ customer, saving, onSave, onCancel }) {
 
       {progressProducts.length ? (
         <div>
-          <p className="mb-2 text-[15px] font-medium">Program progress (%)</p>
+          <p className="mb-2 text-[15px] font-medium">Product progress (%)</p>
           <div className="grid grid-cols-2 gap-3">
             {progressProducts.map((p) => (
               <TextField

@@ -1,4 +1,5 @@
 import { base44 } from "@/api/base44Client";
+import { progressField } from "@/lib/products";
 
 export const customersQuery = {
   queryKey: ["customers"],
@@ -22,7 +23,7 @@ export function byName(a, b) {
 export function averageProgress(customer, keys) {
   const values = keys
     .map((key) => {
-      const field = { sam: "progress_sam", ops: "progress_ops", maint: "progress_maintenance", strategy: "progress_strategy" }[key];
+      const field = progressField(key);
       return field ? Number(customer?.[field] || 0) : null;
     })
     .filter((v) => v !== null);

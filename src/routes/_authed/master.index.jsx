@@ -91,7 +91,7 @@ function Overview() {
         )}
       </Section>
 
-      <Section title="Programs across all customers" subtitle="On or off per customer, with average progress.">
+      <Section title="Products across all customers" subtitle="On or off per customer, with average progress.">
         <div className="grid gap-2 sm:grid-cols-2">
           {ALL_PRODUCTS.map((p) => {
             const using = list.filter((c) => (c.products || []).includes(p.key));

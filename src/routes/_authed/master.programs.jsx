@@ -11,7 +11,7 @@ import { ProgressBar, StatusChip } from "@/components/master/bits";
 
 export const Route = createFileRoute("/_authed/master/programs")({
   component: ProgramsPage,
-  head: () => ({ meta: [{ title: "Sam — Programs" }] }),
+  head: () => ({ meta: [{ title: "Sam — Products" }] }),
 });
 
 function ProgramsPage() {
@@ -36,7 +36,7 @@ function ProgramsPage() {
 
   return (
     <div className="space-y-4">
-      <PageHeader title="Programs" intro="Turn a program on or off per customer, and see how each program is tracking across the country." />
+      <PageHeader title="Products" intro="Turn a product on or off per customer, and see how each one is tracking across the country." />
 
       {PRODUCT_GROUPS.map((group) => (
         <Section key={group.id} title={group.name}>
@@ -78,7 +78,7 @@ function ProgramsPage() {
       {program ? (
         <Section
           title={`${program.name} — collated data`}
-          subtitle={`${list.filter((c) => (c.products || []).includes(program.key)).length} customers have this program on.`}
+          subtitle={`${list.filter((c) => (c.products || []).includes(program.key)).length} customers have this product on.`}
           action={
             <button onClick={() => setSelected(null)} className="text-[15px] font-semibold text-gold">
               Close
@@ -108,19 +108,19 @@ function ProgramsPage() {
                       {progress !== null ? (
                         <div className="mt-2"><ProgressBar value={progress} label="Progress" /></div>
                       ) : (
-                        <p className="mt-1 text-[14px] text-muted-foreground">No progress recorded for this program yet.</p>
+                        <p className="mt-1 text-[14px] text-muted-foreground">No progress recorded for this product yet.</p>
                       )}
                     </div>
                   );
                 })}
             </div>
           ) : (
-            <EmptyLine>No customer has this program on yet. Turn it on below.</EmptyLine>
+            <EmptyLine>No customer has this product on yet. Turn it on below.</EmptyLine>
           )}
         </Section>
       ) : null}
 
-      <Section title="Programs on or off per customer" subtitle="Tap a product to switch it for that customer.">
+      <Section title="Products on or off per customer" subtitle="Tap a product to switch it for that customer.">
         {list.length ? (
           <div className="space-y-3">
             {list.map((c) => (

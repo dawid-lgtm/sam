@@ -8,7 +8,7 @@ const tabs = [
   { to: "/master", label: "Overview" },
   { to: "/master/customers", label: "Customers" },
   { to: "/master/users", label: "Users" },
-  { to: "/master/programs", label: "Programs" },
+  { to: "/master/programs", label: "Products" },
   { to: "/master/tools", label: "Tools" },
   { to: "/master/reports", label: "Reports" },
 ];
