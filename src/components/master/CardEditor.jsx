@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { formatMeta } from "@/lib/cardFormats";
 import { toolsQuery } from "@/lib/masterQueries";
+import { DEPLOYMENT_PLANS } from "@/lib/deploymentPlan";
 import { TextField, TextAreaField, SelectField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
 
 const parseOptions = (text) =>
@@ -15,6 +16,8 @@ export function CardEditor({ card, productKey, saving, onSave, onCancel }) {
   const { data: tools = [] } = useQuery(toolsQuery);
   const [toolId, setToolId] = useState(card.tool_id || "");
   const [step, setStep] = useState(card.step || 1);
+  const planSteps = DEPLOYMENT_PLANS[productKey]?.phases || [{ n: 1, name: "Step 1" }];
+  const stepOptions = planSteps.map((s) => ({ value: s.n, label: `Step ${s.n} · ${s.name}` }));
   const toolOptions = tools
     .filter((t) => t.file_uri && (t.assigned_products || []).includes(productKey))
     .map((t) => ({ value: t.id, label: t.title }));
@@ -101,11 +104,7 @@ export function CardEditor({ card, productKey, saving, onSave, onCancel }) {
         hint="Which of the three steps this activity sits in."
         value={step}
         onChange={(e) => setStep(e.target.value)}
-        options={[
-          { value: 1, label: "Step 1" },
-          { value: 2, label: "Step 2" },
-          { value: 3, label: "Step 3" },
-        ]}
+        options={stepOptions}
       />
 
       <SelectField

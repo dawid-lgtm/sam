@@ -87,7 +87,7 @@ export const DEPLOYMENT_PLANS = {
         name: "Cascading to site",
         status: "Project Managers, coached by Ops and GMs",
         description:
-          "Each site cascades its share: Tactics to deliver the Strategies, Plans saying who does what and where, and Actions with a name and a date. The handbook is issued and the site ON the business meeting sits before the head office one.",
+          "Each site cascades its share: Tactics to deliver the Strategies, Plans saying who does what and where, and Actions with a name and a date. The site ON the business meeting sits before the head office one.",
         blocks: [
           {
             h: "Site translation",
@@ -95,13 +95,6 @@ export const DEPLOYMENT_PLANS = {
               "Tactics the site will use to deliver the Strategies",
               "Plans: who, what, where, when",
               "Actions: a name and a date",
-            ],
-          },
-          {
-            h: "Cascade the handbook",
-            items: [
-              "The Managing Strategy handbook issued to the site leadership team",
-              "Superintendents, and mine managers where that layer exists",
             ],
           },
           {
@@ -116,7 +109,7 @@ export const DEPLOYMENT_PLANS = {
         gate: [
           "Every Strategy has a Tactic on site, with an owner and a trigger",
           "Every Plan has a who, what, where and when; every Action a name and a date",
-          "Site leadership teams hold the handbook and the rhythm",
+          "Site leadership teams hold the rhythm",
           "The site ON meeting sits before the head office ON meeting",
         ],
       },
@@ -168,7 +161,6 @@ export const DEPLOYMENT_PLANS = {
           ["Tactics written: what the site will do to deliver each Strategy", "Project Manager, site leadership"],
           ["Plans written: who, what, where, when", "Project Manager"],
           ["Actions written: a name and a date", "Project Manager"],
-          ["Handbook issued to superintendents, and mine managers where they exist", "Project Manager"],
           ["Site ON the business meeting held before the head office one", "Project Manager"],
           ["Ops Manager or GM in attendance to guide and coach, mandatory", "Ops Manager, GM"],
           ["ELT checks every site is adhering to the rhythm", "ELT"],
