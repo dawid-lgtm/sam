@@ -6,10 +6,11 @@ import { base44 } from "@/api/base44Client";
 import { productCardsQuery, productsQuery } from "@/lib/catalog";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
 import { Modal } from "@/components/ui-kit/Modal";
-import { GhostButton } from "@/components/ui-kit/controls";
+import { GhostButton, PrimaryButton } from "@/components/ui-kit/controls";
 import { ProductCard } from "@/components/master/ProductCard";
 import { CardChain } from "@/components/master/CardChain";
 import { CardEditor } from "@/components/master/CardEditor";
+import { CardRunner } from "@/components/master/CardRunner";
 
 export const Route = createFileRoute("/_authed/master/products_/$productKey")({
   component: ProductChain,
@@ -22,6 +23,7 @@ function ProductChain() {
   const { data: cards = [] } = useQuery(productCardsQuery(productKey));
   const [editing, setEditing] = useState(null);
   const [deleting, setDeleting] = useState(null);
+  const [running, setRunning] = useState(false);
   const [saving, setSaving] = useState(false);
 
   const product = products.find((p) => p.key === productKey);
@@ -80,6 +82,11 @@ function ProductChain() {
           <ProductCard product={product} />
         </div>
         <p className="mt-2 text-[15px] text-gold">{cards.length} cards · {cards.length} days</p>
+        {cards.length ? (
+          <PrimaryButton className="mt-3 w-full" onClick={() => setRunning(true)}>
+            Run the chain
+          </PrimaryButton>
+        ) : null}
       </section>
 
       <Section title="Card chain" subtitle="Drag the cards into the order they run, day by day.">
@@ -91,6 +98,10 @@ function ProductChain() {
           onReorder={reorder}
         />
       </Section>
+
+      <Modal open={running} onClose={() => setRunning(false)} title={product.name}>
+        {running ? <CardRunner cards={cards} /> : null}
+      </Modal>
 
       <Modal
         open={!!editing}
