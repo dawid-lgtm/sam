@@ -15,7 +15,7 @@ const baseItems = [
 
 const adminItems = [
   { to: "/master/customers", label: "Customers", icon: Users },
-  { to: "/master/products", label: "Products", icon: Package },
+  { to: "/master/products", label: "Products + training design", icon: Package },
   { to: "/master/tools", label: "Core materials", icon: Library },
   {
     to: "/master/products/$productKey",

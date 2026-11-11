@@ -12,7 +12,7 @@ import { ProductForm } from "@/components/master/ProductForm";
 
 export const Route = createFileRoute("/_authed/master/products")({
   component: ProductsPage,
-  head: () => ({ meta: [{ title: "Sam — Products" }] }),
+  head: () => ({ meta: [{ title: "Sam — Products + training design" }] }),
 });
 
 function ProductsPage() {
@@ -38,7 +38,7 @@ function ProductsPage() {
   return (
     <div className="space-y-4">
       <PageHeader
-        title="Products"
+        title="Products + training design"
         intro="Build each product as a daily chain of cards, then assign the products a customer runs from their customer page."
       />
 
