@@ -14,7 +14,7 @@ const rhythm = {
     {
       who: "Head office (CEO and ELT)",
       cells: [
-        "ON · ON the business, five key questions",
+        "ON · ON the business (full day, same four questions)",
         "IN · Executive hour",
         "IN · Executive hour",
         "IN · Executive hour",
@@ -43,11 +43,13 @@ const terms = [
     label: "ON the business",
     body: (
       <>
-        Running our business, here we ask the core questions. Are we making money, and can we make more (fiscal
-        performance review)? Are our people safe (safety stats, and the safety and risk plans to improve)? Are we
-        running a quality business (the implementation of the four block model, the utility of our meetings, the
-        performance of our frontline staff, our adherence to the mine plan and the face positions, and the trend and
-        performance analysis)? And lastly, are our people happy (culture, churn)?
+        Running our business, where we ask the same core questions every time, always starting with safety. Are our
+        people safe (safety stats, and the safety and risk plans to improve)? Are we making money, and can we make more
+        (fiscal performance review)? Are we running a quality business (the implementation of the four block model, the
+        utility of our meetings, the performance of our frontline staff, our adherence to the mine plan and the face
+        positions, and the trend and performance analysis)? And lastly, are our people happy (culture, churn)? The site
+        meeting answers these in half a day. The head office meeting answers the same questions in a full day, once a
+        month.
       </>
     ),
   },

@@ -116,7 +116,7 @@ export const DEPLOYMENT_PLANS = {
     ],
     rhythm: {
       title: "The ON the business rhythm Managing Strategy locks in",
-      note: "Each site's ON the business meeting sits in the week, or a couple of days, before the head office ON the business meeting, because one informs the other. The three weekly site reviews that precede it are the Enterprise Foundations rhythm.",
+      note: "Each site's ON the business meeting sits in the week, or a couple of days, before the head office ON the business meeting, because one informs the other. The head office meeting runs a full day once a month and answers the same questions as the site meeting, always starting with whether our people are safe. The three weekly site reviews that precede it are the Enterprise Foundations rhythm.",
       rows: [
         {
           who: "At site (PM, coached by the Ops Manager or GM)",
@@ -124,7 +124,7 @@ export const DEPLOYMENT_PLANS = {
         },
         {
           who: "Head office (CEO and ELT)",
-          cells: ["ON · ON the business, five key questions", "IN · Executive hour", "IN · Executive hour", "IN · Executive hour"],
+          cells: ["ON · ON the business (full day, same four questions)", "IN · Executive hour", "IN · Executive hour", "IN · Executive hour"],
         },
       ],
       onIndex: { 0: [3], 1: [0] },
