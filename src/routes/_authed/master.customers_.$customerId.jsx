@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useProducts } from "@/lib/catalog";
 import { appUsersQuery, averageProgress, customersQuery, toolsQuery } from "@/lib/masterQueries";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
+import { BackLink } from "@/components/ui-kit/BackLink";
 import { Modal } from "@/components/ui-kit/Modal";
 import { GhostButton } from "@/components/ui-kit/controls";
 import { CustomerForm } from "@/components/master/CustomerForm";
@@ -73,9 +74,7 @@ function CustomerDetail() {
 
   return (
     <div className="space-y-4">
-      <Link to="/master/customers" className="inline-flex min-h-[44px] items-center gap-2 text-[15px] font-medium">
-        <ArrowLeft className="h-5 w-5" /> All customers
-      </Link>
+      <BackLink to="/master/customers">All customers</BackLink>
 
       <section className="rounded-2xl bg-card p-4">
         <div className="flex items-start justify-between gap-2">

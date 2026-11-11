@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ArrowLeft } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { productCardsQuery, productsQuery } from "@/lib/catalog";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
+import { BackLink } from "@/components/ui-kit/BackLink";
 import { Modal } from "@/components/ui-kit/Modal";
 import { GhostButton, PrimaryButton } from "@/components/ui-kit/controls";
 import { ProductCard } from "@/components/master/ProductCard";
@@ -105,9 +105,7 @@ function ProductChain() {
 
   return (
     <div className="space-y-4">
-      <Link to="/master/products" className="inline-flex min-h-[44px] items-center gap-2 text-[15px] font-medium">
-        <ArrowLeft className="h-5 w-5" /> All products
-      </Link>
+      <BackLink to="/master/products">All products</BackLink>
 
       <section className="rounded-2xl bg-card p-4">
         <h1 className="font-heading text-[26px] font-semibold leading-tight text-gold">{product.name}</h1>
@@ -139,12 +137,16 @@ function ProductChain() {
         ) : null}
       </section>
 
-      <div className="flex gap-2 overflow-x-auto">
+      <div className="sam-glass flex gap-2 overflow-x-auto rounded-xl p-1.5">
         {tabs.map((t) => (
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
-            className={`min-h-[44px] shrink-0 rounded-xl px-4 text-[15px] font-semibold ${activeTab === t.id ? "bg-gold text-gold-foreground" : "bg-card"}`}
+            className={`min-h-[46px] shrink-0 rounded-lg px-4 text-[15px] font-semibold transition ${
+              activeTab === t.id
+                ? "bg-gold text-gold-foreground"
+                : "bg-background/60 text-foreground hover:bg-background/80"
+            }`}
           >
             {t.label}
           </button>
