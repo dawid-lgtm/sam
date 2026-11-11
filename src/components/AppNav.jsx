@@ -29,18 +29,27 @@ const adminItems = [
 export function AppNav({ variant = "bottom" }) {
   const { data: auth } = useQuery(authQuery);
   const isAdmin = auth?.user?.role === "admin";
-  // Desktop keeps the app tabs and the master tabs on one line, Home first.
+  // Desktop keeps the master tabs and the site tabs on one line, Home first.
   const items = isAdmin
     ? variant === "top"
-      ? [home, ...adminItems, ...baseItems.slice(1), { to: "/admin", label: "Admin", icon: Settings }, { to: "/flow", label: "Test flow", icon: Workflow }]
+      ? [
+          home,
+          ...adminItems,
+          { to: "/site", label: "Site", icon: Mountain },
+          { to: "/meetings", label: "Meetings", icon: CalendarDays },
+          { to: "/admin", label: "Admin", icon: Settings },
+          { to: "/flow", label: "Test flow", icon: Workflow },
+        ]
       : [...baseItems, { to: "/master", label: "Master", icon: Users }, { to: "/admin", label: "Admin", icon: Settings }]
-    : baseItems;
+    : variant === "top"
+      ? [home, ...baseItems.slice(3)]
+      : baseItems;
   const path = useRouterState({ select: (s) => s.location.pathname });
   const isActive = (to) => (to === "/" ? path === "/" : path === to || path.startsWith(`${to}/`));
 
   if (variant === "top") {
     return (
-      <nav className="flex flex-wrap gap-2 pb-3">
+      <nav className="flex flex-nowrap items-center gap-2 overflow-x-auto pb-3">
         {items.map(({ to, params, match, label, icon: Icon }) => {
           const active = isActive(match || to);
           return (
@@ -48,7 +57,7 @@ export function AppNav({ variant = "bottom" }) {
               key={label}
               to={to}
               params={params}
-              className={`flex min-h-[48px] items-center gap-2 rounded-xl px-4 text-[15px] font-medium transition ${
+              className={`flex min-h-[44px] shrink-0 items-center gap-2 whitespace-nowrap rounded-xl px-3.5 text-[15px] font-medium transition ${
                 active ? "bg-card text-foreground" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
               }`}
             >
