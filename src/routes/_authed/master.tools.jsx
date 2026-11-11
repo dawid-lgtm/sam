@@ -14,7 +14,7 @@ import { ToolRow } from "@/components/master/ToolRow";
 
 export const Route = createFileRoute("/_authed/master/tools")({
   component: ToolsPage,
-  head: () => ({ meta: [{ title: "Sam — Tools repository" }] }),
+  head: () => ({ meta: [{ title: "Sam — Core materials" }] }),
 });
 
 const field = "w-full rounded-xl border border-input bg-background px-3 py-3 text-[16px] text-foreground placeholder:text-muted-foreground focus:border-gold focus:outline-none";
@@ -59,8 +59,8 @@ function ToolsPage() {
   return (
     <div className="space-y-4">
       <PageHeader
-        title="Tools repository"
-        intro="Store every handbook, agenda, coaching card and workbook once. Assign it to courses and products; an update flows to every place it is used."
+        title="Core materials"
+        intro="The online and print versions of the handbooks, the tools and the audits, stored once and assigned to products. An update flows to every place it is used."
       />
 
       <Section

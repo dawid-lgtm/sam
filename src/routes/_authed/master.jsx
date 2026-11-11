@@ -5,12 +5,10 @@ export const Route = createFileRoute("/_authed/master")({
 });
 
 const tabs = [
-  { to: "/master", label: "Overview" },
+  { to: "/master", label: "Home" },
   { to: "/master/customers", label: "Customers" },
-  { to: "/master/users", label: "Users" },
-  { to: "/master/programs", label: "Products" },
-  { to: "/master/tools", label: "Tools" },
-  { to: "/master/reports", label: "Reports" },
+  { to: "/master/programs", label: "Program design" },
+  { to: "/master/tools", label: "Core materials" },
 ];
 
 function MasterLayout() {
@@ -32,7 +30,7 @@ function MasterLayout() {
 
   return (
     <div>
-      <div className="mb-4 grid grid-cols-3 gap-1.5 md:grid-cols-6 md:gap-2">
+      <div className="mb-4 grid grid-cols-2 gap-1.5 md:grid-cols-4 md:gap-2">
         {tabs.map((t) => (
           <Link
             key={t.to}

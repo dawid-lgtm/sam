@@ -1,55 +1,83 @@
 // Everything Sam sells sits under one heading: Products. Each one is the same Sam
 // system, just a different delivery pathway. Flip a status to "later" to hide it
-// from switching on anywhere (pickers, program matrix, reports).
+// from switching on anywhere (pickers, program design, reports).
 export const PRODUCT_GROUPS = [
   {
     id: "products",
     name: "Products",
     items: [
       {
-        key: "enterprise",
-        name: "Enterprise Fundamentals",
-        description: "The business fundamentals every site leader is held to",
-        status: "available",
-        progress_field: "progress_ops",
-      },
-      {
-        key: "strategy",
-        name: "Managing Strategy",
-        description: "Cascading GOSPA: goals, strategies and tactics, plans and actions",
-        status: "available",
-        progress_field: "progress_strategy",
-      },
-      {
         key: "operations",
         name: "Managing Operations",
-        description: "Running the month: the work, the numbers and the review that keeps them true",
+        description:
+          "One way to run the production shift, the day, the week and the month, so the plan made is the plan run.",
+        for_whom: "Supervisors, Superintendents, Operations Managers, Project Managers, dispatch",
+        inside:
+          "The four blocks; The Superintendent's day; The number and PADAL; The plan and the reviews; Workbooks and cards; The Production Audit.",
         status: "available",
         progress_field: "progress_sam",
       },
       {
         key: "maintenance",
         name: "Managing Maintenance",
-        description: "Keeping the plant and the equipment doing what the plan needs",
+        description:
+          "The same operating system for the maintenance shift, from the workshop floor to the storeroom.",
+        for_whom: "Maintenance supervisors, Superintendents, planners, storepersons, Maintenance Managers",
+        inside:
+          "The four blocks; The Superintendent's day; Planning and scheduling; Review and Improve; Storeroom Operations; The audit and workbooks.",
         status: "available",
         progress_field: "progress_maintenance",
       },
       {
-        key: "people_risk",
-        name: "Managing People and Risk",
-        description: "Safety, behaviours and the leadership that keeps people well",
+        key: "strategy",
+        name: "Managing Strategy",
+        description:
+          "A strategy the whole business can run: the Goal held above, the site writing its own way to it.",
+        for_whom:
+          "Executives, General Managers, Operations Managers, Project Managers, Superintendents, department managers",
+        inside:
+          "GOSTPA; Annual Business Planning; Site Strategies and Tactics; The Strategy Review; The enterprise rhythm; The Strategy Audit.",
         status: "available",
+        progress_field: "progress_strategy",
       },
       {
         key: "finance",
         name: "Managing Finance: The Keys to the Vault",
-        description: "Reading the money and owning the decisions it drives",
+        description:
+          "The keys to the vault: how a contract mining site makes and loses money, and the decisions that protect the margin.",
+        for_whom: "Managers, Superintendents and supervisors",
+        inside:
+          "The value drivers; The number; Claims and contract management; The circuit, not the truck; Variations.",
+        status: "available",
+      },
+      {
+        key: "people_risk",
+        name: "Managing People and Risk",
+        description:
+          "The statutory layer, the five HRO principles in the workflow, human factors, conflict and critical thinking, and the competency framework.",
+        for_whom: "Every leader, from supervisor to manager",
+        inside:
+          "The statutory layer; The five HRO principles; Human factors; Conflict and critical thinking; The competency framework.",
         status: "available",
       },
       {
         key: "training",
-        name: "Managing Training",
-        description: "Building the crew's capability on purpose, not by accident",
+        name: "Frontline Manager Training",
+        description:
+          "Stand-alone training that makes supervisors and Superintendents confident managers of the shift.",
+        for_whom: "Supervisors and Superintendents",
+        inside:
+          "Prime workbooks; The Labs; Apply and Verify; Coaching cards; Behaviours and functions.",
+        status: "available",
+      },
+      {
+        key: "masterclasses",
+        name: "Master Classes and Tools",
+        description:
+          "Three master classes run on site, and the Tools pack every shift and review runs on.",
+        for_whom: "Every leader",
+        inside:
+          "Handling conflict with integrity; Critical thinking; Reading the mine; The Tools pack; PADAL and ROPE; The reports.",
         status: "available",
       },
     ],
