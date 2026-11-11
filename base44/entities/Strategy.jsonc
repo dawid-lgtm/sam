@@ -27,6 +27,9 @@
       "type": "string",
       "format": "date"
     },
+    "deliver_month": {
+      "type": "string"
+    },
     "sites": {
       "type": "array",
       "items": {

@@ -14,6 +14,7 @@ const blank = {
   value_volume: "",
   value_dollars: "",
   deliver_date: "",
+  deliver_month: "",
   sites: [],
   review_date: "",
 };
@@ -40,6 +41,7 @@ export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, 
         value_volume: form.value_volume || "",
         value_dollars: form.value_dollars || "",
         deliver_date: form.deliver_date || "",
+        deliver_month: form.deliver_month || "",
         sites: form.sites || [],
         review_date: form.review_date || "",
       };
@@ -86,6 +88,13 @@ export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, 
           <TextField label="Success metric" value={form.success_metric || ""} onChange={(e) => set({ success_metric: e.target.value })} placeholder="Agreed in Step 2" />
           <TextField label="Value $" value={form.value_dollars} onChange={(e) => set({ value_dollars: e.target.value })} placeholder="e.g. $1.2M a year" />
           <TextField label="Deliver date" type="date" value={form.deliver_date || ""} onChange={(e) => set({ deliver_date: e.target.value })} />
+          <TextField
+            label="Deliver by month"
+            hint="Use when only the month is known — e.g. March 2027."
+            type="month"
+            value={form.deliver_month || ""}
+            onChange={(e) => set({ deliver_month: e.target.value })}
+          />
           <TextField label="Value volume" value={form.value_volume} onChange={(e) => set({ value_volume: e.target.value })} placeholder="e.g. 310 truck hours a quarter" />
           <TextField label="90-day review" type="date" value={form.review_date} onChange={(e) => set({ review_date: e.target.value })} />
         </div>

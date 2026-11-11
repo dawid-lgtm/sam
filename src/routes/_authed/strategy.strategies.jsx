@@ -71,6 +71,9 @@ function Strategies() {
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   <Pill tone="gold">Serves {s.objective_code || "—"}</Pill>
                   <Pill tone="neutral">Owner {s.owner || "unset"}</Pill>
+                  {s.deliver_month ? (
+                    <Pill tone="neutral">By {moment.utc(`${s.deliver_month}-01`).format("MMMM YYYY")}</Pill>
+                  ) : null}
                   {(s.sites || []).map((id) => (
                     <Pill key={id} tone="neutral">
                       {siteName(id)}

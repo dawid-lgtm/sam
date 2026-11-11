@@ -26,6 +26,9 @@
     "review_date": {
       "type": "string"
     },
+    "deliver_month": {
+      "type": "string"
+    },
     "sort": {
       "type": "number",
       "default": 0

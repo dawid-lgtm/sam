@@ -17,11 +17,12 @@ export function ActionSection({ site, actions, plans, canEdit }) {
 
   const save = async () => {
     if (!editor.action?.trim()) return toast.error("Write the action first");
+    if (!editor.due) return toast.error("Add the completion date — every action carries one");
     const payload = {
       action: editor.action.trim(),
       for_plan: editor.for_plan || "",
       owner: editor.owner || "",
-      due: editor.due || "",
+      due: editor.due,
       done: !!editor.done,
     };
     if (editor.id) await base44.entities.SiteAction.update(editor.id, payload);
@@ -132,7 +133,13 @@ export function ActionSection({ site, actions, plans, canEdit }) {
             />
             <div className="grid gap-3 sm:grid-cols-2">
               <TextField label="Owner" value={editor.owner || ""} onChange={(e) => setEditor({ ...editor, owner: e.target.value })} />
-              <TextField label="Due" type="date" value={editor.due || ""} onChange={(e) => setEditor({ ...editor, due: e.target.value })} />
+              <TextField
+                label="Completion date"
+                hint="Required."
+                type="date"
+                value={editor.due || ""}
+                onChange={(e) => setEditor({ ...editor, due: e.target.value })}
+              />
             </div>
             <div className="flex gap-2">
               <GhostButton className="flex-1" onClick={() => setEditor(null)}>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import moment from "moment";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { base44 } from "@/api/base44Client";
@@ -8,7 +9,7 @@ import { Section, EmptyLine } from "@/components/ui-kit/Section";
 import { Modal } from "@/components/ui-kit/Modal";
 import { TextField, TextAreaField, SelectField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
 
-const blank = { approach: "", delivers_strategy: "", owner: "", not_working_trigger: "", review_date: "" };
+const blank = { approach: "", delivers_strategy: "", owner: "", not_working_trigger: "", review_date: "", deliver_month: "" };
 
 export function TacticSection({ site, tactics, strategies, canEdit }) {
   const refresh = useRefreshSam();
@@ -23,6 +24,7 @@ export function TacticSection({ site, tactics, strategies, canEdit }) {
       owner: editor.owner || "",
       not_working_trigger: editor.not_working_trigger || "",
       review_date: editor.review_date || "",
+      deliver_month: editor.deliver_month || "",
     };
     if (editor.id) await base44.entities.Tactic.update(editor.id, payload);
     else
@@ -95,6 +97,7 @@ export function TacticSection({ site, tactics, strategies, canEdit }) {
                 <p className="mt-1.5 text-[15px] leading-snug text-muted-foreground">
                   Delivers {withWords(t.delivers_strategy, strategy?.statement, 6)} · {t.owner || "no owner"}
                   {t.review_date ? ` · review ${t.review_date}` : ""}
+                  {t.deliver_month ? ` · by ${moment.utc(`${t.deliver_month}-01`).format("MMMM YYYY")}` : ""}
                 </p>
                 {t.not_working_trigger ? (
                   <p className="mt-1.5 rounded-lg bg-background/60 px-3 py-2 text-[15px] leading-snug text-foreground">
@@ -123,6 +126,13 @@ export function TacticSection({ site, tactics, strategies, canEdit }) {
             <div className="grid gap-3 sm:grid-cols-2">
               <TextField label="Owner" value={editor.owner || ""} onChange={(e) => setEditor({ ...editor, owner: e.target.value })} />
               <TextField label="90-day review" type="date" value={editor.review_date || ""} onChange={(e) => setEditor({ ...editor, review_date: e.target.value })} />
+              <TextField
+                label="Complete by month"
+                hint="When only the month is known."
+                type="month"
+                value={editor.deliver_month || ""}
+                onChange={(e) => setEditor({ ...editor, deliver_month: e.target.value })}
+              />
             </div>
             <TextAreaField
               label="The trigger that says it is not working"
