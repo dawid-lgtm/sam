@@ -60,6 +60,9 @@
       ],
       "default": "both"
     },
+    "tool_id": {
+      "type": "string"
+    },
     "is_welcome": {
       "type": "boolean",
       "default": false

@@ -129,7 +129,9 @@ function ProductChain() {
         ))}
       </div>
 
-      {activeTab === "plan" ? <DeploymentPlan plan={plan} productKey={productKey} /> : null}
+      {activeTab === "plan" ? (
+        <DeploymentPlan plan={plan} productKey={productKey} onOpenTools={() => setTab("downloads")} />
+      ) : null}
       {activeTab === "rhythm" ? <RhythmExplained /> : null}
       {activeTab === "gospa" ? <GospaSheet /> : null}
       {activeTab === "downloads" ? <ProductDownloads productKey={productKey} /> : null}
@@ -162,7 +164,15 @@ function ProductChain() {
         onClose={() => setEditing(null)}
         title={editing?.id ? `Edit card` : "Add a card"}
       >
-        {editing ? <CardEditor card={editing} saving={saving} onSave={saveCard} onCancel={() => setEditing(null)} /> : null}
+        {editing ? (
+          <CardEditor
+            card={editing}
+            productKey={productKey}
+            saving={saving}
+            onSave={saveCard}
+            onCancel={() => setEditing(null)}
+          />
+        ) : null}
       </Modal>
 
       <Modal open={!!deleting} onClose={() => setDeleting(null)} title="Remove this card?">

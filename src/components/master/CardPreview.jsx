@@ -1,4 +1,5 @@
 import { formatMeta } from "@/lib/cardFormats";
+import { CardToolLink } from "@/components/master/CardToolLink";
 
 const UPLOAD_LABEL = {
   image: "a photo",
@@ -22,6 +23,8 @@ export function CardPreview({ card }) {
       ) : null}
 
       {card.body ? <p className="mt-2 whitespace-pre-wrap text-[15px] leading-snug">{card.body}</p> : null}
+
+      {card.tool_id ? <CardToolLink toolId={card.tool_id} /> : null}
 
       {meta.needsOptions && options.length ? (
         <ul className="mt-2 space-y-1">

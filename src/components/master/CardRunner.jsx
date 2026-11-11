@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { base44 } from "@/api/base44Client";
 import { formatMeta } from "@/lib/cardFormats";
 import { inputClass } from "@/components/ui-kit/controls";
+import { CardToolLink } from "@/components/master/CardToolLink";
 import { useCardProgress } from "@/lib/cardProgress";
 
 function isComplete(card, answer, watched) {
@@ -138,6 +139,8 @@ export function CardRunner({ cards, productKey }) {
         </div>
 
         {card.body ? <p className="mt-2 whitespace-pre-wrap text-[15px] leading-snug">{card.body}</p> : null}
+
+        {card.tool_id ? <CardToolLink toolId={card.tool_id} /> : null}
 
         {card.format === "video" && card.media_url ? (
           <video
