@@ -87,7 +87,7 @@ function CustomersPage() {
                 <div className="mt-2"><ProductChips keys={c.products || []} max={6} /></div>
                 <div className="mt-2 flex items-center justify-between gap-2">
                   <span className="text-[14px] text-muted-foreground">
-                    {avg === null ? "No program progress yet" : `Average progress ${avg}%`}
+                    {c.delivered_by || "No team assigned"} · {avg === null ? "No program progress yet" : `Average progress ${avg}%`}
                   </span>
                   <span className="flex gap-1.5">
                     <button aria-label={`Edit ${c.name}`} onClick={() => setEditing(c)} className="grid h-11 w-11 place-items-center rounded-xl bg-secondary transition hover:ring-2 hover:ring-gold">
