@@ -3,10 +3,10 @@ import { GospaDiagram } from "@/components/strategy/GospaDiagram";
 
 const LEVELS = [
   { letter: "G", name: "Goal", ask: "Where we are going, in one line." },
-  { letter: "O", name: "Objectives", ask: "The five things that have to move." },
-  { letter: "S", name: "Strategies", ask: "How each objective moves." },
-  { letter: "P", name: "Plans", ask: "Who does what, and where." },
-  { letter: "A", name: "Actions", ask: "What lands, by when." },
+  { letter: "O", name: "Objectives", ask: "The five things that have to be true for the Goal to be achieved." },
+  { letter: "S", name: "Strategies", ask: "The strategies that will deliver the Objectives." },
+  { letter: "P", name: "Plans", ask: "Who does what, and where, to deliver the Strategies." },
+  { letter: "A", name: "Actions", ask: "Who does what, with names and dates." },
 ];
 
 export function GospaSheet() {

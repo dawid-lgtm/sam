@@ -23,7 +23,7 @@ export const GOSPA_LAYERS = [
     letter: "O",
     name: "Objectives",
     heading: "An effective Objective",
-    what: "What must become true in the business for the Goal to happen. Five at most, because more than five cannot be owned.",
+    what: "The five things that have to be true for the Goal to be achieved. Five at most, because more than five cannot be owned.",
     criteria: [
       "An outcome, not a task: the business is different, not that an activity ran.",
       "Measurable at the end: a success metric with a baseline and a target, so agreement is not an opinion.",
@@ -41,7 +41,7 @@ export const GOSPA_LAYERS = [
     letter: "S",
     name: "Strategies",
     heading: "An effective Strategy",
-    what: "The chosen approach to one Objective: the few things the business will do about it, and what it will stop doing.",
+    what: "The strategies that will deliver the Objectives: the chosen approach, the few things the business will do about it, and what it will stop doing.",
     criteria: [
       "A choice. If it does not say what you are not doing, it is a wish list.",
       "Designed as a group in the workshop, so no site invents a competing version of it.",
@@ -59,7 +59,7 @@ export const GOSPA_LAYERS = [
     letter: "P",
     name: "Plans",
     heading: "An effective Plan",
-    what: "The site's answer to its share of a Strategy: who does what, where and when, on this site.",
+    what: "Who does what, and where, to deliver the Strategies: the site's answer to its share of a Strategy.",
     criteria: [
       "Smaller than a Strategy and belonging to one site. If two sites must agree on it, it is a Strategy.",
       "Names a person and a date, not a team and 'ongoing'.",
@@ -76,7 +76,7 @@ export const GOSPA_LAYERS = [
     letter: "A",
     name: "Actions",
     heading: "An effective Action",
-    what: "The next concrete step under a Plan. One name, one date, one verb.",
+    what: "Who does what, with names and dates: the next concrete step under a Plan. One name, one date, one verb.",
     criteria: [
       "One person. Two names means nobody.",
       "One date, in the register, visible at the site meeting and again at the regional one.",
