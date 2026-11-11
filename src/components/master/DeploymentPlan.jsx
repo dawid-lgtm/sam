@@ -1,41 +1,5 @@
-import { Flag } from "lucide-react";
 import { Section } from "@/components/ui-kit/Section";
-
-function Phase({ phase }) {
-  return (
-    <div className="rounded-xl bg-background/40 p-3">
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="grid h-8 w-8 place-items-center rounded-full bg-gold font-heading text-[16px] font-bold text-gold-foreground">
-          {phase.n}
-        </span>
-        <h3 className="font-heading text-[18px] font-semibold">{phase.name}</h3>
-        <span className="rounded-full bg-secondary px-2.5 py-0.5 text-[14px] font-medium">{phase.status}</span>
-      </div>
-      <div className="mt-3 space-y-3">
-        {phase.blocks.map((b) => (
-          <div key={b.h}>
-            <p className="text-[15px] font-semibold text-gold">{b.h}</p>
-            <ul className="mt-1 list-disc space-y-0.5 pl-5 text-[15px]">
-              {b.items.map((i) => (
-                <li key={i}>{i}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <div className="mt-3 rounded-lg bg-card p-3">
-        <p className="flex items-center gap-1.5 text-[15px] font-semibold">
-          <Flag className="h-4 w-4 text-gold" /> Gate {phase.n}
-        </p>
-        <ol className="mt-1 list-decimal space-y-0.5 pl-5 text-[15px]">
-          {phase.gate.map((g) => (
-            <li key={g}>{g}</li>
-          ))}
-        </ol>
-      </div>
-    </div>
-  );
-}
+import { DeployFlow } from "@/components/master/DeployFlow";
 
 function Rhythm({ rhythm }) {
   return (
@@ -91,12 +55,9 @@ function Stream({ stream }) {
 export function DeploymentPlan({ plan }) {
   return (
     <div className="space-y-4">
-      <Section title="The deployment plan" subtitle={plan.intro}>
-        <div className="space-y-3">
-          {plan.phases.map((p) => (
-            <Phase key={p.n} phase={p} />
-          ))}
-        </div>
+      <Section title="The deployment plan">
+        <p className="mb-2 text-[13px] leading-snug text-muted-foreground">{plan.intro}</p>
+        <DeployFlow phases={plan.phases} />
       </Section>
       <Rhythm rhythm={plan.rhythm} />
       <div className="grid gap-4 lg:grid-cols-2">
