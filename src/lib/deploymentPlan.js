@@ -64,7 +64,7 @@ export const DEPLOYMENT_PLANS = {
         ],
         gate: [
           "Every site on the same rhythm, language and cards",
-          "The enterprise model holds without the facilitators in the room",
+          "The enterprise model holds without the master admin in the room",
           "First six-monthly Strategy Review held; resources moved on evidence",
         ],
       },
@@ -74,7 +74,7 @@ export const DEPLOYMENT_PLANS = {
         status: "Later",
         blocks: [
           { h: "The destination behaviour", items: ["Verification data drives monthly redesign", "Standards mature from use"] },
-          { h: "Capability owned", items: ["Your facilitators certified; the capability owned in-house"] },
+          { h: "Capability owned", items: ["Your own project leads certified; the capability owned in-house"] },
           { h: "Fiscal", items: ["Predictable margins across the portfolio"] },
         ],
         gate: [
@@ -98,11 +98,11 @@ export const DEPLOYMENT_PLANS = {
         steps: [
           ["Printing approval: Managing Operations Part A and the workbooks", "Operations Manager"],
           ["Validation Lab dates for supervisors and superintendents", "Operations Manager"],
-          ["Workbooks issued, with the welcome letter and online access", "Site PMs, facilitators"],
-          ["Weekly Site Reviews (IN) on the new standard", "Site PMs"],
-          ["Site GOSTPA locked: each site Strategy with a number, a date and a value", "Site PMs"],
-          ["First Monthly Site Review (ON) at each site, half a day", "Site PMs, lead facilitator"],
-          ["Validation Lab: the five stepping stones, the four blocks and the decision rights", "Facilitators, site PMs"],
+          ["Workbooks issued, with the welcome letter and online access", "Customer admin, project lead"],
+          ["Weekly Site Reviews (IN) on the new standard", "Project lead"],
+          ["Site GOSTPA locked: each site Strategy with a number, a date and a value", "Project lead"],
+          ["First Monthly Site Review (ON) at each site, half a day", "Customer admin, project lead"],
+          ["Validation Lab: the five stepping stones, the four blocks and the decision rights", "Project lead"],
           ["Apply and Verify: the four blocks every shift; the Daily Site Review", "Superintendents"],
         ],
       },
@@ -114,7 +114,7 @@ export const DEPLOYMENT_PLANS = {
           ["First Monthly Regional Business Review (ON), half a day", "COO"],
           ["Objective owners report health and value, monthly", "Executive owners"],
           ["Each executive leader attends one Monthly Site Review at each pilot site", "ELT"],
-          ["Raptor Tech: the eight starter numbers, then the automated pack", "Raptor Tech, facilitators"],
+          ["Raptor Tech: the eight starter numbers, then the automated pack", "Master admin"],
         ],
       },
     ],

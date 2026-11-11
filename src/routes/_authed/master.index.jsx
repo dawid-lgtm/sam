@@ -5,6 +5,8 @@ import { appUsersQuery, customersQuery } from "@/lib/masterQueries";
 import { PageHeader } from "@/components/ui-kit/PageHeader";
 import { Section } from "@/components/ui-kit/Section";
 import { KeyDates } from "@/components/master/KeyDates";
+import { SafetyTasksCard } from "@/components/master/SafetyTasksCard";
+import { CustomerProgressCard } from "@/components/master/CustomerProgressCard";
 
 export const Route = createFileRoute("/_authed/master/")({
   component: MasterHome,
@@ -49,23 +51,16 @@ function MasterHome() {
         </Link>
       </div>
 
-      <Section title="Key dates" subtitle="Customer start dates, month by month.">
-        <KeyDates dates={keyDates} />
-      </Section>
-
-      <Section title="Go to">
-        <div className="grid gap-2 sm:grid-cols-3">
-          <Link to="/master/customers" className="rounded-xl bg-background/40 p-3 text-[15px] font-semibold transition hover:ring-2 hover:ring-gold">
-            Customers
-          </Link>
-          <Link to="/master/products" className="rounded-xl bg-background/40 p-3 text-[15px] font-semibold transition hover:ring-2 hover:ring-gold">
-            Products
-          </Link>
-          <Link to="/master/tools" className="rounded-xl bg-background/40 p-3 text-[15px] font-semibold transition hover:ring-2 hover:ring-gold">
-            Core materials
-          </Link>
+      <div className="grid gap-3 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <Section title="Key dates" subtitle="Customer start dates, month by month.">
+            <KeyDates dates={keyDates} />
+          </Section>
         </div>
-      </Section>
+        <SafetyTasksCard />
+      </div>
+
+      <CustomerProgressCard />
     </div>
   );
 }
