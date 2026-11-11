@@ -14,7 +14,7 @@ export const DEPLOYMENT_PLANS = {
             h: "Review the handbook",
             items: [
               "The Managing Strategy handbook, issued at enrolment, walked through",
-              "The Time Usage Model confirmed",
+              "The Time Usage Model and core performance metric confirmed",
             ],
           },
           {
@@ -35,9 +35,15 @@ export const DEPLOYMENT_PLANS = {
         gate: [
           "Goal confirmed or designed",
           "No more than five Objectives, each with one executive owner",
-          "Time Usage Model confirmed",
+          "Time Usage Model and core performance metric confirmed",
           "Leadership workshop dated",
         ],
+        note: {
+          before:
+            "Please note: the data reporting framework and site fleet management system should be confirmed. If the site has not, we recommend ",
+          link: "Raptortech",
+          after: ".",
+        },
       },
       {
         n: 2,

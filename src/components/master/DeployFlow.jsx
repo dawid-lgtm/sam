@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronRight, Flag } from "lucide-react";
+import { RAPTORTECH_URL } from "@/components/RaptortechCredit";
 
 /** A simple three-step flow: tap a step to highlight it and read what happens in it below. */
 export function DeployFlow({ phases }) {
@@ -63,6 +64,21 @@ export function DeployFlow({ phases }) {
               ))}
             </ul>
           </div>
+
+          {phase.note ? (
+            <p className="mt-2 rounded-xl border border-gold/40 bg-card/60 p-3 text-[15px] leading-snug text-foreground">
+              {phase.note.before}
+              <a
+                href={RAPTORTECH_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-gold underline decoration-gold underline-offset-2"
+              >
+                {phase.note.link}
+              </a>
+              {phase.note.after}
+            </p>
+          ) : null}
         </div>
       ) : null}
     </div>
