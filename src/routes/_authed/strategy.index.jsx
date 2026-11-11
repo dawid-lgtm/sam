@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Compass, Route as RouteIcon, PlayCircle, ChevronRight } from "lucide-react";
+import { Compass, Route as RouteIcon, PlayCircle, ChevronRight, Clock } from "lucide-react";
 import { PageHeader } from "@/components/ui-kit/PageHeader";
 
 export const Route = createFileRoute("/_authed/strategy/")({
@@ -15,10 +15,16 @@ const entryPoints = [
     note: "The three steps, who attends each, and what has to be true before the next one starts.",
   },
   {
+    to: "/strategy/rhythm",
+    icon: Clock,
+    title: "IN, IN, IN, ON rhythm explained",
+    note: "Three meetings running the work, then one improving it — the meeting rhythm this program locks in.",
+  },
+  {
     to: "/strategy/gospa",
     icon: Compass,
-    title: "What the GOSPA model is",
-    note: "One goal, up to five objectives, and a small number of strategies carrying each. This is where they are built.",
+    title: "GOSPA explained",
+    note: "The one-page sheet: one goal, up to five objectives, strategies carrying each, then every site's tactics, plans and actions.",
   },
   {
     to: "/strategy/start",

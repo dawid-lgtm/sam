@@ -1,0 +1,113 @@
+import { Section } from "@/components/ui-kit/Section";
+
+const rhythm = {
+  rows: [
+    {
+      who: "At site (PM, coached by the Ops Manager or GM)",
+      cells: [
+        "IN · Weekly site review",
+        "IN · Weekly site review",
+        "IN · Weekly site review",
+        "ON · ON the business (half a day)",
+      ],
+    },
+    {
+      who: "Head office (CEO and ELT)",
+      cells: [
+        "ON · ON the business, five key questions",
+        "IN · Executive hour",
+        "IN · Executive hour",
+        "IN · Executive hour",
+      ],
+    },
+  ],
+  onIndex: { 0: [3], 1: [0] },
+};
+
+const terms = [
+  {
+    label: "IN the business",
+    body: "Running the work. The three weekly site reviews and the executive hour. Short, standing, a handful of numbers and what will be different tomorrow.",
+  },
+  {
+    label: "ON the business",
+    body: "Improving the work. The monthly ON the business meeting at site and at head office, and the six-monthly strategy and performance review off site.",
+  },
+];
+
+export function RhythmExplained() {
+  return (
+    <div className="space-y-4">
+      <Section
+        title="IN, IN, IN, ON"
+        subtitle="Three weeks in the business, then one on it. The same four week shape at site and at head office."
+      >
+        <div className="grid gap-2 sm:grid-cols-2">
+          {terms.map((t) => (
+            <div key={t.label} className="rounded-xl bg-background/40 p-3">
+              <p className="text-[16px] font-semibold text-gold">{t.label}</p>
+              <p className="mt-1 text-[15px] leading-snug text-foreground">{t.body}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        title="The four weeks, as they sit"
+        subtitle="Each site's ON the business meeting sits in the week, or a couple of days, before the head office one, because one informs the other."
+      >
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[640px] border-separate border-spacing-1 text-[15px]">
+            <thead>
+              <tr>
+                <th />
+                {[1, 2, 3, 4].map((w) => (
+                  <th key={w} className="px-2 py-1 text-left font-semibold">
+                    Week {w}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rhythm.rows.map((r, ri) => (
+                <tr key={r.who}>
+                  <th className="px-2 py-1 text-left font-semibold">{r.who}</th>
+                  {r.cells.map((c, ci) => (
+                    <td
+                      key={ci}
+                      className={`rounded-lg px-2 py-2 ${
+                        (rhythm.onIndex[ri] || []).includes(ci)
+                          ? "bg-gold font-semibold text-gold-foreground"
+                          : "bg-background/40"
+                      }`}
+                    >
+                      {c}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="mt-3 space-y-1.5">
+          {[
+            "The site ON the business meeting is held before the head office ON the business meeting, never after.",
+            "The head office monthly ON the business meeting is dated for twelve months at the leadership workshop.",
+            "The six-monthly strategy and performance review is held off site, and is dated at the same time.",
+            "ELT checks every site is holding the rhythm, not just that it was agreed.",
+          ].map((line) => (
+            <p key={line} className="rounded-lg bg-background/40 p-2.5 text-[15px] leading-snug text-foreground">
+              {line}
+            </p>
+          ))}
+        </div>
+
+        <p className="mt-3 text-[15px] leading-snug text-muted-foreground">
+          The three weekly site reviews that precede the site ON meeting are the Enterprise Foundations rhythm, not this
+          program.
+        </p>
+      </Section>
+    </div>
+  );
+}

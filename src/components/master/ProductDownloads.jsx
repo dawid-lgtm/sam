@@ -44,7 +44,7 @@ export function ProductDownloads({ productKey }) {
     .sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
   return (
-    <Section title="Downloads" subtitle="The handbook and tools that go with this program.">
+    <Section title="Tools and downloads" subtitle="The handbook and tools that go with this program.">
       {isLoading ? (
         <div className="h-24 animate-pulse rounded-xl bg-background/40" />
       ) : list.length ? (

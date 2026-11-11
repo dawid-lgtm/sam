@@ -14,6 +14,8 @@ import { CardRunner } from "@/components/master/CardRunner";
 import { useCardProgress } from "@/lib/cardProgress";
 import { DEPLOYMENT_PLANS } from "@/lib/deploymentPlan";
 import { DeploymentPlan } from "@/components/master/DeploymentPlan";
+import { RhythmExplained } from "@/components/strategy/RhythmExplained";
+import { GospaSheet } from "@/components/strategy/GospaSheet";
 import { ProductDownloads } from "@/components/master/ProductDownloads";
 import { syncWelcomeCard } from "@/lib/welcomeCard";
 
@@ -35,8 +37,10 @@ function ProductChain() {
   const plan = DEPLOYMENT_PLANS[productKey];
   const tabs = [
     ...(plan ? [{ id: "plan", label: "Deployment plan" }] : []),
-    { id: "chain", label: "Program cards" },
-    { id: "downloads", label: "Downloads" },
+    ...(plan ? [{ id: "rhythm", label: "IN, IN, IN, ON rhythm explained" }] : []),
+    ...(plan ? [{ id: "gospa", label: "GOSPA explained" }] : []),
+    { id: "chain", label: "Launch the program" },
+    { id: "downloads", label: "Tools and downloads" },
   ];
   const [tab, setTab] = useState(null);
   const activeTab = tab || tabs[0].id;
@@ -148,6 +152,8 @@ function ProductChain() {
       </div>
 
       {activeTab === "plan" ? <DeploymentPlan plan={plan} /> : null}
+      {activeTab === "rhythm" ? <RhythmExplained /> : null}
+      {activeTab === "gospa" ? <GospaSheet /> : null}
       {activeTab === "downloads" ? <ProductDownloads productKey={productKey} /> : null}
       {activeTab === "chain" ? (
         <Section title="Card chain" subtitle="Drag the cards into the order they run, day by day.">

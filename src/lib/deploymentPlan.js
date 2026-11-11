@@ -53,8 +53,8 @@ export const DEPLOYMENT_PLANS = {
             h: "Strategies, roles, handbooks",
             items: [
               "Strategies designed as a group to deliver the Objectives",
-              "Handbooks discussed by the new levels of the business",
-              "Roles and accountabilities moving forward examined",
+              "Handbooks reviewed by the new levels of the business",
+              "Roles and accountability confirmed",
             ],
           },
           {
@@ -67,7 +67,7 @@ export const DEPLOYMENT_PLANS = {
         ],
         gate: [
           "Every Objective has Strategies, each with an owner and a value",
-          "Roles and accountabilities written for the new levels",
+          "Roles and accountability confirmed for the new levels",
           "Monthly ON the business meetings dated for 12 months",
           "Six-monthly strategy and performance review dated",
         ],
@@ -143,8 +143,8 @@ export const DEPLOYMENT_PLANS = {
           ["Goal presented to the wider leadership group", "CEO"],
           ["Objectives presented and reviewed", "ELT owners"],
           ["Strategies designed as a group, one owner and a value each", "ELT, Ops Managers, GMs, PMs"],
-          ["Handbooks discussed by the new levels of the business", "New levels of leadership"],
-          ["Roles and accountabilities moving forward examined", "ELT, GMs"],
+          ["Handbooks reviewed by the new levels of the business", "New levels of leadership"],
+          ["Roles and accountability confirmed", "ELT, GMs"],
           ["Head office monthly ON the business meetings locked, 12 months", "CEO, COO"],
           ["Six-monthly strategy and performance review offsite dated", "COO"],
         ],

@@ -7,6 +7,7 @@ import { GoalEditor } from "@/components/strategy/GoalEditor";
 import { ObjectiveCard } from "@/components/strategy/ObjectiveCard";
 import { ObjectiveEditor } from "@/components/strategy/ObjectiveEditor";
 import { GospaExplainer } from "@/components/strategy/GospaExplainer";
+import { GospaSheet } from "@/components/strategy/GospaSheet";
 import { NextAdditions } from "@/components/strategy/NextAdditions";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
 
@@ -28,6 +29,8 @@ function GoalAndObjectives() {
 
   return (
     <div className="space-y-4">
+      <GospaSheet />
+
       <GospaExplainer
         company={data.company}
         objectives={data.objectives}
