@@ -1,96 +1,69 @@
-import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Plus, ChevronRight, Lock } from "lucide-react";
-import { useSamData } from "@/lib/useSamData";
-import { canEditStrategy } from "@/lib/access";
-import { GoalEditor } from "@/components/strategy/GoalEditor";
-import { ObjectiveCard } from "@/components/strategy/ObjectiveCard";
-import { ObjectiveEditor } from "@/components/strategy/ObjectiveEditor";
-import { GospaExplainer } from "@/components/strategy/GospaExplainer";
-import { Section, EmptyLine } from "@/components/ui-kit/Section";
+import { Compass, Route as RouteIcon, PlayCircle, ChevronRight } from "lucide-react";
+import { PageHeader } from "@/components/ui-kit/PageHeader";
 
 export const Route = createFileRoute("/_authed/strategy/")({
-  component: GoalAndObjectives,
+  component: ManagingStrategy,
+  head: () => ({ meta: [{ title: "Sam — Managing strategy" }] }),
 });
 
-function GoalAndObjectives() {
-  const { user } = Route.useRouteContext();
-  const { data, isLoading } = useSamData();
-  const [editor, setEditor] = useState({ open: false, objective: null });
-  const canEdit = canEditStrategy(user);
+const entryPoints = [
+  {
+    to: "/strategy/deploy",
+    icon: RouteIcon,
+    title: "How the program is deployed",
+    note: "The three steps, who attends each, and what has to be true before the next one starts.",
+  },
+  {
+    to: "/strategy/gospa",
+    icon: Compass,
+    title: "What the GOSPA model is",
+    note: "One goal, up to five objectives, and a small number of strategies carrying each. This is where they are built.",
+  },
+  {
+    to: "/strategy/start",
+    icon: PlayCircle,
+    title: "Get started",
+    note: "The program cards, in the step they belong to. Each step unlocks when the one before it is complete.",
+  },
+];
 
-  if (isLoading || !data) return <div className="h-56 animate-pulse rounded-2xl bg-card" />;
-
-  const atLimit = data.objectives.length >= 5;
-  const nextCode = `O${data.objectives.length + 1}`;
-
+function ManagingStrategy() {
   return (
-    <div className="space-y-4">
-      <GospaExplainer
-        company={data.company}
-        objectives={data.objectives}
-        strategies={data.strategies}
-        sites={data.sites}
-        canEdit={canEdit}
+    <div>
+      <PageHeader
+        title="Managing strategy"
+        intro="Goal, objectives, strategies — then every site's tactics, plans and actions. Start with how the program runs, then build it."
       />
 
-      <GoalEditor company={data.company} canEdit={canEdit} />
-
-      <Link
-        to="/strategy/changelog"
-        className="flex min-h-[48px] items-center justify-between gap-3 rounded-2xl bg-card px-4 py-3"
-      >
-        <span className="flex items-center gap-2 text-[16px] font-semibold text-foreground">
-          <Lock className="h-5 w-5 text-gold" /> The change log
-        </span>
-        <ChevronRight className="h-5 w-5 text-muted-foreground" />
-      </Link>
-
-      <Section
-        title="Objectives"
-        subtitle={`${data.objectives.length} of 5 in use. Five is the ceiling.`}
-        action={
-          canEdit ? (
-            <button
-              onClick={() => !atLimit && setEditor({ open: true, objective: null })}
-              disabled={atLimit}
-              className="inline-flex min-h-[48px] items-center gap-1.5 rounded-xl bg-secondary px-3.5 text-[15px] font-semibold text-foreground transition disabled:opacity-40"
+      <div className="space-y-3">
+        {entryPoints.map((p) => {
+          const Icon = p.icon;
+          return (
+            <Link
+              key={p.to}
+              to={p.to}
+              className="sam-glass flex min-h-[92px] items-center gap-3.5 p-4 transition hover:ring-2 hover:ring-gold"
             >
-              <Plus className="h-5 w-5" /> Add
-            </button>
-          ) : null
-        }
-      >
-        {atLimit && canEdit ? (
-          <p className="mb-3 rounded-xl bg-background/50 px-3 py-2 text-[15px] text-foreground">
-            Five objectives already. Retire or merge one before adding a sixth.
-          </p>
-        ) : null}
-        <div className="space-y-3">
-          {data.objectives.length ? (
-            data.objectives.map((o) => (
-              <ObjectiveCard
-                key={o.id}
-                objective={o}
-                canEdit={canEdit}
-                onEdit={(objective) => setEditor({ open: true, objective })}
-              />
-            ))
-          ) : (
-            <EmptyLine>No objectives yet.</EmptyLine>
-          )}
-        </div>
-      </Section>
+              <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gold text-gold-foreground">
+                <Icon className="h-6 w-6" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <span className="block font-heading text-[19px] font-semibold leading-snug text-foreground">
+                  {p.title}
+                </span>
+                <span className="mt-1 block text-[15px] leading-snug text-muted-foreground">{p.note}</span>
+              </span>
+              <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground" />
+            </Link>
+          );
+        })}
+      </div>
 
-      {canEdit ? (
-        <ObjectiveEditor
-          key={editor.objective?.id || `new-${nextCode}`}
-          open={editor.open}
-          objective={editor.objective}
-          nextCode={editor.objective?.code || nextCode}
-          onClose={() => setEditor({ open: false, objective: null })}
-        />
-      ) : null}
+      <p className="mt-4 rounded-xl bg-background/40 px-3.5 py-3 text-[15px] leading-snug text-foreground">
+        One company goal, up to five objectives, a small number of strategies for each. A strategy with no tactics,
+        plans or actions behind it does not get delivered — the Strategies screen says so on the card.
+      </p>
     </div>
   );
 }

@@ -6,13 +6,13 @@ export function ObjectiveList({ objectives }) {
     <section className="mt-6">
       <div className="mb-3 flex items-end justify-between gap-3">
         <h2 className="font-heading text-[21px] font-semibold text-foreground">The objectives</h2>
-        <Link to="/strategy" className="text-[15px] font-medium text-foreground underline-offset-4 hover:underline">
+        <Link to="/strategy/gospa" className="text-[15px] font-medium text-foreground underline-offset-4 hover:underline">
           See strategy
         </Link>
       </div>
       <div className="space-y-3">
         {objectives.map((o) => (
-          <Link key={o.code} to="/strategy" className="block rounded-2xl bg-card p-4">
+          <Link key={o.code} to="/strategy/gospa" className="block rounded-2xl bg-card p-4">
             <div className="flex items-start gap-3">
               <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gold text-[15px] font-semibold text-gold-foreground">
                 {o.code}

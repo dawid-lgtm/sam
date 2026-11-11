@@ -204,7 +204,7 @@ function Home() {
           <ul className="space-y-2">{strategies.map((s) => <li key={s.id} className="rounded-xl bg-card p-3 text-[15px]"><b>{s.code}</b> {s.statement}</li>)}</ul>
           <p className="mb-1 mt-3 text-[13px] text-muted-foreground">Site tactics</p>
           <ul className="space-y-2">{tactics.map((t) => <li key={t.id} className="rounded-xl bg-card p-3 text-[15px]"><b>{t.code}</b> {t.approach}</li>)}</ul>
-          <Link to="/strategy" className="mt-3 block rounded-xl bg-gold p-3 text-center font-semibold text-gold-foreground">Open Strategy</Link>
+          <Link to="/strategy/gospa" className="mt-3 block rounded-xl bg-gold p-3 text-center font-semibold text-gold-foreground">Open Strategy</Link>
         </Sheet>
       )}
       {open === "blocks" && (

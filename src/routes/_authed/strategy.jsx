@@ -6,7 +6,7 @@ export const Route = createFileRoute("/_authed/strategy")({
 });
 
 const tabs = [
-  { to: "/strategy", label: "Goal and objectives" },
+  { to: "/strategy/gospa", label: "Goal and objectives" },
   { to: "/strategy/strategies", label: "Strategies" },
   { to: "/strategy/tracker", label: "Tracker" },
   { to: "/strategy/actions", label: "Action register" },
@@ -14,15 +14,15 @@ const tabs = [
 
 function StrategyLayout() {
   const path = useRouterState({ select: (s) => s.location.pathname });
-  const onTab = tabs.some((t) => t.to === path);
+  const inGospa = tabs.some((t) => t.to === path);
 
-  if (!onTab) return <Outlet />;
+  if (!inGospa) return <Outlet />;
 
   return (
     <div>
       <PageHeader
-        title="The strategy"
-        intro="One goal, at most five objectives, and the strategies that carry them."
+        title="The GOSPA model"
+        intro="One goal, no more than five objectives, and a small number of strategies carrying each one."
       />
       <div className="mb-5 grid grid-cols-2 gap-2 sm:grid-cols-4">
         {tabs.map((t) => {

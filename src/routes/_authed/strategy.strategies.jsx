@@ -23,11 +23,27 @@ function Strategies() {
   const nextCode = `S${data.strategies.length + 1}`;
   const siteName = (id) => data.sites.find((s) => s.id === id)?.name || "—";
 
+  const tacticsFor = (s) => data.tactics.filter((t) => t.delivers_strategy === s.code);
+  const plansFor = (s) => {
+    const codes = tacticsFor(s).map((t) => t.code);
+    return data.plans.filter((p) => codes.includes(p.delivers_tactic));
+  };
+  const actionsFor = (s) => {
+    const codes = plansFor(s).map((p) => p.code);
+    return data.actions.filter((a) => codes.includes(a.for_plan));
+  };
+  const deliveryGap = (s) => {
+    if (!tacticsFor(s).length) return "No tactic on any site. Nothing carries this strategy, so it will not be delivered.";
+    if (!plansFor(s).length) return "The tactics have no plans behind them. This strategy will not be delivered.";
+    if (!actionsFor(s).length) return "No action with a name and a date yet — the plans have nothing moving.";
+    return null;
+  };
+
   return (
     <div>
       <Section
         title="Strategies"
-        subtitle={`${data.strategies.length} of 8 in use. Each one serves an objective.`}
+        subtitle="A small number of strategies, each serving one objective. A strategy with no tactics, plans or actions behind it will not be delivered."
         action={
           canEdit ? (
             <button
@@ -104,6 +120,16 @@ function Strategies() {
                 <p className="mt-2 text-[15px] text-muted-foreground">
                   90-day review: {s.review_date ? moment.utc(s.review_date).format("D MMM YYYY") : "not set"}
                 </p>
+
+                {deliveryGap(s) ? (
+                  <p className="mt-2 rounded-lg bg-gold/20 px-3 py-2 text-[15px] leading-snug text-foreground">
+                    {deliveryGap(s)}
+                  </p>
+                ) : (
+                  <p className="mt-2 text-[15px] text-muted-foreground">
+                    Delivering: {tacticsFor(s).length} tactic(s), {plansFor(s).length} plan(s), {actionsFor(s).length} action(s).
+                  </p>
+                )}
               </div>
             ))
           ) : (

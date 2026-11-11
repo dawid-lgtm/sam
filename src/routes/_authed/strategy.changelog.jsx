@@ -16,7 +16,7 @@ function ChangeLog() {
   return (
     <div>
       <Link
-        to="/strategy"
+        to="/strategy/gospa"
         className="mb-3 inline-flex min-h-[44px] items-center gap-1.5 text-[15px] font-medium text-muted-foreground"
       >
         <ArrowLeft className="h-5 w-5" /> Goal and objectives
