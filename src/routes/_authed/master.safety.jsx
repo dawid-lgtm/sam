@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { base44 } from "@/api/base44Client";
 import { customersQuery, safetyTasksQuery, byName } from "@/lib/masterQueries";
 import { PageHeader } from "@/components/ui-kit/PageHeader";
+import { FourBlockLog } from "@/components/master/FourBlockLog";
 import { Section, EmptyLine, Pill } from "@/components/ui-kit/Section";
 import { Modal } from "@/components/ui-kit/Modal";
 import { PrimaryButton, GhostButton, TextField, SelectField, TextAreaField } from "@/components/ui-kit/controls";
@@ -131,6 +132,8 @@ function SafetyTasksPage() {
           <EmptyLine>No open safety tasks. Add the first one.</EmptyLine>
         </Section>
       )}
+
+      <FourBlockLog customers={customers} />
 
       <Modal open={!!form} onClose={() => setForm(null)} title={form?.id ? "Edit safety task" : "New safety task"}>
         {form ? (

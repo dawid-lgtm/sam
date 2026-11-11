@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/ui-kit/PageHeader";
 import { Section } from "@/components/ui-kit/Section";
 import { KeyDates } from "@/components/master/KeyDates";
 import { SafetyTasksCard } from "@/components/master/SafetyTasksCard";
+import { FourBlockCard } from "@/components/master/FourBlockCard";
 import { CustomerProgressCard } from "@/components/master/CustomerProgressCard";
 
 export const Route = createFileRoute("/_authed/master/")({
@@ -57,7 +58,10 @@ function MasterHome() {
             <KeyDates dates={keyDates} />
           </Section>
         </div>
-        <SafetyTasksCard />
+        <div className="space-y-2.5">
+          <SafetyTasksCard />
+          <FourBlockCard />
+        </div>
       </div>
 
       <CustomerProgressCard />

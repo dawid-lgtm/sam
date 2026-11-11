@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import { base44 } from "@/api/base44Client";
 import { progressField } from "@/lib/products";
 
@@ -23,24 +22,34 @@ export const safetyTasksQuery = {
   select: (page) => page.items || [],
 };
 
-/** Open safety tasks across every customer site: total, due in the next 7 days, overdue. */
+/** Safety tasks across every customer site: designed (all) and implemented (done). */
 export const safetyCountsQuery = {
   queryKey: ["safety-counts"],
   queryFn: async () => {
-    const start = new Date();
-    start.setHours(0, 0, 0, 0);
-    const weekEnd = new Date(start);
-    weekEnd.setDate(weekEnd.getDate() + 7);
-    const today = format(start, "yyyy-MM-dd");
-    const inAWeek = format(weekEnd, "yyyy-MM-dd");
-    const open = { status: { $ne: "Done" } };
-
-    const [active, dueThisWeek, overdue] = await Promise.all([
-      base44.entities.SafetyTask.count(open),
-      base44.entities.SafetyTask.count({ ...open, due_date: { $gte: today, $lte: inAWeek } }),
-      base44.entities.SafetyTask.count({ ...open, due_date: { $lt: today } }),
+    const [designed, implemented] = await Promise.all([
+      base44.entities.SafetyTask.count({}),
+      base44.entities.SafetyTask.count({ status: "Done" }),
     ]);
-    return { active, dueThisWeek, overdue };
+    return { designed, implemented };
+  },
+};
+
+export const fourBlockDaysQuery = {
+  queryKey: ["four-block-days"],
+  queryFn: () => base44.entities.FourBlockDay.list({ limit: 500 }),
+  select: (page) => page.items || [],
+};
+
+/** Full shifts completed in four blocks across every customer site, split by role. */
+export const fourBlockCountsQuery = {
+  queryKey: ["four-block-counts"],
+  queryFn: async () => {
+    const [total, supervisors, superintendents] = await Promise.all([
+      base44.entities.FourBlockDay.count({}),
+      base44.entities.FourBlockDay.count({ role: "Supervisor" }),
+      base44.entities.FourBlockDay.count({ role: "Superintendent" }),
+    ]);
+    return { total, supervisors, superintendents };
   },
 };
 

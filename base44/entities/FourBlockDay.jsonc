@@ -1,0 +1,64 @@
+{
+  "name": "FourBlockDay",
+  "type": "object",
+  "properties": {
+    "person_name": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string",
+      "enum": [
+        "Supervisor",
+        "Superintendent"
+      ],
+      "enumColors": [
+        "blue",
+        "purple"
+      ],
+      "default": "Supervisor"
+    },
+    "customer_id": {
+      "type": "string"
+    },
+    "customer_name": {
+      "type": "string"
+    },
+    "site_name": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "blocks": {
+      "type": "number",
+      "default": 4
+    }
+  },
+  "required": [
+    "person_name",
+    "role"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
