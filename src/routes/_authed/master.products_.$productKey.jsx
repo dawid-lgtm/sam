@@ -11,7 +11,6 @@ import { ProductCard } from "@/components/master/ProductCard";
 import { CardChain } from "@/components/master/CardChain";
 import { CardEditor } from "@/components/master/CardEditor";
 import { CardRunner } from "@/components/master/CardRunner";
-import { useCardProgress } from "@/lib/cardProgress";
 import { DEPLOYMENT_PLANS } from "@/lib/deploymentPlan";
 import { DeploymentPlan } from "@/components/master/DeploymentPlan";
 import { RhythmExplained } from "@/components/strategy/RhythmExplained";
@@ -33,7 +32,6 @@ function ProductChain() {
   const [running, setRunning] = useState(false);
   const [saving, setSaving] = useState(false);
 
-  const { record } = useCardProgress(productKey);
   const plan = DEPLOYMENT_PLANS[productKey];
   const tabs = [
     ...(plan ? [{ id: "plan", label: "Deployment plan" }] : []),
@@ -113,28 +111,6 @@ function ProductChain() {
           <ProductCard product={product} />
         </div>
         <p className="mt-2 text-[15px] text-gold">{cards.length} cards · {cards.length} days</p>
-        {record?.total ? (
-          <div className="mt-3">
-            <div className="h-2 w-full overflow-hidden rounded-full bg-background/50">
-              <div
-                className="h-full rounded-full bg-gold transition-all"
-                style={{ width: `${Math.min(100, ((record.done || 0) / record.total) * 100)}%` }}
-              />
-            </div>
-            <p className="mt-1.5 text-[14px] text-muted-foreground">
-              {record.done || 0} of {record.total} cards done
-            </p>
-          </div>
-        ) : null}
-        {cards.length ? (
-          <PrimaryButton className="mt-3 w-full" onClick={() => setRunning(true)}>
-            {record?.total && (record.done || 0) >= record.total
-              ? "Run the chain again"
-              : record?.done
-                ? "Continue the chain"
-                : "Run the chain"}
-          </PrimaryButton>
-        ) : null}
       </section>
 
       <div className="sam-glass flex gap-2 overflow-x-auto rounded-xl p-1.5">
@@ -142,7 +118,7 @@ function ProductChain() {
           <button
             key={t.id}
             onClick={() => setTab(t.id)}
-            className={`min-h-[46px] shrink-0 rounded-lg px-4 text-[15px] font-semibold transition ${
+            className={`min-h-[42px] shrink-0 rounded-lg px-3 text-[14px] font-semibold transition ${
               activeTab === t.id
                 ? "bg-gold text-gold-foreground"
                 : "bg-background/60 text-foreground hover:bg-background/80"
@@ -158,7 +134,15 @@ function ProductChain() {
       {activeTab === "gospa" ? <GospaSheet /> : null}
       {activeTab === "downloads" ? <ProductDownloads productKey={productKey} /> : null}
       {activeTab === "chain" ? (
-        <Section title="Card chain" subtitle="Drag the cards into the order they run, day by day.">
+        <Section
+          title="Card chain"
+          subtitle="Drag the cards into the order they run, day by day."
+          action={
+            cards.length ? (
+              <PrimaryButton onClick={() => setRunning(true)}>Run the chain</PrimaryButton>
+            ) : null
+          }
+        >
           <CardChain
             cards={cards}
             onAdd={(format) => setEditing({ format })}
