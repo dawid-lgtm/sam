@@ -60,6 +60,10 @@
       ],
       "default": "both"
     },
+    "is_welcome": {
+      "type": "boolean",
+      "default": false
+    },
     "sort": {
       "type": "number",
       "default": 0

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, Lock, Paperclip } from "lucide-react";
 import { toast } from "sonner";
 import { base44 } from "@/api/base44Client";
 import { formatMeta } from "@/lib/cardFormats";
 import { inputClass } from "@/components/ui-kit/controls";
+import { useCardProgress } from "@/lib/cardProgress";
 
 function isComplete(card, answer, watched) {
   if (!card) return false;
@@ -23,10 +24,12 @@ function hintFor(card) {
   return "Read this card and tick it off to unlock the next card.";
 }
 
-export function CardRunner({ cards }) {
+export function CardRunner({ cards, productKey }) {
+  const { record, isLoading, save } = useCardProgress(productKey);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [watched, setWatched] = useState({});
+  const [restored, setRestored] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [finished, setFinished] = useState(false);
 
@@ -35,6 +38,39 @@ export function CardRunner({ cards }) {
   const done = isComplete(card, answer, watched[card?.id]);
   const last = index === cards.length - 1;
   const meta = card ? formatMeta(card.format) : null;
+  const completed = cards.filter((c) => isComplete(c, answers[c.id] || {}, watched[c.id])).length;
+  const percent = cards.length ? (completed / cards.length) * 100 : 0;
+
+  useEffect(() => {
+    if (restored || isLoading) return;
+    if (record) {
+      const entries = {};
+      const seen = {};
+      (record.entries || []).forEach((entry) => {
+        if (!entry?.card_id) return;
+        entries[entry.card_id] = entry;
+        if (entry.watched) seen[entry.card_id] = true;
+      });
+      setAnswers(entries);
+      setWatched(seen);
+      const day = Number(record.day) || 1;
+      setIndex(Math.max(0, Math.min(day, cards.length) - 1));
+    }
+    setRestored(true);
+  }, [record, isLoading, restored, cards.length]);
+
+  useEffect(() => {
+    if (!restored || !Object.keys(answers).length) return;
+    const timer = setTimeout(() => {
+      const entries = Object.entries(answers).map(([card_id, a]) => ({
+        ...a,
+        card_id,
+        watched: !!watched[card_id],
+      }));
+      save({ entries, day: index + 1, done: completed, total: cards.length });
+    }, 600);
+    return () => clearTimeout(timer);
+  }, [answers, watched, index, restored, completed, cards.length]);
 
   const setAnswer = (patch) =>
     setAnswers((a) => ({ ...a, [card.id]: { ...(a[card.id] || {}), ...patch } }));
@@ -61,7 +97,12 @@ export function CardRunner({ cards }) {
       <div className="rounded-xl bg-background/40 p-5 text-center">
         <Check className="mx-auto h-10 w-10 text-gold" />
         <p className="mt-2 font-heading text-[20px] font-semibold">Chain complete</p>
-        <p className="mt-1 text-[15px] text-muted-foreground">All {cards.length} cards are done.</p>
+        <p className="mt-1 text-[15px] text-muted-foreground">
+          All {cards.length} cards are done.
+        </p>
+        <div className="mx-auto mt-3 h-2 w-full max-w-xs overflow-hidden rounded-full bg-background/50">
+          <div className="h-full rounded-full bg-gold" style={{ width: "100%" }} />
+        </div>
         <button
           type="button"
           onClick={() => {
@@ -81,10 +122,12 @@ export function CardRunner({ cards }) {
       <div className="mb-3">
         <div className="mb-1.5 flex items-baseline justify-between gap-2">
           <p className="text-[15px] font-semibold text-gold">Day {index + 1}</p>
-          <p className="text-[14px] text-muted-foreground">of {cards.length}</p>
+          <p className="text-[14px] text-muted-foreground">
+            {completed} of {cards.length} cards done
+          </p>
         </div>
         <div className="h-2 w-full overflow-hidden rounded-full bg-background/50">
-          <div className="h-full rounded-full bg-gold transition-all" style={{ width: `${((index + 1) / cards.length) * 100}%` }} />
+          <div className="h-full rounded-full bg-gold transition-all" style={{ width: `${percent}%` }} />
         </div>
       </div>
 

@@ -1,0 +1,72 @@
+{
+  "name": "CardProgress",
+  "type": "object",
+  "properties": {
+    "product_key": {
+      "type": "string"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": []
+    },
+    "day": {
+      "type": "number",
+      "default": 1
+    },
+    "done": {
+      "type": "number",
+      "default": 0
+    },
+    "total": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "product_key"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

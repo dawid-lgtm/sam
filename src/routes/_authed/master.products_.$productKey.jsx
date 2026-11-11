@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
@@ -11,6 +11,8 @@ import { ProductCard } from "@/components/master/ProductCard";
 import { CardChain } from "@/components/master/CardChain";
 import { CardEditor } from "@/components/master/CardEditor";
 import { CardRunner } from "@/components/master/CardRunner";
+import { useCardProgress } from "@/lib/cardProgress";
+import { syncWelcomeCard } from "@/lib/welcomeCard";
 
 export const Route = createFileRoute("/_authed/master/products_/$productKey")({
   component: ProductChain,
@@ -26,8 +28,24 @@ function ProductChain() {
   const [running, setRunning] = useState(false);
   const [saving, setSaving] = useState(false);
 
+  const { record } = useCardProgress(productKey);
+
   const product = products.find((p) => p.key === productKey);
-  const refresh = () => queryClient.invalidateQueries({ queryKey: ["program-cards"] });
+  const refresh = async () => {
+    if (product) await syncWelcomeCard(product);
+    await queryClient.invalidateQueries({ queryKey: ["program-cards"] });
+  };
+
+  useEffect(() => {
+    if (!product || !cards.length) return;
+    let alive = true;
+    syncWelcomeCard(product).then((changed) => {
+      if (alive && changed) queryClient.invalidateQueries({ queryKey: ["program-cards"] });
+    });
+    return () => {
+      alive = false;
+    };
+  }, [product?.key, cards]);
 
   const saveCard = async (payload) => {
     setSaving(true);
@@ -82,9 +100,26 @@ function ProductChain() {
           <ProductCard product={product} />
         </div>
         <p className="mt-2 text-[15px] text-gold">{cards.length} cards · {cards.length} days</p>
+        {record?.total ? (
+          <div className="mt-3">
+            <div className="h-2 w-full overflow-hidden rounded-full bg-background/50">
+              <div
+                className="h-full rounded-full bg-gold transition-all"
+                style={{ width: `${Math.min(100, ((record.done || 0) / record.total) * 100)}%` }}
+              />
+            </div>
+            <p className="mt-1.5 text-[14px] text-muted-foreground">
+              {record.done || 0} of {record.total} cards done
+            </p>
+          </div>
+        ) : null}
         {cards.length ? (
           <PrimaryButton className="mt-3 w-full" onClick={() => setRunning(true)}>
-            Run the chain
+            {record?.total && (record.done || 0) >= record.total
+              ? "Run the chain again"
+              : record?.done
+                ? "Continue the chain"
+                : "Run the chain"}
           </PrimaryButton>
         ) : null}
       </section>
@@ -100,7 +135,7 @@ function ProductChain() {
       </Section>
 
       <Modal open={running} onClose={() => setRunning(false)} title={product.name}>
-        {running ? <CardRunner cards={cards} /> : null}
+        {running ? <CardRunner cards={cards} productKey={productKey} /> : null}
       </Modal>
 
       <Modal
