@@ -1,13 +1,10 @@
 import { Section } from "@/components/ui-kit/Section";
-import { DeployFlow } from "@/components/master/DeployFlow";
+import { DeploySteps } from "@/components/master/DeploySteps";
 
-export function DeploymentPlan({ plan }) {
+export function DeploymentPlan({ plan, productKey, onOpenTools }) {
   return (
-    <div className="space-y-4">
-      <Section title="The deployment plan">
-        <p className="mb-2 text-[13px] leading-snug text-muted-foreground">{plan.intro}</p>
-        <DeployFlow phases={plan.phases} />
-      </Section>
-    </div>
+    <Section title="The deployment plan" subtitle={plan.intro}>
+      <DeploySteps plan={plan} productKey={productKey} onOpenTools={onOpenTools} />
+    </Section>
   );
 }

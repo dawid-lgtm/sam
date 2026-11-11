@@ -7,6 +7,8 @@ export const DEPLOYMENT_PLANS = {
         n: 1,
         name: "The executive session",
         status: "CEO and ELT, usually an offsite",
+        description:
+          "The handbook is reviewed and the frame set: one three year Goal, up to five Objectives that must be true for it, and one ELT owner on each. The leadership workshop is dated before anyone leaves the room.",
         blocks: [
           {
             h: "Review the handbook",
@@ -41,6 +43,8 @@ export const DEPLOYMENT_PLANS = {
         n: 2,
         name: "The leadership workshop",
         status: "Full day, Ops Managers, GMs and PMs",
+        description:
+          "The Goal and Objectives are presented to the wider leadership group and the Strategies that will deliver them are designed together, each with an owner and a value. Roles are confirmed and the ON the business rhythm is locked for twelve months.",
         blocks: [
           {
             h: "Goal and Objectives",
@@ -76,6 +80,8 @@ export const DEPLOYMENT_PLANS = {
         n: 3,
         name: "Translate to site",
         status: "Project Managers, coached by Ops and GMs",
+        description:
+          "Each site translates its share: Tactics to deliver the Strategies, Plans saying who does what and where, and Actions with a name and a date. The handbook is issued and the site ON the business meeting sits before the head office one.",
         blocks: [
           {
             h: "Site translation",
