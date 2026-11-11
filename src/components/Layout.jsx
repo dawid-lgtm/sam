@@ -4,6 +4,7 @@ import { LogOut, Users } from "lucide-react";
 import { AppNav } from "@/components/AppNav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ButtonHints } from "@/components/ButtonHints";
+import { RaptortechCredit } from "@/components/RaptortechCredit";
 
 export function AppShell({ children }) {
   const { user, logout } = useAuth();
@@ -72,7 +73,7 @@ export function AppShell({ children }) {
         />
         <main className="relative mx-auto w-full max-w-3xl px-4 pb-6 pt-5">{children}</main>
         <footer className="relative mx-auto w-full max-w-3xl px-4 pb-28 md:pb-10">
-          <p className="text-center text-[15px] text-muted-foreground">Powered by Raptortech</p>
+          <RaptortechCredit />
         </footer>
       </div>
 

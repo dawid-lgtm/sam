@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { RaptortechCredit } from "@/components/RaptortechCredit";
 
 const HERO = "https://base44.app/api/apps/6af15b436d05108c2128035d/files/mp/public/6af15b436d05108c2128035d/7892daf24_sam-hero-aeroplane.jpg";
 
@@ -36,7 +37,7 @@ function Welcome() {
           Log in
         </Link>
         <p className="mt-6 text-center text-sm text-white/80">Invite only · Mine in a box™</p>
-        <p className="mt-2 text-center text-[15px] text-white/70">Powered by Raptortech</p>
+        <RaptortechCredit className="mt-2 text-white/70" />
       </main>
     </div>
   );

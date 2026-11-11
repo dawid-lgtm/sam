@@ -1,4 +1,5 @@
 import { AuthTagline } from "@/components/auth/AuthTagline";
+import { RaptortechCredit } from "@/components/RaptortechCredit";
 
 // Full-screen card shared by the auth pages. It sets its own color tokens so it stays readable under any theme.
 export function AuthLayout({ icon: Icon, title, subtitle, footer, children }) {
@@ -28,7 +29,7 @@ export function AuthLayout({ icon: Icon, title, subtitle, footer, children }) {
         </div>
         <div className="rounded-2xl bg-card p-6 text-card-foreground shadow-lg sm:p-8">{children}</div>
         {footer && <p className="mt-6 text-center text-[15px] text-muted-foreground">{footer}</p>}
-        <p className="mt-4 text-center text-[15px] text-muted-foreground">Powered by Raptortech</p>
+        <RaptortechCredit className="mt-4" />
       </div>
     </div>
   );
