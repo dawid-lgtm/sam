@@ -18,7 +18,7 @@ function PhaseDetail({ phase }) {
       </div>
       <div className="mt-2 rounded-md bg-card p-2">
         <p className="flex items-center gap-1.5 text-[14px] font-semibold">
-          <Flag className="h-3.5 w-3.5 text-gold" /> Gate {phase.n}
+          <Flag className="h-3.5 w-3.5 text-gold" /> Done when
         </p>
         <ul className="mt-0.5 list-disc space-y-0 pl-4 text-[14px] leading-snug">
           {phase.gate.map((g) => (
@@ -47,7 +47,7 @@ export function DeployFlow({ phases }) {
               }`}
             >
               <span className={`text-[12px] font-semibold ${open === p.n ? "opacity-80" : "text-muted-foreground"}`}>
-                Phase {p.n} · {p.status}
+                Step {p.n} · {p.status}
               </span>
               <span className="mt-0.5 block text-[14px] font-semibold leading-tight">{p.name}</span>
             </button>
