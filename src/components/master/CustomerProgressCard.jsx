@@ -41,18 +41,18 @@ const CUSTOMERS = [
 export function CustomerProgressCard() {
   return (
     <Section title="Customer completion" subtitle="Each customer, product by product. No averages.">
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
         {CUSTOMERS.map((c) => (
-          <div key={c.name} className="rounded-xl bg-background/40 p-3">
-            <p className="text-[16px] font-semibold">{c.name}</p>
-            <div className="mt-2 space-y-2.5">
+          <div key={c.name} className="rounded-lg bg-background/40 p-2">
+            <p className="text-[12px] font-semibold">{c.name}</p>
+            <div className="mt-1 space-y-1">
               {c.products.map(([product, done]) => (
                 <div key={product}>
-                  <div className="mb-1 flex items-baseline justify-between gap-2">
-                    <p className="truncate text-[14px] text-muted-foreground">{product}</p>
-                    <p className="shrink-0 text-[14px] font-semibold text-gold">{done}%</p>
+                  <div className="flex items-baseline justify-between gap-1.5">
+                    <p className="truncate text-[10px] text-muted-foreground">{product}</p>
+                    <p className="shrink-0 text-[10px] font-semibold text-gold">{done}%</p>
                   </div>
-                  <div className="h-2.5 w-full overflow-hidden rounded-full bg-card">
+                  <div className="mt-0.5 h-1 w-full overflow-hidden rounded-full bg-card">
                     <div className="h-full rounded-full bg-gold" style={{ width: `${done}%` }} />
                   </div>
                 </div>
