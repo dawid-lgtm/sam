@@ -41,17 +41,15 @@ const terms = [
   },
   {
     label: "ON the business",
-    body: (
-      <>
-        Running our business, where we ask the same core questions every time, always starting with safety. Are our
-        people safe (safety stats, and the safety and risk plans to improve)? Are we making money, and can we make more
-        (fiscal performance review)? Are we running a quality business (the implementation of the four block model, the
-        utility of our meetings, the performance of our frontline staff, our adherence to the mine plan and the face
-        positions, and the trend and performance analysis)? And lastly, are our people happy (culture, churn)? The site
-        meeting answers these in half a day. The head office meeting answers the same questions in a full day, once a
-        month.
-      </>
-    ),
+    body: "Running our business, where we ask the same core questions every time, always starting with safety.",
+    questions: [
+      "Are our people safe? Safety stats, and the safety and risk plans to improve.",
+      "Are we making money, and can we make more? Fiscal performance review.",
+      "Are we running a quality business? The implementation of the four block model, the utility of our meetings, the performance of our frontline staff, our adherence to the mine plan and the face positions, and the trend and performance analysis.",
+      "Are our people happy? Culture and churn.",
+    ],
+    after:
+      "The site meeting answers these in half a day. The head office meeting answers the same questions in a full day, once a month.",
   },
 ];
 
@@ -72,6 +70,16 @@ export function RhythmExplained() {
             <div key={t.label} className="rounded-xl bg-background/40 p-3">
               <p className="text-[16px] font-semibold text-gold">{t.label}</p>
               <p className="mt-1 text-[15px] leading-snug text-foreground">{t.body}</p>
+              {t.questions ? (
+                <ul className="mt-1.5 list-disc space-y-1.5 pl-5 text-[15px] leading-snug text-gold marker:text-gold">
+                  {t.questions.map((q) => (
+                    <li key={q}>{q}</li>
+                  ))}
+                </ul>
+              ) : null}
+              {t.after ? (
+                <p className="mt-1.5 text-[15px] leading-snug text-muted-foreground">{t.after}</p>
+              ) : null}
             </div>
           ))}
         </div>
