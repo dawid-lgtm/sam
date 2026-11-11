@@ -6,6 +6,7 @@ import { canEditStrategy } from "@/lib/access";
 import { GoalEditor } from "@/components/strategy/GoalEditor";
 import { ObjectiveCard } from "@/components/strategy/ObjectiveCard";
 import { ObjectiveEditor } from "@/components/strategy/ObjectiveEditor";
+import { GospaExplainer } from "@/components/strategy/GospaExplainer";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
 
 export const Route = createFileRoute("/_authed/strategy/")({
@@ -25,6 +26,8 @@ function GoalAndObjectives() {
 
   return (
     <div className="space-y-4">
+      <GospaExplainer />
+
       <GoalEditor company={data.company} canEdit={canEdit} />
 
       <Link
