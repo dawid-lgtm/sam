@@ -1,7 +1,7 @@
 export const DEPLOYMENT_PLANS = {
   strategy: {
     intro:
-      "Three steps. Defining the Goal and the Objectives sits with the CEO and the ELT; threshing them out and defining the Strategies is the full-day leadership workshop; casting to site turns Strategies into Tactics, Plans and Actions. Smaller companies often run steps 1 and 2 as one event.",
+      "Three steps. Defining the Goal and the Objectives sits with the CEO and the ELT; reviewing them and defining the Strategies is the full-day leadership workshop; casting to site turns Strategies into Tactics, Plans and Actions. Smaller companies often run steps 1 and 2 as one event.",
     phases: [
       {
         n: 1,
@@ -41,10 +41,10 @@ export const DEPLOYMENT_PLANS = {
       },
       {
         n: 2,
-        name: "Threshing the Goals and Objectives and defining the Strategies",
+        name: "Reviewing the Goals and Objectives and defining the Strategies",
         status: "Full day, Ops Managers, GMs and PMs",
         description:
-          "The Goal and Objectives are threshed out with the wider leadership group, then the Strategies that will deliver them are designed together, each with an owner and a value. Roles are confirmed and the ON the business rhythm is locked for twelve months.",
+          "The Goal and Objectives are reviewed with the wider leadership group, then the Strategies that will deliver them are designed together, each with an owner and a value. Roles are confirmed and the ON the business rhythm is locked for twelve months.",
         blocks: [
           {
             h: "Goal and Objectives",
@@ -144,7 +144,7 @@ export const DEPLOYMENT_PLANS = {
         ],
       },
       {
-        name: "Step 2 · Threshing them out and defining the Strategies",
+        name: "Step 2 · Reviewing the Goals and Objectives and defining the Strategies",
         steps: [
           ["Goal presented to the wider leadership group", "CEO"],
           ["Objectives presented and reviewed", "ELT owners"],
