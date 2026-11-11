@@ -1,11 +1,11 @@
 export const DEPLOYMENT_PLANS = {
   strategy: {
     intro:
-      "Three steps. The executive session sets the Goal and the Objectives; the full-day workshop designs the Strategies and locks the ON the business meetings; the sites turn Strategies into Tactics, Plans and Actions. Smaller companies often run steps 1 and 2 as one event.",
+      "Three steps. Defining the Goal and the Objectives sits with the CEO and the ELT; threshing them out and defining the Strategies is the full-day leadership workshop; casting to site turns Strategies into Tactics, Plans and Actions. Smaller companies often run steps 1 and 2 as one event.",
     phases: [
       {
         n: 1,
-        name: "The executive session",
+        name: "Defining the Goals and Objectives",
         status: "CEO and ELT, usually an offsite",
         description:
           "The handbook is reviewed and the frame set: one three year Goal, up to five Objectives that must be true for it, and one ELT owner on each. The leadership workshop is dated before anyone leaves the room.",
@@ -41,10 +41,10 @@ export const DEPLOYMENT_PLANS = {
       },
       {
         n: 2,
-        name: "The leadership workshop",
+        name: "Threshing the Goals and Objectives and defining the Strategies",
         status: "Full day, Ops Managers, GMs and PMs",
         description:
-          "The Goal and Objectives are presented to the wider leadership group and the Strategies that will deliver them are designed together, each with an owner and a value. Roles are confirmed and the ON the business rhythm is locked for twelve months.",
+          "The Goal and Objectives are threshed out with the wider leadership group, then the Strategies that will deliver them are designed together, each with an owner and a value. Roles are confirmed and the ON the business rhythm is locked for twelve months.",
         blocks: [
           {
             h: "Goal and Objectives",
@@ -78,10 +78,10 @@ export const DEPLOYMENT_PLANS = {
       },
       {
         n: 3,
-        name: "Translate to site",
+        name: "Casting to site",
         status: "Project Managers, coached by Ops and GMs",
         description:
-          "Each site translates its share: Tactics to deliver the Strategies, Plans saying who does what and where, and Actions with a name and a date. The handbook is issued and the site ON the business meeting sits before the head office one.",
+          "Each site casts its share: Tactics to deliver the Strategies, Plans saying who does what and where, and Actions with a name and a date. The handbook is issued and the site ON the business meeting sits before the head office one.",
         blocks: [
           {
             h: "Site translation",
@@ -132,7 +132,7 @@ export const DEPLOYMENT_PLANS = {
     },
     streams: [
       {
-        name: "Step 1 · The executive session",
+        name: "Step 1 · Defining the Goals and Objectives",
         steps: [
           ["Handbook reviewed: Goal, Objectives, Strategies, Tactics, Plans, Actions", "CEO, ELT"],
           ["Time Usage Model confirmed", "CEO, ELT"],
@@ -144,7 +144,7 @@ export const DEPLOYMENT_PLANS = {
         ],
       },
       {
-        name: "Step 2 · The leadership workshop",
+        name: "Step 2 · Threshing them out and defining the Strategies",
         steps: [
           ["Goal presented to the wider leadership group", "CEO"],
           ["Objectives presented and reviewed", "ELT owners"],
@@ -156,7 +156,7 @@ export const DEPLOYMENT_PLANS = {
         ],
       },
       {
-        name: "Step 3 · Sites translate the Strategies",
+        name: "Step 3 · Casting to site",
         steps: [
           ["Project Manager returns to site, supported by the Ops Manager or GM", "Project Manager"],
           ["Tactics written: what the site will do to deliver each Strategy", "Project Manager, site leadership"],
