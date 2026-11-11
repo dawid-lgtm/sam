@@ -12,13 +12,22 @@ export function AppShell({ children }) {
       <header className="sticky top-0 z-30 bg-background">
         <div className="relative mx-auto flex max-w-3xl items-center justify-between gap-2 px-4 py-2.5">
           <div className="flex min-w-0 items-center gap-3">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gold font-heading text-[18px] font-semibold text-gold-foreground">
-              S
+            <span className="grid h-11 shrink-0 place-items-center rounded-xl bg-gold px-3 font-heading text-[18px] font-semibold text-gold-foreground">
+              Sam
             </span>
             <div className="min-w-0 leading-tight">
-              <p className="font-heading text-[19px] font-semibold text-foreground">Sam</p>
               <p className="whitespace-nowrap text-[15px] text-muted-foreground">Mine in a box™</p>
-              <p className="whitespace-nowrap text-[13px] text-muted-foreground/80">Powered by Raptortech</p>
+              <p className="whitespace-nowrap text-[15px] text-muted-foreground">
+                Powered by{" "}
+                <a
+                  href="https://www.raptortech.com.au/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-foreground underline decoration-gold underline-offset-2"
+                >
+                  Raptortech
+                </a>
+              </p>
             </div>
           </div>
           <div className="flex shrink-0 items-center">
