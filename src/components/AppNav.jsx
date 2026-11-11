@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { authQuery } from "@/lib/AuthContext";
-import { Home, ClipboardCheck, Target, Mountain, CalendarDays, Settings, Workflow, Users, Package, Library, GraduationCap } from "lucide-react";
+import { Home, ClipboardCheck, Target, Mountain, CalendarDays, Settings, Workflow, Users, Package, Library, GraduationCap, Briefcase } from "lucide-react";
 
 const home = { to: "/", label: "Home", icon: Home };
 
@@ -14,6 +14,7 @@ const baseItems = [
 ];
 
 const adminItems = [
+  { to: "/master/raptortech", label: "Raptortech team", icon: Briefcase },
   { to: "/master/customers", label: "Customers", icon: Users },
   { to: "/master/products", label: "Products + training design", icon: Package },
   { to: "/master/tools", label: "Core materials", icon: Library },
@@ -34,6 +35,7 @@ const hints = {
   "/site": "Site tactics, plans, actions and asks",
   "/meetings": "The meeting calendar and the rules for each meeting",
   "/master": "Master admin overview",
+  "/master/raptortech": "The Raptortech team's own customers and delivery calendar",
   "/master/customers": "Customers, their sites, products and progress",
   "/master/products": "Products + training design: cards, rollout plans and downloads",
   "/master/tools": "Core materials: handbooks, agendas and workbooks",
