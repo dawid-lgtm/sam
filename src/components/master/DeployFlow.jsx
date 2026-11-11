@@ -1,56 +1,70 @@
-import { Flag } from "lucide-react";
+import { useState } from "react";
+import { ChevronRight, Flag } from "lucide-react";
 
-/** The three deployment steps as a connected flow, with what happens in each. */
+/** A simple three-step flow: tap a step to highlight it and read what happens in it below. */
 export function DeployFlow({ phases }) {
+  const [active, setActive] = useState(phases[0]?.n ?? 1);
+  const phase = phases.find((p) => p.n === active) || phases[0];
+
   return (
     <div>
-      {phases.map((p, i) => (
-        <div key={p.n}>
-          <div className="rounded-2xl bg-background/40 p-4">
-            <div className="flex items-start gap-3">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gold font-heading text-[19px] font-semibold text-gold-foreground">
-                {p.n}
+      <div className="flex items-stretch gap-1">
+        {phases.map((p, i) => (
+          <div key={p.n} className="flex flex-1 items-center gap-1">
+            <button
+              type="button"
+              onClick={() => setActive(p.n)}
+              title={`Show what happens in step ${p.n}`}
+              aria-pressed={active === p.n}
+              className={`min-h-[76px] flex-1 rounded-xl px-2.5 py-2 text-left transition ${
+                active === p.n
+                  ? "bg-gold text-gold-foreground ring-2 ring-gold"
+                  : "bg-background/40 text-foreground hover:bg-background/60"
+              }`}
+            >
+              <span className={`block text-[14px] font-semibold ${active === p.n ? "opacity-80" : "text-muted-foreground"}`}>
+                Step {p.n}
               </span>
-              <div className="min-w-0">
-                <p className="font-heading text-[20px] font-semibold leading-snug text-foreground">{p.name}</p>
-                <p className="text-[15px] leading-snug text-muted-foreground">{p.status}</p>
+              <span className="mt-0.5 block text-[15px] font-semibold leading-tight">{p.name}</span>
+            </button>
+            {i < phases.length - 1 ? <ChevronRight className="h-5 w-5 shrink-0 text-gold" /> : null}
+          </div>
+        ))}
+      </div>
+
+      {phase ? (
+        <div className="mt-3 rounded-2xl bg-background/40 p-4">
+          <p className="font-heading text-[20px] font-semibold leading-snug text-foreground">
+            Step {phase.n} · {phase.name}
+          </p>
+          <p className="text-[15px] leading-snug text-muted-foreground">{phase.status}</p>
+          <p className="mt-2 text-[15px] leading-snug text-foreground">{phase.description}</p>
+
+          <div className="mt-3 grid gap-2 sm:grid-cols-3">
+            {phase.blocks.map((b) => (
+              <div key={b.h} className="rounded-xl bg-card/70 p-3">
+                <p className="text-[15px] font-semibold leading-snug text-gold">{b.h}</p>
+                <ul className="mt-1 list-disc space-y-1 pl-4 text-[15px] leading-snug text-foreground">
+                  {b.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
               </div>
-            </div>
-
-            <p className="mt-2 text-[15px] leading-snug text-foreground">{p.description}</p>
-
-            <div className="mt-3 grid gap-2 sm:grid-cols-3">
-              {p.blocks.map((b) => (
-                <div key={b.h} className="rounded-xl bg-card/70 p-3">
-                  <p className="text-[15px] font-semibold leading-snug text-gold">{b.h}</p>
-                  <ul className="mt-1 list-disc space-y-1 pl-4 text-[15px] leading-snug text-foreground">
-                    {b.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-2 rounded-xl bg-card p-3">
-              <p className="flex items-center gap-1.5 text-[15px] font-semibold text-foreground">
-                <Flag className="h-4 w-4 text-gold" /> Done when
-              </p>
-              <ul className="mt-1 list-disc space-y-1 pl-4 text-[15px] leading-snug text-foreground">
-                {p.gate.map((g) => (
-                  <li key={g}>{g}</li>
-                ))}
-              </ul>
-            </div>
+            ))}
           </div>
 
-          {i < phases.length - 1 ? (
-            <div className="flex justify-center py-1">
-              <span className="h-7 w-0.5 rounded-full bg-gold/60" aria-hidden="true" />
-            </div>
-          ) : null}
+          <div className="mt-2 rounded-xl bg-card p-3">
+            <p className="flex items-center gap-1.5 text-[15px] font-semibold text-foreground">
+              <Flag className="h-4 w-4 text-gold" /> Done when
+            </p>
+            <ul className="mt-1 list-disc space-y-1 pl-4 text-[15px] leading-snug text-foreground">
+              {phase.gate.map((g) => (
+                <li key={g}>{g}</li>
+              ))}
+            </ul>
+          </div>
         </div>
-      ))}
+      ) : null}
     </div>
   );
 }
