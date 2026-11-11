@@ -1,7 +1,7 @@
 export const DEPLOYMENT_PLANS = {
   strategy: {
     intro:
-      "Three steps. Defining the Goal and the Objectives sits with the CEO and the ELT; reviewing them and defining the Strategies is the full-day leadership workshop; casting to site turns Strategies into Tactics, Plans and Actions. Smaller companies often run steps 1 and 2 as one event.",
+      "Three steps. Defining the Goal and the Objectives sits with the CEO and the ELT; reviewing them and defining the Strategies is the full-day leadership workshop; cascading to site turns Strategies into Tactics, Plans and Actions. Smaller companies often run steps 1 and 2 as one event.",
     phases: [
       {
         n: 1,
@@ -78,10 +78,10 @@ export const DEPLOYMENT_PLANS = {
       },
       {
         n: 3,
-        name: "Casting to site",
+        name: "Cascading to site",
         status: "Project Managers, coached by Ops and GMs",
         description:
-          "Each site casts its share: Tactics to deliver the Strategies, Plans saying who does what and where, and Actions with a name and a date. The handbook is issued and the site ON the business meeting sits before the head office one.",
+          "Each site cascades its share: Tactics to deliver the Strategies, Plans saying who does what and where, and Actions with a name and a date. The handbook is issued and the site ON the business meeting sits before the head office one.",
         blocks: [
           {
             h: "Site translation",
@@ -156,7 +156,7 @@ export const DEPLOYMENT_PLANS = {
         ],
       },
       {
-        name: "Step 3 · Casting to site",
+        name: "Step 3 · Cascading to site",
         steps: [
           ["Project Manager returns to site, supported by the Ops Manager or GM", "Project Manager"],
           ["Tactics written: what the site will do to deliver each Strategy", "Project Manager, site leadership"],
