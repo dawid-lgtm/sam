@@ -18,6 +18,7 @@ export function AppShell({ children }) {
             <div className="min-w-0 leading-tight">
               <p className="font-heading text-[19px] font-semibold text-foreground">Sam</p>
               <p className="whitespace-nowrap text-[15px] text-muted-foreground">Mine in a box™</p>
+              <p className="whitespace-nowrap text-[13px] text-muted-foreground/80">Powered by Raptortech</p>
             </div>
           </div>
           <div className="flex shrink-0 items-center">
