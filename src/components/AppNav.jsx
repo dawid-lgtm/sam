@@ -26,6 +26,22 @@ const adminItems = [
   },
 ];
 
+// What each tab is for, shown when a pointer rests on it.
+const hints = {
+  "/": "Your overview",
+  "/assess": "Assess a leader against the maturity staircase",
+  "/strategy": "The goal, objectives, strategies and tracker",
+  "/site": "Site tactics, plans, actions and asks",
+  "/meetings": "The meeting calendar and the rules for each meeting",
+  "/master": "Master admin overview",
+  "/master/customers": "Customers, their sites, products and progress",
+  "/master/products": "Products + training design: cards, rollout plans and downloads",
+  "/master/tools": "Core materials: handbooks, agendas and workbooks",
+  "/master/products/raptortech_training": "The Raptortech training card chain",
+  "/admin": "Admin settings",
+  "/flow": "Test the card flow",
+};
+
 export function AppNav({ variant = "bottom" }) {
   const { data: auth } = useQuery(authQuery);
   const isAdmin = auth?.user?.role === "admin";
@@ -57,6 +73,7 @@ export function AppNav({ variant = "bottom" }) {
               key={label}
               to={to}
               params={params}
+              title={hints[match || to] || `Open ${label}`}
               className={`flex min-h-[36px] shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg px-2 text-[13px] font-medium transition ${
                 active ? "bg-card text-foreground" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
               }`}
@@ -80,6 +97,7 @@ export function AppNav({ variant = "bottom" }) {
               key={label}
               to={to}
               params={params}
+              title={hints[match || to] || `Open ${label}`}
               className="flex min-h-[56px] flex-1 flex-col items-center justify-center gap-1 py-2"
             >
               <Icon className={`h-6 w-6 ${active ? "text-gold" : "text-muted-foreground"}`} strokeWidth={2} />

@@ -34,6 +34,7 @@ function MasterHome() {
       <PageHeader
         title={`Hello${name ? `, ${name}` : ""}`}
         intro="Master admin · the customers, the people and the dates that matter."
+        brand
       />
 
       <div className="grid gap-3 sm:grid-cols-2">

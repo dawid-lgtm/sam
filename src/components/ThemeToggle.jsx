@@ -35,6 +35,7 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-pressed={light}
       aria-label={light ? "Switch to the navy screen" : "Switch to the light screen"}
+      title={light ? "Switch to the navy screen" : "Switch to the light screen"}
       className="grid h-12 w-12 place-items-center rounded-xl text-muted-foreground transition hover:bg-secondary hover:text-foreground"
     >
       {light ? <Sun className="h-6 w-6" /> : <Moon className="h-6 w-6" />}

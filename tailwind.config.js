@@ -47,6 +47,7 @@ export default {
   			input: 'hsl(var(--input))',
   			ring: 'hsl(var(--ring))',
   			navy: 'hsl(var(--navy))',
+  			brand: 'hsl(var(--brand))',
   			gold: {
   				DEFAULT: 'hsl(var(--gold))',
   				foreground: 'hsl(var(--gold-foreground))'

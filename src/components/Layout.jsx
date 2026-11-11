@@ -36,6 +36,7 @@ export function AppShell({ children }) {
               <Link
                 to="/people"
                 aria-label="People and access"
+                title="People and access — invite people and set their role"
                 className="grid h-12 w-12 place-items-center rounded-xl text-muted-foreground transition hover:bg-secondary hover:text-foreground"
               >
                 <Users className="h-6 w-6" />
@@ -44,6 +45,7 @@ export function AppShell({ children }) {
             <button
               onClick={() => logout()}
               aria-label="Sign out"
+              title="Sign out of Sam"
               className="grid h-12 w-12 place-items-center rounded-xl text-muted-foreground transition hover:bg-secondary hover:text-foreground"
             >
               <LogOut className="h-6 w-6" />
