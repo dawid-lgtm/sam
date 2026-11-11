@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { base44 } from "@/api/base44Client";
 import { CUSTOMER_STATUSES } from "@/lib/products";
 import { useProducts } from "@/lib/catalog";
+import { Image } from "@/components/ui/image";
 import { TextField, TextAreaField, SelectField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
 import { ProductPicker } from "@/components/master/ProductPicker";
 
@@ -12,6 +14,8 @@ const BLANK = {
   contact_name: "",
   contact_email: "",
   region: "",
+  address: "",
+  logo_url: "",
   sites: "",
   start_date: "",
   notes: "",
@@ -33,7 +37,20 @@ export function CustomerForm({ customer, saving, onSave, onCancel }) {
   );
 
   const products = useProducts();
+  const [uploading, setUploading] = useState(false);
   const set = (key, value) => setForm((f) => ({ ...f, [key]: value }));
+
+  const pickLogo = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const { file_url } = await base44.integrations.Core.UploadPublicFile({ file });
+      set("logo_url", file_url);
+    } finally {
+      setUploading(false);
+    }
+  };
   const progressProducts = products.filter((p) => p.progress_field && form.products.includes(p.key));
 
   const submit = (e) => {
@@ -74,6 +91,24 @@ export function CustomerForm({ customer, saving, onSave, onCancel }) {
         <TextField label="Start date" type="date" value={form.start_date} onChange={(e) => set("start_date", e.target.value)} />
       </div>
       <TextField label="Sites" hint="Separate with commas" value={form.sites} onChange={(e) => set("sites", e.target.value)} />
+      <TextAreaField label="Address" rows={2} value={form.address} onChange={(e) => set("address", e.target.value)} placeholder="Street, suburb, state, postcode" />
+
+      <div>
+        <p className="mb-2 text-[15px] font-medium">Logo</p>
+        <div className="flex items-center gap-3">
+          {form.logo_url ? (
+            <Image src={form.logo_url} alt="Customer logo" className="h-16 w-16 shrink-0 rounded-xl bg-background" />
+          ) : (
+            <div className="grid h-16 w-16 shrink-0 place-items-center rounded-xl bg-background/40 text-[14px] text-muted-foreground">
+              None
+            </div>
+          )}
+          <label className="inline-flex min-h-[48px] cursor-pointer items-center justify-center rounded-xl bg-secondary px-4 text-[15px] font-semibold text-foreground">
+            {uploading ? "Uploading…" : form.logo_url ? "Replace logo" : "Upload logo"}
+            <input type="file" accept="image/*" className="hidden" onChange={pickLogo} disabled={uploading} />
+          </label>
+        </div>
+      </div>
 
       <div>
         <p className="mb-2 text-[15px] font-medium">Products they get access to</p>

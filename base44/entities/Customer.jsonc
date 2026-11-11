@@ -40,6 +40,12 @@
     "region": {
       "type": "string"
     },
+    "address": {
+      "type": "string"
+    },
+    "logo_url": {
+      "type": "string"
+    },
     "sites": {
       "type": "array",
       "items": {

@@ -11,6 +11,7 @@ import { GhostButton } from "@/components/ui-kit/controls";
 import { CustomerForm } from "@/components/master/CustomerForm";
 import { ProductPicker } from "@/components/master/ProductPicker";
 import { ProductChips, ProgressBar, StatusChip } from "@/components/master/bits";
+import { Image } from "@/components/ui/image";
 
 export const Route = createFileRoute("/_authed/master/customers_/$customerId")({
   component: CustomerDetail,
@@ -78,14 +79,20 @@ function CustomerDetail() {
 
       <section className="rounded-2xl bg-card p-4">
         <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0">
-            <h1 className="font-heading text-[26px] font-semibold leading-tight">{customer.name}</h1>
-            <p className="mt-1 text-[14px] text-muted-foreground">
-              {[customer.code, customer.region, customer.start_date].filter(Boolean).join(" · ") || "No code or region yet"}
-            </p>
+          <div className="flex min-w-0 items-center gap-3">
+            {customer.logo_url ? (
+              <Image src={customer.logo_url} alt={`${customer.name} logo`} className="h-14 w-14 shrink-0 rounded-xl bg-background" />
+            ) : null}
+            <div className="min-w-0">
+              <h1 className="font-heading text-[26px] font-semibold leading-tight">{customer.name}</h1>
+              <p className="mt-1 text-[14px] text-muted-foreground">
+                {[customer.code, customer.region, customer.start_date].filter(Boolean).join(" · ") || "No code or region yet"}
+              </p>
+            </div>
           </div>
           <StatusChip status={customer.status} />
         </div>
+        {customer.address ? <p className="mt-2 text-[15px] text-muted-foreground">{customer.address}</p> : null}
         <p className="mt-2 text-[15px]">
           {[customer.contact_name, customer.contact_email].filter(Boolean).join(" · ") || "No main contact yet"}
         </p>

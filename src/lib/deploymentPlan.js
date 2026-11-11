@@ -11,13 +11,11 @@ export const DEPLOYMENT_PLANS = {
           { h: "Capture the core", items: ["Tools, models, meetings and ownership captured", "Maturity mapped by site"] },
           { h: "Head office first", items: ["Reporting and measurement sorted at the top", "Roles, accountabilities and enterprise rhythms defined"] },
           { h: "Lock the frame", items: ["Goal and five Objectives approved", "One executive owner per Objective", "The Time Usage Model (TUM) defined"] },
-          { h: "Senior training", items: ["GMs, Ops Managers and PMs: critical thinking and fiscal capability"] },
         ],
         gate: [
           "Goal and Objectives approved, each with one executive owner",
           "Roles and decision rights written for the enterprise rhythm",
           "TUM defined; the eight starter numbers agreed",
-          "Senior training delivered",
           "ON meeting dates set for 12 months",
         ],
       },
