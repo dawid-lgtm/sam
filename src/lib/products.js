@@ -2,6 +2,33 @@
 // everywhere (pickers, program matrix, reports) without any other change.
 export const PRODUCT_GROUPS = [
   {
+    id: "mine-in-a-box",
+    name: "Mine in a Box",
+    items: [
+      {
+        key: "enterprise",
+        name: "Enterprise Fundamentals",
+        description: "The business fundamentals every site leader is held to",
+        status: "available",
+        progress_field: "progress_ops",
+      },
+      {
+        key: "safety",
+        name: "Safety Sam",
+        description: "Safety leadership: the routine and the behaviours that keep people safe",
+        status: "available",
+      },
+      {
+        key: "strategy",
+        name: "Strategy Sam",
+        description: "Cascading GOSPA: goals, strategies and tactics, plans and actions",
+        status: "available",
+        progress_field: "progress_strategy",
+        kind: "strategy",
+      },
+    ],
+  },
+  {
     id: "platform",
     name: "Platform",
     items: [
@@ -17,58 +44,6 @@ export const PRODUCT_GROUPS = [
         name: "LMS (Raptor Tech)",
         description: "Learning Management System",
         status: "available",
-      },
-    ],
-  },
-  {
-    id: "cml",
-    name: "Mine in a Box Suite",
-    items: [
-      {
-        key: "ops",
-        name: "Managing Operations",
-        description: "Full CML training program (Enterprise Fundamentals for Ops)",
-        status: "available",
-        progress_field: "progress_ops",
-      },
-      {
-        key: "maint",
-        name: "Managing Maintenance",
-        description: "Full CML training program (Enterprise Fundamentals for Maintenance)",
-        status: "available",
-        progress_field: "progress_maintenance",
-      },
-      {
-        key: "safety",
-        name: "Managing Safety",
-        description: "Full CML training program",
-        status: "later",
-      },
-      {
-        key: "training",
-        name: "Managing Training",
-        description: "Full CML training program",
-        status: "later",
-      },
-      {
-        key: "sales_finance",
-        name: "Sales and Finances",
-        description: "Full program",
-        status: "later",
-      },
-    ],
-  },
-  {
-    id: "strategy",
-    name: "Strategy",
-    items: [
-      {
-        key: "strategy",
-        name: "Managing Strategy",
-        description: "Cascading GOSPA process (Goals → Strategies & Tactics → Plans & Actions)",
-        status: "available",
-        progress_field: "progress_strategy",
-        kind: "strategy",
       },
     ],
   },

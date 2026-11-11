@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { CalendarDays, ChevronRight, GraduationCap, LayoutGrid, ShieldCheck, Target, TrendingUp, X } from "lucide-react";
 import { useSamData } from "@/lib/useSamData";
 import { AccessSetup } from "@/components/home/AccessSetup";
@@ -10,6 +10,10 @@ import { person, programs, sitePerformance, safetyFocus, keyDates } from "@/lib/
 const HERO = "https://media.base44.com/images/public/6af15b436d05108c2128035d/0dc42b8b1_sam-hero.jpg";
 
 export const Route = createFileRoute("/_authed/")({
+  // A super admin belongs on the master admin dashboard, not the site home page.
+  beforeLoad: ({ context }) => {
+    if (context.user?.role === "admin") throw redirect({ to: "/master" });
+  },
   component: Home,
   head: () => ({ meta: [{ title: "Sam — Home" }] }),
 });
@@ -53,15 +57,6 @@ function Sheet({ title, onClose, children }) {
   );
 }
 
-// A super admin belongs on the master admin dashboard, not the site home page.
-function GoToMaster() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    navigate({ to: "/master", replace: true });
-  }, [navigate]);
-  return <div className="h-40 animate-pulse rounded-2xl bg-background/40" />;
-}
-
 function Home() {
   const { user } = Route.useRouteContext();
   const { data } = useSamData();
@@ -74,9 +69,6 @@ function Home() {
   const todayIso = now.toISOString().slice(0, 10);
   const upcoming = keyDates.filter((k) => k.date >= todayIso).slice(0, 3);
   const myName = user?.full_name?.split(" ")[0] || user?.email?.split("@")[0] || "";
-
-  // The super admin lands on the master admin page.
-  if (user?.role === "admin") return <GoToMaster />;
 
   return (
     <div className="space-y-3">
