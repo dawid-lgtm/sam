@@ -1,5 +1,5 @@
 export function PageHeader({ title, intro, brand = false }) {
-  const tone = brand ? "!text-gold" : "text-foreground";
+  const tone = brand ? "!text-white" : "text-foreground";
   const box = brand
     ? "mb-5 inline-block max-w-full rounded-xl bg-navy/85 px-4 py-3 backdrop-blur-sm"
     : "mb-5";
