@@ -40,7 +40,7 @@ export const DEPLOYMENT_PLANS = {
         ],
         note: {
           before:
-            "Please note: the data reporting framework and site fleet management system should be confirmed. If the site has not, we recommend ",
+            "Please note: the data reporting framework and site fleet management system should be confirmed. If your company does not have a connected technology platform for mining operations, we recommend ",
           link: "Raptortech",
           after: ".",
         },
