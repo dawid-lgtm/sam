@@ -24,14 +24,32 @@ const rhythm = {
   onIndex: { 0: [3], 1: [0] },
 };
 
+function Mark({ children }) {
+  return <span className="font-semibold text-gold">{children}</span>;
+}
+
 const terms = [
   {
     label: "IN the business",
-    body: "Running the work. The three weekly site reviews and the executive hour. Short, standing, a handful of numbers and what will be different tomorrow.",
+    body: (
+      <>
+        A standing operational meeting. It deals with the issues and concerns from the last week and looks at the week
+        ahead: mitigating risk, making the plans to address it, or changing the plans accordingly. It has a week that
+        was and a week that follows: are we going to hit our number, this month's focus?
+      </>
+    ),
   },
   {
     label: "ON the business",
-    body: "Improving the work. The monthly ON the business meeting at site and at head office, and the six-monthly strategy and performance review off site.",
+    body: (
+      <>
+        Running our business, here we ask the core questions. Are we making money, and can we make more (fiscal
+        performance review)? Are our people safe (safety stats, and the safety and risk plans to improve)? Are we
+        running a quality business (the implementation of the four block model, the utility of our meetings, the
+        performance of our frontline staff, our adherence to the mine plan and the face positions, and the trend and
+        performance analysis)? And lastly, are our people happy (culture, churn)?
+      </>
+    ),
   },
 ];
 
@@ -40,7 +58,12 @@ export function RhythmExplained() {
     <div className="space-y-4">
       <Section
         title="IN, IN, IN, ON"
-        subtitle="Three weeks in the business, then one on it. The same four week shape at site and at head office."
+        subtitle={
+          <>
+            Three weeks <Mark>IN</Mark> the business, then one <Mark>ON</Mark> it. The same four week shape at site and
+            at head office.
+          </>
+        }
       >
         <div className="grid gap-2 sm:grid-cols-2">
           {terms.map((t) => (
@@ -54,7 +77,12 @@ export function RhythmExplained() {
 
       <Section
         title="The four weeks, as they sit"
-        subtitle="Each site's ON the business meeting sits in the week, or a couple of days, before the head office one, because one informs the other."
+        subtitle={
+          <>
+            Each site's <Mark>ON</Mark> the business meeting sits in the week, or a couple of days, before the head
+            office one, because one informs the other.
+          </>
+        }
       >
         <div className="overflow-x-auto">
           <table className="w-full min-w-[640px] border-separate border-spacing-1 text-[15px]">
