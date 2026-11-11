@@ -1,7 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { authQuery } from "@/lib/AuthContext";
-import { Home, ClipboardCheck, Target, Mountain, CalendarDays, Settings, Workflow, Users, Package, Library } from "lucide-react";
+import { Home, ClipboardCheck, Target, Mountain, CalendarDays, Settings, Workflow, Users, Package, Library, GraduationCap } from "lucide-react";
 
 const home = { to: "/", label: "Home", icon: Home };
 
@@ -17,6 +17,13 @@ const adminItems = [
   { to: "/master/customers", label: "Customers", icon: Users },
   { to: "/master/products", label: "Products", icon: Package },
   { to: "/master/tools", label: "Core materials", icon: Library },
+  {
+    to: "/master/products/$productKey",
+    params: { productKey: "raptortech_training" },
+    match: "/master/products/raptortech_training",
+    label: "Raptortech training",
+    icon: GraduationCap,
+  },
 ];
 
 export function AppNav({ variant = "bottom" }) {
@@ -34,12 +41,13 @@ export function AppNav({ variant = "bottom" }) {
   if (variant === "top") {
     return (
       <nav className="flex flex-wrap gap-2 pb-3">
-        {items.map(({ to, label, icon: Icon }) => {
-          const active = isActive(to);
+        {items.map(({ to, params, match, label, icon: Icon }) => {
+          const active = isActive(match || to);
           return (
             <Link
-              key={to}
+              key={label}
               to={to}
+              params={params}
               className={`flex min-h-[48px] items-center gap-2 rounded-xl px-4 text-[15px] font-medium transition ${
                 active ? "bg-card text-foreground" : "text-muted-foreground hover:bg-secondary hover:text-foreground"
               }`}
@@ -56,12 +64,13 @@ export function AppNav({ variant = "bottom" }) {
   return (
     <nav className="safe-bottom bg-background">
       <div className="mx-auto flex max-w-3xl items-stretch">
-        {items.map(({ to, label, icon: Icon }) => {
-          const active = isActive(to);
+        {items.map(({ to, params, match, label, icon: Icon }) => {
+          const active = isActive(match || to);
           return (
             <Link
-              key={to}
+              key={label}
               to={to}
+              params={params}
               className="flex min-h-[56px] flex-1 flex-col items-center justify-center gap-1 py-2"
             >
               <Icon className={`h-6 w-6 ${active ? "text-gold" : "text-muted-foreground"}`} strokeWidth={2} />
