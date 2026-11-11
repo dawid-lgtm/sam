@@ -113,7 +113,7 @@ function ProductChain() {
         <p className="mt-2 text-[15px] text-gold">{cards.length} cards · {cards.length} days</p>
       </section>
 
-      <div className="sam-glass flex gap-2 overflow-x-auto rounded-xl p-1.5">
+      <div className="sam-glass flex flex-wrap gap-2 rounded-xl p-1.5">
         {tabs.map((t) => (
           <button
             key={t.id}
