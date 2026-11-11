@@ -71,7 +71,7 @@ export function RhythmExplained() {
               <p className="text-[16px] font-semibold text-gold">{t.label}</p>
               <p className="mt-1 text-[15px] leading-snug text-foreground">{t.body}</p>
               {t.questions ? (
-                <ul className="mt-1.5 list-disc space-y-1.5 pl-5 text-[15px] leading-snug text-gold marker:text-gold">
+                <ul className="mt-1.5 list-disc space-y-1.5 pl-5 text-[15px] leading-snug text-foreground marker:text-gold">
                   {t.questions.map((q) => (
                     <li key={q}>{q}</li>
                   ))}
