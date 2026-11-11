@@ -1,11 +1,11 @@
 export function Section({ title, subtitle, action, children, className = "" }) {
   return (
-    <section className={`sam-glass p-4 sm:p-5 ${className}`}>
+    <section className={`sam-glass p-3.5 sm:p-4 ${className}`}>
       {(title || action) && (
         <div className="mb-3 flex items-start justify-between gap-3">
           <div className="min-w-0">
             {title ? (
-              <h2 className="font-heading text-[20px] font-semibold leading-snug text-foreground">{title}</h2>
+              <h2 className="font-heading text-[18px] font-semibold leading-snug text-foreground">{title}</h2>
             ) : null}
             {subtitle ? <p className="mt-1 text-[15px] leading-snug text-muted-foreground">{subtitle}</p> : null}
           </div>
