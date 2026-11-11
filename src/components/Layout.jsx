@@ -49,10 +49,10 @@ export function AppShell({ children }) {
       <div className="relative">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-80"
+          className="pointer-events-none absolute inset-x-0 top-0 h-[26rem]"
           style={{
             backgroundImage:
-              "linear-gradient(180deg, hsl(var(--background) / 0.74) 0%, hsl(var(--background) / 0.9) 55%, hsl(var(--background)) 100%), url('https://base44.app/api/apps/6af15b436d05108c2128035d/files/mp/public/6af15b436d05108c2128035d/7892daf24_sam-hero-aeroplane.jpg')",
+              "linear-gradient(180deg, hsl(var(--background) / 0.35) 0%, hsl(var(--background) / 0.6) 55%, hsl(var(--background)) 100%), url('https://base44.app/api/apps/6af15b436d05108c2128035d/files/mp/public/6af15b436d05108c2128035d/7892daf24_sam-hero-aeroplane.jpg')",
             backgroundSize: "cover",
             backgroundPosition: "center top",
           }}
