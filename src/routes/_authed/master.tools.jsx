@@ -6,11 +6,11 @@ import { base44 } from "@/api/base44Client";
 import { useProducts } from "@/lib/catalog";
 import { byName, toolsQuery } from "@/lib/masterQueries";
 import { PageHeader } from "@/components/ui-kit/PageHeader";
-import { Section, EmptyLine } from "@/components/ui-kit/Section";
+import { Section } from "@/components/ui-kit/Section";
 import { Modal } from "@/components/ui-kit/Modal";
 import { PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
 import { ToolForm } from "@/components/master/ToolForm";
-import { ToolRow } from "@/components/master/ToolRow";
+import { ToolProductTabs } from "@/components/master/ToolProductTabs";
 
 export const Route = createFileRoute("/_authed/master/tools")({
   component: ToolsPage,
@@ -27,13 +27,11 @@ function ToolsPage() {
   const [editing, setEditing] = useState(null);
   const [deleting, setDeleting] = useState(null);
   const [saving, setSaving] = useState(false);
-  const [productFilter, setProductFilter] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [search, setSearch] = useState("");
 
   const list = [...tools]
     .sort(byName)
-    .filter((t) => (productFilter ? (t.assigned_products || []).includes(productFilter) : true))
     .filter((t) => (categoryFilter ? t.category === categoryFilter : true))
     .filter((t) => `${t.title} ${t.summary || ""}`.toLowerCase().includes(search.toLowerCase()));
 
@@ -71,16 +69,8 @@ function ToolsPage() {
           </PrimaryButton>
         }
       >
-        <div className="grid gap-2 sm:grid-cols-3">
+        <div className="grid gap-2 sm:grid-cols-2">
           <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search tools" className={field} />
-          <select value={productFilter} onChange={(e) => setProductFilter(e.target.value)} className={field}>
-            <option value="">Every product</option>
-            {products.map((p) => (
-              <option key={p.key} value={p.key}>
-                {p.name}
-              </option>
-            ))}
-          </select>
           <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)} className={field}>
             <option value="">Every type</option>
             {CATEGORIES.map((c) => (
@@ -95,14 +85,8 @@ function ToolsPage() {
       <Section title={`In the repository (${tools.length})`} subtitle="Each tool is available online and as a PDF download.">
         {isLoading ? (
           <div className="h-32 animate-pulse rounded-xl bg-background/40" />
-        ) : list.length ? (
-          <div className="space-y-2">
-            {list.map((tool) => (
-              <ToolRow key={tool.id} tool={tool} onEdit={setEditing} onDelete={setDeleting} />
-            ))}
-          </div>
         ) : (
-          <EmptyLine>{tools.length ? "No tool matches those filters." : "Nothing in the repository yet. Add the first tool."}</EmptyLine>
+          <ToolProductTabs tools={list} products={products} onEdit={setEditing} onDelete={setDeleting} />
         )}
         <p className="mt-3 flex items-start gap-2 text-[14px] text-muted-foreground">
           <RefreshCw className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
