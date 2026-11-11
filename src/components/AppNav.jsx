@@ -1,19 +1,33 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { authQuery } from "@/lib/AuthContext";
-import { Home, ClipboardCheck, Target, Mountain, CalendarDays, Settings, Crown, Workflow } from "lucide-react";
+import { Home, ClipboardCheck, Target, Mountain, CalendarDays, Settings, Workflow, Users, Package, Library } from "lucide-react";
+
+const home = { to: "/", label: "Home", icon: Home };
 
 const baseItems = [
-  { to: "/", label: "Home", icon: Home },
+  home,
   { to: "/assess", label: "Assess", icon: ClipboardCheck },
   { to: "/strategy", label: "Strategy", icon: Target },
   { to: "/site", label: "Site", icon: Mountain },
   { to: "/meetings", label: "Meetings", icon: CalendarDays },
 ];
 
+const adminItems = [
+  { to: "/master/customers", label: "Customers", icon: Users },
+  { to: "/master/products", label: "Products", icon: Package },
+  { to: "/master/tools", label: "Core materials", icon: Library },
+];
+
 export function AppNav({ variant = "bottom" }) {
   const { data: auth } = useQuery(authQuery);
-  const items = auth?.user?.role === "admin" ? [...baseItems, { to: "/master", label: "Master", icon: Crown }, { to: "/admin", label: "Admin", icon: Settings }, { to: "/flow", label: "Test flow", icon: Workflow }] : baseItems;
+  const isAdmin = auth?.user?.role === "admin";
+  // Desktop keeps the app tabs and the master tabs on one line, Home first.
+  const items = isAdmin
+    ? variant === "top"
+      ? [home, ...adminItems, ...baseItems.slice(1), { to: "/admin", label: "Admin", icon: Settings }, { to: "/flow", label: "Test flow", icon: Workflow }]
+      : [...baseItems, { to: "/master", label: "Master", icon: Users }, { to: "/admin", label: "Admin", icon: Settings }]
+    : baseItems;
   const path = useRouterState({ select: (s) => s.location.pathname });
   const isActive = (to) => (to === "/" ? path === "/" : path === to || path.startsWith(`${to}/`));
 
