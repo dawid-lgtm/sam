@@ -4,7 +4,7 @@ import { Frame, MockCard, MockField, MockRow, MockTap } from "@/components/flow/
 export function AddObjectiveSheet() {
   return (
     <Frame label="Enter the Goal and Objectives · add objective">
-      <MockCard gold title="Add objective" note="O1 · 1 of 5">
+      <MockCard gold title="Add objective" note="4 objective spaces left · 5 is the max">
         <MockField label="The objective" placeholder="Type the objective" />
         <MockField label="What it delivers" placeholder="The outcome, in one sentence" />
         <MockField label="Executive owner" placeholder="Choose the person who owns it" />
