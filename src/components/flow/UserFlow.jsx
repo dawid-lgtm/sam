@@ -2,12 +2,13 @@ import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { PEOPLE, SCREENS } from "@/components/flow/userFlowScreens";
 import { authScreens } from "@/components/flow/authScreens";
+import { orderSlides } from "@/lib/slideOrder";
 
 export function UserFlow() {
   const [who, setWho] = useState("vahid");
   const [step, setStep] = useState(0);
   const person = PEOPLE[who];
-  const screens = [...authScreens(person), ...SCREENS[who]];
+  const screens = orderSlides(who, [...authScreens(person), ...SCREENS[who]]);
   const screen = screens[step];
 
   const pick = (key) => {
@@ -43,11 +44,11 @@ export function UserFlow() {
             key={s.title}
             onClick={() => setStep(i)}
             aria-label={s.title}
-            className={`grid h-8 w-8 place-items-center rounded-lg text-[13px] font-bold ${
+            className={`grid h-9 min-w-[42px] place-items-center rounded-lg px-2 text-[13px] font-bold ${
               i === step ? "bg-gold text-gold-foreground" : "bg-background/50 text-foreground"
             }`}
           >
-            {i + 1}
+            {s.num || i + 1}
           </button>
         ))}
       </div>
@@ -56,7 +57,8 @@ export function UserFlow() {
         {screen.view}
         <div className="flex flex-col gap-2">
           <p className="text-[13px] text-gold">
-            {step + 1} of {screens.length} · {screen.group || "In the app"} · {screen.where}
+            {screen.num ? `Slide ${screen.num}` : `${step + 1} of ${screens.length}`} ·{" "}
+            {screen.group || "In the app"} · {screen.where}
           </p>
           <p className="font-heading text-[18px] font-semibold leading-snug">{screen.title}</p>
           <p className="text-[15px] leading-relaxed">{screen.does}</p>
