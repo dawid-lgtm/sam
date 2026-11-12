@@ -1,7 +1,5 @@
 import { Lock, Mail } from "lucide-react";
 
-const APP_URL = "sam-2128035d.base44.app";
-
 function EmailShell({ inbox, subject, children }) {
   return (
     <div className="mx-auto w-full max-w-[380px] overflow-hidden rounded-2xl border border-foreground/20 bg-card shadow-xl">
@@ -28,30 +26,35 @@ function WelcomeEmail({ firstName, role }) {
         <div>
           <p className="font-heading text-[19px] font-semibold leading-tight">Welcome, {firstName}.</p>
           <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
-            You have been invited to Sam, the one place for our goal, objectives, site plans and meetings.
+            Your organisation has elected to deploy the Decisions Architecture Managing Strategy Module. You have
+            been invited to Sam, the platform that will run this program for your operation. Your role has been set
+            to that of Administrator.
           </p>
         </div>
         <div>
           <p className="text-[11px] leading-snug">
-            <b>1. Set your password.</b> Use the button below. This link is yours alone.
+            <b>1. Set your password.</b> Use the button below, then sign in with the password you set. This link is
+            yours alone.
           </p>
           <p className="mt-1.5 inline-block rounded-lg bg-gold px-3 py-1.5 text-[11px] font-bold text-gold-foreground">
             Set your password
           </p>
         </div>
-        <p className="text-[11px] leading-snug">
-          <b>2. Sign in.</b> Open {APP_URL} on your phone, tablet or laptop.
-        </p>
-        <p className="text-[11px] leading-snug">
-          <b>3. Ask for your access.</b> If your role and site are not showing yet, ask your administrator to set
-          them.
-        </p>
         <div>
-          <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-gold">What you will find</p>
-          <p className="mt-1 text-[11px] leading-snug"><b>Assess</b> where the site is on the staircase.</p>
-          <p className="text-[11px] leading-snug"><b>Strategy</b> one goal, up to five objectives.</p>
-          <p className="text-[11px] leading-snug"><b>Site</b> tactics, plans and actions.</p>
-          <p className="text-[11px] leading-snug"><b>Meetings</b> the cadence that keeps the week honest.</p>
+          <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-gold">Your administrator page</p>
+          <p className="mt-1 text-[11px] leading-snug">
+            <b>1. Load your people.</b> Add the details and roles of the people who will complete the program. Each
+            person you add receives their own welcome email.
+          </p>
+          <p className="mt-1 text-[11px] leading-snug">
+            <b>2. Launch the program.</b> Use the Launch the program link. Sam walks you through the steps in order,
+            from the goal and objectives through to the cascade to site.
+          </p>
+          <p className="mt-1 text-[11px] leading-snug">
+            You will also find the deployment methodology explained step by step, a section with the tools and
+            artifacts, and the reporting dashboards. The dashboards are empty for now and fill as the program
+            progresses.
+          </p>
         </div>
         <p className="rounded-lg bg-card px-2.5 py-2 text-[11px] leading-snug">
           Sam is invite only. If you did not expect this email, you can ignore it and nothing will happen to your
