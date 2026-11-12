@@ -1,5 +1,6 @@
 import { Frame, MockCard, MockField, MockPill, MockRow, MockTap } from "@/components/flow/MockScreen";
 import { MikeWelcome } from "@/components/flow/mike/MikeWelcome";
+import { RhythmSheet } from "@/components/flow/mike/RhythmSheet";
 import { AdminLanding } from "@/components/flow/AdminLanding";
 import { AddPersonSheet } from "@/components/flow/admin/AddPersonSheet";
 import { OrgChart } from "@/components/flow/admin/OrgChart";
@@ -219,6 +220,12 @@ export const SCREENS = {
       where: "Home · Kestrel Underground",
       does: "The first thing he sees is a welcome, not a dashboard. It tells him what head office has done, the Goal, the three Objectives and the strategies that are now his to cascade, and it shows the meeting rhythm and how it links up: the weekly IN the business he runs with his leadership team, the monthly ON the business his manager joins, and the quarterly enterprise ON the business where his report is read. A button on that card opens a pop-up that draws the three meetings as a flow instead of paragraphs: the weekly IN the business at the bottom of the chain, the monthly ON the business above it, and the enterprise ON the business at the top, with the arrows naming what carries up. Then his two steps, in order. Step 1, schedule a meeting with his leadership team to work through the company Goal, Objectives and Strategies, and from that meeting they build the tactics, plans and actions that deliver them. Step 2, schedule the weekly IN the business and the monthly ON the business using the agendas and coaching cards provided, and invite his manager to the ON the business meetings. The last card explains the Action Register: every action is registered against the tactic it serves, the weekly meeting works it, and once a month the ON the business updates the tactic pages behind it, which roll up into the strategy implementation report the senior leadership team uses in their own ON the business meetings.",
       view: <MikeWelcome />,
+    },
+    {
+      title: "The rhythm, opened in a pop-up",
+      where: "Home · The meeting rhythm",
+      does: "Tapping See the rhythm on card 4 opens this over the page. No paragraphs: the three meetings are drawn as a flow. The weekly IN the business sits at the bottom, the monthly ON the business above it, and the enterprise ON the business at the top in gold, where his report is finally read. The arrows say what carries up: the actions are tracked against the tactics, and the tactics roll up into the strategy implementation report. It closes with the close button or a tap outside, and the card stays as it was.",
+      view: <RhythmSheet />,
     },
     {
       title: "The goal and objectives, in full",
