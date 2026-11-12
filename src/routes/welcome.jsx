@@ -3,6 +3,11 @@ import { RaptortechCredit } from "@/components/RaptortechCredit";
 
 const HERO = "https://base44.app/api/apps/6af15b436d05108c2128035d/files/mp/public/6af15b436d05108c2128035d/7892daf24_sam-hero-aeroplane.jpg";
 
+// Programs this person has been enrolled into.
+const ENROLLED = [
+  { name: "Managing Strategy", note: "Part of the Mine in a Box™ product suite" },
+];
+
 export const Route = createFileRoute("/welcome")({ ssr: false, component: Welcome });
 
 function Welcome() {
@@ -28,6 +33,17 @@ function Welcome() {
           Your site, your shift, one place.
         </h1>
         <p className="mt-3 text-lg text-white/90">Strategy, plans and meetings for site leaders.</p>
+        <div className="mt-6 rounded-2xl bg-white/10 p-4 ring-1 ring-white/20">
+          <p className="text-sm font-semibold" style={{ color: "#e2ad2f" }}>You are enrolled in</p>
+          <ul className="mt-2 space-y-2">
+            {ENROLLED.map((program) => (
+              <li key={program.name}>
+                <p className="text-lg font-semibold">{program.name}</p>
+                <p className="text-sm text-white/80">{program.note}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
         <Link
           to="/login"
           search={returnTo ? { returnTo } : undefined}
