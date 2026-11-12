@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { base44 } from "@/api/base44Client";
+import { ACCESS_LABELS } from "@/lib/access";
 
 const selectClass =
   "mt-1 w-full rounded-xl border border-input bg-background px-3 py-2.5 text-[15px] text-foreground focus:border-gold focus:outline-none";
 
 export function UserRow({ person, customers, onSaved }) {
   const [role, setRole] = useState(person.role || "user");
+  const [access, setAccess] = useState(person.access || "");
   const [customerId, setCustomerId] = useState(person.customer_id || "");
   const [saving, setSaving] = useState(false);
 
@@ -41,6 +43,24 @@ export function UserRow({ person, customers, onSaved }) {
           >
             <option value="user">User</option>
             <option value="admin">Super admin</option>
+          </select>
+        </label>
+        <label className="block">
+          <span className="text-[14px] text-muted-foreground">Access</span>
+          <select
+            className={selectClass}
+            value={access}
+            onChange={(e) => {
+              setAccess(e.target.value);
+              save({ access: e.target.value });
+            }}
+          >
+            <option value="">Not set</option>
+            {Object.entries(ACCESS_LABELS).map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
           </select>
         </label>
         <label className="block">

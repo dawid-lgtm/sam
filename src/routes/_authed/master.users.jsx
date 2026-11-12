@@ -28,7 +28,10 @@ function UsersPage() {
 
   return (
     <div className="space-y-4">
-      <PageHeader title="Users and roles" intro="Invite people, assign them to a customer, and decide who is a super admin." />
+      <PageHeader
+        title="Users and roles"
+        intro="Invite people, assign them to a customer, and decide who is a super admin. Set Access to Project Lead for the person who completes the steps; you then review the quality."
+      />
 
       <Section title="Add people">
         <div className="mb-3 grid grid-cols-2 gap-2">

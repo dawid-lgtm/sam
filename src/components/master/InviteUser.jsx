@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { base44 } from "@/api/base44Client";
 import { PrimaryButton } from "@/components/ui-kit/controls";
+import { ACCESS_LABELS } from "@/lib/access";
 
 const field = "mt-1 w-full rounded-xl border border-input bg-background px-3 py-2.5 text-[15px] text-foreground focus:border-gold focus:outline-none";
 
@@ -8,6 +9,7 @@ export function InviteUser({ customers, onDone }) {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("user");
   const [customerId, setCustomerId] = useState("");
+  const [access, setAccess] = useState("");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState(null);
 
@@ -18,10 +20,15 @@ export function InviteUser({ customers, onDone }) {
     setMessage(null);
     try {
       await base44.users.inviteUser(email.trim(), role);
-      if (customerId) {
+      if (customerId || access) {
         const matches = await base44.entities.User.filter({ email: email.trim() });
         const created = matches?.[0];
-        if (created) await base44.entities.User.update(created.id, { customer_id: customerId });
+        if (created) {
+          await base44.entities.User.update(created.id, {
+            ...(customerId ? { customer_id: customerId } : {}),
+            ...(access ? { access } : {}),
+          });
+        }
       }
       setMessage({ ok: true, text: `Invite sent to ${email.trim()}.` });
       setEmail("");
@@ -45,6 +52,17 @@ export function InviteUser({ customers, onDone }) {
           <select className={field} value={role} onChange={(e) => setRole(e.target.value)}>
             <option value="user">User</option>
             <option value="admin">Super admin</option>
+          </select>
+        </label>
+        <label className="block">
+          <span className="text-[15px] font-medium">Access</span>
+          <select className={field} value={access} onChange={(e) => setAccess(e.target.value)}>
+            <option value="">Not set</option>
+            {Object.entries(ACCESS_LABELS).map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
           </select>
         </label>
         <label className="block">

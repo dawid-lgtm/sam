@@ -2,6 +2,7 @@ export const ACCESS_LABELS = {
   administrator: "Administrator",
   executive: "Executive",
   project_manager: "Project Manager",
+  project_lead: "Project Lead",
   site_lead: "Site Lead",
 };
 
@@ -11,7 +12,8 @@ export function accessLabel(user) {
 
 // Goal, objectives, strategies and the change log belong to the top of the house.
 export function canEditStrategy(user) {
-  return user?.access === "administrator" || user?.access === "executive";
+  // A Project Lead completes the steps; the administrator reviews the quality.
+  return ["administrator", "executive", "project_lead"].includes(user?.access);
 }
 
 // Tactics, plans, actions and tracker rows belong to the site team.
