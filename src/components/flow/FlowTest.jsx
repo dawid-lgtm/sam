@@ -14,7 +14,10 @@ const FLOWS = [
       { label: "Tactics", who: "Project Manager" },
       { label: "Plans", who: "Site leaders" },
       { label: "Actions", who: "Site leaders, name and date" },
-      { label: "ON the business", who: "Monthly, site then head office" },
+      {
+        label: "Embed",
+        who: "Embedded by running the ON the business meetings consistently, using the stipulated agenda and coaching cards",
+      },
     ],
   },
   {
