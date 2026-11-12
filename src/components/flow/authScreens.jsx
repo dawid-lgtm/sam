@@ -31,7 +31,8 @@ function WelcomeEmail({ firstName, role }) {
           </p>
         </div>
         <div>
-          <p className="text-[11px] leading-snug">
+          <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-gold">What you need to do next</p>
+          <p className="mt-1 text-[11px] leading-snug">
             <b>1. Set your password.</b> Use the button below, then sign in with the password you set. This link is
             yours alone.
           </p>
