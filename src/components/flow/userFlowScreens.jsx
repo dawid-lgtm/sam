@@ -48,9 +48,9 @@ export const SCREENS = {
     },
     {
       group: "Setting up the program",
-      title: "Step 1 · he dates the first workshop",
+      title: "Step 2 · the first workshop",
       where: "Home · Launch the program",
-      does: "With his people loaded, Launch the program opens. Step 1 is the first workshop: the completed button sits at the top, then Sam says what the workshop is for and who should be in the room. He picks the date, and saving it invites the ELT, the people who sit in the room for workshop one, with the brief and the tool. Ticking the button at the top is what takes him to the finalised Goal and Objectives.",
+      does: "The first card of Step 2, the launch. It opens with the completed button, then says what the workshop is for and who is in the room, and tells him plainly: if it has been held, tick the button and he will be required to add the approved Goal and Objectives before he can continue; if it has not, schedule it below and send the invite. Under the date sits the list of who will get that invite, with a way to add someone from the people he already loaded or add a new person, a send the invite button, and a see the email button that opens the email so he can change the words.",
       view: <FirstWorkshop />,
     },
     {

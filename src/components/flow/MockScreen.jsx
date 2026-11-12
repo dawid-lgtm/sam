@@ -44,13 +44,15 @@ export function MockField({ label, value, faded }) {
   );
 }
 
-export function MockTap({ children, locked }) {
+export function MockTap({ children, locked, quiet }) {
   return (
     <div
       className={`rounded-lg px-2.5 py-2 text-center text-[13px] font-semibold ${
         locked
           ? "bg-gold/40 text-gold-foreground/80 ring-1 ring-gold/60"
-          : "bg-gold text-gold-foreground"
+          : quiet
+            ? "bg-background/50 text-foreground ring-1 ring-foreground/25"
+            : "bg-gold text-gold-foreground"
       }`}
     >
       {children}

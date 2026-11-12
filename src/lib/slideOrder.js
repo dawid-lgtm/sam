@@ -9,7 +9,7 @@ const ORDER = {
     { title: "Step 1 · he taps People and roles", num: "4A" },
     { title: "The org chart he has entered", num: "4B" },
     { title: "Step 2 · locked until Step 1 is done", num: "4C" },
-    { title: "Step 1 · he dates the first workshop", num: "4D" },
+    { title: "Step 2 · the first workshop", num: "4D" },
     { title: "Ticked: he enters the finalised Goal and Objectives", num: "4E" },
     { title: "Save turns into the next question", num: "4F" },
     { title: "Deployment methodology, step by step", num: "4G" },

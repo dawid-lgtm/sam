@@ -1,38 +1,56 @@
 import { Frame, MockCard, MockField, MockRow, MockTap } from "@/components/flow/MockScreen";
 
-// Step 1 of the launch: the first workshop, dated, with the completed button at the very top.
+// First card of Step 2: he either ticks the workshop as held, or dates it and sends the invite.
 export function FirstWorkshop() {
   return (
-    <Frame label="Launch the program · Step 1">
+    <Frame label="Launch the program · the first workshop">
       <div className="rounded-lg bg-gold px-3 py-3 text-center text-[14px] font-bold leading-tight text-gold-foreground ring-2 ring-gold">
         This workshop has been completed
       </div>
-      <p className="px-0.5 text-[12px] leading-snug text-muted-foreground">
-        If it is done, tick this button and Sam goes straight to the finalised Goal and Objectives.
+
+      <MockCard title="What this workshop is for" note="Half a day · in the room or online">
+        <p>
+          Agreeing the single three-year Goal, and the objectives that carry it, in your words, with the people who
+          own the work.
+        </p>
+        <p className="text-muted-foreground">
+          In the room: the CEO, the CFO, the COO, the GM Ops, your program managers and each site lead.
+        </p>
+      </MockCard>
+
+      <p className="px-0.5 text-[12px] leading-snug">
+        If you have completed this workshop, tick the button above, and you will be required to add the approved Goal
+        and Objectives before you can continue. If it has not been held yet, schedule the workshop below and send the
+        invite.
       </p>
 
-      <MockCard title="What this workshop is for">
-        <p>
-          One half day with your leadership team to agree the single three-year Goal, and the objectives that carry
-          it, in the room, in your words.
-        </p>
+      <MockCard title="Schedule the workshop" note="Step 1 of the launch">
+        <MockField label="Workshop date and time" value="Tue 18 Nov · 8:00 am to 12:00 pm" />
+        <MockRow arrow>Pick another date</MockRow>
       </MockCard>
 
-      <MockCard title="Who should be in the room">
-        <p>CEO and the ELT · the regional GMs · your program managers · each site lead.</p>
+      <MockCard title="Who gets the invite" note="5 people · they will see the date and the brief">
+        <p>Sarah Bell · CEO</p>
+        <p>Elle Wong · CFO</p>
+        <p>Dave Kerr · COO</p>
+        <p>Priya Nair · GM Ops</p>
+        <p>Mike Tau · program manager</p>
+        <MockRow arrow>Add someone from the people you loaded</MockRow>
+        <MockRow arrow>Add a new person</MockRow>
       </MockCard>
 
-      <MockField label="Date and time" value="Tue 18 Nov · 8:00 am to 12:00 pm" />
+      <MockTap>Send the invite</MockTap>
 
-      <MockCard title="Invite the ELT to the room" note="4 people · sent when he saves the date">
-        <p>CEO · CFO · COO · GM Ops</p>
-        <p className="text-muted-foreground">
-          Each one gets the date, the workshop brief and the tool, so they walk in ready to agree the Goal.
-        </p>
+      <MockTap quiet>See the email they will get</MockTap>
+
+      <MockCard title="The email · you can change the words" note="Sent from the program, in your name">
+        <MockField label="Subject" value="You are invited · Sam workshop, Tue 18 Nov" />
+        <MockField
+          label="Message"
+          value="You are in the room for the first Sam workshop. We will agree the Goal and the objectives for the next three years. The date and the agenda are in your diary."
+        />
+        <MockRow arrow>Edit the email text</MockRow>
       </MockCard>
-
-      <MockRow arrow>Open the workshop tool · agenda, GOSPA sheet, slides</MockRow>
-      <MockTap>Save the date and invite the room</MockTap>
     </Frame>
   );
 }
