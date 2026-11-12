@@ -1,12 +1,30 @@
+import { useState } from "react";
 import { Frame, MockCard, MockField, MockPill, MockRow, MockTap } from "@/components/flow/MockScreen";
 
 // The save on the Goal and Objectives turns straight into this: date the second workshop, with who must be in it.
 export function ScheduleWorkshop() {
+  const [held, setHeld] = useState(false);
+
   return (
     <Frame label="Schedule the second workshop">
       <MockCard gold title="The Goal and Objectives are saved">
         <p className="text-muted-foreground">Next: reviewing them and defining the Strategies, as a group.</p>
       </MockCard>
+
+      <button
+        type="button"
+        onClick={() => setHeld((v) => !v)}
+        className="flex w-full items-center gap-2 rounded-lg bg-background/40 px-2.5 py-2 text-left text-[13px] font-semibold"
+      >
+        <span
+          className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[11px] ${
+            held ? "border-gold bg-gold text-gold-foreground" : "border-foreground/50 bg-background/60"
+          }`}
+        >
+          {held ? "✓" : ""}
+        </span>
+        <span>This meeting has been completed</span>
+      </button>
 
       <MockCard title="Who has to be in the room" note="Only the roles that exist in his org are offered">
         <p>☑ Program managers · 2 <MockPill>Mike Tau</MockPill></p>
@@ -35,6 +53,21 @@ export function ScheduleWorkshop() {
       </MockCard>
 
       <MockTap>Send invite to the wider ELT team</MockTap>
+
+      <MockCard
+        gold={held}
+        title={held ? "What this invite now does" : "What this invite does"}
+        note={held ? "Ticked: the meeting has been completed" : "The meeting has not been held yet"}
+      >
+        {held ? (
+          <p>
+            This email will now invite them to the platform, and will provide them with the completed Goals,
+            Objectives and Strategies.
+          </p>
+        ) : (
+          <p>This email gives them the date, with the Goal and Objectives that were agreed already in hand.</p>
+        )}
+      </MockCard>
     </Frame>
   );
 }

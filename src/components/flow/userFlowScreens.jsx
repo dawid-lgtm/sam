@@ -72,7 +72,7 @@ export const SCREENS = {
       group: "Setting up the program",
       title: "Save turns into the next question",
       where: "Home · Schedule the second workshop",
-      does: "The moment he saves, Sam asks for the second workshop: the full day that reviews the Goal and Objectives and defines the Strategies. The room is pre-ticked from the roles he has entered, program managers, GMs and the ELT, and any role his org does not have yet is shown with a way to add it. Scheduling it comes first, then a separate button, send invite to the wider ELT team, with the list of who gets it: the rest of the leadership team, who walk in with the date and the Goal already in hand.",
+      does: "The moment he saves, Sam asks for the second workshop: the full day that reviews the Goal and Objectives and defines the Strategies. The room is pre-ticked from the roles he has entered, program managers, GMs and the ELT, and any role his org does not have yet is shown with a way to add it. Scheduling it comes first, then a separate button, send invite to the wider ELT team, with the list of who gets it: the rest of the leadership team. It carries the same completed tick as the first workshop: unticked, the invite hands them the date and the Goal; ticked, the note under the button says the email now invites them to the platform and provides the completed Goal, Objectives and Strategies.",
       view: <ScheduleWorkshop />,
     },
     {
