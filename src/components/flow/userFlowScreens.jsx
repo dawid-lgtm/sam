@@ -4,6 +4,7 @@ import { AdminLanding } from "@/components/flow/AdminLanding";
 import { AddPersonSheet } from "@/components/flow/admin/AddPersonSheet";
 import { OrgChart } from "@/components/flow/admin/OrgChart";
 import { LaunchProgram } from "@/components/flow/admin/LaunchProgram";
+import { FirstWorkshop } from "@/components/flow/admin/FirstWorkshop";
 import { LoadGoals } from "@/components/flow/admin/LoadGoals";
 import { ScheduleWorkshop } from "@/components/flow/admin/ScheduleWorkshop";
 import { MethodologyPage } from "@/components/flow/admin/MethodologyPage";
@@ -47,9 +48,16 @@ export const SCREENS = {
     },
     {
       group: "Setting up the program",
-      title: "Ticked: he enters the Goal and Objectives",
+      title: "Step 1 · he dates the first workshop",
+      where: "Home · Launch the program",
+      does: "With his people loaded, Launch the program opens. Step 1 is the first workshop: the completed button sits at the top, then Sam says what the workshop is for and who should be in the room, he picks the date, and a row opens the workshop tool. Ticking the button is what takes him to the finalised Goal and Objectives.",
+      view: <FirstWorkshop />,
+    },
+    {
+      group: "Setting up the program",
+      title: "Ticked: he enters the finalised Goal and Objectives",
       where: "Home · Enter the Goal and Objectives",
-      does: "He cannot launch on an empty frame. One three-year Goal, typed as the room wrote it, then up to five Objectives, each with its executive owner and the metric it moves. Sam refuses to save an objective with no owner, and Save is the only button.",
+      does: "Ticking the workshop as completed opens the frame the room agreed. One three-year Goal, typed as the room wrote it, then up to five Objectives, each with its executive owner and the metric it moves. Sam refuses to save an objective with no owner, and Save is the only button.",
       view: <LoadGoals />,
     },
     {
