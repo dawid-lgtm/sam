@@ -46,10 +46,10 @@ export function FirstWorkshop() {
       <MockTap quiet>See the email they will get</MockTap>
 
       <MockCard title="The email · you can change the words" note="Sent from the program, in your name">
-        <MockField label="Subject" value="You are invited · Sam workshop, Tue 18 Nov" />
+        <MockField label="Subject" value="You have been enrolled · Managing Strategy program" />
         <MockField
           label="Message"
-          value="You are in the room for the first Sam workshop. We will agree the Goal and the objectives for the next three years. The date and the agenda are in your diary."
+          value="Welcome [the name from the invite]. You have been enrolled in the Decision Architecture Managing Strategy program. This program is designed to structure how the business manages its core strategies, from head office to the front line. The first meeting to kick off the program is scheduled for [the date you added above], Tue 18 Nov, 8:00 am. We look forward to seeing you there."
         />
         <MockRow arrow>Edit the email text</MockRow>
       </MockCard>
