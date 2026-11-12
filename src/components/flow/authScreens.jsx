@@ -49,8 +49,7 @@ function WelcomeEmail({ firstName, role }) {
             person you add receives their own welcome email.
           </p>
           <p className="mt-1 text-[11px] leading-snug">
-            <b>2. Launch the program.</b> Use the Launch the program link. Sam walks you through the steps in order,
-            from the goal and objectives through to the cascade to site.
+            <b>2. Launch the program.</b> Use the Launch the program link. Sam walks you through the steps in order.
           </p>
           <p className="mt-1 text-[11px] leading-snug">
             You will also find the deployment methodology explained step by step, a section with the tools and
