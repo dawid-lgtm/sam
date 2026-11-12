@@ -14,7 +14,7 @@ export function LoadGoals() {
         <MockField label="Objective" placeholder="Type the objective" />
         <MockField label="Owner · metric" placeholder="Choose the executive owner, then the metric it moves" />
 
-        <MockRow arrow>Add objective · 5 places left</MockRow>
+        <MockRow arrow>Add objective · 4 objectives left</MockRow>
         <p className="text-muted-foreground">Five is the ceiling. An objective with no owner will not save.</p>
       </MockCard>
 
