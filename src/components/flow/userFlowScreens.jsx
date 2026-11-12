@@ -40,9 +40,9 @@ export const SCREENS = {
     },
     {
       group: "Setting up the program",
-      title: "Step 2 · Launch the program",
+      title: "Step 2 · locked until Step 1 is done",
       where: "Home · Launch the program",
-      does: "The tick sits at the top: has the session been held? Left empty, he dates the first workshop and Sam puts it in Meetings. Ticked, the date is not asked for at all.",
+      does: "Step 2 does not open on an empty org. The button is locked and says what is missing; tapping it answers plainly that he cannot access Step 2 until Step 1 is completed. Once the people are loaded and every one has a role, the tick and the workshop date appear.",
       view: <LaunchProgram />,
     },
     {

@@ -1,24 +1,32 @@
-import { Frame, MockCard, MockField, MockRow, MockTap } from "@/components/flow/MockScreen";
+import { Lock } from "lucide-react";
+import { Frame, MockCard, MockRow } from "@/components/flow/MockScreen";
 
-// Step 2 on the admin page. The tick sits at the top: if the session is already held, the date is not asked for.
+// Step 2 stays locked until Step 1 is done: he cannot get past the button, and it says why.
 export function LaunchProgram() {
   return (
     <Frame label="Launch the program · Step 2">
-      <MockCard gold title="Has the session been held?">
-        <MockRow>☐ The first workshop has been completed</MockRow>
+      <MockCard gold title="Step 1 is not finished" note="0 of 9 people loaded">
+        <p>Add your people, and give each one a role. Step 2 opens when that is done.</p>
+        <MockRow arrow>People and roles · add your first person</MockRow>
+      </MockCard>
+
+      <div className="flex items-center justify-center gap-2 rounded-lg bg-background/40 px-2.5 py-2 text-[13px] font-semibold text-muted-foreground opacity-60">
+        <Lock className="h-3.5 w-3.5" /> Launch the program
+      </div>
+
+      <MockCard title="If he taps it anyway">
+        <p className="rounded-lg bg-card px-2 py-1.5 text-[13px] font-semibold text-gold">
+          You cannot access Step 2 until Step 1 is completed.
+        </p>
         <p className="text-muted-foreground">
-          Tick it and Sam skips the date and asks for the Goal and Objectives the room agreed.
+          The date and the tick appear only once the people are in, so nothing launches on an empty org.
         </p>
       </MockCard>
 
-      <MockCard title="Not ticked · date the workshop" note="Sam puts it straight into Meetings">
-        <MockField label="Date of the first workshop" value="Thursday 20 November 2026" />
-        <p className="text-muted-foreground">CEO and ELT · Defining the Goals and Objectives.</p>
+      <MockCard title="Once Step 1 is done" note="The same page, unlocked">
+        <MockRow>☐ The first workshop has been completed</MockRow>
+        <p className="text-muted-foreground">Ticked, Sam asks for the Goal and Objectives. Unticked, he dates the workshop.</p>
       </MockCard>
-
-      <MockRow arrow>Check the org chart · 9 people, every one with a role</MockRow>
-
-      <MockTap>Launch the program</MockTap>
     </Frame>
   );
 }
