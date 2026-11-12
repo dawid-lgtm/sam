@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { FlowDiagram } from "@/components/flow/FlowDiagram";
 
 const FLOWS = [
   {
-    name: "Managing Strategy (GOSTPA)",
+    key: "strategy",
+    name: "Managing Strategy",
     steps: [
       { label: "Goal", who: "CEO and ELT" },
       { label: "Objectives", who: "CEO and ELT" },
@@ -15,7 +17,8 @@ const FLOWS = [
     ],
   },
   {
-    name: "Ops and Maintenance Phase 1 (CML)",
+    key: "ops",
+    name: "Managing Ops & Maintenance",
     steps: [
       { label: "Briefing", who: "Project Manager" },
       { label: "Prime workbook", who: "Superintendent and Supervisor" },
@@ -27,14 +30,25 @@ const FLOWS = [
 ];
 
 export function FlowTest() {
+  const [prog, setProg] = useState("strategy");
+  const flow = FLOWS.find((f) => f.key === prog);
+
   return (
-    <div className="space-y-4">
-      {FLOWS.map((flow) => (
-        <div key={flow.name}>
-          <p className="mb-2 px-1 text-[15px] font-semibold text-gold">{flow.name}</p>
-          <FlowDiagram steps={flow.steps} />
-        </div>
-      ))}
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-2">
+        {FLOWS.map((f) => (
+          <button
+            key={f.key}
+            onClick={() => setProg(f.key)}
+            className={`rounded-lg px-3 py-2 text-[14px] font-bold ${
+              prog === f.key ? "bg-gold text-gold-foreground" : "bg-secondary text-foreground"
+            }`}
+          >
+            {f.name}
+          </button>
+        ))}
+      </div>
+      <FlowDiagram steps={flow.steps} />
     </div>
   );
 }
