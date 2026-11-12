@@ -1,6 +1,14 @@
 import { Frame, MockCard, MockField, MockPill, MockRow, MockTap } from "@/components/flow/MockScreen";
 import { PhoneDash } from "@/components/flow/DashboardMock";
 import { AdminLanding } from "@/components/flow/AdminLanding";
+import { AddPersonSheet } from "@/components/flow/admin/AddPersonSheet";
+import { OrgChart } from "@/components/flow/admin/OrgChart";
+import { LaunchProgram } from "@/components/flow/admin/LaunchProgram";
+import { LoadGoals } from "@/components/flow/admin/LoadGoals";
+import { ScheduleWorkshop } from "@/components/flow/admin/ScheduleWorkshop";
+import { MethodologyPage } from "@/components/flow/admin/MethodologyPage";
+import { ToolsPage } from "@/components/flow/admin/ToolsPage";
+import { AdminDashboard } from "@/components/flow/admin/AdminDashboard";
 
 export const PEOPLE = {
   vahid: { name: "Vahid", role: "Project lead", blurb: "He runs the workshop and puts the Goal, Objectives and Strategies into the tool while the room talks." },
@@ -15,6 +23,55 @@ export const SCREENS = {
       where: "Home · Administrator",
       does: "Exactly what the welcome email promised: the administrator page. Two steps sit at the top, load his people and set their roles, then launch the program. Under them are the deployment methodology, the tools and artifacts, and the dashboards, which stay empty until the program is launched.",
       view: <AdminLanding />,
+    },
+    {
+      group: "Setting up the program",
+      title: "Step 1 · he taps People and roles",
+      where: "Home · Add a person",
+      does: "A sheet opens over the page. Name, email, site, role and who they report to. The role is required: Sam refuses to save without it, because the role is what the invite email promises and what the person can change. Direct reports are offered here, so the org chart is built as he goes, and a link shows the chart as it stands.",
+      view: <AddPersonSheet />,
+    },
+    {
+      group: "Setting up the program",
+      title: "The org chart he has entered",
+      where: "Home · Org chart",
+      does: "The same people, once, where they report. Anyone he has not given a role to is flagged, because Sam cannot invite them. He can add a person straight into any box.",
+      view: <OrgChart />,
+    },
+    {
+      group: "Setting up the program",
+      title: "Step 2 · Launch the program",
+      where: "Home · Launch the program",
+      does: "Two doors. If the workshop is still ahead he picks its date and Sam puts it in Meetings. If it has already been held he ticks completed, and Sam asks for the Goal and Objectives the room agreed instead of a date.",
+      view: <LaunchProgram />,
+    },
+    {
+      group: "Setting up the program",
+      title: "Ticked as already held: load what was agreed",
+      where: "Home · Load the Goal and Objectives",
+      does: "He cannot launch on an empty frame. The Goal goes in as one sentence, then up to five Objectives with one executive owner each. Save is the only button.",
+      view: <LoadGoals />,
+    },
+    {
+      group: "Setting up the program",
+      title: "Save turns into the next question",
+      where: "Home · Schedule the second workshop",
+      does: "The moment he saves, Sam asks for the second workshop: the full day that reviews the Goal and Objectives and defines the Strategies. The room is pre-ticked from the roles he has entered, program managers, GMs and the ELT, and any role his org does not have yet is shown with a way to add it.",
+      view: <ScheduleWorkshop />,
+    },
+    {
+      group: "Setting up the program",
+      title: "Deployment methodology, step by step",
+      where: "Home · Deployment methodology",
+      does: "The three steps of the program, in order, with the gate each one has to pass and where he is in it right now.",
+      view: <MethodologyPage />,
+    },
+    {
+      group: "Setting up the program",
+      title: "The tools and artifacts page",
+      where: "Home · Tools and artifacts",
+      does: "What the program hands out, each carrying its program and version: the handbook, the workshop agenda, the site coaching card. A row opens on screen, so he can read it or send it to the room.",
+      view: <ToolsPage />,
     },
     {
       title: "Which step is next",
@@ -129,6 +186,13 @@ export const SCREENS = {
           <MockTap>Send to the sites</MockTap>
         </Frame>
       ),
+    },
+    {
+      group: "The dashboard",
+      title: "Set up, so the setup page is gone",
+      where: "Home · Administrator",
+      does: "Once the people are loaded, the program is launched and the second workshop is dated, the checklist disappears and his normal admin dashboard loads: the programs with real progress, the sites and their cascade, and what is due this week. No reporting dashboards early, no empty charts.",
+      view: <AdminDashboard />,
     },
   ],
 
