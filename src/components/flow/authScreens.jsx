@@ -41,7 +41,9 @@ function WelcomeEmail({ firstName, role }) {
           </p>
         </div>
         <div>
-          <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-gold">Your administrator page</p>
+          <p className="font-heading text-[11px] font-semibold leading-snug text-gold">
+            Your login will take you to the administrator page. Once there you will see:
+          </p>
           <p className="mt-1 text-[11px] leading-snug">
             <b>1. Load your people.</b> Add the details and roles of the people who will complete the program. Each
             person you add receives their own welcome email.
