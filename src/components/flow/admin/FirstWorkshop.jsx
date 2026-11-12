@@ -24,8 +24,15 @@ export function FirstWorkshop() {
 
       <MockField label="Date and time" value="Tue 18 Nov · 8:00 am to 12:00 pm" />
 
+      <MockCard title="Invite the ELT to the room" note="4 people · sent when he saves the date">
+        <p>CEO · CFO · COO · GM Ops</p>
+        <p className="text-muted-foreground">
+          Each one gets the date, the workshop brief and the tool, so they walk in ready to agree the Goal.
+        </p>
+      </MockCard>
+
       <MockRow arrow>Open the workshop tool · agenda, GOSPA sheet, slides</MockRow>
-      <MockTap>Save the date</MockTap>
+      <MockTap>Save the date and invite the room</MockTap>
     </Frame>
   );
 }

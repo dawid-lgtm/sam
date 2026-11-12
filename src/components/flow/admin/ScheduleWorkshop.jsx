@@ -22,6 +22,19 @@ export function ScheduleWorkshop() {
       </MockCard>
 
       <MockTap>Schedule and send</MockTap>
+
+      <MockCard title="Then: the wider ELT team" note="6 people · they were not in workshop one">
+        <p>Priya Nair · GM Processing</p>
+        <p>Tom Reid · Maintenance manager</p>
+        <p>Ana Silva · HR lead</p>
+        <p>Ellie Wong · Finance lead</p>
+        <p className="text-muted-foreground">
+          This list is who will get it: the rest of the leadership team, with the same date and the Goal and
+          Objectives already inside.
+        </p>
+      </MockCard>
+
+      <MockTap>Send invite to the wider ELT team</MockTap>
     </Frame>
   );
 }

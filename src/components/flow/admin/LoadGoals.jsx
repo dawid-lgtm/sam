@@ -28,6 +28,13 @@ export function LoadGoals() {
 
       <MockTap>Save</MockTap>
 
+      <MockCard gold title="The ELT sees this the moment he saves" note="Everyone invited to workshop one">
+        <p>
+          The Goal and the Objectives land on their home screen, so the room can check what it agreed before the
+          second workshop is booked.
+        </p>
+      </MockCard>
+
       <MockCard title="On save" note="Sam's next question">
         <p>It opens the date for the second workshop, with the roles it needs already ticked.</p>
       </MockCard>
