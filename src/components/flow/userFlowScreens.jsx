@@ -1,4 +1,5 @@
 import { Frame, MockCard, MockField, MockPill, MockRow, MockTap } from "@/components/flow/MockScreen";
+import { PhoneDash } from "@/components/flow/DashboardMock";
 
 export const PEOPLE = {
   vahid: { name: "Vahid", role: "Project lead", blurb: "He runs the workshop and puts the Goal, Objectives and Strategies into the tool while the room talks." },
@@ -8,25 +9,22 @@ export const PEOPLE = {
 export const SCREENS = {
   vahid: [
     {
-      title: "Home, before the workshop",
+      group: "The dashboard",
+      title: "Where signing in lands him",
       where: "Home",
-      does: "Vahid opens Sam on his phone. My programs shows Managing Strategy and what is up next. He taps it.",
+      does: "Straight onto Home, no setup screen. My programs is what he came for, and the bottom bar is the whole app.",
       view: (
-        <Frame label="Home">
-          <MockCard gold title="Welcome, Vahid" note="Program lead · Kestrel Underground" />
-          <MockRow arrow>
-            <b>My programs</b>
-            <p className="text-muted-foreground">Managing Strategy · 42%</p>
-          </MockRow>
-          <MockRow arrow>
-            <b>Key dates</b>
-            <p className="text-muted-foreground">ON the business · 24 Nov</p>
-          </MockRow>
-          <MockRow arrow>
-            <b>This quarter</b>
-            <p className="text-muted-foreground">3 objectives · 4 strategies</p>
-          </MockRow>
-        </Frame>
+        <PhoneDash
+          name="Vahid"
+          role="Project lead"
+          site="Kestrel Underground"
+          goal="Be the safest, lowest cost 2 Mt a year underground mine in the region by 2029."
+          quarter="4 strategies · 3 site tactics"
+          programs={[
+            { label: "Managing Strategy", pct: 42, note: "week 3 of 12" },
+            { label: "Ops & Maintenance", pct: 10, note: "phase 1" },
+          ]}
+        />
       ),
     },
     {
@@ -147,25 +145,22 @@ export const SCREENS = {
 
   mike: [
     {
-      title: "Mike's home screen",
+      group: "The dashboard",
+      title: "Where signing in lands him",
       where: "Home",
-      does: "Mike signs in as a project manager and sees the agreed Goal and Objectives on his own home screen, before he opens anything.",
+      does: "The same app, his own numbers. The agreed Goal is already on his home screen and My programs says the cascade is his next step.",
       view: (
-        <Frame label="Home">
-          <MockCard gold title="Welcome, Mike" note="Project manager · Kestrel Underground" />
-          <MockRow arrow>
-            <b>This quarter</b>
-            <p className="text-muted-foreground">Goal + 3 objectives</p>
-          </MockRow>
-          <MockRow arrow>
-            <b>My programs</b>
-            <p className="text-muted-foreground">Managing Strategy · next: cascade</p>
-          </MockRow>
-          <MockRow arrow>
-            <b>Key dates</b>
-            <p className="text-muted-foreground">Site ON the business · 20 Nov</p>
-          </MockRow>
-        </Frame>
+        <PhoneDash
+          name="Mike"
+          role="Project manager"
+          site="Kestrel Underground"
+          goal="Be the safest, lowest cost 2 Mt a year underground mine in the region by 2029."
+          quarter="4 strategies · 1 site tactic"
+          programs={[
+            { label: "Managing Strategy", pct: 68, note: "cascade to site" },
+            { label: "Ops & Maintenance", pct: 0, note: "not started" },
+          ]}
+        />
       ),
     },
     {

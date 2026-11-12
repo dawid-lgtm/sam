@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { PEOPLE, SCREENS } from "@/components/flow/userFlowScreens";
+import { authScreens } from "@/components/flow/authScreens";
 
 export function UserFlow() {
   const [who, setWho] = useState("vahid");
   const [step, setStep] = useState(0);
-  const screens = SCREENS[who];
-  const screen = screens[step];
   const person = PEOPLE[who];
+  const screens = [...authScreens(person), ...SCREENS[who]];
+  const screen = screens[step];
 
   const pick = (key) => {
     setWho(key);
@@ -55,7 +56,7 @@ export function UserFlow() {
         {screen.view}
         <div className="flex flex-col gap-2">
           <p className="text-[13px] text-gold">
-            {step + 1} of {screens.length} · {screen.where}
+            {step + 1} of {screens.length} · {screen.group || "In the app"} · {screen.where}
           </p>
           <p className="font-heading text-[18px] font-semibold leading-snug">{screen.title}</p>
           <p className="text-[15px] leading-relaxed">{screen.does}</p>
