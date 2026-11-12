@@ -42,7 +42,7 @@ function WelcomeEmail({ firstName, role }) {
         </div>
         <div>
           <p className="font-heading text-[11px] font-semibold leading-snug text-gold">
-            Your login will take you to the administrator page. Once there you will see:
+            Your login will take you to the administrator page. Once there, complete the following steps:
           </p>
           <p className="mt-1 text-[11px] leading-snug">
             <b>1. Load your people.</b> Add the details and roles of the people who will complete the program. Each
