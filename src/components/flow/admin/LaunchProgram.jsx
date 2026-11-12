@@ -6,7 +6,7 @@ export function LaunchProgram() {
   return (
     <Frame label="Launch the program · Step 2">
       <MockCard gold title="Step 1 is not finished" note="0 of 9 people loaded">
-        <p>Add your people, and give each one a role. Step 2 opens when that is done.</p>
+        <p>Add your people, and give each one a role. Once this step is done, the Launch the program Step 2 will be unlocked.</p>
         <MockRow arrow>People and roles · add your first person</MockRow>
       </MockCard>
 
@@ -19,7 +19,7 @@ export function LaunchProgram() {
           You cannot access Step 2 until Step 1 is completed.
         </p>
         <p className="text-muted-foreground">
-          The date and the tick appear only once the people are in, so nothing launches on an empty org.
+          Once this step is done, the Launch the program Step 2 will be unlocked, and the date and the tick appear.
         </p>
       </MockCard>
 
