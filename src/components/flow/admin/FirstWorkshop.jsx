@@ -47,10 +47,33 @@ export function FirstWorkshop() {
 
       <MockCard title="The email · you can change the words" note="Sent from the program, in your name">
         <MockField label="Subject" value="You have been enrolled · Managing Strategy program" />
-        <MockField
-          label="Message"
-          value="Welcome [the name from the invite]. You have been enrolled in the Decision Architecture Managing Strategy program. This program is designed to structure how the business manages its core strategies, from head office to the front line. The first meeting to kick off the program is scheduled for [the date you added above], Tue 18 Nov, 8:00 am. We look forward to seeing you there."
-        />
+        <div>
+          <p className="text-[11px] uppercase tracking-wide text-muted-foreground">Message</p>
+          <div className="space-y-1.5 rounded-lg bg-background/60 px-2 py-1.5 text-[12px] leading-snug">
+            <p>
+              Welcome{" "}
+              <span className="rounded bg-gold px-1 text-[11px] font-semibold text-gold-foreground">
+                each person's name
+              </span>
+              ,
+            </p>
+            <p>
+              You have been enrolled in the Decision Architecture Managing Strategy program. This program is designed to
+              structure how the business manages its core strategies, from head office to the front line.
+            </p>
+            <p>
+              The first meeting to kick off the program is scheduled for{" "}
+              <span className="rounded bg-gold px-1 text-[11px] font-semibold text-gold-foreground">
+                the date above
+              </span>
+              . We look forward to seeing you there.
+            </p>
+          </div>
+          <p className="text-[11px] leading-snug text-muted-foreground">
+            The gold fields fill in on their own for every person on the list above: their own name, and the workshop
+            date.
+          </p>
+        </div>
         <MockRow arrow>Edit the email text</MockRow>
       </MockCard>
     </Frame>
