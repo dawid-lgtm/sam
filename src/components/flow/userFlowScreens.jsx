@@ -1,5 +1,6 @@
 import { Frame, MockCard, MockField, MockPill, MockRow, MockTap } from "@/components/flow/MockScreen";
 import { PhoneDash } from "@/components/flow/DashboardMock";
+import { AdminLanding } from "@/components/flow/AdminLanding";
 
 export const PEOPLE = {
   vahid: { name: "Vahid", role: "Project lead", blurb: "He runs the workshop and puts the Goal, Objectives and Strategies into the tool while the room talks." },
@@ -11,21 +12,9 @@ export const SCREENS = {
     {
       group: "The dashboard",
       title: "Where signing in lands him",
-      where: "Home",
-      does: "Straight onto Home, no setup screen. My programs is what he came for, and the bottom bar is the whole app.",
-      view: (
-        <PhoneDash
-          name="Vahid"
-          role="Project lead"
-          site="Kestrel Underground"
-          goal="Be the safest, lowest cost 2 Mt a year underground mine in the region by 2029."
-          quarter="4 strategies · 3 site tactics"
-          programs={[
-            { label: "Managing Strategy", pct: 42, note: "week 3 of 12" },
-            { label: "Ops & Maintenance", pct: 10, note: "phase 1" },
-          ]}
-        />
-      ),
+      where: "Home · Administrator",
+      does: "Exactly what the welcome email promised: the administrator page. Two steps sit at the top, load his people and set their roles, then launch the program. Under them are the deployment methodology, the tools and artifacts, and the dashboards, which stay empty until the program is launched.",
+      view: <AdminLanding />,
     },
     {
       title: "Which step is next",
