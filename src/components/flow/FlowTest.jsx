@@ -95,20 +95,10 @@ function Strategy({ s, save, role }) {
       </Card>
     </div>
   );
-  return <Master t={t} />;
+  return null;
 }
 
-function Master({ t }) {
-  return (
-    <Card title="Master GOSTPA" tag="Live page">
-      {t.goals.map((g, i) => <div key={i} className="mb-2 rounded-lg bg-background/60 p-2 text-[14px]"><b className="text-gold">Goal:</b> {g.goal} · <b>Objective:</b> {g.obj}</div>)}
-      {t.strategies.map((x, i) => <div key={i} className="mb-2 ml-4 rounded-lg bg-background/60 p-2 text-[14px]"><b className="text-gold">Strategy:</b> {x.strategy} · <b>Tactic:</b> {x.tactic}</div>)}
-      {t.actions.map((a, i) => <div key={i} className="mb-2 ml-8 rounded-lg bg-background/60 p-2 text-[14px]"><b className="text-gold">Plan:</b> {a.plan} · <b>Action:</b> {a.action} · {a.owner} · {a.date} · {a.measure}</div>)}
-      {!t.goals.length && <p className="text-[13px] opacity-70">Fills in as each level enters its part.</p>}
-      <Btn onClick={() => window.print()}>Download PDF</Btn>
-    </Card>
-  );
-}
+
 
 function Workbook({ s, save, who }) {
   const w = s.op.wb[who.name] || { a: {}, sub: false, ok: false };
@@ -179,40 +169,6 @@ function Ops({ s, save, role, actAs, setActAs }) {
   return null;
 }
 
-function SuperView({ s, save, prog }) {
-  const o = s.op, t = s.st;
-  const stage = (p) => o.attended[p.name] ? "Apply" : o.wb[p.name]?.ok ? "Lab next" : o.wb[p.name]?.sub ? "Waiting sign-off" : "Prime workbook";
-  const answers = o.people.filter((p) => o.wb[p.name]?.sub);
-  if (prog === "strategy") return (
-    <div className="grid gap-3 md:grid-cols-2">
-      <Card title="MMS (test) · Managing Strategy">
-        <p className="text-[14px]">{t.goals.length} goals · {t.strategies.length} strategies · {t.actions.length} actions · briefing {t.briefing ? "done ✓" : "not yet"}</p>
-        <p className="mt-1 text-[14px]">Regional GMs: {t.regionals.length} · site leaders: {t.leaders.length} · regional workshop {t.regWorkshop ? "done ✓" : "not yet"}</p>
-      </Card>
-      <Card title="Monthly On the Business">
-        <List items={t.monthly} render={(m) => <>{m.date} · {m.done ? "held ✓" : "not held"} · {m.reg ? "register ✓" : "register not updated"}</>} />
-      </Card>
-      <div className="md:col-span-2"><Master t={t} /></div>
-    </div>
-  );
-  return (
-    <div className="grid gap-3 md:grid-cols-2">
-      <Card title="MMS (test) · Ops and Maintenance Phase 1">
-        <label className="flex items-center gap-2 text-[15px]"><input type="checkbox" checked={o.on} onChange={(e) => save((n) => { n.op.on = e.target.checked; return n; })} /> Ops / Maintenance Phase 1 on</label>
-      </Card>
-      <Card title="Where everyone is (CML)">
-        <List items={o.people} render={(p) => <>{p.name} · {p.level} · {p.stream} · <b className="text-gold">{stage(p)}</b></>} />
-      </Card>
-      <Card title="Collated workbook answers" tag="For the Labs">
-        {PROMPTS.map((q, i) => <div key={i} className="mb-2 text-[13px]"><b>{q}</b>{answers.map((p) => <p key={p.name} className="ml-2 opacity-90">{p.name}: {o.wb[p.name].a[i]}</p>)}</div>)}
-      </Card>
-      <Card title="AI summary" tag="Coming">
-        <p className="text-[14px]">Sam will read all the answers and give you the themes, gaps and who needs help. Needs your OK for the AI spend before it is switched on.</p>
-      </Card>
-    </div>
-  );
-}
-
 const FLOWS = {
   strategy: {
     steps: [
@@ -225,7 +181,7 @@ const FLOWS = {
       { label: "Actions", who: "Site leaders, name and date" },
       { label: "ON the business", who: "Monthly, site then head office" },
     ],
-    at: { super: -1, lead: 2, regional: 3, pm: 6 },
+    at: { lead: 2, regional: 3, pm: 6 },
   },
   ops: {
     steps: [
@@ -235,38 +191,34 @@ const FLOWS = {
       { label: "Validation Lab", who: "Facilitator" },
       { label: "Apply on site", who: "Everyone" },
     ],
-    at: { super: -1, pm: 0, supt: 1, sup: 1, facilitator: 3 },
+    at: { pm: 0, supt: 1, sup: 1, facilitator: 3 },
   },
 };
 
 const ROLES = {
-  strategy: [["super", "Super admin (you)"], ["lead", "Program Lead / Ops Manager"], ["regional", "Regional GM"], ["pm", "Project Manager (site)"]],
-  ops: [["super", "Super admin (you)"], ["pm", "Project Manager"], ["supt", "Superintendent"], ["sup", "Supervisor"], ["facilitator", "Lab facilitator"]],
+  strategy: [["lead", "Program Lead / Ops Manager"], ["regional", "Regional GM"], ["pm", "Project Manager (site)"]],
+  ops: [["pm", "Project Manager"], ["supt", "Superintendent"], ["sup", "Supervisor"], ["facilitator", "Lab facilitator"]],
 };
 
 export function FlowTest() {
   const [s, save] = useStore();
   const [prog, setProg] = useState("strategy");
-  const [role, setRole] = useState("super");
+  const [role, setRole] = useState("lead");
   const [actAs, setActAs] = useState("");
   return (
     <div className="space-y-3">
       <div className="rounded-2xl bg-card p-4">
         <h2 className="font-serif text-[22px] font-semibold">Test the MMS set-up</h2>
-        <p className="text-[14px] opacity-80">Test names only. Pick a program, then act as each person in turn. Nothing is emailed: emails go to the test outbox below.</p>
+        <p className="text-[14px] opacity-80">Test names only. Pick a program, then act as each person in turn. Nothing is emailed.</p>
         <div className="mt-2 flex flex-wrap gap-2">
-          {[["strategy", "Managing Strategy (GOSTPA)"], ["ops", "Ops and Maintenance Phase 1 (CML)"]].map(([k, l]) => <button key={k} onClick={() => { setProg(k); setRole("super"); }} className={`rounded-lg px-3 py-2 text-[14px] font-bold ${prog === k ? "bg-gold text-background" : "bg-background"}`}>{l}</button>)}
+          {[["strategy", "Managing Strategy (GOSTPA)"], ["ops", "Ops and Maintenance Phase 1 (CML)"]].map(([k, l]) => <button key={k} onClick={() => { setProg(k); setRole(ROLES[k][0][0]); }} className={`rounded-lg px-3 py-2 text-[14px] font-bold ${prog === k ? "bg-gold text-background" : "bg-background"}`}>{l}</button>)}
         </div>
         <div className="mt-2 flex flex-wrap gap-2">
           {ROLES[prog].map(([k, l]) => <button key={k} onClick={() => setRole(k)} className={`rounded-lg px-3 py-1 text-[13px] ${role === k ? "bg-gold text-background font-bold" : "bg-background"}`}>{l}</button>)}
         </div>
       </div>
       <FlowDiagram steps={FLOWS[prog].steps} active={FLOWS[prog].at[role] ?? -1} />
-      {role === "super" ? <SuperView s={s} save={save} prog={prog} /> : prog === "strategy" ? <Strategy s={s} save={save} role={role} /> : <Ops s={s} save={save} role={role} actAs={actAs} setActAs={setActAs} />}
-      <Card title="Test outbox (not sent)">
-        <List items={s.outbox.slice(0, 8)} render={(m) => <>{m.at} · to {m.to}: {m.what}</>} />
-        <Btn onClick={() => { if (confirm("Clear all saved answers?")) save(() => structuredClone(blank)); }}>Reset test</Btn>
-      </Card>
+      {prog === "strategy" ? <Strategy s={s} save={save} role={role} /> : <Ops s={s} save={save} role={role} actAs={actAs} setActAs={setActAs} />}
     </div>
   );
 }
