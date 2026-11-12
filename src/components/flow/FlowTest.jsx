@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FlowDiagram } from "@/components/flow/FlowDiagram";
+import { UserFlow } from "@/components/flow/UserFlow";
 
 const FLOWS = [
   {
@@ -49,6 +50,7 @@ export function FlowTest() {
         ))}
       </div>
       <FlowDiagram steps={flow.steps} />
+      {prog === "strategy" ? <UserFlow /> : null}
     </div>
   );
 }
