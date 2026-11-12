@@ -35,7 +35,7 @@ export const getAdminSummary = createServerFn({ method: "POST" })
     const statuses = data.statuses.map((s) => `- ${s.name}: ${s.count}`).join("\n");
 
     return context.getBase44().integrations.Core.InvokeLLM({
-      prompt: `You are the analyst for Sam, a mining leadership SaaS ("Mine in a box\u2122"). Write a short read-out for the super admin on the whole customer base.
+      prompt: `You are the analyst for Sam, a mining leadership SaaS ("Mine-In-A-Box\u2122"). Write a short read-out for the super admin on the whole customer base.
 
 Numbers:
 - Customers: ${data.customers} (${data.activeCustomers} active)

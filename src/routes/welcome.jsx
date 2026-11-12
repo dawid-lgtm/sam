@@ -5,7 +5,7 @@ const HERO = "https://base44.app/api/apps/6af15b436d05108c2128035d/files/mp/publ
 
 // Programs this person has been enrolled into.
 const ENROLLED = [
-  { name: "Managing Strategy", note: "Part of the Mine in a Box™ product suite" },
+  { name: "Managing Strategy", note: "Part of the Mine-In-A-Box™ product suite" },
 ];
 
 export const Route = createFileRoute("/welcome")({ ssr: false, component: Welcome });
@@ -17,7 +17,7 @@ function Welcome() {
     <div className="relative flex min-h-screen flex-col bg-[#2c4775] text-white">
       <header className="px-6 pt-10">
         <p className="font-serif text-5xl font-semibold tracking-tight" style={{ fontFamily: "Fraunces, serif" }}>Sam</p>
-        <p className="mt-1 text-base" style={{ color: "#e2ad2f" }}>Mine in a box™</p>
+        <p className="mt-1 text-base" style={{ color: "#e2ad2f" }}>Mine-In-A-Box™</p>
       </header>
       {/* Hero, cropped just below the girl and plane: no mountains */}
       <div className="mx-auto mt-6 w-full max-w-[900px] flex-1 flex items-center">
@@ -52,7 +52,7 @@ function Welcome() {
         >
           Log in
         </Link>
-        <p className="mt-6 text-center text-sm text-white/80">Invite only · Mine in a box™</p>
+        <p className="mt-6 text-center text-sm text-white/80">Invite only · Mine-In-A-Box™</p>
         <RaptortechCredit className="mt-2 text-white/70" />
       </main>
     </div>

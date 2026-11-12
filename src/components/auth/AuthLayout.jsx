@@ -19,7 +19,7 @@ export function AuthLayout({ icon: Icon, title, subtitle, footer, children }) {
             S
           </div>
           <p className="font-heading text-[38px] font-semibold leading-none">Sam</p>
-          <p className="mt-1 text-[15px] font-semibold text-gold">Mine in a box™</p>
+          <p className="mt-1 text-[15px] font-semibold text-gold">Mine-In-A-Box™</p>
           <AuthTagline />
           <h1 className="mt-2 flex items-center justify-center gap-2 font-heading text-[26px] font-semibold tracking-tight">
             {Icon ? <Icon className="h-6 w-6 text-gold" aria-hidden="true" /> : null}

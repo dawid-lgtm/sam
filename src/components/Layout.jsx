@@ -19,7 +19,7 @@ export function AppShell({ children }) {
               Sam
             </span>
             <div className="min-w-0 leading-tight">
-              <p className="whitespace-nowrap text-[15px] text-muted-foreground">Mine in a box™</p>
+              <p className="whitespace-nowrap text-[15px] text-muted-foreground">Mine-In-A-Box™</p>
               <p className="whitespace-nowrap text-[15px] text-muted-foreground">
                 Powered by{" "}
                 <a
