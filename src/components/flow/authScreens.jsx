@@ -1,6 +1,5 @@
 import { Lock, Mail } from "lucide-react";
-import { Image } from "@/components/ui/image";
-import { BRAND_MARK } from "@/lib/brand";
+import { BrandMark } from "@/components/auth/BrandMark";
 
 function EmailShell({ inbox, subject, children }) {
   return (
@@ -78,9 +77,7 @@ function AuthPhone({ icon: Icon, title, subtitle, children }) {
     <div className="mx-auto w-full max-w-[360px] rounded-[26px] border border-foreground/20 bg-background p-3 shadow-xl">
       <div className="rounded-2xl bg-card p-4">
         <div className="text-center">
-          <span className="mx-auto block h-10 w-10 overflow-hidden rounded-full bg-gold p-[2px]">
-            <Image src={BRAND_MARK} alt="Sam" className="h-full w-full rounded-full" />
-          </span>
+          <BrandMark className="mx-auto h-10 w-10 sm:h-12 sm:w-12" />
           <p className="mt-1.5 font-heading text-[24px] font-semibold leading-none">Sam</p>
           <p className="text-[11px] font-semibold text-gold">Mine-In-A-Box™</p>
           <p className="mt-2 flex items-center justify-center gap-1.5 font-heading text-[16px] font-semibold">
