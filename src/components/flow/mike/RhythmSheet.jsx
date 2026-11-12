@@ -6,7 +6,7 @@ import { RhythmDiagram } from "@/components/flow/mike/RhythmDiagram";
 export function RhythmSheet() {
   return (
     <Frame label="Home · the rhythm, opened over card 4">
-      <div className="rounded-2xl bg-background/70 p-2.5 ring-1 ring-gold/40">
+      <div className="sam-glass p-2.5 ring-1 ring-gold/40">
         <div className="mb-2 flex items-start justify-between gap-2">
           <p className="font-heading text-[17px] font-semibold leading-snug">The meeting rhythm</p>
           <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-background/60 text-muted-foreground">

@@ -16,7 +16,7 @@ export function Frame({ label, children }) {
 
 export function MockCard({ title, note, gold, children }) {
   return (
-    <div className={`rounded-xl p-2.5 ${gold ? "bg-gold/15 ring-1 ring-gold" : "bg-card"}`}>
+    <div className={`rounded-xl p-2.5 ${gold ? "bg-gold/15 ring-1 ring-gold" : "sam-glass"}`}>
       {title ? <p className={`text-[14px] font-semibold ${gold ? "text-gold" : ""}`}>{title}</p> : null}
       {note ? <p className="text-[12px] text-muted-foreground">{note}</p> : null}
       {children ? <div className="mt-1.5 space-y-1 text-[13px] leading-snug">{children}</div> : null}

@@ -10,7 +10,7 @@ function Arrow({ label }) {
 
 function MeetingCard({ lane, title, note, children, gold }) {
   return (
-    <div className={`rounded-xl p-2.5 ${gold ? "bg-gold/15 ring-1 ring-gold" : "bg-background/40"}`}>
+    <div className={`rounded-xl p-2.5 ${gold ? "bg-gold/15 ring-1 ring-gold" : "sam-glass"}`}>
       <p className={`text-[10px] uppercase tracking-wide ${gold ? "text-gold" : "text-muted-foreground"}`}>{lane}</p>
       <p className={`text-[14px] font-semibold ${gold ? "text-gold" : ""}`}>{title}</p>
       <p className="text-[12px] text-muted-foreground">{note}</p>

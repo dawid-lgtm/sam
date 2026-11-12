@@ -8,7 +8,7 @@ export function AddPersonSheet() {
         <p className="text-muted-foreground">People and roles · 2 of 9 added</p>
       </MockCard>
 
-      <div className="rounded-xl bg-card p-2.5 ring-1 ring-gold">
+      <div className="sam-glass rounded-xl p-2.5 ring-1 ring-gold">
         <div className="flex items-center justify-between">
           <p className="text-[14px] font-semibold text-gold">Add a person</p>
           <span className="text-[13px] text-muted-foreground">×</span>

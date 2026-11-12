@@ -15,7 +15,7 @@ export function LaunchProgram() {
       </div>
 
       <MockCard title="If he taps it anyway">
-        <p className="rounded-lg bg-card px-2 py-1.5 text-[13px] font-semibold text-gold">
+        <p className="sam-glass rounded-lg px-2 py-1.5 text-[13px] font-semibold text-gold">
           You cannot access Step 2 until Step 1 is completed.
         </p>
         <p className="text-muted-foreground">

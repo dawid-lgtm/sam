@@ -3,7 +3,7 @@ import { BrandMark } from "@/components/auth/BrandMark";
 
 function EmailShell({ inbox, subject, children }) {
   return (
-    <div className="mx-auto w-full max-w-[380px] overflow-hidden rounded-2xl border border-foreground/20 bg-card shadow-xl">
+    <div className="mx-auto w-full max-w-[380px] overflow-hidden rounded-2xl border border-foreground/20 sam-glass shadow-xl">
       <div className="space-y-0.5 border-b border-foreground/15 bg-background/60 px-3 py-2">
         <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{inbox}</p>
         <p className="text-[11px] text-muted-foreground">From: Sam &lt;no-reply&gt; · to you</p>
