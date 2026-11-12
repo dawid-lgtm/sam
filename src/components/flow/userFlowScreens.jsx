@@ -21,7 +21,7 @@ export const SCREENS = {
       group: "The dashboard",
       title: "Where signing in lands him",
       where: "Home · Administrator",
-      does: "Exactly what the welcome email promised: the administrator page. Two steps sit at the top, load his people and set their roles, then launch the program. Under them are the deployment methodology, the tools and artifacts, and the dashboards, which stay empty until the program is launched.",
+      does: "Exactly what the welcome email promised: the administrator page. Two steps sit at the top, load your people and set their roles, then launch the program, which stays locked until step one is completed. Under them are the deployment methodology, the tools and artifacts, and the dashboards, which stay empty until the program is launched.",
       view: <AdminLanding />,
     },
     {
@@ -35,7 +35,7 @@ export const SCREENS = {
       group: "Setting up the program",
       title: "The org chart he has entered",
       where: "Home · Org chart",
-      does: "The same people, once, where they report. Anyone he has not given a role to is flagged, because Sam cannot invite them. He can add a person straight into any box.",
+      does: "The same people, once, where they report, as you entered them. Anyone you have not given a role to is flagged, because Sam cannot invite them. You can add a person straight into any box.",
       view: <OrgChart />,
     },
     {
