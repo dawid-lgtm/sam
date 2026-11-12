@@ -51,7 +51,7 @@ export const SCREENS = {
       group: "Setting up the program",
       title: "Step 2 · the first workshop",
       where: "Home · Launch the program",
-      does: "The first card of Step 2, the launch. It opens with the completed button, then says what the workshop is for and who is in the room, and tells him plainly: if it has been held, tick the button and he will be required to add the approved Goal and Objectives before he can continue; if it has not, schedule it below and send the invite. Under the date sits the list of who will get that invite, with a way to add someone from the people he already loaded or add a new person, a send the invite button, and a see the email button that opens the email so he can change the words.",
+      does: "The first card of Step 2, the launch. It opens with the completed button, then says what the workshop is for and who is in the room, and tells him plainly: if it has been held, tick the button and he will be required to add the approved Goal and Objectives before he can continue; if it has not, schedule it below, tick who he wants from the people he has loaded, and save. Under the date sits that list, with a way to add a new person, a save button, and a see the email button that opens the email so he can change the words. Ticked as held, the date, the list and the email grey out and Sam says every invite will now be sent as part of the Step 2 meeting set up; the people he ticks roll into the invite for the second meeting.",
       view: <FirstWorkshop />,
     },
     {

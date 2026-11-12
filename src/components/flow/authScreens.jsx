@@ -77,8 +77,8 @@ function AuthPhone({ icon: Icon, title, subtitle, children }) {
     <div className="mx-auto w-full max-w-[360px] rounded-[26px] border border-foreground/20 bg-background p-3 shadow-xl">
       <div className="rounded-2xl bg-card p-4">
         <div className="text-center">
-          <BrandMark className="mx-auto h-10 w-10 sm:h-12 sm:w-12" />
-          <p className="mt-1.5 font-heading text-[24px] font-semibold leading-none">Sam</p>
+          <BrandMark className="mx-auto h-16 w-16 sm:h-20 sm:w-20" />
+          <p className="mt-2 font-heading text-[24px] font-semibold leading-none">Sam</p>
           <p className="text-[11px] font-semibold text-gold">Mine-In-A-Box™</p>
           <p className="mt-2 flex items-center justify-center gap-1.5 font-heading text-[16px] font-semibold">
             <Icon className="h-4 w-4 text-gold" /> {title}
