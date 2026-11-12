@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FlowDiagram } from "@/components/flow/FlowDiagram";
 
 const KEY = "sam-test-flow-v1";
 const blank = {
@@ -212,6 +213,32 @@ function SuperView({ s, save, prog }) {
   );
 }
 
+const FLOWS = {
+  strategy: {
+    steps: [
+      { label: "Goal", who: "CEO and ELT" },
+      { label: "Objectives", who: "CEO and ELT" },
+      { label: "Briefing workshop", who: "Program Lead" },
+      { label: "Strategies", who: "Regional GM with the PMs" },
+      { label: "Tactics", who: "Project Manager" },
+      { label: "Plans", who: "Site leaders" },
+      { label: "Actions", who: "Site leaders, name and date" },
+      { label: "ON the business", who: "Monthly, site then head office" },
+    ],
+    at: { super: -1, lead: 2, regional: 3, pm: 6 },
+  },
+  ops: {
+    steps: [
+      { label: "Briefing", who: "Project Manager" },
+      { label: "Prime workbook", who: "Superintendent and Supervisor" },
+      { label: "Sign-off", who: "Superintendent, then PM" },
+      { label: "Validation Lab", who: "Facilitator" },
+      { label: "Apply on site", who: "Everyone" },
+    ],
+    at: { super: -1, pm: 0, supt: 1, sup: 1, facilitator: 3 },
+  },
+};
+
 const ROLES = {
   strategy: [["super", "Super admin (you)"], ["lead", "Program Lead / Ops Manager"], ["regional", "Regional GM"], ["pm", "Project Manager (site)"]],
   ops: [["super", "Super admin (you)"], ["pm", "Project Manager"], ["supt", "Superintendent"], ["sup", "Supervisor"], ["facilitator", "Lab facilitator"]],
@@ -234,6 +261,7 @@ export function FlowTest() {
           {ROLES[prog].map(([k, l]) => <button key={k} onClick={() => setRole(k)} className={`rounded-lg px-3 py-1 text-[13px] ${role === k ? "bg-gold text-background font-bold" : "bg-background"}`}>{l}</button>)}
         </div>
       </div>
+      <FlowDiagram steps={FLOWS[prog].steps} active={FLOWS[prog].at[role] ?? -1} />
       {role === "super" ? <SuperView s={s} save={save} prog={prog} /> : prog === "strategy" ? <Strategy s={s} save={save} role={role} /> : <Ops s={s} save={save} role={role} actAs={actAs} setActAs={setActAs} />}
       <Card title="Test outbox (not sent)">
         <List items={s.outbox.slice(0, 8)} render={(m) => <>{m.at} · to {m.to}: {m.what}</>} />
