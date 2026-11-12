@@ -22,11 +22,6 @@ export function LaunchProgram() {
           Once this step is done, the Launch the program Step 2 will be unlocked, and the date and the tick appear.
         </p>
       </MockCard>
-
-      <MockCard title="Once Step 1 is done" note="The same page, unlocked">
-        <MockRow>☐ The first workshop has been completed</MockRow>
-        <p className="text-muted-foreground">Ticked, Sam asks for the Goal and Objectives. Unticked, he dates the workshop.</p>
-      </MockCard>
     </Frame>
   );
 }
