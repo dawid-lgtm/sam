@@ -42,14 +42,14 @@ export const SCREENS = {
       group: "Setting up the program",
       title: "Step 2 · Launch the program",
       where: "Home · Launch the program",
-      does: "Two doors. If the workshop is still ahead he picks its date and Sam puts it in Meetings. If it has already been held he ticks completed, and Sam asks for the Goal and Objectives the room agreed instead of a date.",
+      does: "The tick sits at the top: has the session been held? Left empty, he dates the first workshop and Sam puts it in Meetings. Ticked, the date is not asked for at all.",
       view: <LaunchProgram />,
     },
     {
       group: "Setting up the program",
-      title: "Ticked as already held: load what was agreed",
-      where: "Home · Load the Goal and Objectives",
-      does: "He cannot launch on an empty frame. The Goal goes in as one sentence, then up to five Objectives with one executive owner each. Save is the only button.",
+      title: "Ticked: he enters the Goal and Objectives",
+      where: "Home · Enter the Goal and Objectives",
+      does: "He cannot launch on an empty frame. One three-year Goal, typed as the room wrote it, then up to five Objectives, each with its executive owner and the metric it moves. Sam refuses to save an objective with no owner, and Save is the only button.",
       view: <LoadGoals />,
     },
     {
