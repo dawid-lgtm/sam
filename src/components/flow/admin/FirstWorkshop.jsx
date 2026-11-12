@@ -4,10 +4,6 @@ import { Frame, MockCard, MockField, MockRow, MockTap } from "@/components/flow/
 export function FirstWorkshop() {
   return (
     <Frame label="Launch the program · the first workshop">
-      <div className="rounded-lg bg-gold px-3 py-3 text-center text-[14px] font-bold leading-tight text-gold-foreground ring-2 ring-gold">
-        This workshop has been completed
-      </div>
-
       <MockCard title="What this workshop is for" note="Half a day · in the room or online">
         <p>
           Agreeing the single three-year Goal, and the objectives that carry it, in your words, with the people who
@@ -18,10 +14,16 @@ export function FirstWorkshop() {
         </p>
       </MockCard>
 
+      <p className="px-0.5 text-[12px] leading-snug">If this workshop has already been held, tick the box.</p>
+
+      <div className="flex items-center gap-2 rounded-lg bg-background/40 px-2.5 py-2 text-[13px] font-semibold">
+        <span className="h-4 w-4 shrink-0 rounded border border-foreground/50 bg-background/60" />
+        <span>This workshop has been completed</span>
+      </div>
+
       <p className="px-0.5 text-[12px] leading-snug">
-        If you have completed this workshop, tick the button above, and you will be required to add the approved Goal
-        and Objectives before you can continue. If it has not been held yet, schedule the workshop below and send the
-        invite.
+        Ticking it means you will be required to add the approved Goal and Objectives before you can continue. If it
+        has not been held yet, leave it empty, schedule the workshop below and send the invite.
       </p>
 
       <MockCard title="Schedule the workshop" note="Step 1 of the launch">
