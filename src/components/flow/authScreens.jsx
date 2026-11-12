@@ -26,9 +26,8 @@ function WelcomeEmail({ firstName, role }) {
         <div>
           <p className="font-heading text-[19px] font-semibold leading-tight">Welcome, {firstName}.</p>
           <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
-            Your organisation has elected to deploy the Decision Architecture Managing Strategy Module. You have
-            been invited to Sam, the platform that will run this program for your operation. Your role has been set
-            to that of Administrator.
+            MMS has elected to deploy the Decision Architecture Managing Strategy Module. You have been invited to
+            Sam, the platform that will deploy this program in MMS. Your role has been set to that of Administrator.
           </p>
         </div>
         <div>
