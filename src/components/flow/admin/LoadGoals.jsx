@@ -5,24 +5,16 @@ export function LoadGoals() {
   return (
     <Frame label="Enter the Goal and Objectives">
       <MockCard gold title="1 · The Goal" note="One sentence, three years out">
-        <MockField value="Be the safest, lowest cost 2 Mt a year underground mine in the region by 2029." />
+        <MockField placeholder="Type the goal exactly as the room agreed it" />
         <p className="text-muted-foreground">Typed exactly as the room wrote it. Every site sees this sentence.</p>
       </MockCard>
 
-      <MockCard title="2 · The Objectives" note="3 of 5 · one executive owner each">
+      <MockCard title="2 · The Objectives" note="0 of 5 · one executive owner each">
         <p className="font-semibold">O1</p>
-        <MockField label="Objective" value="Zero serious incidents" />
-        <MockField label="Owner · metric" value="COO · TRIFR" />
+        <MockField label="Objective" placeholder="Type the objective" />
+        <MockField label="Owner · metric" placeholder="Choose the executive owner, then the metric it moves" />
 
-        <p className="pt-1 font-semibold">O2</p>
-        <MockField label="Objective" value="90% fleet availability" />
-        <MockField label="Owner · metric" value="GM Ops · availability %" />
-
-        <p className="pt-1 font-semibold">O3</p>
-        <MockField label="Objective" value="12% lower cost per tonne" />
-        <MockField label="Owner · metric" value="CFO · $/t" />
-
-        <MockRow arrow>Add objective · 2 places left</MockRow>
+        <MockRow arrow>Add objective · 5 places left</MockRow>
         <p className="text-muted-foreground">Five is the ceiling. An objective with no owner will not save.</p>
       </MockCard>
 

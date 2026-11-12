@@ -33,12 +33,16 @@ export function MockRow({ children, arrow }) {
   );
 }
 
-export function MockField({ label, value, faded }) {
+export function MockField({ label, value, faded, placeholder }) {
   return (
     <div>
       {label ? <p className="text-[11px] uppercase tracking-wide text-muted-foreground">{label}</p> : null}
-      <p className={`rounded-lg bg-background/60 px-2 py-1.5 text-[13px] ${faded ? "text-muted-foreground" : ""}`}>
-        {value || "—"}
+      <p
+        className={`rounded-lg bg-background/60 px-2 py-1.5 text-[13px] ${
+          faded || !value ? "text-muted-foreground" : ""
+        }`}
+      >
+        {value || placeholder || "—"}
       </p>
     </div>
   );
