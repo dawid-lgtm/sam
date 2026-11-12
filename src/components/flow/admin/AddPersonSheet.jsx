@@ -30,8 +30,11 @@ export function AddPersonSheet() {
           <MockField label="Reports to" value="Sarah Bell · GM Ops" />
           <MockRow arrow>Direct reports · none added yet</MockRow>
         </div>
-        <div className="mt-1.5">
-          <MockTap>Save and send the invite</MockTap>
+        <div className="mt-1.5 space-y-1">
+          <MockTap>Save</MockTap>
+          <p className="text-[12px] leading-snug text-muted-foreground">
+            Saving adds him to your people list. His invite goes out with the first workshop invite in Step 2, not now.
+          </p>
         </div>
       </div>
 

@@ -30,7 +30,7 @@ export const SCREENS = {
       group: "Setting up the program",
       title: "Step 1 · he taps People and roles",
       where: "Home · Add a person",
-      does: "A sheet opens over the page. Name, email, site, role and who they report to. The role is required: Sam refuses to save without it, because the role is what the invite email promises and what the person can change. Direct reports are offered here, so the org chart is built as he goes, and a link shows the chart as it stands.",
+      does: "A sheet opens over the page. Name, email, site, role and who they report to. The role is required: Sam refuses to save without it, because the role is what the invite email promises and what the person can change. Direct reports are offered here, so the org chart is built as he goes, and a link shows the chart as it stands. The only button is Save: saving puts the person on his list, and their invite goes out with the first workshop invite in Step 2, not from here.",
       view: <AddPersonSheet />,
     },
     {
