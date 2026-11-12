@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { Plus, Pencil } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { isOffline, saveOffline } from "@/lib/offline";
 import { useRefreshSam } from "@/lib/useSamData";
 import { shortWords } from "@/lib/labels";
 import { Section, EmptyLine, Pill } from "@/components/ui-kit/Section";
@@ -24,17 +24,19 @@ export function AskSection({ site, asks, strategies, canEdit }) {
       reason: editor.reason || "",
       what_it_would_take: editor.what_it_would_take || "",
     };
-    if (editor.id) await base44.entities.SiteAsk.update(editor.id, payload);
+    if (editor.id) await saveOffline("SiteAsk", "update", { id: editor.id, data: payload });
     else
-      await base44.entities.SiteAsk.create({
-        ...payload,
-        site_id: site.id,
-        site_name: site.name,
-        is_test: true,
+      await saveOffline("SiteAsk", "create", {
+        data: {
+          ...payload,
+          site_id: site.id,
+          site_name: site.name,
+          is_test: true,
+        },
       });
     refresh();
     setEditor(null);
-    toast.success("Saved");
+    toast.success(isOffline() ? "Saved on this device · it will sync" : "Saved");
   };
 
   const setStrategy = (code) => {

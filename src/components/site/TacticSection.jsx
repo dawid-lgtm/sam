@@ -2,7 +2,7 @@ import { useState } from "react";
 import moment from "moment";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { isOffline, saveOffline } from "@/lib/offline";
 import { useRefreshSam } from "@/lib/useSamData";
 import { withWords } from "@/lib/labels";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
@@ -26,23 +26,25 @@ export function TacticSection({ site, tactics, strategies, canEdit }) {
       review_date: editor.review_date || "",
       deliver_month: editor.deliver_month || "",
     };
-    if (editor.id) await base44.entities.Tactic.update(editor.id, payload);
+    if (editor.id) await saveOffline("Tactic", "update", { id: editor.id, data: payload });
     else
-      await base44.entities.Tactic.create({
-        ...payload,
-        code: `T${tactics.length + 1}`,
-        site_id: site.id,
-        site_name: site.name,
-        sort: 99,
-        is_test: true,
+      await saveOffline("Tactic", "create", {
+        data: {
+          ...payload,
+          code: `T${tactics.length + 1}`,
+          site_id: site.id,
+          site_name: site.name,
+          sort: 99,
+          is_test: true,
+        },
       });
     refresh();
     setEditor(null);
-    toast.success("Tactic saved");
+    toast.success(isOffline() ? "Saved on this device · it will sync" : "Tactic saved");
   };
 
   const remove = async (id) => {
-    await base44.entities.Tactic.delete(id);
+    await saveOffline("Tactic", "delete", { id });
     refresh();
   };
 

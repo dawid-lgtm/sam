@@ -5,6 +5,7 @@ import { AppNav } from "@/components/AppNav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ButtonHints } from "@/components/ButtonHints";
 import { RaptortechCredit } from "@/components/RaptortechCredit";
+import { OfflineStatus } from "@/components/OfflineStatus";
 
 export function AppShell({ children }) {
   const { user, logout } = useAuth();
@@ -59,6 +60,8 @@ export function AppShell({ children }) {
           <AppNav variant="top" />
         </div>
       </header>
+
+      <OfflineStatus />
 
       <div className="relative">
         <div

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { base44 } from "@/api/base44Client";
+import { isOffline, saveOffline } from "@/lib/offline";
 import { useRefreshSam } from "@/lib/useSamData";
 import { isAdministrator, notifySaveError } from "@/lib/access";
 import { Modal } from "@/components/ui-kit/Modal";
@@ -38,22 +38,26 @@ export function ActionEditor({ open, onClose, action, sites, plans, actions, use
         due: form.due,
       };
       if (editing) {
-        await base44.entities.SiteAction.update(action.id, payload);
+        await saveOffline("SiteAction", "update", { id: action.id, data: payload });
       } else {
         const count = (actions || []).filter((a) => a.site_id === form.site_id).length;
-        await base44.entities.SiteAction.create({
-          ...payload,
-          code: `A${count + 1}`,
-          site_id: form.site_id,
-          site_name: site?.name || "",
-          done: false,
-          sort: 99,
-          is_test: true,
+        await saveOffline("SiteAction", "create", {
+          data: {
+            ...payload,
+            code: `A${count + 1}`,
+            site_id: form.site_id,
+            site_name: site?.name || "",
+            done: false,
+            sort: 99,
+            is_test: true,
+          },
         });
       }
       refresh();
       onClose();
-      toast.success(editing ? "Action changed" : "Action added");
+      toast.success(
+        isOffline() ? "Saved on this device · it will sync" : editing ? "Action changed" : "Action added"
+      );
     } catch (err) {
       toast.error(notifySaveError(err));
     } finally {

@@ -1,4 +1,4 @@
-import { base44 } from "@/api/base44Client";
+import { saveOffline } from "@/lib/offline";
 import { useRefreshSam } from "@/lib/useSamData";
 import { withWords } from "@/lib/labels";
 
@@ -18,14 +18,16 @@ export function TrackerGrid({ site, strategies, trackers, canEdit }) {
   const save = async (code, patch) => {
     const existing = rowFor(code);
     if (existing) {
-      await base44.entities.StrategyTracker.update(existing.id, patch);
+      await saveOffline("StrategyTracker", "update", { id: existing.id, data: patch });
     } else {
-      await base44.entities.StrategyTracker.create({
-        strategy_code: code,
-        site_id: site.id,
-        site_name: site.name,
-        ...patch,
-        is_test: true,
+      await saveOffline("StrategyTracker", "create", {
+        data: {
+          strategy_code: code,
+          site_id: site.id,
+          site_name: site.name,
+          ...patch,
+          is_test: true,
+        },
       });
     }
     refresh();

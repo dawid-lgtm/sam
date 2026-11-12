@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2, Check } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { isOffline, saveOffline } from "@/lib/offline";
 import { useRefreshSam } from "@/lib/useSamData";
 import { withWords } from "@/lib/labels";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
@@ -25,28 +25,30 @@ export function ActionSection({ site, actions, plans, canEdit }) {
       due: editor.due,
       done: !!editor.done,
     };
-    if (editor.id) await base44.entities.SiteAction.update(editor.id, payload);
+    if (editor.id) await saveOffline("SiteAction", "update", { id: editor.id, data: payload });
     else
-      await base44.entities.SiteAction.create({
-        ...payload,
-        code: `A${actions.length + 1}`,
-        site_id: site.id,
-        site_name: site.name,
-        sort: 99,
-        is_test: true,
+      await saveOffline("SiteAction", "create", {
+        data: {
+          ...payload,
+          code: `A${actions.length + 1}`,
+          site_id: site.id,
+          site_name: site.name,
+          sort: 99,
+          is_test: true,
+        },
       });
     refresh();
     setEditor(null);
-    toast.success("Action saved");
+    toast.success(isOffline() ? "Saved on this device · it will sync" : "Action saved");
   };
 
   const tick = async (a) => {
-    await base44.entities.SiteAction.update(a.id, { done: !a.done });
+    await saveOffline("SiteAction", "update", { id: a.id, data: { done: !a.done } });
     refresh();
   };
 
   const remove = async (id) => {
-    await base44.entities.SiteAction.delete(id);
+    await saveOffline("SiteAction", "delete", { id });
     refresh();
   };
 

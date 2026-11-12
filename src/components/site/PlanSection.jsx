@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2 } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { isOffline, saveOffline } from "@/lib/offline";
 import { useRefreshSam } from "@/lib/useSamData";
 import { withWords } from "@/lib/labels";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
@@ -24,23 +24,25 @@ export function PlanSection({ site, plans, tactics, canEdit }) {
       where: editor.where || "",
       when: editor.when || "",
     };
-    if (editor.id) await base44.entities.Plan.update(editor.id, payload);
+    if (editor.id) await saveOffline("Plan", "update", { id: editor.id, data: payload });
     else
-      await base44.entities.Plan.create({
-        ...payload,
-        code: `P${plans.length + 1}`,
-        site_id: site.id,
-        site_name: site.name,
-        sort: 99,
-        is_test: true,
+      await saveOffline("Plan", "create", {
+        data: {
+          ...payload,
+          code: `P${plans.length + 1}`,
+          site_id: site.id,
+          site_name: site.name,
+          sort: 99,
+          is_test: true,
+        },
       });
     refresh();
     setEditor(null);
-    toast.success("Plan saved");
+    toast.success(isOffline() ? "Saved on this device · it will sync" : "Plan saved");
   };
 
   const remove = async (id) => {
-    await base44.entities.Plan.delete(id);
+    await saveOffline("Plan", "delete", { id });
     refresh();
   };
 

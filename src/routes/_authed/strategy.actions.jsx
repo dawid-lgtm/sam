@@ -3,7 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import moment from "moment";
 import { toast } from "sonner";
 import { Plus, Pencil } from "lucide-react";
-import { base44 } from "@/api/base44Client";
+import { saveOffline } from "@/lib/offline";
 import { useSamData, useRefreshSam } from "@/lib/useSamData";
 import { canEditSite, isAdministrator } from "@/lib/access";
 import { Section, EmptyLine, Pill } from "@/components/ui-kit/Section";
@@ -27,7 +27,7 @@ function ActionRegister() {
 
   const tick = async (a) => {
     try {
-      await base44.entities.SiteAction.update(a.id, { done: !a.done });
+      await saveOffline("SiteAction", "update", { id: a.id, data: { done: !a.done } });
       refresh();
     } catch {
       toast.error("Only that site's team or an administrator can tick this.");
