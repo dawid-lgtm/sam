@@ -6,6 +6,7 @@ import { OrgChart } from "@/components/flow/admin/OrgChart";
 import { LaunchProgram } from "@/components/flow/admin/LaunchProgram";
 import { FirstWorkshop } from "@/components/flow/admin/FirstWorkshop";
 import { LoadGoals } from "@/components/flow/admin/LoadGoals";
+import { AddObjectiveSheet } from "@/components/flow/admin/AddObjectiveSheet";
 import { ScheduleWorkshop } from "@/components/flow/admin/ScheduleWorkshop";
 import { MethodologyPage } from "@/components/flow/admin/MethodologyPage";
 import { ToolsPage } from "@/components/flow/admin/ToolsPage";
@@ -59,6 +60,13 @@ export const SCREENS = {
       where: "Home · Enter the Goal and Objectives",
       does: "Ticking the workshop as completed opens the frame the room agreed. One three-year Goal, typed as the room wrote it, then up to five Objectives, each with its executive owner and the metric it moves. Sam refuses to save an objective with no owner, and Save is the only button. The moment he saves, the Goal and the Objectives appear on the home screen of every ELT member he invited, so they can check what the room agreed.",
       view: <LoadGoals />,
+    },
+    {
+      group: "Setting up the program",
+      title: "Add objective · the sheet over card 5A",
+      where: "Home · Enter the Goal and Objectives",
+      does: "Tapping add objective opens a sheet over the page. He types the objective, what it delivers, the executive who owns it, the metric it moves and the target date, and he chooses the owner from the people he has already loaded rather than typing a name. Add objective is the only button that saves. The note on the sheet says what Sam will refuse: an objective with no executive owner, and a sixth objective.",
+      view: <AddObjectiveSheet />,
     },
     {
       group: "Setting up the program",

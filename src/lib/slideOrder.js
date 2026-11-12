@@ -11,6 +11,7 @@ const ORDER = {
     { title: "Step 2 · locked until Step 1 is done", num: "4C" },
     { title: "Step 2 · the first workshop", num: "5" },
     { title: "Ticked: he enters the finalised Goal and Objectives", num: "5A" },
+    { title: "Add objective · the sheet over card 5A", num: "5A1" },
     { title: "Save turns into the next question", num: "5B" },
     { title: "Deployment methodology, step by step", num: "5C" },
     { title: "The tools and artifacts page", num: "5D" },
