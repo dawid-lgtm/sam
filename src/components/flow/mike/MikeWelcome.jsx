@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { Frame, MockCard, MockPill, MockRow } from "@/components/flow/MockScreen";
+import { RhythmFlow } from "@/components/flow/mike/RhythmFlow";
 
 // What Mike lands on the first time he signs in: what head office has done, the rhythm he now runs, and his two steps.
 export function MikeWelcome() {
+  const [rhythmOpen, setRhythmOpen] = useState(false);
+
   return (
     <Frame label="Home · Kestrel Underground">
       <MockCard gold title="Welcome, Mike" note="Project manager · Kestrel Underground">
@@ -20,20 +24,23 @@ export function MikeWelcome() {
         <p>3 Strategies that deliver them <MockPill>yours to cascade</MockPill></p>
       </MockCard>
 
-      <MockCard title="The meeting rhythm" note="How your site links to the enterprise rhythm">
+      <MockCard title="The meeting rhythm" note="Weekly, monthly, and the enterprise meeting above them">
         <p>
-          <span className="font-semibold">Weekly · IN the business</span> · you and your leadership team. Tactics,
-          plans and actions, and the Action Register.
+          <span className="font-semibold">Weekly · IN the business</span>, <span className="font-semibold">monthly ·
+          ON the business</span>, and the <span className="font-semibold">quarterly enterprise ON the business</span>{" "}
+          your report is read in.
         </p>
-        <p>
-          <span className="font-semibold">Monthly · ON the business</span> · your manager joins. The tactics are
-          updated and the strategy implementation report is written.
-        </p>
-        <p>
-          <span className="font-semibold">Quarterly · enterprise ON the business</span> · the senior leadership team
-          reads your report in their own rhythm.
-        </p>
+        <button
+          type="button"
+          onClick={() => setRhythmOpen(true)}
+          className="flex w-full items-center justify-between gap-2 rounded-xl bg-gold px-2.5 py-2 text-[13px] font-semibold text-gold-foreground"
+        >
+          <span>See the rhythm · how they tie together</span>
+          <span>›</span>
+        </button>
       </MockCard>
+
+      <RhythmFlow open={rhythmOpen} onClose={() => setRhythmOpen(false)} />
 
       <MockCard title="What you need to do next" note="Two steps, in order">
         <p className="font-semibold">Step 1 · Cascade the strategy</p>
