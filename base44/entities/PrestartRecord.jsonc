@@ -1,0 +1,131 @@
+{
+  "name": "PrestartRecord",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string"
+    },
+    "site_id": {
+      "type": "string"
+    },
+    "shift_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "fit_to_start": {
+      "type": "string"
+    },
+    "changes_to_plan": {
+      "type": "string"
+    },
+    "got_away_with": {
+      "type": "string"
+    },
+    "said_back": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": []
+    },
+    "scorecard_current": {
+      "type": "boolean",
+      "default": false
+    },
+    "scorecard_named_date": {
+      "type": "string"
+    },
+    "marks": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": []
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": []
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Done",
+        "Missed"
+      ],
+      "enumColors": [
+        "gray",
+        "green",
+        "yellow"
+      ],
+      "default": "Draft"
+    },
+    "submitted_at": {
+      "type": "string"
+    },
+    "skipped_reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "shift_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "$and": [
+            {
+              "data.customer_id": "{{user.data.customer_id}}"
+            },
+            {
+              "data.site_id": "{{user.data.site_id}}"
+            }
+          ]
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "name": "Shift",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string"
+    },
+    "site_id": {
+      "type": "string"
+    },
+    "site_name": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "user_name": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "day_night": {
+      "type": "string",
+      "enum": [
+        "Day",
+        "Night"
+      ],
+      "enumColors": [
+        "yellow",
+        "purple"
+      ],
+      "default": "Day"
+    },
+    "crew": {
+      "type": "string"
+    },
+    "pit_and_areas": {
+      "type": "string"
+    },
+    "superintendent_id": {
+      "type": "string"
+    },
+    "steps": {
+      "type": "object",
+      "default": {}
+    },
+    "target_loads": {
+      "type": "number"
+    },
+    "committed_loads": {
+      "type": "number"
+    },
+    "committed_at": {
+      "type": "string"
+    },
+    "started_at": {
+      "type": "string"
+    },
+    "closed_at": {
+      "type": "string"
+    },
+    "opened_actions": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": []
+    }
+  },
+  "required": [
+    "user_id",
+    "date"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "$and": [
+            {
+              "data.customer_id": "{{user.data.customer_id}}"
+            },
+            {
+              "data.site_id": "{{user.data.site_id}}"
+            }
+          ]
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

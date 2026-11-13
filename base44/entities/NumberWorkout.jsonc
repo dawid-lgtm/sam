@@ -1,0 +1,143 @@
+{
+  "name": "NumberWorkout",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string"
+    },
+    "site_id": {
+      "type": "string"
+    },
+    "shift_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "volume": {
+      "type": "number"
+    },
+    "unit": {
+      "type": "string",
+      "enum": [
+        "bcm",
+        "t"
+      ],
+      "default": "bcm"
+    },
+    "payload": {
+      "type": "number"
+    },
+    "loads": {
+      "type": "number"
+    },
+    "digging_hours": {
+      "type": "number"
+    },
+    "trucks": {
+      "type": "number"
+    },
+    "buckets_load": {
+      "type": "number"
+    },
+    "loads_hr": {
+      "type": "number"
+    },
+    "loads_truck_hr": {
+      "type": "number"
+    },
+    "buckets_min": {
+      "type": "number"
+    },
+    "secs_bucket": {
+      "type": "number"
+    },
+    "sentence": {
+      "type": "string"
+    },
+    "block_targets": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "default": []
+    },
+    "first_bucket": {
+      "type": "string"
+    },
+    "last_bucket": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Done"
+      ],
+      "enumColors": [
+        "gray",
+        "green"
+      ],
+      "default": "Draft"
+    },
+    "submitted_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "shift_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "$and": [
+            {
+              "data.customer_id": "{{user.data.customer_id}}"
+            },
+            {
+              "data.site_id": "{{user.data.site_id}}"
+            }
+          ]
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

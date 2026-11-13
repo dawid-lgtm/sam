@@ -1,0 +1,179 @@
+{
+  "name": "BlockReport",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string"
+    },
+    "site_id": {
+      "type": "string"
+    },
+    "shift_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "block_no": {
+      "type": "number"
+    },
+    "planned_start": {
+      "type": "string"
+    },
+    "planned_end": {
+      "type": "string"
+    },
+    "actual_start": {
+      "type": "string"
+    },
+    "actual_end": {
+      "type": "string"
+    },
+    "submitted_at": {
+      "type": "string"
+    },
+    "on_time": {
+      "type": "boolean",
+      "default": true
+    },
+    "checklist": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": []
+    },
+    "data": {
+      "type": "object",
+      "default": {}
+    },
+    "operator_counts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": []
+    },
+    "loads_target": {
+      "type": "number"
+    },
+    "loads_mine": {
+      "type": "number"
+    },
+    "loads_system": {
+      "type": "number"
+    },
+    "variance": {
+      "type": "number"
+    },
+    "meeting_held": {
+      "type": "boolean",
+      "default": false
+    },
+    "meeting_time": {
+      "type": "string"
+    },
+    "meeting_decision": {
+      "type": "string"
+    },
+    "meeting_not_available": {
+      "type": "boolean",
+      "default": false
+    },
+    "escalations": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": []
+    },
+    "marks": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": []
+    },
+    "photos": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": []
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Done",
+        "Missed"
+      ],
+      "enumColors": [
+        "gray",
+        "green",
+        "yellow"
+      ],
+      "default": "Draft"
+    },
+    "skipped_reason": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "shift_id",
+    "block_no"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "$and": [
+            {
+              "data.customer_id": "{{user.data.customer_id}}"
+            },
+            {
+              "data.site_id": "{{user.data.site_id}}"
+            }
+          ]
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

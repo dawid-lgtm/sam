@@ -1,0 +1,97 @@
+{
+  "name": "OpsCohort",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string"
+    },
+    "site_id": {
+      "type": "string"
+    },
+    "program_key": {
+      "type": "string",
+      "default": "ops_supervisors"
+    },
+    "name": {
+      "type": "string"
+    },
+    "facilitator_id": {
+      "type": "string"
+    },
+    "lab_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "lab_place": {
+      "type": "string"
+    },
+    "apply_weeks": {
+      "type": "number",
+      "default": 6
+    },
+    "verify_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Planned",
+        "In progress",
+        "Complete"
+      ],
+      "enumColors": [
+        "gray",
+        "yellow",
+        "green"
+      ],
+      "default": "Planned"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

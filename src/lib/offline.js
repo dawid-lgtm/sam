@@ -22,6 +22,17 @@ const LIST_KEY = {
   Plan: "plans",
   SiteAction: "actions",
   SiteAsk: "asks",
+  OpsEnrolment: "opsEnrolments",
+  ShiftSetting: "opsShiftSettings",
+  Shift: "opsShifts",
+  HandoverRecord: "opsHandovers",
+  PrestartRecord: "opsPrestarts",
+  NumberWorkout: "opsNumbers",
+  BlockReport: "opsBlockReports",
+  ShiftReport: "opsShiftReports",
+  PrimeResponse: "opsPrimeResponses",
+  VerifyObservation: "opsVerify",
+  CoachingNote: "opsNotes",
 };
 
 const canStore = () => typeof window !== "undefined" && !!window.localStorage;

@@ -1,0 +1,107 @@
+{
+  "name": "CoachingNote",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string"
+    },
+    "site_id": {
+      "type": "string"
+    },
+    "shift_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "parent_type": {
+      "type": "string"
+    },
+    "parent_id": {
+      "type": "string"
+    },
+    "superintendent_id": {
+      "type": "string"
+    },
+    "superintendent_name": {
+      "type": "string"
+    },
+    "text": {
+      "type": "string"
+    },
+    "coaching_point": {
+      "type": "boolean",
+      "default": false
+    },
+    "checked_next_shift": {
+      "type": "string",
+      "enum": [
+        "Pending",
+        "Yes",
+        "No"
+      ],
+      "enumColors": [
+        "gray",
+        "green",
+        "yellow"
+      ],
+      "default": "Pending"
+    }
+  },
+  "required": [
+    "text"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "$and": [
+            {
+              "data.customer_id": "{{user.data.customer_id}}"
+            },
+            {
+              "data.site_id": "{{user.data.site_id}}"
+            }
+          ]
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

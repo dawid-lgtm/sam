@@ -1,0 +1,141 @@
+{
+  "name": "ShiftSetting",
+  "type": "object",
+  "properties": {
+    "customer_id": {
+      "type": "string"
+    },
+    "site_id": {
+      "type": "string"
+    },
+    "site_name": {
+      "type": "string"
+    },
+    "roster_pattern": {
+      "type": "string",
+      "default": "7 on / 7 off"
+    },
+    "on_days": {
+      "type": "number",
+      "default": 7
+    },
+    "off_days": {
+      "type": "number",
+      "default": 7
+    },
+    "day_first": {
+      "type": "boolean",
+      "default": true
+    },
+    "roster_start": {
+      "type": "string",
+      "format": "date"
+    },
+    "shift_length_hours": {
+      "type": "number",
+      "default": 12
+    },
+    "handover_time": {
+      "type": "string",
+      "default": "05:00"
+    },
+    "handover_minutes": {
+      "type": "number",
+      "default": 30
+    },
+    "prestart_time": {
+      "type": "string",
+      "default": "06:00"
+    },
+    "prestart_minutes": {
+      "type": "number",
+      "default": 15
+    },
+    "block_times": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      },
+      "default": []
+    },
+    "report_due_time": {
+      "type": "string",
+      "default": "16:00"
+    },
+    "last_bucket_time": {
+      "type": "string",
+      "default": "16:30"
+    },
+    "handover_out_time": {
+      "type": "string",
+      "default": "17:00"
+    },
+    "night_offset_hours": {
+      "type": "number",
+      "default": 12
+    },
+    "supervisors_on_shift": {
+      "type": "number",
+      "default": 1
+    },
+    "approved_by": {
+      "type": "string"
+    },
+    "approved_at": {
+      "type": "string"
+    },
+    "approval_pending": {
+      "type": "boolean",
+      "default": false
+    },
+    "changed_by": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "site_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "create": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "data.customer_id": "{{user.data.customer_id}}"
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
