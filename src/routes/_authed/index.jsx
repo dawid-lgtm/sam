@@ -69,6 +69,8 @@ function Home() {
   const todayIso = now.toISOString().slice(0, 10);
   const upcoming = keyDates.filter((k) => k.date >= todayIso).slice(0, 3);
   const myName = user?.full_name?.split(" ")[0] || user?.email?.split("@")[0] || "";
+  // A supervisor's blocks live in Operations → Today; Home must not show the Superintendent's day.
+  const isSupervisor = user?.access === "supervisor";
 
   return (
     <div className="space-y-3">
@@ -146,9 +148,20 @@ function Home() {
           ))}
         </HomeCard>
 
-        <HomeCard title="Your day in four blocks" icon={LayoutGrid} onOpen={() => setOpen("blocks")} className="col-span-2 md:col-span-3">
-          <FourBlocks role={person.role} now={now} compact />
-        </HomeCard>
+        {isSupervisor ? (
+          <Link to="/operations" className="col-span-2 flex items-center gap-3 rounded-2xl bg-gold p-4 text-gold-foreground md:col-span-3">
+            <LayoutGrid className="h-6 w-6 shrink-0" />
+            <span className="min-w-0 flex-1">
+              <span className="block font-heading text-[18px] font-semibold">Your shift</span>
+              <span className="block text-[14px]">Handover, pre-start, the four blocks and the Shift Report — one tap.</span>
+            </span>
+            <ChevronRight className="h-5 w-5 shrink-0" />
+          </Link>
+        ) : (
+          <HomeCard title="Your day in four blocks" icon={LayoutGrid} onOpen={() => setOpen("blocks")} className="col-span-2 md:col-span-3">
+            <FourBlocks role={person.role} now={now} compact />
+          </HomeCard>
+        )}
       </div>
 
       {open === "programs" && (

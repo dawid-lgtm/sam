@@ -6,7 +6,8 @@ import { Camera, Check } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useOps } from "@/lib/useOps";
 import { PRIME_TASKS } from "@/lib/opsContent";
-import { uploadEvidence, saveStep } from "@/lib/opsStore";
+import { uploadEvidence } from "@/lib/opsStore";
+import { tenantId } from "@/lib/tenant";
 import { inputClass } from "@/components/ui-kit/controls";
 
 export const Route = createFileRoute("/_authed/operations/prime")({
@@ -126,6 +127,8 @@ function TaskForm({ task, response, enrolment, user, onSaved }) {
           enrolment_id: enrolment.id,
           user_id: user.id,
           task_no: task.no,
+          customer_id: tenantId(user),
+          site_id: enrolment.site_id || user.site_id || "",
           ...payload,
         });
       }

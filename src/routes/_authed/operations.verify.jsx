@@ -7,6 +7,7 @@ import { useAuth } from "@/lib/AuthContext";
 import { CARD_LINES } from "@/lib/opsContent";
 import { validateMarks } from "@/lib/opsMarks";
 import { CardLines } from "@/components/ops/CardLines";
+import { tenantId } from "@/lib/tenant";
 import { inputClass } from "@/components/ui-kit/controls";
 
 export const Route = createFileRoute("/_authed/operations/verify")({
@@ -46,6 +47,8 @@ function VerifyPage() {
     try {
       await base44.entities.VerifyObservation.create({
         enrolment_id: enrolment.id,
+        customer_id: tenantId(user),
+        site_id: enrolment.site_id || user?.site_id || "",
         user_id: enrolment.user_id,
         observer_id: user?.id || "",
         observer_name: user?.full_name || user?.email || "",

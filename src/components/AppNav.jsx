@@ -1,7 +1,8 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { authQuery } from "@/lib/AuthContext";
-import { Home, ClipboardCheck, Target, Mountain, CalendarDays, Settings, Workflow, Users, Package, Library, GraduationCap, Briefcase } from "lucide-react";
+import { base44 } from "@/api/base44Client";
+import { Home, ClipboardCheck, Target, Mountain, CalendarDays, Settings, Workflow, Users, Package, Library, GraduationCap, Briefcase, HardHat } from "lucide-react";
 
 const home = { to: "/", label: "Home", icon: Home };
 
@@ -30,6 +31,7 @@ const adminItems = [
 // What each tab is for, shown when a pointer rests on it.
 const hints = {
   "/": "Your overview",
+  "/operations": "Today: handover, pre-start, the four blocks and the Shift Report",
   "/assess": "Assess a leader against the maturity staircase",
   "/strategy": "The goal, objectives, strategies and tracker",
   "/site": "Site tactics, plans, actions and asks",
@@ -46,22 +48,34 @@ const hints = {
 
 export function AppNav({ variant = "bottom" }) {
   const { data: auth } = useQuery(authQuery);
-  const isAdmin = auth?.user?.role === "admin";
+  const user = auth?.user;
+  const isAdmin = user?.role === "admin";
+
+  // The Operations tab is for anyone in an Ops program, and for the people who run one.
+  const { data: opsEnrolled } = useQuery({
+    queryKey: ["ops-enrolled", user?.id],
+    enabled: !!user?.id,
+    staleTime: 60000,
+    queryFn: async () => (await base44.entities.OpsEnrolment.filter({ user_id: user.id })).length > 0,
+  });
+  const showOps = !!opsEnrolled || ["superintendent", "facilitator"].includes(user?.access) || isAdmin;
+  const opsItem = { to: "/operations", label: "Operations", icon: HardHat };
+  const mainItems = showOps ? [home, opsItem, ...baseItems.slice(1)] : baseItems;
+
   // Desktop keeps the master tabs and the site tabs on one line, Home first.
   const items = isAdmin
     ? variant === "top"
       ? [
           home,
+          ...(showOps ? [opsItem] : []),
           ...adminItems,
           { to: "/site", label: "Site", icon: Mountain },
           { to: "/meetings", label: "Meetings", icon: CalendarDays },
           { to: "/admin", label: "Admin", icon: Settings },
           { to: "/flow", label: "Test flow", icon: Workflow },
         ]
-      : [...baseItems, { to: "/master", label: "Master", icon: Users }, { to: "/admin", label: "Admin", icon: Settings }]
-    : variant === "top"
-      ? baseItems
-      : baseItems;
+      : [...mainItems, { to: "/master", label: "Master", icon: Users }, { to: "/admin", label: "Admin", icon: Settings }]
+    : mainItems;
   const path = useRouterState({ select: (s) => s.location.pathname });
   const isActive = (to) => (to === "/" ? path === "/" : path === to || path.startsWith(`${to}/`));
 

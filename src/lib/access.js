@@ -4,7 +4,17 @@ export const ACCESS_LABELS = {
   project_manager: "Project Manager",
   project_lead: "Project Lead",
   site_lead: "Site Lead",
+  supervisor: "Supervisor",
+  superintendent: "Superintendent",
+  facilitator: "Facilitator",
 };
+
+// The roles that live in the Managing Operations field coach.
+export const OPS_ROLES = ["supervisor", "superintendent", "facilitator"];
+
+export function isOpsRole(user) {
+  return OPS_ROLES.includes(user?.access);
+}
 
 export function accessLabel(user) {
   return ACCESS_LABELS[user?.access] || "No access set";

@@ -6,6 +6,7 @@ import { base44 } from "@/api/base44Client";
 import { todayISO, stepStatus, stepsFor } from "@/lib/opsShift";
 import { inputClass } from "@/components/ui-kit/controls";
 import { STEPS } from "@/lib/opsContent";
+import { tenantId } from "@/lib/tenant";
 
 async function loadCoach(user) {
   const [enrolments, shifts] = await Promise.all([
@@ -65,6 +66,7 @@ export function CoachDashboard({ user, setting }) {
     if (!noteText.trim()) return;
     try {
       await base44.entities.CoachingNote.create({
+        customer_id: tenantId(user),
         shift_id: row.shift?.id || "",
         user_id: row.enrolment.user_id,
         superintendent_id: user.id,

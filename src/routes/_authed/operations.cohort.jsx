@@ -6,6 +6,7 @@ import { GraduationCap } from "lucide-react";
 import { base44 } from "@/api/base44Client";
 import { useAuth } from "@/lib/AuthContext";
 import { todayISO } from "@/lib/opsShift";
+import { tenantId } from "@/lib/tenant";
 import { inputClass } from "@/components/ui-kit/controls";
 
 export const Route = createFileRoute("/_authed/operations/cohort")({
@@ -53,6 +54,7 @@ function CohortPage() {
     try {
       await base44.entities.OpsCohort.create({
         name: form.name.trim(),
+        customer_id: tenantId(user),
         site_id: user?.site_id || "",
         lab_date: form.lab_date || "",
         lab_place: form.lab_place || "",
@@ -80,6 +82,7 @@ function CohortPage() {
     try {
       await base44.entities.OpsEnrolment.create({
         cohort_id: cohort.id,
+        customer_id: tenantId(user),
         user_id: person.id,
         user_name: person.full_name || person.email,
         site_id: cohort.site_id || person.site_id || "",
