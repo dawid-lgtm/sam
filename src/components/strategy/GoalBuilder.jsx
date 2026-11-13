@@ -6,6 +6,7 @@ import { base44 } from "@/api/base44Client";
 import { useAuth } from "@/lib/AuthContext";
 import { useRefreshSam } from "@/lib/useSamData";
 import { notifySaveError } from "@/lib/access";
+import { tenantId } from "@/lib/tenant";
 import { Modal } from "@/components/ui-kit/Modal";
 import { TextAreaField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
 
@@ -39,7 +40,7 @@ export function GoalBuilder({ open, onClose, company }) {
       if (company?.id) {
         await base44.entities.CompanySetting.update(company.id, payload);
       } else {
-        await base44.entities.CompanySetting.create({ company_name: "Your company", ...payload });
+        await base44.entities.CompanySetting.create({ company_name: "Your company", customer_id: tenantId(user), ...payload });
       }
       refresh();
       onClose();

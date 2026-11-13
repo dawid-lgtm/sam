@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { base44 } from "@/api/base44Client";
+import { useAuth } from "@/lib/AuthContext";
 import { useRefreshSam } from "@/lib/useSamData";
 import { notifySaveError } from "@/lib/access";
+import { tenantId } from "@/lib/tenant";
 import { Modal } from "@/components/ui-kit/Modal";
 import { TextField, TextAreaField, SelectField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
 
@@ -20,6 +22,7 @@ const blank = {
 };
 
 export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, sites, presetObjective }) {
+  const { user } = useAuth();
   const refresh = useRefreshSam();
   const editing = !!strategy;
   const [form, setForm] = useState(strategy || { ...blank, code: nextCode, objective_code: presetObjective || "" });
@@ -48,7 +51,7 @@ export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, 
       if (editing) {
         await base44.entities.Strategy.update(strategy.id, payload);
       } else {
-        await base44.entities.Strategy.create({ ...payload, code: form.code, sort: 99 });
+        await base44.entities.Strategy.create({ ...payload, code: form.code, sort: 99, customer_id: tenantId(user) });
       }
       refresh();
       onClose();

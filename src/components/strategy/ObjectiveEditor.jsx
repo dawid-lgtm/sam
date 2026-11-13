@@ -5,6 +5,7 @@ import { base44 } from "@/api/base44Client";
 import { useAuth } from "@/lib/AuthContext";
 import { useRefreshSam } from "@/lib/useSamData";
 import { notifySaveError } from "@/lib/access";
+import { tenantId } from "@/lib/tenant";
 import { Modal } from "@/components/ui-kit/Modal";
 import { TextField, TextAreaField, PrimaryButton, GhostButton } from "@/components/ui-kit/controls";
 
@@ -62,10 +63,11 @@ export function ObjectiveEditor({ open, onClose, objective, nextCode, onSaved, g
           cause: log.cause.trim(),
           board_approval_date: log.board_approval_date || "",
           logged_by: user?.full_name || user?.email || "",
+          customer_id: tenantId(user),
         });
         await base44.entities.Objective.update(objective.id, payload);
       } else {
-        await base44.entities.Objective.create({ ...payload, code: form.code, sort: 99 });
+        await base44.entities.Objective.create({ ...payload, code: form.code, sort: 99, customer_id: tenantId(user) });
       }
       refresh();
       onSaved?.();

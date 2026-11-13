@@ -2,6 +2,9 @@
   "name": "CompanySetting",
   "type": "object",
   "properties": {
+    "customer_id": {
+      "type": "string"
+    },
     "company_name": {
       "type": "string"
     },
@@ -36,9 +39,7 @@
           }
         },
         {
-          "user_condition": {
-            "role": "user"
-          }
+          "data.customer_id": "{{user.data.customer_id}}"
         }
       ]
     },

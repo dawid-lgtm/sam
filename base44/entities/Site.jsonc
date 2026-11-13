@@ -2,6 +2,9 @@
   "name": "Site",
   "type": "object",
   "properties": {
+    "customer_id": {
+      "type": "string"
+    },
     "name": {
       "type": "string"
     },
@@ -40,9 +43,7 @@
           }
         },
         {
-          "user_condition": {
-            "role": "user"
-          }
+          "data.customer_id": "{{user.data.customer_id}}"
         }
       ]
     },

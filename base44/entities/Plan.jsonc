@@ -2,6 +2,9 @@
   "name": "Plan",
   "type": "object",
   "properties": {
+    "customer_id": {
+      "type": "string"
+    },
     "site_id": {
       "type": "string"
     },
@@ -48,9 +51,14 @@
           }
         },
         {
-          "user_condition": {
-            "role": "user"
-          }
+          "$and": [
+            {
+              "data.customer_id": "{{user.data.customer_id}}"
+            },
+            {
+              "data.site_id": "{{user.data.site_id}}"
+            }
+          ]
         }
       ]
     },
@@ -62,7 +70,14 @@
           }
         },
         {
-          "data.site_id": "{{user.data.site_id}}"
+          "$and": [
+            {
+              "data.customer_id": "{{user.data.customer_id}}"
+            },
+            {
+              "data.site_id": "{{user.data.site_id}}"
+            }
+          ]
         }
       ]
     },
@@ -74,7 +89,14 @@
           }
         },
         {
-          "data.site_id": "{{user.data.site_id}}"
+          "$and": [
+            {
+              "data.customer_id": "{{user.data.customer_id}}"
+            },
+            {
+              "data.site_id": "{{user.data.site_id}}"
+            }
+          ]
         }
       ]
     },
@@ -86,7 +108,14 @@
           }
         },
         {
-          "data.site_id": "{{user.data.site_id}}"
+          "$and": [
+            {
+              "data.customer_id": "{{user.data.customer_id}}"
+            },
+            {
+              "data.site_id": "{{user.data.site_id}}"
+            }
+          ]
         }
       ]
     }

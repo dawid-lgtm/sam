@@ -1,4 +1,5 @@
 import { base44 } from "@/api/base44Client";
+import { currentTenantId } from "@/lib/tenant";
 
 // Anything saved while the phone has no signal goes in this queue on the device,
 // and is replayed against the app once the phone is back in coverage.
@@ -98,10 +99,12 @@ export function applyQueue(data) {
 // Create, update or delete a record. Straight to the app when there is signal,
 // kept on the device when there is not.
 export async function saveOffline(entity, op, { id, data } = {}) {
+  // Every client-owned record carries the client it belongs to.
+  const payload = op === "create" && LIST_KEY[entity] ? { customer_id: currentTenantId(), ...data } : data;
   if (!isOffline()) {
     try {
-      if (op === "create") return await base44.entities[entity].create(data);
-      if (op === "update") return await base44.entities[entity].update(id, data);
+      if (op === "create") return await base44.entities[entity].create(payload);
+      if (op === "update") return await base44.entities[entity].update(id, payload);
       return await base44.entities[entity].delete(id);
     } catch (error) {
       if (!isNetworkError(error)) throw error;
@@ -123,10 +126,10 @@ export async function saveOffline(entity, op, { id, data } = {}) {
   }
 
   const localId = `local-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-  queue.push({ localId, entity, op, id, data, at: new Date().toISOString() });
+  queue.push({ localId, entity, op, id, data: payload, at: new Date().toISOString() });
   write(QUEUE_KEY, queue);
   emit();
-  return { id: id || localId, ...(data || {}), pending: true };
+  return { id: id || localId, ...(payload || {}), pending: true };
 }
 
 let flushing = false;

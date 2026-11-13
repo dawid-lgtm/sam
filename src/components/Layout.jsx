@@ -1,14 +1,22 @@
+import { useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { useAuth } from "@/lib/AuthContext";
+import { rememberTenant } from "@/lib/tenant";
 import { LogOut, Users } from "lucide-react";
 import { AppNav } from "@/components/AppNav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ButtonHints } from "@/components/ButtonHints";
 import { RaptortechCredit } from "@/components/RaptortechCredit";
 import { OfflineStatus } from "@/components/OfflineStatus";
+import { ClientSwitcher } from "@/components/master/ClientSwitcher";
 
 export function AppShell({ children }) {
   const { user, logout } = useAuth();
+
+  // Keep every save tied to the client this person belongs to.
+  useEffect(() => {
+    rememberTenant(user);
+  }, [user]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -35,6 +43,7 @@ export function AppShell({ children }) {
             </div>
           </div>
           <div className="flex shrink-0 items-center">
+            <ClientSwitcher />
             <ThemeToggle />
             {user?.role === "admin" ? (
               <Link
