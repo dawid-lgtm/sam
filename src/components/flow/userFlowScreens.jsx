@@ -31,7 +31,7 @@ export const SCREENS = {
       group: "Setting up the program",
       title: "Step 1 · he taps People and roles",
       where: "Home · Add a person",
-      does: "A sheet opens over the page. Name, email, site, role and who they report to. The role is required: Sam refuses to save without it, because the role is what the invite email promises and what the person can change. Direct reports are offered here, so the org chart is built as he goes, and a link shows the chart as it stands. The only button is Save: saving puts the person on his list, and their invite goes out with the first workshop invite in Step 2, not from here.",
+      does: "A sheet opens over the page. Name, email, site, role and who they report to. Two things are required. The site comes from a dropdown holding only the sites set up for this customer, so the invited group cannot grow past the sites that were sold and set up, and Sam will not save a person who has no site. The role is required too, because the role is what the invite email promises and what the person can change. Direct reports are offered here, so the org chart is built as he goes. The only button is Save: saving puts the person on his list, on that site, and their invite goes out with the workshop invite in Step 2, not from here.",
       view: <AddPersonSheet />,
     },
     {
@@ -52,7 +52,7 @@ export const SCREENS = {
       group: "Setting up the program",
       title: "Step 2 · the first workshop",
       where: "Home · Launch the program",
-      does: "The first card of Step 2, the launch. It opens with the completed button, then says what the workshop is for and who is in the room, and tells him plainly: if it has been held, tick the button and he will be required to add the approved Goal and Objectives before he can continue; if it has not, schedule it below, tick who he wants from the people he has loaded, and save. Under the date sits that list, with a way to add a new person, a save button, and a see the email button that opens the email so he can change the words. Ticked as held, the date, the list and the email grey out and Sam says every invite will now be sent as part of the Step 2 meeting set up; the people he ticks roll into the invite for the second meeting.",
+      does: "The first card of Step 2, the launch. It opens with the completed button, then says what the workshop is for and who is in the room. If it has not been held, he dates it, ticks the people he has loaded who must be in the room, reads the email, and ticks that he has checked it: saving is what sends the invite, to exactly those people, and nothing leaves before he has read the words. If it has already been held, ticking the button greys the date, the list and the email out, because no invite leaves from this card at all. His next invitation is the second workshop. That is how a customer who has already run their leadership team meeting, or has already locked in the Goal and Objectives, goes straight on to the Strategies and the cascade, with nobody invited twice.",
       view: <FirstWorkshop />,
     },
     {
@@ -73,7 +73,7 @@ export const SCREENS = {
       group: "Setting up the program",
       title: "Save turns into the next question",
       where: "Home · Schedule the second workshop",
-      does: "The moment he saves, Sam asks for the second workshop: the full day that reviews the Goal and Objectives and defines the Strategies. The room is pre-ticked from the roles he has entered, program managers, GMs and the ELT, and any role his org does not have yet is shown with a way to add it. Scheduling it comes first, then a separate button, send invite to the wider ELT team, with the list of who gets it: the rest of the leadership team. It carries the same completed tick as the first workshop: unticked, the invite hands them the date and the Goal; ticked, the note under the button says the email now invites them to the platform and provides the completed Goal, Objectives and Strategies.",
+      does: "The moment he saves, Sam asks for the second workshop: the full day that reviews the Goal and Objectives and defines the Strategies. The room is pre-ticked from the roles he has entered, program managers, GMs and the ELT, and any role his org does not have yet is shown with a way to add it. Scheduling it comes first, then a separate button, send invite to the wider ELT team, with the list of who gets it: the rest of the leadership team. It carries the same completed tick as the first workshop: unticked, the invite hands them the date and the Goal; ticked, the note under the button says the email now invites them to the platform and provides the completed Goal, Objectives and Strategies. This is also the card that catches the held case: if workshop one was ticked as done, nothing has been sent to anyone, and scheduling this second workshop is what invites the team in.",
       view: <ScheduleWorkshop />,
     },
     {

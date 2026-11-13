@@ -11,6 +11,18 @@ export function ScheduleWorkshop() {
         <p className="text-muted-foreground">Next: reviewing them and defining the Strategies, as a group.</p>
       </MockCard>
 
+      <MockCard title="Who has already been invited" note="It depends on what happened to workshop one">
+        <p>
+          <span className="font-semibold text-gold">Workshop one not held:</span> the people ticked there were invited
+          the moment it was saved.
+        </p>
+        <p>
+          <span className="font-semibold text-gold">Workshop one ticked as held:</span> nothing has been sent to
+          anyone, and no invite goes out until this second workshop is scheduled. This email is the one that brings
+          them onto the platform, with the Goal, Objectives and Strategies inside it.
+        </p>
+      </MockCard>
+
       <button
         type="button"
         onClick={() => setHeld((v) => !v)}

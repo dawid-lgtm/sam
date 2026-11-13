@@ -9,7 +9,14 @@ export function PersonRow({ person, sites, onSaved }) {
   const [siteId, setSiteId] = useState(person.site_id || "");
   const [saving, setSaving] = useState(false);
 
+  // Site staff must sit on a site from the setup; a super admin does not work one.
+  const missingSite = person.role !== "admin" && !siteId;
+
   const save = async () => {
+    if (missingSite) {
+      toast.error("Choose the site this person works at.");
+      return;
+    }
     setSaving(true);
     try {
       await base44.entities.User.update(person.id, { access, site_id: siteId || "" });
@@ -38,14 +45,15 @@ export function PersonRow({ person, sites, onSaved }) {
         />
         <SelectField
           label="Site"
-          placeholder="None"
+          hint={missingSite ? "Required before this person can be saved." : undefined}
+          placeholder="Choose their site"
           value={siteId}
           onChange={(e) => setSiteId(e.target.value)}
           options={sites.map((s) => ({ value: s.id, label: s.name }))}
         />
       </div>
-      <PrimaryButton className="mt-2 w-full" onClick={save} disabled={saving}>
-        {saving ? "Saving…" : "Save"}
+      <PrimaryButton className="mt-2 w-full" onClick={save} disabled={saving || missingSite}>
+        {saving ? "Saving…" : missingSite ? "Choose their site first" : "Save"}
       </PrimaryButton>
     </div>
   );

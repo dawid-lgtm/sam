@@ -6,6 +6,11 @@ export const customersQuery = {
   queryFn: () => base44.entities.Customer.list(),
 };
 
+export const sitesQuery = {
+  queryKey: ["sites-set-up"],
+  queryFn: () => base44.entities.Site.list(),
+};
+
 export const toolsQuery = {
   queryKey: ["tools"],
   queryFn: () => base44.entities.Tool.list(),

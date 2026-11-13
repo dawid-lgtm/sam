@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { appUsersQuery, customersQuery } from "@/lib/masterQueries";
+import { appUsersQuery, customersQuery, sitesQuery } from "@/lib/masterQueries";
 import { PageHeader } from "@/components/ui-kit/PageHeader";
 import { Section, EmptyLine } from "@/components/ui-kit/Section";
 import { UserRow } from "@/components/master/UserRow";
@@ -18,6 +18,7 @@ const field = "w-full rounded-xl border border-input bg-background px-3 py-3 tex
 function UsersPage() {
   const { data: users = [], isLoading, refetch } = useQuery(appUsersQuery);
   const { data: customers = [] } = useQuery(customersQuery);
+  const { data: sites = [] } = useQuery(sitesQuery);
   const [customerFilter, setCustomerFilter] = useState("");
   const [search, setSearch] = useState("");
   const [mode, setMode] = useState("one");
@@ -51,7 +52,7 @@ function UsersPage() {
           ))}
         </div>
         {mode === "one" ? (
-          <InviteUser customers={customers} onDone={() => refetch()} />
+          <InviteUser customers={customers} sites={sites} onDone={() => refetch()} />
         ) : (
           <BulkUserUpload customers={customers} onDone={() => refetch()} />
         )}

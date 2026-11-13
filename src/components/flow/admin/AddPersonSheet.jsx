@@ -16,7 +16,16 @@ export function AddPersonSheet() {
         <div className="mt-1.5 space-y-1.5">
           <MockField label="Name" value="Mike Tau" />
           <MockField label="Email" value="mike.tao@mms.com.au" />
-          <MockField label="Site" value="Kestrel Underground" />
+          <div>
+            <p className="flex items-center gap-1.5 text-[11px] uppercase tracking-wide text-muted-foreground">
+              Site <MockPill>required</MockPill>
+            </p>
+            <p className="rounded-lg bg-background px-2 py-1.5 text-[13px]">Kestrel Underground ▾</p>
+            <p className="mt-1 text-[12px] leading-snug text-muted-foreground">
+              The dropdown holds only the sites set up for this customer, so nobody can be added to a site that was
+              never set up. Sam will not save a person without one.
+            </p>
+          </div>
           <div>
             <p className="flex items-center gap-1.5 text-[11px] uppercase tracking-wide text-muted-foreground">
               Role <MockPill>required</MockPill>
@@ -33,7 +42,8 @@ export function AddPersonSheet() {
         <div className="mt-1.5 space-y-1">
           <MockTap>Save</MockTap>
           <p className="text-[12px] leading-snug text-muted-foreground">
-            Saving adds him to your people list. His invite goes out with the first workshop invite in Step 2, not now.
+            Saving adds him to your people list, on that site. His invite goes out with the workshop invite in Step 2,
+            not now.
           </p>
         </div>
       </div>
