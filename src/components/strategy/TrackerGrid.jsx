@@ -26,7 +26,6 @@ export function TrackerGrid({ site, strategies, trackers, canEdit }) {
           site_id: site.id,
           site_name: site.name,
           ...patch,
-          is_test: true,
         },
       });
     }

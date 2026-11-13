@@ -14,7 +14,6 @@ const blank = { approach: "", delivers_strategy: "", owner: "", not_working_trig
 export function TacticSection({ site, tactics, strategies, canEdit }) {
   const refresh = useRefreshSam();
   const [editor, setEditor] = useState(null);
-  const atLimit = tactics.length >= 6;
 
   const save = async () => {
     if (!editor.approach?.trim()) return toast.error("Write the approach first");
@@ -35,7 +34,6 @@ export function TacticSection({ site, tactics, strategies, canEdit }) {
           site_id: site.id,
           site_name: site.name,
           sort: 99,
-          is_test: true,
         },
       });
     refresh();
@@ -51,12 +49,11 @@ export function TacticSection({ site, tactics, strategies, canEdit }) {
   return (
     <Section
       title="Tactics"
-      subtitle={`${tactics.length} of 6. Each tactic delivers a strategy.`}
+      subtitle={`${tactics.length} ${tactics.length === 1 ? "tactic" : "tactics"}. Each tactic delivers a strategy.`}
       action={
         canEdit ? (
           <button
-            onClick={() => !atLimit && setEditor({ ...blank })}
-            disabled={atLimit}
+            onClick={() => setEditor({ ...blank })}
             className="inline-flex min-h-[48px] items-center gap-1.5 rounded-xl bg-secondary px-3.5 text-[15px] font-semibold text-foreground disabled:opacity-40"
           >
             <Plus className="h-5 w-5" /> Add

@@ -31,7 +31,6 @@ export function AskSection({ site, asks, strategies, canEdit }) {
           ...payload,
           site_id: site.id,
           site_name: site.name,
-          is_test: true,
         },
       });
     refresh();

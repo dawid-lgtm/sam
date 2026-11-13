@@ -49,7 +49,6 @@ export function ActionEditor({ open, onClose, action, sites, plans, actions, use
             site_name: site?.name || "",
             done: false,
             sort: 99,
-            is_test: true,
           },
         });
       }

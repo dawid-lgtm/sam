@@ -39,7 +39,7 @@ export function GoalBuilder({ open, onClose, company }) {
       if (company?.id) {
         await base44.entities.CompanySetting.update(company.id, payload);
       } else {
-        await base44.entities.CompanySetting.create({ company_name: "Your company", is_test: true, ...payload });
+        await base44.entities.CompanySetting.create({ company_name: "Your company", ...payload });
       }
       refresh();
       onClose();

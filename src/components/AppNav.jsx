@@ -60,7 +60,7 @@ export function AppNav({ variant = "bottom" }) {
         ]
       : [...baseItems, { to: "/master", label: "Master", icon: Users }, { to: "/admin", label: "Admin", icon: Settings }]
     : variant === "top"
-      ? [home, ...baseItems.slice(3)]
+      ? baseItems
       : baseItems;
   const path = useRouterState({ select: (s) => s.location.pathname });
   const isActive = (to) => (to === "/" ? path === "/" : path === to || path.startsWith(`${to}/`));

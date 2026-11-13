@@ -33,7 +33,6 @@ export function PlanSection({ site, plans, tactics, canEdit }) {
           site_id: site.id,
           site_name: site.name,
           sort: 99,
-          is_test: true,
         },
       });
     refresh();

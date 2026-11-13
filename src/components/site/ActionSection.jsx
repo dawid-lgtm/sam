@@ -34,7 +34,6 @@ export function ActionSection({ site, actions, plans, canEdit }) {
           site_id: site.id,
           site_name: site.name,
           sort: 99,
-          is_test: true,
         },
       });
     refresh();

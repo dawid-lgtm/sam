@@ -62,11 +62,10 @@ export function ObjectiveEditor({ open, onClose, objective, nextCode, onSaved, g
           cause: log.cause.trim(),
           board_approval_date: log.board_approval_date || "",
           logged_by: user?.full_name || user?.email || "",
-          is_test: true,
         });
         await base44.entities.Objective.update(objective.id, payload);
       } else {
-        await base44.entities.Objective.create({ ...payload, code: form.code, sort: 99, is_test: true });
+        await base44.entities.Objective.create({ ...payload, code: form.code, sort: 99 });
       }
       refresh();
       onSaved?.();

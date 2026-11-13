@@ -4,6 +4,8 @@ import { base44 } from "@/api/base44Client";
 import { ACCESS_LABELS } from "@/lib/access";
 import { SelectField, PrimaryButton } from "@/components/ui-kit/controls";
 
+// Access, site and customer are set by an administrator, never by the account holder.
+// A site lead cannot move themselves to another site or make themselves an administrator.
 export function AccessSetup({ user, sites }) {
   const { refresh } = useAuth();
   const [access, setAccess] = useState("");
@@ -15,7 +17,7 @@ export function AccessSetup({ user, sites }) {
       <div className="mb-5 rounded-2xl bg-card p-4">
         <p className="text-[16px] font-semibold text-foreground">Your access has not been set yet</p>
         <p className="mt-1 text-[15px] leading-snug text-muted-foreground">
-          Ask an administrator to set your role in Sam.
+          Ask an administrator to set your role and site in Sam.
         </p>
       </div>
     );
@@ -24,7 +26,8 @@ export function AccessSetup({ user, sites }) {
   const save = async () => {
     setSaving(true);
     try {
-      await base44.auth.updateMe({ access, site_id: siteId || "" });
+      // An administrator assigns access; the database refuses this for anyone else.
+      await base44.entities.User.update(user.id, { access, site_id: siteId || "" });
       await refresh();
     } finally {
       setSaving(false);
@@ -36,10 +39,6 @@ export function AccessSetup({ user, sites }) {
       <p className="text-[16px] font-semibold text-foreground">Set your access</p>
       <p className="mt-1 text-[15px] leading-snug text-muted-foreground">
         Sam shows the strategy to everyone. Your role decides what you can change.
-      </p>
-      <p className="mt-1 text-[15px] leading-snug text-muted-foreground">
-        Administrators and executives also need app-admin rights on their account before they can save strategy
-        changes.
       </p>
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         <SelectField

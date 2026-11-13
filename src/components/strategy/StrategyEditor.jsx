@@ -48,7 +48,7 @@ export function StrategyEditor({ open, onClose, strategy, nextCode, objectives, 
       if (editing) {
         await base44.entities.Strategy.update(strategy.id, payload);
       } else {
-        await base44.entities.Strategy.create({ ...payload, code: form.code, sort: 99, is_test: true });
+        await base44.entities.Strategy.create({ ...payload, code: form.code, sort: 99 });
       }
       refresh();
       onClose();

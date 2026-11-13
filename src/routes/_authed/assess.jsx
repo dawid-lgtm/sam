@@ -82,7 +82,6 @@ function Assess() {
         gaps: form.gaps,
         meetings_review: form.meetings_review,
         evidence: form.evidence,
-        is_test: true,
       };
       const todays = myAssessments.find((a) => a.assessment_date === today);
       const record = todays
